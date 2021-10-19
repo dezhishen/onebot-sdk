@@ -8,8 +8,8 @@ type FaceMessage struct {
 }
 
 type msg struct {
-	Message    *MessageElement `json:"message"`
-	AutoEscape bool            `json:"auto_escape"`
+	Message    []MessageElement `json:"message"`
+	AutoEscape bool             `json:"auto_escape"`
 }
 
 type PrivateMsg struct {
@@ -23,11 +23,11 @@ type GroupMsg struct {
 }
 
 type MsgNode struct {
-	ID      int32           `json:"id"`
-	Name    string          `json:"name"`
-	Uin     int64           `json:"uin"`
-	Content *MessageElement `json:"content"`
-	Seq     *MessageElement `json:"seq"`
+	ID      int32            `json:"id"`
+	Name    string           `json:"name"`
+	Uin     int64            `json:"uin"`
+	Content []MessageElement `json:"content"`
+	Seq     []MessageElement `json:"seq"`
 }
 
 type GroupForwardMsg struct {
