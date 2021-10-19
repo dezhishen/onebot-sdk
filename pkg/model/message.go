@@ -33,3 +33,12 @@ type MsgForSend struct {
 	AutoEscape  bool              `json:"auto_escape"`
 	MessageType string            `json:"message_type"`
 }
+
+type MessageResultData struct {
+	MessageId int `json:"message_id"`
+}
+type MessageResult struct {
+	Data    *MessageResultData `json:"data"`
+	RetCode int                `json:"retcode"`
+	Status  string             `json:"status"`
+}

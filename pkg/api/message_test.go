@@ -27,7 +27,7 @@ func TestSendMsg(t *testing.T) {
 		t.Errorf("SendMsg() error = %v", err)
 		return
 	}
-	print(got)
+	print(got.Data.MessageId)
 }
 
 func TestSendGroupMsg(t *testing.T) {
@@ -47,7 +47,7 @@ func TestSendGroupMsg(t *testing.T) {
 		t.Errorf("SendGroupMsg() error = %v", err)
 		return
 	}
-	print(got)
+	print(got.Data.MessageId)
 }
 
 func TestSendPrivateMsg(t *testing.T) {
@@ -67,5 +67,5 @@ func TestSendPrivateMsg(t *testing.T) {
 		t.Errorf("SendPrivate() error = %v", err)
 		return
 	}
-	print(got)
+	print(got.Data.MessageId)
 }

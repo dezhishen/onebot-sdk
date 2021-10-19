@@ -11,7 +11,7 @@ import (
 )
 
 // 发送消息
-func SendMsg(msg *model.MsgForSend) (string, error) {
+func SendMsg(msg *model.MsgForSend) (*model.MessageResult, error) {
 	if msg.MessageType == "private" {
 		return SendPrivateMsg(&model.PrivateMsg{
 			UserID:     msg.UserID,
@@ -27,7 +27,7 @@ func SendMsg(msg *model.MsgForSend) (string, error) {
 }
 
 // 发送私信
-func SendPrivateMsg(msg *model.PrivateMsg) (string, error) {
+func SendPrivateMsg(msg *model.PrivateMsg) (*model.MessageResult, error) {
 	requestBody, _ := json.Marshal(msg)
 	resp, err := http.Post(
 		config.GetUrl()+"/send_private_msg",
@@ -35,16 +35,17 @@ func SendPrivateMsg(msg *model.PrivateMsg) (string, error) {
 		bytes.NewBuffer(requestBody),
 	)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 	defer resp.Body.Close()
 	respBodyContent, _ := io.ReadAll(resp.Body)
-	return string(respBodyContent), nil
-
+	var result model.MessageResult
+	err = json.Unmarshal(respBodyContent, &result)
+	return &result, err
 }
 
 // 发送群消息
-func SendGroupMsg(msg *model.GroupMsg) (string, error) {
+func SendGroupMsg(msg *model.GroupMsg) (*model.MessageResult, error) {
 	requestBody, _ := json.Marshal(msg)
 	resp, err := http.Post(
 		config.GetUrl()+"/send_group_msg",
@@ -52,9 +53,11 @@ func SendGroupMsg(msg *model.GroupMsg) (string, error) {
 		bytes.NewBuffer(requestBody),
 	)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 	defer resp.Body.Close()
 	respBodyContent, _ := io.ReadAll(resp.Body)
-	return string(respBodyContent), nil
+	var result model.MessageResult
+	json.Unmarshal(respBodyContent, &result)
+	return &result, nil
 }
