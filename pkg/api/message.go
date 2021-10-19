@@ -13,9 +13,17 @@ import (
 // 发送消息
 func SendMsg(msg *model.MsgForSend) (string, error) {
 	if msg.MessageType == "private" {
-		return SendPrivateMsg(&msg.PrivateMsg)
+		return SendPrivateMsg(&model.PrivateMsg{
+			UserID:     msg.UserID,
+			GroupID:    msg.GroupID,
+			Message:    msg.Message,
+			AutoEscape: msg.AutoEscape,
+		})
 	}
-	return SendGroupMsg(&msg.GroupMsg)
+	return SendGroupMsg(&model.GroupMsg{
+		GroupID:    msg.GroupID,
+		Message:    msg.Message,
+		AutoEscape: msg.AutoEscape})
 }
 
 // 发送私信

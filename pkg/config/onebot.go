@@ -17,6 +17,6 @@ func GetIp() string {
 	return "127.0.0.1"
 }
 
-func GetPort() uint8 {
-	return 80
+func GetPort() uint {
+	return 5700
 }
