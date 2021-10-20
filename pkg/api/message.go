@@ -30,7 +30,7 @@ func SendMsg(msg *model.MsgForSend) (*model.MessageResult, error) {
 func SendPrivateMsg(msg *model.PrivateMsg) (*model.MessageResult, error) {
 	requestBody, _ := json.Marshal(msg)
 	resp, err := http.Post(
-		config.GetUrl()+"/send_private_msg",
+		config.GetHttpUrl()+"/send_private_msg",
 		"application/json",
 		bytes.NewBuffer(requestBody),
 	)
@@ -48,7 +48,7 @@ func SendPrivateMsg(msg *model.PrivateMsg) (*model.MessageResult, error) {
 func SendGroupMsg(msg *model.GroupMsg) (*model.MessageResult, error) {
 	requestBody, _ := json.Marshal(msg)
 	resp, err := http.Post(
-		config.GetUrl()+"/send_group_msg",
+		config.GetHttpUrl()+"/send_group_msg",
 		"application/json",
 		bytes.NewBuffer(requestBody),
 	)

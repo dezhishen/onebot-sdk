@@ -6,17 +6,25 @@ func init() {
 
 }
 
-func GetUrl() string {
-	return fmt.Sprintf("%v://%v:%v", GetSchema(), GetIp(), GetPort())
+func GetHttpUrl() string {
+	return fmt.Sprintf("%v://%v:%v", GetHttpSchema(), GetHttpHost(), GetHttpPort())
 }
 
-func GetSchema() string {
+func GetHttpSchema() string {
 	return "http"
 }
-func GetIp() string {
+func GetHttpHost() string {
 	return "127.0.0.1"
 }
 
-func GetPort() uint {
+func GetHttpPort() uint {
 	return 5700
+}
+
+func GetWsHost() string {
+	return "127.0.0.1"
+}
+
+func GetWsPort() uint {
+	return 6700
 }
