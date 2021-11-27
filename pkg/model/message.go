@@ -26,12 +26,19 @@ type GroupForwardMsg struct {
 	Messages []*MsgNode `json:"messages"`
 }
 
+type MessageType string
+
+const (
+	PrivateMessageType MessageType = "private"
+	GroupMessageType   MessageType = "group"
+)
+
 type MsgForSend struct {
 	UserID      int64             `json:"user_id"`
 	GroupID     int64             `json:"group_id"`
 	Message     []*MessageSegment `json:"message"`
 	AutoEscape  bool              `json:"auto_escape"`
-	MessageType string            `json:"message_type"`
+	MessageType MessageType       `json:"message_type"`
 }
 
 type MessageResultData struct {

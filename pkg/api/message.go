@@ -12,7 +12,7 @@ import (
 
 // 发送消息
 func SendMsg(msg *model.MsgForSend) (*model.MessageResult, error) {
-	if msg.MessageType == "private" {
+	if msg.MessageType == model.PrivateMessageType {
 		return SendPrivateMsg(&model.PrivateMsg{
 			UserID:     msg.UserID,
 			GroupID:    msg.GroupID,
