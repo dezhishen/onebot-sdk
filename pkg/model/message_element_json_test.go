@@ -6,20 +6,39 @@ import (
 	"testing"
 )
 
-func TestJson(t *testing.T) {
-	data := []byte("[{\"type\":\"text\",\"data\":{\"text\":\"1231\"}},{\"type\":\"face\",\"data\":{\"id\":\"1\"}}]")
-	var messageSegment []MessageSegment
-	err := json.Unmarshal(data, &messageSegment)
+func TestText(t *testing.T) {
+	data := []byte("[{\"type\":\"text\",\"data\":{\"text\":\"1231\"}}]")
+	var msg []MessageSegment
+	err := json.Unmarshal(data, &msg)
 	if err != nil {
 		panic(err)
 	}
-	if len(messageSegment) != 2 {
-		panic(errors.New("转换错误，长度错误"))
+	if msg[0].Data.Type() != "text" {
+		panic(errors.New("类型错误"))
 	}
-	if messageSegment[0].Type != "text" {
-		panic(errors.New("转换错误，第一个消息体应该是text"))
+	field, ok := msg[0].Data.(TextMessage)
+	if !ok {
+		panic(errors.New("类型错误"))
 	}
-	if messageSegment[1].Type != "face" {
-		panic(errors.New("转换错误，第二个消息体应该是face"))
+	if field.Text != "1231" {
+		panic(errors.New("类型错误"))
+	}
+}
+func TestFace(t *testing.T) {
+	data := []byte("[{\"type\":\"face\",\"data\":{\"id\":\"1231\"}}]")
+	var msg []MessageSegment
+	err := json.Unmarshal(data, &msg)
+	if err != nil {
+		panic(err)
+	}
+	if msg[0].Data.Type() != "face" {
+		panic(errors.New("类型错误"))
+	}
+	field, ok := msg[0].Data.(FaceMessage)
+	if !ok {
+		panic(errors.New("类型错误"))
+	}
+	if field.ID != "1231" {
+		panic(errors.New("类型错误"))
 	}
 }
