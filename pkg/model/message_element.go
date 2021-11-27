@@ -52,6 +52,15 @@ func (msg TextMessage) Type() string {
 	return "text"
 }
 
+//掷骰子魔法表情
+type DiceMessage struct {
+}
+
+//掷骰子魔法表情
+func (msg DiceMessage) Type() string {
+	return "dice"
+}
+
 func init() {
 	unmarshalJSONMap["face"] = func(data []byte) (MessageElement, error) {
 		var result FaceMessage
@@ -60,6 +69,12 @@ func init() {
 	}
 	unmarshalJSONMap["text"] = func(data []byte) (MessageElement, error) {
 		var result TextMessage
+		err := json.Unmarshal(data, &result)
+		return result, err
+	}
+	//掷骰子魔法表情
+	unmarshalJSONMap["dice"] = func(data []byte) (MessageElement, error) {
+		var result DiceMessage
 		err := json.Unmarshal(data, &result)
 		return result, err
 	}
