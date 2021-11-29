@@ -11,7 +11,7 @@ import (
 )
 
 // 发送消息
-func SendMsg(msg *model.MsgForSend) (*model.MessageResult, error) {
+func SendMsg(msg *model.MsgForSend) (int, error) {
 	if msg.MessageType == model.PrivateMessageType {
 		return SendPrivateMsg(&model.PrivateMsg{
 			UserID:     msg.UserID,
@@ -27,7 +27,7 @@ func SendMsg(msg *model.MsgForSend) (*model.MessageResult, error) {
 }
 
 // 发送私信
-func SendPrivateMsg(msg *model.PrivateMsg) (*model.MessageResult, error) {
+func SendPrivateMsg(msg *model.PrivateMsg) (int, error) {
 	requestBody, _ := json.Marshal(msg)
 	resp, err := http.Post(
 		config.GetHttpUrl()+"/send_private_msg",
@@ -35,20 +35,51 @@ func SendPrivateMsg(msg *model.PrivateMsg) (*model.MessageResult, error) {
 		bytes.NewBuffer(requestBody),
 	)
 	if err != nil {
-		return nil, err
+		return 0, err
 	}
 	defer resp.Body.Close()
 	respBodyContent, _ := io.ReadAll(resp.Body)
-	var result model.MessageResult
+	var result model.SendMessageResult
 	err = json.Unmarshal(respBodyContent, &result)
-	return &result, err
+	return result.Data.MessageId, err
 }
 
 // 发送群消息
-func SendGroupMsg(msg *model.GroupMsg) (*model.MessageResult, error) {
+func SendGroupMsg(msg *model.GroupMsg) (int, error) {
 	requestBody, _ := json.Marshal(msg)
 	resp, err := http.Post(
 		config.GetHttpUrl()+"/send_group_msg",
+		"application/json",
+		bytes.NewBuffer(requestBody),
+	)
+	if err != nil {
+		return 0, err
+	}
+	defer resp.Body.Close()
+	respBodyContent, _ := io.ReadAll(resp.Body)
+	var result model.SendMessageResult
+	json.Unmarshal(respBodyContent, &result)
+	return result.Data.MessageId, nil
+}
+
+func DelMsg(id int) error {
+	reqMap := make(map[string]int)
+	reqMap["message_id"] = id
+	requestBody, _ := json.Marshal(reqMap)
+	_, err := http.Post(
+		config.GetHttpUrl()+"/get_msg",
+		"application/json",
+		bytes.NewBuffer(requestBody),
+	)
+	return err
+}
+
+func GetMsg(id int) (*model.MessageResultData, error) {
+	reqMap := make(map[string]int)
+	reqMap["message_id"] = id
+	requestBody, _ := json.Marshal(reqMap)
+	resp, err := http.Post(
+		config.GetHttpUrl()+"/get_msg",
 		"application/json",
 		bytes.NewBuffer(requestBody),
 	)
@@ -59,5 +90,24 @@ func SendGroupMsg(msg *model.GroupMsg) (*model.MessageResult, error) {
 	respBodyContent, _ := io.ReadAll(resp.Body)
 	var result model.MessageResult
 	json.Unmarshal(respBodyContent, &result)
-	return &result, nil
+	return result.Data, nil
+}
+
+func GetForwardMsg(id int) ([]model.MessageSegment, error) {
+	reqMap := make(map[string]int)
+	reqMap["message_id"] = id
+	requestBody, _ := json.Marshal(reqMap)
+	resp, err := http.Post(
+		config.GetHttpUrl()+"/get_msg",
+		"application/json",
+		bytes.NewBuffer(requestBody),
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	respBodyContent, _ := io.ReadAll(resp.Body)
+	var result model.ForwardMessageResult
+	json.Unmarshal(respBodyContent, &result)
+	return result.Data, nil
 }
