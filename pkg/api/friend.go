@@ -3,9 +3,11 @@ package api
 import (
 	"bytes"
 	"encoding/json"
+	"io"
 	"net/http"
 
 	"github.com/dezhishen/onebot-sdk/pkg/config"
+	"github.com/dezhishen/onebot-sdk/pkg/model"
 )
 
 func SendLike(userID int, times int) error {
@@ -34,4 +36,20 @@ func SetFriendAddRequest(flag string, approve bool, remark string) error {
 		bytes.NewBuffer(requestBody),
 	)
 	return err
+}
+
+func GetFriendList() ([]model.Account, error) {
+	resp, err := http.Post(
+		config.GetHttpUrl()+"/get_friend_list",
+		"application/json",
+		nil,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	respBodyContent, _ := io.ReadAll(resp.Body)
+	var result model.FriendListResult
+	json.Unmarshal(respBodyContent, &result)
+	return result.Data, nil
 }

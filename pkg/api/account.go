@@ -45,19 +45,3 @@ func GetStrangerInfo(userId int, noCache bool) (*model.Account, error) {
 	json.Unmarshal(respBodyContent, &result)
 	return result.Data, nil
 }
-
-func GetFriendList() ([]model.Account, error) {
-	resp, err := http.Post(
-		config.GetHttpUrl()+"/get_friend_list",
-		"application/json",
-		nil,
-	)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-	respBodyContent, _ := io.ReadAll(resp.Body)
-	var result model.FriendListResult
-	json.Unmarshal(respBodyContent, &result)
-	return result.Data, nil
-}
