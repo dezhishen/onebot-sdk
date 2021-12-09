@@ -24,3 +24,19 @@ type Credentials struct {
 	Cookies   string `json:"cookies"`
 	CSRFToken int32  `json:"csrf_token"`
 }
+
+type CredentialsResult struct {
+	Data    *Credentials `json:"data"`
+	RetCode int          `json:"retcode"`
+	Status  string       `json:"status"`
+}
+
+type File struct {
+	File string `json:"file"`
+}
+
+type FileResult struct {
+	Data    *File  `json:"data"`
+	RetCode int    `json:"retcode"`
+	Status  string `json:"status"`
+}

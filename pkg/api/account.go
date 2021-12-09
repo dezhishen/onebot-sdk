@@ -46,7 +46,7 @@ func GetStrangerInfo(userId int, noCache bool) (*model.Account, error) {
 	return result.Data, nil
 }
 
-func GetCookies(domin string) (string, error) {
+func GetCookies(domin string) (*model.Credentials, error) {
 	reqMap := make(map[string]interface{})
 	reqMap["domain"] = domin
 	requestBody, _ := json.Marshal(reqMap)
@@ -56,29 +56,29 @@ func GetCookies(domin string) (string, error) {
 		bytes.NewBuffer(requestBody),
 	)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 	defer resp.Body.Close()
 	respBodyContent, _ := io.ReadAll(resp.Body)
-	var result model.Credentials
+	var result model.CredentialsResult
 	json.Unmarshal(respBodyContent, &result)
-	return result.Cookies, nil
+	return result.Data, nil
 }
 
-func GetCSRFToken() (int32, error) {
+func GetCSRFToken() (*model.Credentials, error) {
 	resp, err := http.Post(
 		config.GetHttpUrl()+"/get_csrf_token ",
 		"application/json",
 		nil,
 	)
 	if err != nil {
-		return -1, err
+		return nil, err
 	}
 	defer resp.Body.Close()
 	respBodyContent, _ := io.ReadAll(resp.Body)
-	var result model.Credentials
+	var result model.CredentialsResult
 	json.Unmarshal(respBodyContent, &result)
-	return result.CSRFToken, nil
+	return result.Data, nil
 }
 
 func GetCredentials(domin string) (*model.Credentials, error) {
@@ -95,12 +95,12 @@ func GetCredentials(domin string) (*model.Credentials, error) {
 	}
 	defer resp.Body.Close()
 	respBodyContent, _ := io.ReadAll(resp.Body)
-	var result model.Credentials
+	var result model.CredentialsResult
 	json.Unmarshal(respBodyContent, &result)
-	return &result, nil
+	return result.Data, nil
 }
 
-func GetRecord(file string, out_format string) (map[string]interface{}, error) {
+func GetRecord(file string, out_format string) (*model.File, error) {
 	reqMap := make(map[string]interface{})
 	reqMap["file"] = file
 	reqMap["out_format"] = out_format
@@ -110,18 +110,18 @@ func GetRecord(file string, out_format string) (map[string]interface{}, error) {
 		"application/json",
 		bytes.NewBuffer(requestBody),
 	)
-	result := make(map[string]interface{})
+
 	if err != nil {
-		return result, err
+		return nil, err
 	}
 	defer resp.Body.Close()
 	respBodyContent, _ := io.ReadAll(resp.Body)
-
+	var result model.FileResult
 	json.Unmarshal(respBodyContent, &result)
-	return result, nil
+	return result.Data, nil
 }
 
-func GetImage(file string) (map[string]interface{}, error) {
+func GetImage(file string) (*model.File, error) {
 	reqMap := make(map[string]interface{})
 	reqMap["file"] = file
 	requestBody, _ := json.Marshal(reqMap)
@@ -130,13 +130,12 @@ func GetImage(file string) (map[string]interface{}, error) {
 		"application/json",
 		bytes.NewBuffer(requestBody),
 	)
-	result := make(map[string]interface{})
 	if err != nil {
-		return result, err
+		return nil, err
 	}
 	defer resp.Body.Close()
 	respBodyContent, _ := io.ReadAll(resp.Body)
-
+	var result model.FileResult
 	json.Unmarshal(respBodyContent, &result)
-	return result, nil
+	return result.Data, nil
 }
