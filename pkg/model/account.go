@@ -13,9 +13,14 @@ type FriendListResult struct {
 }
 
 type Account struct {
-	UserID   int    `json:"user_id`
+	UserID   int    `json:"user_id"`
 	Sex      string `json:"sex"`
 	Nickname string `json:"nickname"`
 	Age      int    `json:"age"`
 	Remark   string `json:"remark"`
+}
+
+type Credentials struct {
+	Cookies   string `json:"cookies"`
+	CSRFToken int32  `json:"csrf_token"`
 }

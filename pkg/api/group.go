@@ -38,17 +38,30 @@ func SetGroupBan(groupID, userID, duration int) error {
 	return err
 }
 
-// // 群组匿名用户禁言
-// func SetGroupAnonymousBan(groupID, userID, duration int) error {
-// 	reqMap := make(map[string]int)
-// 	reqMap["user_id"] = userID
-// 	reqMap["group_id"] = groupID
-// 	reqMap["duration"] = duration
-// 	requestBody, _ := json.Marshal(reqMap)
-// 	_, err := http.Post(
-// 		config.GetHttpUrl()+"/set_group_anonymous_ban",
-// 		"application/json",
-// 		bytes.NewBuffer(requestBody),
-// 	)
-// 	return err
-// }
+// 群组匿名用户禁言
+func SetGroupAnonymousBan(groupID, duration int, anonymousFlag string) error {
+	reqMap := make(map[string]interface{})
+	reqMap["group_id"] = groupID
+	reqMap["anonymous_flag"] = anonymousFlag
+	reqMap["duration"] = duration
+	requestBody, _ := json.Marshal(reqMap)
+	_, err := http.Post(
+		config.GetHttpUrl()+"/set_group_anonymous_ban",
+		"application/json",
+		bytes.NewBuffer(requestBody),
+	)
+	return err
+}
+
+func SetGroupWholeBan(groupID int, enable bool) error {
+	reqMap := make(map[string]interface{})
+	reqMap["group_id"] = groupID
+	reqMap["enable"] = enable
+	requestBody, _ := json.Marshal(reqMap)
+	_, err := http.Post(
+		config.GetHttpUrl()+"/set_group_whole_ban",
+		"application/json",
+		bytes.NewBuffer(requestBody),
+	)
+	return err
+}

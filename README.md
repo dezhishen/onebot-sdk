@@ -12,8 +12,8 @@ onebot-sdk
 ### 群组
 - [x] `set_group_kick` 群组踢人
 - [x] `set_group_ban` 群组单人禁言
-- [ ] `set_group_anonymous_ban` 群组匿名用户禁言
-- [ ] `set_group_whole_ban` 群组全员禁言
+- [ ] `set_group_anonymous_ban` 群组匿名用户禁言(`SetGroupAnonymousBan dev`)
+- [ ] `set_group_whole_ban` 群组全员禁言(`SetGroupWholeBan dev`)
 - [ ] `set_group_admin` 群组设置管理员
 - [ ] `set_group_anonymous` 群组匿名
 - [ ] `set_group_card` 设置群名片（群备注）
@@ -35,16 +35,16 @@ onebot-sdk
 ### 账号
 - [x] `get_login_info` 获取登录号信息
 - [x] `get_stranger_info` 获取陌生人信息
-- [ ] `get_cookies` 获取 Cookies
-- [ ] `get_csrf_token` 获取 CSRF Token
-- [ ] `get_credentials` 获取 QQ 相关接口凭证
-- [ ] `get_record` 获取语音
-- [ ] `get_image` 获取图片
+- [ ] `get_cookies` 获取 Cookies (`GetCookies dev`)
+- [ ] `get_csrf_token` 获取 CSRF Token (`GetCSRFToken dev`)
+- [ ] `get_credentials` 获取 QQ 相关接口凭证(`GetCredentials dev`)
+- [ ] `get_record` 获取语音(`GetRecord dev`)
+- [ ] `get_image` 获取图片(`GetImage dev`)
 
 ### 系统
 - [x] `get_status` 获取运行状态
 - [x] `get_version_info` 获取版本信息
 - [x] `set_restart` 重启 OneBot 实现
 - [x] `clean_cache` 清理缓存
-- [ ] `can_send_image` 检查是否可以发送图片
-- [ ] `can_send_record` 检查是否可以发送语音
+- [ ] `can_send_image` 检查是否可以发送图片(`CanSendImage dev`)
+- [ ] `can_send_record` 检查是否可以发送语音(`CanSendRecord dev`)

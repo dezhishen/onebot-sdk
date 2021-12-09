@@ -62,3 +62,35 @@ func GetStatus() (map[string]interface{}, error) {
 	json.Unmarshal(respBodyContent, &result)
 	return result.Data, nil
 }
+
+func CanSendImage() (map[string]interface{}, error) {
+	resp, err := http.Post(
+		config.GetHttpUrl()+"/can_send_image",
+		"application/json",
+		nil,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	respBodyContent, _ := io.ReadAll(resp.Body)
+	var result model.MapInfoResult
+	json.Unmarshal(respBodyContent, &result)
+	return result.Data, nil
+}
+
+func CanSendRecord() (map[string]interface{}, error) {
+	resp, err := http.Post(
+		config.GetHttpUrl()+"/can_send_record",
+		"application/json",
+		nil,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	respBodyContent, _ := io.ReadAll(resp.Body)
+	var result model.MapInfoResult
+	json.Unmarshal(respBodyContent, &result)
+	return result.Data, nil
+}
