@@ -1,12 +1,7 @@
 package api
 
 import (
-	"bytes"
-	"encoding/json"
-	"io"
-	"net/http"
-
-	"github.com/dezhishen/onebot-sdk/pkg/config"
+	"github.com/dezhishen/onebot-sdk/pkg/cli"
 	"github.com/dezhishen/onebot-sdk/pkg/model"
 )
 
@@ -16,13 +11,13 @@ func SetGroupKick(groupID, userID int, rejectAddRequest bool) error {
 	req["user_id"] = userID
 	req["group_id"] = groupID
 	req["reject_add_request"] = rejectAddRequest
-	requestBody, _ := json.Marshal(req)
-	_, err := http.Post(
-		config.GetHttpUrl()+"/set_group_kick",
-		"application/json",
-		bytes.NewBuffer(requestBody),
-	)
-	return err
+
+	url := "/set_group_kick"
+	if err := cli.PostWithRequsetForResult(url, req, nil); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // 群组禁言
@@ -31,13 +26,13 @@ func SetGroupBan(groupID, userID, duration int) error {
 	req["user_id"] = userID
 	req["group_id"] = groupID
 	req["duration"] = duration
-	requestBody, _ := json.Marshal(req)
-	_, err := http.Post(
-		config.GetHttpUrl()+"/set_group_ban",
-		"application/json",
-		bytes.NewBuffer(requestBody),
-	)
-	return err
+
+	url := "/set_group_ban"
+	if err := cli.PostWithRequsetForResult(url, req, nil); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // 群组匿名用户禁言
@@ -46,13 +41,12 @@ func SetGroupAnonymousBan(groupID, duration int, anonymousFlag string) error {
 	req["group_id"] = groupID
 	req["anonymous_flag"] = anonymousFlag
 	req["duration"] = duration
-	requestBody, _ := json.Marshal(req)
-	_, err := http.Post(
-		config.GetHttpUrl()+"/set_group_anonymous_ban",
-		"application/json",
-		bytes.NewBuffer(requestBody),
-	)
-	return err
+
+	url := "/set_group_anonymous_ban"
+	if err := cli.PostWithRequsetForResult(url, req, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 //群组全员禁言
@@ -60,13 +54,13 @@ func SetGroupWholeBan(groupID int, enable bool) error {
 	req := make(map[string]interface{})
 	req["group_id"] = groupID
 	req["enable"] = enable
-	requestBody, _ := json.Marshal(req)
-	_, err := http.Post(
-		config.GetHttpUrl()+"/set_group_whole_ban",
-		"application/json",
-		bytes.NewBuffer(requestBody),
-	)
-	return err
+
+	url := "/set_group_whole_ban"
+	if err := cli.PostWithRequsetForResult(url, req, nil); err != nil {
+		return err
+	}
+	return nil
+
 }
 
 //群组设置管理员
@@ -75,13 +69,13 @@ func SetGroupAdmin(groupID, userID int, enable bool) error {
 	req["group_id"] = groupID
 	req["user_id"] = userID
 	req["enable"] = enable
-	requestBody, _ := json.Marshal(req)
-	_, err := http.Post(
-		config.GetHttpUrl()+"/set_group_admin",
-		"application/json",
-		bytes.NewBuffer(requestBody),
-	)
-	return err
+
+	url := "/set_group_admin"
+	if err := cli.PostWithRequsetForResult(url, req, nil); err != nil {
+		return err
+	}
+	return nil
+
 }
 
 //群组匿名
@@ -89,13 +83,12 @@ func SetGroupAnonymous(groupID int, enable bool) error {
 	req := make(map[string]interface{})
 	req["group_id"] = groupID
 	req["enable"] = enable
-	requestBody, _ := json.Marshal(req)
-	_, err := http.Post(
-		config.GetHttpUrl()+"/set_group_anonymous",
-		"application/json",
-		bytes.NewBuffer(requestBody),
-	)
-	return err
+
+	url := "/set_group_anonymous"
+	if err := cli.PostWithRequsetForResult(url, req, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 //设置群名片（群备注）
@@ -104,13 +97,12 @@ func SetGroupCard(groupID, userID int, card string) error {
 	req["group_id"] = groupID
 	req["user_id"] = userID
 	req["card"] = card
-	requestBody, _ := json.Marshal(req)
-	_, err := http.Post(
-		config.GetHttpUrl()+"/set_group_card",
-		"application/json",
-		bytes.NewBuffer(requestBody),
-	)
-	return err
+
+	url := "/set_group_card"
+	if err := cli.PostWithRequsetForResult(url, req, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 //设置群名
@@ -118,13 +110,12 @@ func SetGroupName(groupID int, groupName string) error {
 	req := make(map[string]interface{})
 	req["group_id"] = groupID
 	req["group_name"] = groupName
-	requestBody, _ := json.Marshal(req)
-	_, err := http.Post(
-		config.GetHttpUrl()+"/set_group_name",
-		"application/json",
-		bytes.NewBuffer(requestBody),
-	)
-	return err
+
+	url := "/set_group_name"
+	if err := cli.PostWithRequsetForResult(url, req, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 //退出群组
@@ -132,13 +123,12 @@ func SetGroupLeave(groupID int, isDismiss bool) error {
 	req := make(map[string]interface{})
 	req["group_id"] = groupID
 	req["is_dismiss"] = isDismiss
-	requestBody, _ := json.Marshal(req)
-	_, err := http.Post(
-		config.GetHttpUrl()+"/set_group_leave",
-		"application/json",
-		bytes.NewBuffer(requestBody),
-	)
-	return err
+
+	url := "/set_group_leave"
+	if err := cli.PostWithRequsetForResult(url, req, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 //设置群组专属头衔
@@ -148,13 +138,12 @@ func SetGroupSpecialTitle(groupID, userID, duration int, specialTitle string) er
 	req["user_id"] = userID
 	req["special_title"] = specialTitle
 	req["duration"] = duration
-	requestBody, _ := json.Marshal(req)
-	_, err := http.Post(
-		config.GetHttpUrl()+"/set_group_special_title",
-		"application/json",
-		bytes.NewBuffer(requestBody),
-	)
-	return err
+
+	url := "/set_group_special_title"
+	if err := cli.PostWithRequsetForResult(url, req, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 //处理加群请求／邀请
@@ -164,13 +153,12 @@ func SetGroupAddRequest(flag, subType, reason string, approve bool) error {
 	req["sub_type"] = subType
 	req["approve"] = approve
 	req["reason"] = reason
-	requestBody, _ := json.Marshal(req)
-	_, err := http.Post(
-		config.GetHttpUrl()+"/set_group_add_request",
-		"application/json",
-		bytes.NewBuffer(requestBody),
-	)
-	return err
+
+	url := "/set_group_add_request"
+	if err := cli.PostWithRequsetForResult(url, req, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 //获取群信息
@@ -178,36 +166,25 @@ func GetGroupInfo(groupID int, noCache bool) (*model.Group, error) {
 	req := make(map[string]interface{})
 	req["group_id"] = groupID
 	req["no_cache"] = noCache
-	requestBody, _ := json.Marshal(req)
-	resp, err := http.Post(
-		config.GetHttpUrl()+"/get_group_info",
-		"application/json",
-		bytes.NewBuffer(requestBody),
-	)
-	if err != nil {
+
+	var result model.GroupResult
+	url := "/get_group_info"
+	if err := cli.PostWithRequsetForResult(url, req, &result); err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
-	respBodyContent, _ := io.ReadAll(resp.Body)
-	var result model.GroupResult
-	json.Unmarshal(respBodyContent, &result)
+
 	return result.Data, nil
 }
 
 //获取群列表
 func GetGroupList() ([]model.Group, error) {
-	resp, err := http.Post(
-		config.GetHttpUrl()+"/get_group_list",
-		"application/json",
-		nil,
-	)
-	if err != nil {
+	var result model.GroupListResult
+	url := "/get_group_list"
+
+	if err := cli.PostForResult(url, &result); err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
-	respBodyContent, _ := io.ReadAll(resp.Body)
-	var result model.GroupListResult
-	json.Unmarshal(respBodyContent, &result)
+
 	return result.Data, nil
 }
 
@@ -217,36 +194,23 @@ func GetGroupMemberInfo(groupID, userID int, noCache bool) (*model.GroupMember, 
 	req["group_id"] = groupID
 	req["user_id"] = userID
 	req["no_cache"] = noCache
-	requestBody, _ := json.Marshal(req)
-	resp, err := http.Post(
-		config.GetHttpUrl()+"/get_group_member_info",
-		"application/json",
-		bytes.NewBuffer(requestBody),
-	)
-	if err != nil {
+
+	var result model.GroupMemberResult
+	url := "/get_group_member_info"
+	if err := cli.PostWithRequsetForResult(url, req, &result); err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
-	respBodyContent, _ := io.ReadAll(resp.Body)
-	var result model.GroupMemberResult
-	json.Unmarshal(respBodyContent, &result)
 	return result.Data, nil
 }
 
 //获取群成员列表
 func GetGroupMemberListInfo() ([]model.GroupMember, error) {
-	resp, err := http.Post(
-		config.GetHttpUrl()+"/get_group_member_list",
-		"application/json",
-		nil,
-	)
-	if err != nil {
+	var result model.GroupMemberListResult
+	url := "/get_group_member_list"
+
+	if err := cli.PostForResult(url, &result); err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
-	respBodyContent, _ := io.ReadAll(resp.Body)
-	var result model.GroupMemberListResult
-	json.Unmarshal(respBodyContent, &result)
 	return result.Data, nil
 }
 
@@ -255,19 +219,11 @@ func GetGroupHonorInfo(groupID int, honorType string) (*model.GroupHonorInfo, er
 	req := make(map[string]interface{})
 	req["group_id"] = groupID
 	req["type"] = honorType
-	requestBody, _ := json.Marshal(req)
-	resp, err := http.Post(
-		config.GetHttpUrl()+"/get_group_honor_info",
-		"application/json",
-		bytes.NewBuffer(requestBody),
-	)
-	if err != nil {
+
+	var result model.GroupHonorInfoResult
+	url := "/get_group_honor_info"
+	if err := cli.PostWithRequsetForResult(url, req, &result); err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
-	respBodyContent, _ := io.ReadAll(resp.Body)
-	var result model.GroupHonorInfoResult
-	json.Unmarshal(respBodyContent, &result)
 	return result.Data, nil
-
 }
