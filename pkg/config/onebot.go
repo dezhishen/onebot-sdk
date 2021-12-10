@@ -1,9 +1,29 @@
 package config
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
-func init() {
+func getConfigStringWithDefault(group, key, defaultValue string) string {
+	c, ok := all_config[configName]
+	if !ok {
+		return defaultValue
+	}
+	d := c.GetStringMapString(group)
+	if d == nil {
+		return defaultValue
+	}
+	if v, ok := d[key]; ok {
+		return v
+	}
+	return defaultValue
+}
 
+func getConfigIntWithDefault(group, key string, defaultValue int) int {
+	value := getConfigStringWithDefault(group, key, strconv.Itoa(defaultValue))
+	v, _ := strconv.ParseInt(value, 10, 64)
+	return int(v)
 }
 
 func GetHttpUrl() string {
@@ -11,20 +31,20 @@ func GetHttpUrl() string {
 }
 
 func GetHttpSchema() string {
-	return "http"
+	return getConfigStringWithDefault("http", "schema", "http")
 }
 func GetHttpHost() string {
-	return "127.0.0.1"
+	return getConfigStringWithDefault("http", "host", "127.0.0.1")
 }
 
 func GetHttpPort() uint {
-	return 5700
+	return uint(getConfigIntWithDefault("http", "host", 5700))
 }
 
 func GetWsHost() string {
-	return "127.0.0.1"
+	return getConfigStringWithDefault("websocket", "host", "127.0.0.1")
 }
 
 func GetWsPort() uint {
-	return 6700
+	return uint(getConfigIntWithDefault("websocket", "host", 6700))
 }
