@@ -20,6 +20,22 @@ type Account struct {
 	Remark   string `json:"remark"`
 }
 
+type Cokies struct {
+	Cookies string `json:"cookies"`
+}
+
+type CokiesResult struct {
+	Data *Cokies `json:"data"`
+}
+
+type CSRFToken struct {
+	Token string `json:"token"`
+}
+
+type CSRFTokenResult struct {
+	Data *CSRFToken `json:"data"`
+}
+
 type Credentials struct {
 	Cookies   string `json:"cookies"`
 	CSRFToken int32  `json:"csrf_token"`
