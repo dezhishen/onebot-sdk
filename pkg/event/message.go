@@ -1,34 +1,26 @@
 package event
 
 import (
-	"fmt"
-	"net/url"
+	"encoding/json"
 
-	"github.com/dezhishen/onebot-sdk/pkg/config"
-	"github.com/gorilla/websocket"
-	log "github.com/sirupsen/logrus"
+	"github.com/dezhishen/onebot-sdk/pkg/model"
 )
 
-func StartWs() {
-	host := fmt.Sprintf("%v:%v", config.GetWsHost(), config.GetWsPort())
-	u := url.URL{Scheme: "ws", Host: host, Path: ""}
-	log.Printf("connecting to %s", u.String())
-
-	c, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
-	if err != nil {
-		log.Fatal("dial:", err)
-	}
-	defer c.Close()
-	for {
-		_, message, err := c.ReadMessage()
+func init() {
+	allhandler[EventTypeMessage] = func(data []byte) error {
+		var message model.EventMsgBase
+		err := json.Unmarshal(data, &message)
 		if err != nil {
-			log.Println("read:", err)
-			return
+			return err
 		}
-		log.Printf("%s", message)
+		if message.SubType == "group" {
+
+		} else {
+
+		}
+		return nil
 	}
 }
 
-func ListenReciverPrivateMsg(func(data []byte) error) {
-
+func ListenReciverMsg(handler func(data model.EventPrivateMsg) error) {
 }
