@@ -32,18 +32,18 @@ func GetStatus() (map[string]interface{}, error) {
 	return result.Data, nil
 }
 
-func CanSendImage() (map[string]interface{}, error) {
-	var result model.MapInfoResult
+func CanSendImage() (bool, error) {
+	var result model.BoolYesOfResult
 	if err := cli.PostForResult("/can_send_image", &result); err != nil {
-		return nil, err
+		return false, err
 	}
-	return result.Data, nil
+	return result.Data.Yes, nil
 }
 
-func CanSendRecord() (map[string]interface{}, error) {
-	var result model.MapInfoResult
+func CanSendRecord() (bool, error) {
+	var result model.BoolYesOfResult
 	if err := cli.PostForResult("/can_send_record", &result); err != nil {
-		return nil, err
+		return false, err
 	}
-	return result.Data, nil
+	return result.Data.Yes, nil
 }

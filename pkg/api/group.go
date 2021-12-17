@@ -13,7 +13,7 @@ func SetGroupKick(groupID, userID int, rejectAddRequest bool) error {
 	req["reject_add_request"] = rejectAddRequest
 
 	url := "/set_group_kick"
-	if err := cli.PostWithRequsetForResult(url, req, nil); err != nil {
+	if err := cli.PostWithRequest(url, req); err != nil {
 		return err
 	}
 
@@ -28,10 +28,9 @@ func SetGroupBan(groupID, userID, duration int) error {
 	req["duration"] = duration
 
 	url := "/set_group_ban"
-	if err := cli.PostWithRequsetForResult(url, req, nil); err != nil {
+	if err := cli.PostWithRequest(url, req); err != nil {
 		return err
 	}
-
 	return nil
 }
 
@@ -41,9 +40,8 @@ func SetGroupAnonymousBan(groupID, duration int, anonymousFlag string) error {
 	req["group_id"] = groupID
 	req["anonymous_flag"] = anonymousFlag
 	req["duration"] = duration
-
 	url := "/set_group_anonymous_ban"
-	if err := cli.PostWithRequsetForResult(url, req, nil); err != nil {
+	if err := cli.PostWithRequest(url, req); err != nil {
 		return err
 	}
 	return nil
@@ -56,7 +54,7 @@ func SetGroupWholeBan(groupID int, enable bool) error {
 	req["enable"] = enable
 
 	url := "/set_group_whole_ban"
-	if err := cli.PostWithRequsetForResult(url, req, nil); err != nil {
+	if err := cli.PostWithRequest(url, req); err != nil {
 		return err
 	}
 	return nil
@@ -71,7 +69,7 @@ func SetGroupAdmin(groupID, userID int, enable bool) error {
 	req["enable"] = enable
 
 	url := "/set_group_admin"
-	if err := cli.PostWithRequsetForResult(url, req, nil); err != nil {
+	if err := cli.PostWithRequest(url, req); err != nil {
 		return err
 	}
 	return nil
@@ -85,7 +83,7 @@ func SetGroupAnonymous(groupID int, enable bool) error {
 	req["enable"] = enable
 
 	url := "/set_group_anonymous"
-	if err := cli.PostWithRequsetForResult(url, req, nil); err != nil {
+	if err := cli.PostWithRequest(url, req); err != nil {
 		return err
 	}
 	return nil
@@ -99,7 +97,7 @@ func SetGroupCard(groupID, userID int, card string) error {
 	req["card"] = card
 
 	url := "/set_group_card"
-	if err := cli.PostWithRequsetForResult(url, req, nil); err != nil {
+	if err := cli.PostWithRequest(url, req); err != nil {
 		return err
 	}
 	return nil
@@ -112,7 +110,7 @@ func SetGroupName(groupID int, groupName string) error {
 	req["group_name"] = groupName
 
 	url := "/set_group_name"
-	if err := cli.PostWithRequsetForResult(url, req, nil); err != nil {
+	if err := cli.PostWithRequest(url, req); err != nil {
 		return err
 	}
 	return nil
@@ -125,7 +123,7 @@ func SetGroupLeave(groupID int, isDismiss bool) error {
 	req["is_dismiss"] = isDismiss
 
 	url := "/set_group_leave"
-	if err := cli.PostWithRequsetForResult(url, req, nil); err != nil {
+	if err := cli.PostWithRequest(url, req); err != nil {
 		return err
 	}
 	return nil
@@ -140,7 +138,7 @@ func SetGroupSpecialTitle(groupID, userID, duration int, specialTitle string) er
 	req["duration"] = duration
 
 	url := "/set_group_special_title"
-	if err := cli.PostWithRequsetForResult(url, req, nil); err != nil {
+	if err := cli.PostWithRequest(url, req); err != nil {
 		return err
 	}
 	return nil
@@ -155,7 +153,7 @@ func SetGroupAddRequest(flag, subType, reason string, approve bool) error {
 	req["reason"] = reason
 
 	url := "/set_group_add_request"
-	if err := cli.PostWithRequsetForResult(url, req, nil); err != nil {
+	if err := cli.PostWithRequest(url, req); err != nil {
 		return err
 	}
 	return nil
