@@ -2,7 +2,7 @@ package model
 
 import "encoding/json"
 
-type MusicMessage struct {
+type MessageElementMusic struct {
 	MusicType string `json:"type"`
 	Url       string `json:"url"`
 	Audio     string `json:"audio"`
@@ -11,13 +11,13 @@ type MusicMessage struct {
 	Image     string `json:"image"`
 }
 
-func (msg MusicMessage) Type() string {
+func (msg MessageElementMusic) Type() string {
 	return "music"
 }
 
 func init() {
 	unmarshalJSONMap["music"] = func(data []byte) (MessageElement, error) {
-		var result MusicMessage
+		var result MessageElementMusic
 		err := json.Unmarshal(data, &result)
 		return result, err
 	}
