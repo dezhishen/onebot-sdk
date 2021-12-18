@@ -8,6 +8,11 @@ type EventMsgBase struct {
 	UserID      int64            `json:"user_id"`
 	Message     []MessageSegment `json:"message"`
 }
+
 type EventPrivateMsg struct {
+	EventMsgBase
+}
+
+type EventGroupMsg struct {
 	EventMsgBase
 }

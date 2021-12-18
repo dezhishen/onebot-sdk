@@ -6,6 +6,9 @@ import (
 	"github.com/dezhishen/onebot-sdk/pkg/model"
 )
 
+var privateMsgHandlers []func(data model.EventPrivateMsg) error
+var groupMsgHandlers []func(data model.EventGroupMsg) error
+
 func init() {
 	allhandler[EventTypeMessage] = func(data []byte) error {
 		var message model.EventMsgBase
@@ -14,13 +17,30 @@ func init() {
 			return err
 		}
 		if message.SubType == "group" {
-
+			var data model.EventGroupMsg
+			for _, e := range groupMsgHandlers {
+				err = e(data)
+				if err != nil {
+					return err
+				}
+			}
 		} else {
-
+			var data model.EventPrivateMsg
+			for _, e := range privateMsgHandlers {
+				err = e(data)
+				if err != nil {
+					return err
+				}
+			}
 		}
 		return nil
 	}
 }
 
-func ListenReciverMsg(handler func(data model.EventPrivateMsg) error) {
+func ListenReciverPrivateMsg(handler func(data model.EventPrivateMsg) error) {
+	privateMsgHandlers = append(privateMsgHandlers, handler)
+}
+
+func ListenReciverGroupMsg(handler func(data model.EventGroupMsg) error) {
+	groupMsgHandlers = append(groupMsgHandlers, handler)
 }
