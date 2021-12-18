@@ -11,6 +11,16 @@ type EventNoticeGroupBase struct {
 	GroupID int64 `json:"group_id"`
 }
 
+type EventNoticeNotifyBase struct {
+	EventNoticeBase
+	// honor,lucky_king,poke 群荣誉,红包运气王，戳一戳
+	SubType string `json:"sub_type"`
+}
+type EventNoticeNotifyGroupBase struct {
+	EventNoticeGroupBase
+	// honor,lucky_king,poke 群荣誉,红包运气王，戳一戳
+	SubType string `json:"sub_type"`
+}
 type QQFile struct {
 	//文件 ID
 	ID string `json:"id"`
@@ -38,7 +48,7 @@ type EventGroupAdmin struct {
 }
 
 //群成员减少
-type EventMemberDecrease struct {
+type EventGroupDecrease struct {
 	EventNoticeGroupBase
 	//leave、kick、kick_me	事件子类型，分别表示主动退群、成员被踢、登录号被踢
 	SubType string `json:"sub_type"`
@@ -49,7 +59,7 @@ type EventMemberDecrease struct {
 }
 
 //群成员增加
-type EventMemberIncrease struct {
+type EventGroupIncrease struct {
 	EventNoticeGroupBase
 	//approve、invite	事件子类型，分别表示管理员已同意入群、管理员邀请入群
 	SubType string `json:"sub_type"`
@@ -101,9 +111,7 @@ type EventFriendRecall struct {
 
 //群内戳一戳
 type EventGroupNotifyPoke struct {
-	EventNoticeGroupBase
-	//poke	提示类型
-	SubType string `json:"sub_type"`
+	EventNoticeNotifyGroupBase
 	//发送者 QQ 号
 	UserID int64 `json:"user_id"`
 	//被戳者 QQ 号
@@ -112,9 +120,7 @@ type EventGroupNotifyPoke struct {
 
 //群红包运气王
 type EventGroupNotifyLuckyKing struct {
-	EventNoticeGroupBase
-	//lucky_king	提示类型
-	SubType string `json:"sub_type"`
+	EventNoticeNotifyGroupBase
 	//红包发送者 QQ 号
 	UserID int64 `json:"user_id"`
 	//运气王 QQ 号
@@ -123,9 +129,7 @@ type EventGroupNotifyLuckyKing struct {
 
 //群成员荣誉变更
 type EventGroupNotifyHonor struct {
-	EventNoticeGroupBase
-	//honor	提示类型
-	SubType string `json:"sub_type"`
+	EventNoticeNotifyGroupBase
 	//talkative、performer、emotion	荣誉类型，分别表示龙王、群聊之火、快乐源泉
 	HonorType string `json:"honor_type"`
 	//成员 QQ 号
