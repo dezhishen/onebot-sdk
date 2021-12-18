@@ -2,17 +2,17 @@ package model
 
 import "encoding/json"
 
-type AtMessage struct {
+type MessageElementAt struct {
 	Qq string `json:"qq"`
 }
 
-func (msg AtMessage) Type() string {
+func (msg MessageElementAt) Type() string {
 	return "at"
 }
 
 func init() {
 	unmarshalJSONMap["at"] = func(data []byte) (MessageElement, error) {
-		var result AtMessage
+		var result MessageElementAt
 		err := json.Unmarshal(data, &result)
 		return result, err
 	}

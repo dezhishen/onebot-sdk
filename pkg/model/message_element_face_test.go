@@ -16,7 +16,7 @@ func TestFace(t *testing.T) {
 	if msg[0].Data.Type() != "face" {
 		panic(errors.New("类型错误"))
 	}
-	field, ok := msg[0].Data.(FaceMessage)
+	field, ok := msg[0].Data.(MessageElementFace)
 	if !ok {
 		panic(errors.New("类型错误"))
 	}

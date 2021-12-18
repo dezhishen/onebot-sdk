@@ -16,7 +16,7 @@ func TestJson(t *testing.T) {
 	if msg[0].Data.Type() != "json" {
 		panic(errors.New("类型错误"))
 	}
-	_, ok := msg[0].Data.(JsonMessage)
+	_, ok := msg[0].Data.(MessageElementJson)
 	if !ok {
 		panic(errors.New("类型错误"))
 	}

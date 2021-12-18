@@ -27,7 +27,7 @@ func GenMessageElement(jsonStr, dir string) error {
 	}
 	messageType := gjson.GetBytes(data, "type").Str
 	messageData := gjson.GetBytes(data, "data")
-	structName := upperFirst(messageType) + "Message"
+	structName := "MessageElement" + upperFirst(messageType)
 	structString := fmt.Sprintf("type %v struct{", structName)
 	messageData.ForEach(func(key, value gjson.Result) bool {
 		propType := replaceJsonType(value.Type.String())

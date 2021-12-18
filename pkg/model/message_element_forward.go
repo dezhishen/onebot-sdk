@@ -2,17 +2,17 @@ package model
 
 import "encoding/json"
 
-type ForwardMessage struct {
+type MessageElementForward struct {
 	Id string `json:"id"`
 }
 
-func (msg ForwardMessage) Type() string {
+func (msg MessageElementForward) Type() string {
 	return "forward"
 }
 
 func init() {
 	unmarshalJSONMap["forward"] = func(data []byte) (MessageElement, error) {
-		var result ForwardMessage
+		var result MessageElementForward
 		err := json.Unmarshal(data, &result)
 		return result, err
 	}

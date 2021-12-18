@@ -16,7 +16,7 @@ func TestPoke(t *testing.T) {
 	if msg[0].Data.Type() != "poke" {
 		panic(errors.New("类型错误"))
 	}
-	_, ok := msg[0].Data.(PokeMessage)
+	_, ok := msg[0].Data.(MessageElementPoke)
 	if !ok {
 		panic(errors.New("类型错误"))
 	}

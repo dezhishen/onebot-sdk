@@ -2,20 +2,20 @@ package model
 
 import "encoding/json"
 
-type LocationMessage struct {
+type MessageElementLocation struct {
 	Lat     string `json:"lat"`
 	Lon     string `json:"lon"`
 	Title   string `json:"title"`
 	Content string `json:"content"`
 }
 
-func (msg LocationMessage) Type() string {
+func (msg MessageElementLocation) Type() string {
 	return "location"
 }
 
 func init() {
 	unmarshalJSONMap["location"] = func(data []byte) (MessageElement, error) {
-		var result LocationMessage
+		var result MessageElementLocation
 		err := json.Unmarshal(data, &result)
 		return result, err
 	}

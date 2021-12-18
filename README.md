@@ -18,7 +18,7 @@ func do(){
 		Message: []*model.MessageSegment{
 			{
 				Type: "text",
-				Data: &model.TextMessage{
+				Data: &model.MessageElementText{
 					Text: "测试消息",
 				},
 			},

@@ -16,7 +16,7 @@ func TestShare(t *testing.T) {
 	if msg[0].Data.Type() != "share" {
 		panic(errors.New("类型错误"))
 	}
-	_, ok := msg[0].Data.(ShareMessage)
+	_, ok := msg[0].Data.(MessageElementShare)
 	if !ok {
 		panic(errors.New("类型错误"))
 	}

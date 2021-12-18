@@ -2,16 +2,16 @@ package model
 
 import "encoding/json"
 
-type RpsMessage struct {
+type MessageElementRps struct {
 }
 
-func (msg RpsMessage) Type() string {
+func (msg MessageElementRps) Type() string {
 	return "rps"
 }
 
 func init() {
 	unmarshalJSONMap["rps"] = func(data []byte) (MessageElement, error) {
-		var result RpsMessage
+		var result MessageElementRps
 		err := json.Unmarshal(data, &result)
 		return result, err
 	}

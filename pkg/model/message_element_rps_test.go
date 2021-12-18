@@ -16,7 +16,7 @@ func TestRps(t *testing.T) {
 	if msg[0].Data.Type() != "rps" {
 		panic(errors.New("类型错误"))
 	}
-	_, ok := msg[0].Data.(RpsMessage)
+	_, ok := msg[0].Data.(MessageElementRps)
 	if !ok {
 		panic(errors.New("类型错误"))
 	}

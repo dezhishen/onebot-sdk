@@ -2,19 +2,19 @@ package model
 
 import "encoding/json"
 
-type NodeMessage struct {
+type MessageElementNode struct {
 	User_id  string           `json:"user_id"`
 	Nickname string           `json:"nickname"`
 	Content  []MessageSegment `json:"content"`
 }
 
-func (msg NodeMessage) Type() string {
+func (msg MessageElementNode) Type() string {
 	return "node"
 }
 
 func init() {
 	unmarshalJSONMap["node"] = func(data []byte) (MessageElement, error) {
-		var result NodeMessage
+		var result MessageElementNode
 		err := json.Unmarshal(data, &result)
 		return result, err
 	}

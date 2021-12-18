@@ -16,7 +16,7 @@ func TestSendMsg(t *testing.T) {
 		Message: []*model.MessageSegment{
 			{
 				Type: "text",
-				Data: &model.TextMessage{
+				Data: &model.MessageElementText{
 					Text: "测试消息",
 				},
 			},
@@ -36,7 +36,7 @@ func TestSendGroupMsg(t *testing.T) {
 		Message: []*model.MessageSegment{
 			{
 				Type: "text",
-				Data: &model.TextMessage{
+				Data: &model.MessageElementText{
 					Text: "测试消息",
 				},
 			},
@@ -56,7 +56,7 @@ func TestSendPrivateMsg(t *testing.T) {
 		Message: []*model.MessageSegment{
 			{
 				Type: "text",
-				Data: &model.TextMessage{
+				Data: &model.MessageElementText{
 					Text: "测试消息",
 				},
 			},

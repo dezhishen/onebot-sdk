@@ -16,7 +16,7 @@ func TestVideo(t *testing.T) {
 	if msg[0].Data.Type() != "video" {
 		panic(errors.New("类型错误"))
 	}
-	_, ok := msg[0].Data.(VideoMessage)
+	_, ok := msg[0].Data.(MessageElementVideo)
 	if !ok {
 		panic(errors.New("类型错误"))
 	}

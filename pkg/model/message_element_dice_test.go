@@ -16,7 +16,7 @@ func TestDice(t *testing.T) {
 	if msg[0].Data.Type() != "dice" {
 		panic(errors.New("类型错误"))
 	}
-	_, ok := msg[0].Data.(DiceMessage)
+	_, ok := msg[0].Data.(MessageElementDice)
 	if !ok {
 		panic(errors.New("类型错误"))
 	}

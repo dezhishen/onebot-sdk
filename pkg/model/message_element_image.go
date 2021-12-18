@@ -2,7 +2,7 @@ package model
 
 import "encoding/json"
 
-type ImageMessage struct {
+type MessageElementImage struct {
 	File string `json:"file"`
 	//图片类型
 	ImageType string `json:"type"`
@@ -12,13 +12,13 @@ type ImageMessage struct {
 	Timeout   uint   `json:"timeout"`
 }
 
-func (msg ImageMessage) Type() string {
+func (msg MessageElementImage) Type() string {
 	return "image"
 }
 
 func init() {
 	unmarshalJSONMap["image"] = func(data []byte) (MessageElement, error) {
-		var result ImageMessage
+		var result MessageElementImage
 		err := json.Unmarshal(data, &result)
 		return result, err
 	}
