@@ -1,7 +1,8 @@
 # onebot-sdk
 onebot-sdk
-# 使用说明
-## API
+# 快速开始
+
+## 发送API
 直接调用[./pkg/api/](./pkg/api/)下面的方法,例如
 ```
 package test
@@ -32,7 +33,7 @@ func do(){
 }
 ```
 
-## 事件
+## 响应事件
 WebSocket事件分为注册和启用两步,
 ### 注册
 直接调用[./pkg/event/](./pkg/event/)下面的`ListenXxxXxx`方法
@@ -136,7 +137,7 @@ func TestListenMessagePrivate() {
 - [x] 消息事件适配器
 - [x] 通知事件适配器
 - [x] 请求事件适配器
-- [ ] 元事件适配器
+- [x] 元事件适配器
 
 ### 消息事件注册
 - [x] 群聊消息
@@ -157,6 +158,6 @@ func TestListenMessagePrivate() {
 - [x] 加好友请求
 - [x] 加群请求／邀请
 ### 元事件注册
-- [ ] 生命周期
-- [ ] 心跳
-- [ ] 相关配置
+- [x] 生命周期
+- [x] 心跳
+- [x] 相关配置
