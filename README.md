@@ -13,7 +13,7 @@ import (
 )
 
 func do(){
-    msg := model.PrivateMsg{
+	msg := model.PrivateMsg{
 		UserID: userId,
 		Message: []*model.MessageSegment{
 			{
