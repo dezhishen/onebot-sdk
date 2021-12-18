@@ -45,14 +45,14 @@ import (
 	"github.com/dezhishen/onebot-sdk/pkg/event"
 )
 
-func TestListenPrivateMessage() {
+func TestListenMessagePrivate() {
     //注册第一个处理器
-	event.ListenReciverPrivateMsg(func(data model.EventPrivateMsg) error {
+	event.ListenMessagePrivate(func(data model.EventMessagePrivate) error {
 		log.Printf("1:%v", data.Message)
 		return nil
 	})
     //注册第二个
-	event.ListenReciverPrivateMsg(func(data model.EventPrivateMsg) error {
+	event.ListenMessagePrivate(func(data model.EventMessagePrivate) error {
 		log.Printf("2:%v", data.Message)
 		return nil
 	})
@@ -73,7 +73,7 @@ import (
 	"github.com/dezhishen/onebot-sdk/pkg/event"
 )
 
-func TestListenPrivateMessage() {
+func TestListenMessagePrivate() {
 	...
 	StartWs()
 }
@@ -135,7 +135,7 @@ func TestListenPrivateMessage() {
 - [x] 开始监听
 - [x] 消息事件适配器
 - [x] 通知事件适配器
-- [ ] 请求事件适配器
+- [x] 请求事件适配器
 - [ ] 元事件适配器
 
 ### 消息事件注册
@@ -154,8 +154,8 @@ func TestListenPrivateMessage() {
 - [x] 群红包运气王
 - [x] 群成员荣誉变更
 ### 请求事件注册
-- [ ] 加好友请求
-- [ ] 加群请求／邀请
+- [x] 加好友请求
+- [x] 加群请求／邀请
 ### 元事件注册
 - [ ] 生命周期
 - [ ] 心跳

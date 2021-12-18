@@ -8,24 +8,24 @@ import (
 	"github.com/dezhishen/onebot-sdk/pkg/model"
 )
 
-func TestListenPrivateMessage(t *testing.T) {
-	ListenReciverPrivateMsg(func(data model.EventPrivateMsg) error {
+func TestListenMessagePrivate(t *testing.T) {
+	ListenMessagePrivate(func(data model.EventMessagePrivate) error {
 		log.Printf("1:%v", data.Message)
 		return nil
 	})
-	ListenReciverPrivateMsg(func(data model.EventPrivateMsg) error {
+	ListenMessagePrivate(func(data model.EventMessagePrivate) error {
 		log.Printf("2:%v", data.Message)
 		return nil
 	})
 	StartWs()
 }
 
-func TestListenGroupMsg(t *testing.T) {
-	ListenReciverGroupMsg(func(data model.EventGroupMsg) error {
+func TestListenMessageGroup(t *testing.T) {
+	ListenMessageGroup(func(data model.EventMessageGroup) error {
 		log.Printf("1:%v", data.Message)
 		return nil
 	})
-	ListenReciverGroupMsg(func(data model.EventGroupMsg) error {
+	ListenMessageGroup(func(data model.EventMessageGroup) error {
 		log.Printf("2:%v", data.Message)
 		return nil
 	})

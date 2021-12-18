@@ -1,6 +1,6 @@
 package model
 
-type EventMsgBase struct {
+type EventMeesageBase struct {
 	EventBase
 	MessageType string           `json:"message_type"`
 	SubType     string           `json:"sub_type"`
@@ -12,12 +12,12 @@ type EventMsgBase struct {
 	Sender      *Sender          `json:"sender"`
 }
 
-type EventPrivateMsg struct {
-	EventMsgBase
+type EventMessagePrivate struct {
+	EventMeesageBase
 }
 
-type EventGroupMsg struct {
+type EventMessageGroup struct {
 	GroupID   int64      `json:"group_id"`
 	Anonymous *Anonymous `json:"anonymous"`
-	EventMsgBase
+	EventMeesageBase
 }
