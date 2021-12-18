@@ -1,5 +1,86 @@
 # onebot-sdk
 onebot-sdk
+# 使用说明
+## API
+直接调用[./pkg/api/](./pkg/api/)下面的方法,例如
+```
+package test
+
+import (
+	"github.com/dezhishen/onebot-sdk/pkg/model"
+	"github.com/dezhishen/onebot-sdk/pkg/api"
+)
+
+func do(){
+    msg := model.PrivateMsg{
+		UserID: userId,
+		Message: []*model.MessageSegment{
+			{
+				Type: "text",
+				Data: &model.TextMessage{
+					Text: "测试消息",
+				},
+			},
+		},
+	}
+	got, err := api.SendPrivateMsg(&msg)
+	if err != nil {
+		t.Errorf("SendPrivate() error = %v", err)
+		return
+	}
+	print(got)
+}
+```
+
+## 事件
+WebSocket事件分为注册和启用两步,
+### 注册
+直接调用[./pkg/event/](./pkg/event/)下面的`ListenXxxXxx`方法
+```
+import (
+
+	log "github.com/sirupsen/logrus"
+
+	"github.com/dezhishen/onebot-sdk/pkg/model"
+	"github.com/dezhishen/onebot-sdk/pkg/event"
+)
+
+func TestListenPrivateMessage() {
+    //注册第一个处理器
+	event.ListenReciverPrivateMsg(func(data model.EventPrivateMsg) error {
+		log.Printf("1:%v", data.Message)
+		return nil
+	})
+    //注册第二个
+	event.ListenReciverPrivateMsg(func(data model.EventPrivateMsg) error {
+		log.Printf("2:%v", data.Message)
+		return nil
+	})
+    //会依次执行注册的处理器
+    ...
+	StartWs()
+}
+
+```
+### 开启
+
+直接调用[./pkg/event/](./pkg/event/)下面的`StartWs()`方法
+
+```
+import (
+	log "github.com/sirupsen/logrus"
+	"github.com/dezhishen/onebot-sdk/pkg/model"
+	"github.com/dezhishen/onebot-sdk/pkg/event"
+)
+
+func TestListenPrivateMessage() {
+	...
+	StartWs()
+}
+
+```
+
+# 功能点清单
 ## API
 ### 消息
 - [x] `send_private_msg` 发送私聊消息
@@ -49,7 +130,7 @@ onebot-sdk
 - [x] `can_send_image` 检查是否可以发送图片
 - [x] `can_send_record` 检查是否可以发送语音
 
-## WebSocket
+## 事件
 ### 监听命令
 - [x] 开始监听
 - [x] 消息事件适配器
