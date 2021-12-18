@@ -10,7 +10,11 @@ import (
 
 func TestListenPrivateMessage(t *testing.T) {
 	ListenReciverPrivateMsg(func(data model.EventPrivateMsg) error {
-		log.Println(data.Message)
+		log.Printf("1:%v", data.Message)
+		return nil
+	})
+	ListenReciverPrivateMsg(func(data model.EventPrivateMsg) error {
+		log.Printf("2:%v", data.Message)
 		return nil
 	})
 	StartWs()
@@ -18,7 +22,11 @@ func TestListenPrivateMessage(t *testing.T) {
 
 func TestListenGroupMsg(t *testing.T) {
 	ListenReciverGroupMsg(func(data model.EventGroupMsg) error {
-		log.Println(data.Message)
+		log.Printf("1:%v", data.Message)
+		return nil
+	})
+	ListenReciverGroupMsg(func(data model.EventGroupMsg) error {
+		log.Printf("2:%v", data.Message)
 		return nil
 	})
 	StartWs()
