@@ -55,3 +55,7 @@ func StartWs() {
 		}
 	}
 }
+
+func setHandler(eventType string, handler func(data []byte) error) {
+	allhandler[eventType] = handler
+}

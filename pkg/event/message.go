@@ -10,31 +10,36 @@ var privateMsgHandlers []func(data model.EventPrivateMsg) error
 var groupMsgHandlers []func(data model.EventGroupMsg) error
 
 func init() {
-	allhandler[EventTypeMessage] = func(data []byte) error {
-		var message model.EventMsgBase
-		err := json.Unmarshal(data, &message)
-		if err != nil {
-			return err
-		}
-		if message.SubType == "group" {
-			var data model.EventGroupMsg
-			for _, e := range groupMsgHandlers {
-				err = e(data)
-				if err != nil {
-					return err
-				}
-			}
-		} else {
-			var data model.EventPrivateMsg
-			for _, e := range privateMsgHandlers {
-				err = e(data)
-				if err != nil {
-					return err
-				}
-			}
-		}
-		return nil
+	setHandler(
+		EventTypeMessage,
+		messageHandler,
+	)
+}
+
+func messageHandler(data []byte) error {
+	var message model.EventMsgBase
+	err := json.Unmarshal(data, &message)
+	if err != nil {
+		return err
 	}
+	if message.SubType == "group" {
+		var data model.EventGroupMsg
+		for _, e := range groupMsgHandlers {
+			err = e(data)
+			if err != nil {
+				return err
+			}
+		}
+	} else {
+		var data model.EventPrivateMsg
+		for _, e := range privateMsgHandlers {
+			err = e(data)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	return nil
 }
 
 func ListenReciverPrivateMsg(handler func(data model.EventPrivateMsg) error) {
