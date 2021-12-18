@@ -10,7 +10,7 @@ type Sender struct {
 	//性别，male 或 female 或 unknown
 	Sex string `json:"sex"`
 	//	年龄
-	Age int32 `json"age"`
+	Age int32 `json:"age"`
 	//群名片／备注
 	Area string `json:"area"`
 	//成员等级
