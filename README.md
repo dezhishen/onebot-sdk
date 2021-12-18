@@ -1,5 +1,12 @@
 # onebot-sdk
 onebot-sdk
+# 待处理事项
+## 重要
+- [ ] webSocket使用的库更换为MIT协议的库
+## 一般
+-
+## 等待
+-
 # 快速开始
 
 ## 发送API
