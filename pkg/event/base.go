@@ -1,14 +1,16 @@
 package event
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
-	"net/url"
+	"time"
 
 	"github.com/dezhishen/onebot-sdk/pkg/config"
 	"github.com/dezhishen/onebot-sdk/pkg/model"
-	"github.com/gorilla/websocket"
 	log "github.com/sirupsen/logrus"
+	"nhooyr.io/websocket"
+	// "github.com/gorilla/websocket"
 )
 
 const (
@@ -22,20 +24,22 @@ var allhandler = make(map[string]func(data []byte) error)
 
 // StartWs 开始监听
 // 监听前请注册相关事件
-func StartWs() {
-	host := fmt.Sprintf("%v:%v", config.GetWsHost(), config.GetWsPort())
-	u := url.URL{Scheme: "ws", Host: host, Path: ""}
-	log.Printf("connecting to %s", u.String())
-	c, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
+func StartWs() error {
+	url := fmt.Sprintf("ws://%v:%v", config.GetWsHost(), config.GetWsPort())
+	// url.URL{Scheme: "ws", Host: host, Path: ""}
+	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+	defer cancel()
+
+	c, _, err := websocket.Dial(ctx, url, nil)
 	if err != nil {
-		log.Fatal("dial:", err)
+		return err
 	}
-	defer c.Close()
+	defer c.Close(websocket.StatusNormalClosure, "disconnected")
 	for {
-		_, message, err := c.ReadMessage()
+		_, message, err := c.Read(ctx)
 		if err != nil {
 			log.Println("read:", err)
-			return
+			continue
 		}
 		var eventBaseInfo model.EventBase
 		err = json.Unmarshal(message, &eventBaseInfo)
