@@ -10,7 +10,6 @@ import (
 	"github.com/dezhishen/onebot-sdk/pkg/model"
 	log "github.com/sirupsen/logrus"
 	"nhooyr.io/websocket"
-	// "github.com/gorilla/websocket"
 )
 
 const (
