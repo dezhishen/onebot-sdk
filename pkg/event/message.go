@@ -22,18 +22,26 @@ func messageHandler(data []byte) error {
 	if err != nil {
 		return err
 	}
-	if message.SubType == "group" {
-		var data model.EventGroupMsg
+	if message.MessageType == "group" {
+		var groupMessage model.EventGroupMsg
+		err = json.Unmarshal(data, &groupMessage)
+		if err != nil {
+			return err
+		}
 		for _, e := range groupMsgHandlers {
-			err = e(data)
+			err = e(groupMessage)
 			if err != nil {
 				return err
 			}
 		}
 	} else {
-		var data model.EventPrivateMsg
+		var privateMessage model.EventPrivateMsg
+		err = json.Unmarshal(data, &privateMessage)
+		if err != nil {
+			return err
+		}
 		for _, e := range privateMsgHandlers {
-			err = e(data)
+			err = e(privateMessage)
 			if err != nil {
 				return err
 			}
