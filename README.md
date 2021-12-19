@@ -67,7 +67,7 @@ func TestListenMessagePrivate() {
 		cancel()
 	}()
 	defer cancel()
-	StartWsWithContext(ctx)
+	event.StartWsWithContext(ctx)
 }
 
 ```
@@ -93,7 +93,7 @@ func TestListenMessagePrivate() {
 		cancel()
 	}()
 	defer cancel()
-	StartWsWithContext(ctx)
+	event.StartWsWithContext(ctx)
 }
 
 ```
