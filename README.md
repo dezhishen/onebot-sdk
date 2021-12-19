@@ -73,10 +73,11 @@ func TestListenMessagePrivate() {
 ```
 ### 开启
 
-直接调用[./pkg/event/](./pkg/event/)下面的`StartWs()`方法
+直接调用[./pkg/event/](./pkg/event/)下面的`StartWsWithContext(ctx context.Context)`方法
 
 ```
 import (
+	"context"
 	log "github.com/sirupsen/logrus"
 	"github.com/dezhishen/onebot-sdk/pkg/model"
 	"github.com/dezhishen/onebot-sdk/pkg/event"
