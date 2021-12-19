@@ -58,8 +58,16 @@ func TestListenMessagePrivate() {
 		return nil
 	})
     //会依次执行注册的处理器
-    ...
-	StartWs()
+    ...	
+	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+	go func() {
+		time.Sleep(time.Second * 5)
+		//模拟退出
+		log.Info("模拟退出...")
+		cancel()
+	}()
+	defer cancel()
+	StartWsWithContext(ctx)
 }
 
 ```
@@ -76,7 +84,15 @@ import (
 
 func TestListenMessagePrivate() {
 	...
-	StartWs()
+	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+	go func() {
+		time.Sleep(time.Second * 5)
+		//模拟退出
+		log.Info("模拟退出...")
+		cancel()
+	}()
+	defer cancel()
+	StartWsWithContext(ctx)
 }
 
 ```
