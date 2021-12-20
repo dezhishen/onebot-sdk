@@ -1,0 +1,68 @@
+syntax = "proto3";
+package model;
+option go_package="../model";
+
+message Account  {
+	int64 user_id =1  ;
+	string sex =2   ;
+	string nickname =3;
+	int64 age   =4;
+    string	remark =5;
+}
+message AccountResult{
+	Account data =1;
+	int64 retcode = 2;
+	string status =3;
+}
+
+
+message FriendListResult  {
+    repeated Account data=1;
+	int64 retcode =2;
+	string status=3;
+}
+
+message Anonymous  {
+	//匿名用户 ID
+    int64	id  = 1;
+    int64	name =2;
+    int64	flag =3;
+}
+
+
+message Cokies  {
+    string	cookies = 1 ;
+}
+
+message CokiesResult  {
+    Cokies data = 1;
+}
+
+message CSRFToken  {
+    string	token  = 1;
+}
+
+message CSRFTokenResult  {
+    CSRFToken	data =1;
+}
+
+message Credentials  {
+    string cookies =1;
+    int32	csrf_token =2;
+}
+
+message CredentialsResult  {
+	Credentials data = 1;
+    int64	retcode        =2;
+	  string  status=3;
+}
+
+message File  {
+	 string  file = 1;
+}
+
+message FileResult  {
+	File data = 1;
+    int64	retcode =2;
+    string  status=3;
+}

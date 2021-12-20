@@ -1,6 +1,7 @@
 # onebot-sdk
 onebot-sdk
 # 待处理事项
+- [ ] model 增加protobuf
 # 快速开始
 ## 发送API
 直接调用[./pkg/api/](./pkg/api/)下面的方法,例如
