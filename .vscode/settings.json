@@ -1,0 +1,8 @@
+{
+    "protoc": {
+        "options": [
+            "--proto_path=${workspaceFolder}/pkg/proto",
+            "--go_package=pkg/model",
+        ]
+    }
+}

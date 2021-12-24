@@ -1,0 +1,24 @@
+syntax = "proto3";
+package model;
+option go_package="../model";
+
+message Sender {
+	//	发送者 QQ 号
+	 int64 user_id = 1;
+	//昵称
+	 string nickname = 2;
+	//群名片／备注
+	 string card = 3;
+	//性别，male 或 female 或 unknown
+	 string sex = 4;
+	//	年龄
+	 int32 age = 5;
+	//群名片／备注
+	 string area = 6;
+	//成员等级
+	 string level = 7;
+	//角色 owner/admin/member
+	 string role = 8;
+	//头衔
+	 string title = 9;
+}

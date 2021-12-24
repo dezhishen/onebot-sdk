@@ -1,0 +1,11 @@
+syntax = "proto3";
+package model;
+option go_package="../model";
+
+message MessageElementVideo  {
+	string file = 1;
+	string url = 2;
+	uint32   cache = 3;
+	uint32   proxy = 4;
+	uint64   timeout = 5;
+}

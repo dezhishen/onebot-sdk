@@ -54,11 +54,11 @@ message Credentials  {
 message CredentialsResult  {
 	Credentials data = 1;
     int64	retcode        =2;
-	  string  status=3;
+    string  status=3;
 }
 
 message File  {
-	 string  file = 1;
+	string  file = 1;
 }
 
 message FileResult  {

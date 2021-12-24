@@ -1,0 +1,18 @@
+syntax = "proto3";
+package model;
+option go_package="../model";
+import "message_element_xml.proto";
+import "message_element_video.proto";
+
+message MessageSegment {
+	string         type = 1;
+	MessageElementProtoBuffer data = 2;
+}
+
+message MessageElementProtoBuffer {
+	string type = 1;
+	oneof data {
+		MessageElementXml messageElementXml = 2;
+		MessageElementVideo messageElementVideo = 3;
+	}
+}

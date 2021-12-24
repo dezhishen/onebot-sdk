@@ -1,0 +1,34 @@
+syntax = "proto3";
+package model;
+option go_package="../model";
+import "event.proto";
+
+message EventRequestBase {
+	EventBase eventBase = 1;
+	//请求类型
+	 string request_type = 2;
+}
+
+message EventRequestFriend {
+	EventRequestBase eventRequestBase = 1;
+	//发送请求的QQ
+	 int64 user_id = 2;
+	//验证信息
+	 string comment =3;
+	//请求 flag，在调用处理请求的 API 时需要传入
+	 string flag =4;
+}
+
+message EventRequestGroup {
+	EventRequestBase eventRequestBase = 1;
+	//add、invite	请求子类型，分别表示加群请求、邀请登录号入群
+	 string sub_type =2;
+	//群号
+	 int64 group_id =3;
+	//发送请求的QQ
+	 int64 user_id= 4;
+	//验证信息
+	 string comment =5;
+	//请求 flag，在调用处理请求的 API 时需要传入
+	 string flag =6;
+}
