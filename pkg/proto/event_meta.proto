@@ -1,6 +1,5 @@
 syntax = "proto3";
 import "event.proto";
-import "google/protobuf/any.proto";
 package model;
 option go_package="../model";
 
@@ -23,7 +22,7 @@ message EventMetaLifecycle  {
 
 message EventMetaHeartbeat  {
 	EventBase eventBase = 1;
-	google.protobuf.Any status = 2;
+	map<string,string> status = 2;
 	//到下次心跳的间隔，单位毫秒
 	int64 interval = 3;
 }

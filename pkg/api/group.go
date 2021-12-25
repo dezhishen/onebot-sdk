@@ -175,7 +175,7 @@ func GetGroupInfo(groupID int, noCache bool) (*model.Group, error) {
 }
 
 //获取群列表
-func GetGroupList() ([]model.Group, error) {
+func GetGroupList() ([]*model.Group, error) {
 	var result model.GroupListResult
 	url := "/get_group_list"
 
@@ -202,7 +202,7 @@ func GetGroupMemberInfo(groupID, userID int, noCache bool) (*model.GroupMember, 
 }
 
 //获取群成员列表
-func GetGroupMemberListInfo() ([]model.GroupMember, error) {
+func GetGroupMemberListInfo() ([]*model.GroupMember, error) {
 	var result model.GroupMemberListResult
 	url := "/get_group_member_list"
 

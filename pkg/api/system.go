@@ -16,16 +16,16 @@ func SetRestart(delay int) error {
 	return cli.PostWithRequest("/set_restart", reqMap)
 }
 
-func GetVersionInfo() (map[string]interface{}, error) {
-	var result model.MapInfoResult
+func GetVersionInfo() (*model.VersionInfoData, error) {
+	var result model.VersionInfoResult
 	if err := cli.PostForResult("/get_version_info", &result); err != nil {
 		return nil, err
 	}
 	return result.Data, nil
 }
 
-func GetStatus() (map[string]interface{}, error) {
-	var result model.MapInfoResult
+func GetStatus() (*model.StatusInfoData, error) {
+	var result model.StatusInfoResult
 	if err := cli.PostForResult("/get_status", &result); err != nil {
 		return nil, err
 	}
