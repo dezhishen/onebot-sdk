@@ -20,6 +20,4 @@ func TestNode(t *testing.T) {
 	if !ok {
 		panic(errors.New("类型错误"))
 	}
-}类型错误"))
-	}
 }
