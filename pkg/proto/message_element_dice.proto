@@ -1,0 +1,8 @@
+syntax = "proto3";
+package model;
+option go_package="../model";
+
+
+//掷骰子魔法表情
+message MessageElementDice {
+}

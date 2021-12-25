@@ -1,18 +1,14 @@
 syntax = "proto3";
 package model;
 option go_package="../model";
-import "message_element_xml.proto";
-import "message_element_video.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
 
-message MessageSegment {
-	string         type = 1;
-	MessageElementProtoBuffer data = 2;
-}
+// message MessageSegment {
+// 	string        message = 1;
+// 	MessageElement data = 2;
+// }
 
-message MessageElementProtoBuffer {
-	string type = 1;
-	oneof data {
-		MessageElementXml messageElementXml = 2;
-		MessageElementVideo messageElementVideo = 3;
-	}
+service MessageElement {
+	rpc Type(google.protobuf.Empty) returns (google.protobuf.StringValue){}
 }

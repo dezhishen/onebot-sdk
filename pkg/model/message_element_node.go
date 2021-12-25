@@ -16,6 +16,6 @@ func init() {
 	unmarshalJSONMap["node"] = func(data []byte) (MessageElement, error) {
 		var result MessageElementNode
 		err := json.Unmarshal(data, &result)
-		return result, err
+		return &result, err
 	}
 }

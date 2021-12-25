@@ -1,0 +1,10 @@
+syntax = "proto3";
+package model;
+option go_package="../model";
+
+
+message MessageElementPoke {
+	string poke_type = 1 [json_name="type"];	
+	string id = 2;
+	string name = 3;
+}

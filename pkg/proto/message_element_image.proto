@@ -1,0 +1,14 @@
+syntax = "proto3";
+package model;
+option go_package="../model";
+
+
+message MessageElementImage {
+	string file = 1;
+	//图片类型
+	string image_type = 2 [json_name="type"];
+	string url = 3;
+	uint32   cache = 4;
+	uint32   proxy = 5;
+	uint32   timeout = 6;
+}

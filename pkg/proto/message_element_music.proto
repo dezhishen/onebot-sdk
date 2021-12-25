@@ -1,0 +1,12 @@
+syntax = "proto3";
+package model;
+option go_package="../model";
+
+message MessageElementMusic {
+	string music_type = 1 [json_name="type"];
+	string url = 2;
+	string audio = 3;
+	string title = 4;
+	string content = 5;
+	string image = 6;
+}

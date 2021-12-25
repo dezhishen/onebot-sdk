@@ -1,0 +1,11 @@
+syntax = "proto3";
+package model;
+option go_package="../model";
+
+
+message MessageElementShare {
+	string url = 1;
+	string title = 2;
+	string content = 3;
+	string image = 4;
+}
