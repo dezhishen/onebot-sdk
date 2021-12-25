@@ -3,11 +3,14 @@ package model;
 option go_package="../model";
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/empty.proto";
+import "message_element_at.proto";
 
-// message MessageSegment {
-// 	string        message = 1;
-// 	MessageElement data = 2;
-// }
+message MessageSegment {
+	string type = 1;
+	oneof data {
+		MessageElementAt message_element_at = 2;
+	}
+}
 
 service MessageElement {
 	rpc Type(google.protobuf.Empty) returns (google.protobuf.StringValue){}

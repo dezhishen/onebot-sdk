@@ -6,157 +6,276 @@
 
 package model
 
-import (
-	context "context"
-	grpc "google.golang.org/grpc"
-	codes "google.golang.org/grpc/codes"
-	status "google.golang.org/grpc/status"
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
-	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
-	reflect "reflect"
-)
+// import (
+// 	context "context"
+// 	grpc "google.golang.org/grpc"
+// 	codes "google.golang.org/grpc/codes"
+// 	status "google.golang.org/grpc/status"
+// 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+// 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+// 	emptypb "google.golang.org/protobuf/types/known/emptypb"
+// 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
+// 	reflect "reflect"
+// 	sync "sync"
+// )
 
-const (
-	// Verify that this generated code is sufficiently up-to-date.
-	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)
-	// Verify that runtime/protoimpl is sufficiently up-to-date.
-	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
-)
+// const (
+// 	// Verify that this generated code is sufficiently up-to-date.
+// 	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)
+// 	// Verify that runtime/protoimpl is sufficiently up-to-date.
+// 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
+// )
 
-var File_message_element_proto protoreflect.FileDescriptor
+// type MessageSegment struct {
+// 	state         protoimpl.MessageState
+// 	sizeCache     protoimpl.SizeCache
+// 	unknownFields protoimpl.UnknownFields
 
-var file_message_element_proto_rawDesc = []byte{
-	0x0a, 0x15, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x65, 0x6c, 0x65, 0x6d, 0x65, 0x6e,
-	0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x05, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x1a, 0x1e,
-	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f,
-	0x77, 0x72, 0x61, 0x70, 0x70, 0x65, 0x72, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1b,
-	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f,
-	0x65, 0x6d, 0x70, 0x74, 0x79, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0x50, 0x0a, 0x0e, 0x4d,
-	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x45, 0x6c, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x3e, 0x0a,
-	0x04, 0x54, 0x79, 0x70, 0x65, 0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a, 0x1c, 0x2e,
-	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e,
-	0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x00, 0x42, 0x0a, 0x5a,
-	0x08, 0x2e, 0x2e, 0x2f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
-}
+// 	Type string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+// 	// Types that are assignable to Data:
+// 	//	*MessageSegment_MessageElementAt
+// 	Data isMessageSegment_Data `protobuf_oneof:"data"`
+// }
 
-var file_message_element_proto_goTypes = []interface{}{
-	(*emptypb.Empty)(nil),          // 0: google.protobuf.Empty
-	(*wrapperspb.StringValue)(nil), // 1: google.protobuf.StringValue
-}
-var file_message_element_proto_depIdxs = []int32{
-	0, // 0: model.MessageElement.Type:input_type -> google.protobuf.Empty
-	1, // 1: model.MessageElement.Type:output_type -> google.protobuf.StringValue
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
-}
+// func (x *MessageSegment) Reset() {
+// 	*x = MessageSegment{}
+// 	if protoimpl.UnsafeEnabled {
+// 		mi := &file_message_element_proto_msgTypes[0]
+// 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+// 		ms.StoreMessageInfo(mi)
+// 	}
+// }
 
-func init() { file_message_element_proto_init() }
-func file_message_element_proto_init() {
-	if File_message_element_proto != nil {
-		return
-	}
-	type x struct{}
-	out := protoimpl.TypeBuilder{
-		File: protoimpl.DescBuilder{
-			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_message_element_proto_rawDesc,
-			NumEnums:      0,
-			NumMessages:   0,
-			NumExtensions: 0,
-			NumServices:   1,
-		},
-		GoTypes:           file_message_element_proto_goTypes,
-		DependencyIndexes: file_message_element_proto_depIdxs,
-	}.Build()
-	File_message_element_proto = out.File
-	file_message_element_proto_rawDesc = nil
-	file_message_element_proto_goTypes = nil
-	file_message_element_proto_depIdxs = nil
-}
+// func (x *MessageSegment) String() string {
+// 	return protoimpl.X.MessageStringOf(x)
+// }
 
-// Reference imports to suppress errors if they are not otherwise used.
-var _ context.Context
-var _ grpc.ClientConnInterface
+// func (*MessageSegment) ProtoMessage() {}
 
-// This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion6
+// func (x *MessageSegment) ProtoReflect() protoreflect.Message {
+// 	mi := &file_message_element_proto_msgTypes[0]
+// 	if protoimpl.UnsafeEnabled && x != nil {
+// 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+// 		if ms.LoadMessageInfo() == nil {
+// 			ms.StoreMessageInfo(mi)
+// 		}
+// 		return ms
+// 	}
+// 	return mi.MessageOf(x)
+// }
 
-// MessageElementClient is the client API for MessageElement service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type MessageElementClient interface {
-	Type(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*wrapperspb.StringValue, error)
-}
+// // Deprecated: Use MessageSegment.ProtoReflect.Descriptor instead.
+// func (*MessageSegment) Descriptor() ([]byte, []int) {
+// 	return file_message_element_proto_rawDescGZIP(), []int{0}
+// }
 
-type messageElementClient struct {
-	cc grpc.ClientConnInterface
-}
+// func (x *MessageSegment) GetType() string {
+// 	if x != nil {
+// 		return x.Type
+// 	}
+// 	return ""
+// }
 
-func NewMessageElementClient(cc grpc.ClientConnInterface) MessageElementClient {
-	return &messageElementClient{cc}
-}
+// func (m *MessageSegment) GetData() isMessageSegment_Data {
+// 	if m != nil {
+// 		return m.Data
+// 	}
+// 	return nil
+// }
 
-func (c *messageElementClient) Type(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*wrapperspb.StringValue, error) {
-	out := new(wrapperspb.StringValue)
-	err := c.cc.Invoke(ctx, "/model.MessageElement/Type", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
+// func (x *MessageSegment) GetMessageElementAt() *MessageElementAt {
+// 	if x, ok := x.GetData().(*MessageSegment_MessageElementAt); ok {
+// 		return x.MessageElementAt
+// 	}
+// 	return nil
+// }
 
-// MessageElementServer is the server API for MessageElement service.
-type MessageElementServer interface {
-	Type(context.Context, *emptypb.Empty) (*wrapperspb.StringValue, error)
-}
+// type isMessageSegment_Data interface {
+// 	isMessageSegment_Data()
+// }
 
-// UnimplementedMessageElementServer can be embedded to have forward compatible implementations.
-type UnimplementedMessageElementServer struct {
-}
+// type MessageSegment_MessageElementAt struct {
+// 	MessageElementAt *MessageElementAt `protobuf:"bytes,2,opt,name=message_element_at,json=messageElementAt,proto3,oneof"`
+// }
 
-func (*UnimplementedMessageElementServer) Type(context.Context, *emptypb.Empty) (*wrapperspb.StringValue, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Type not implemented")
-}
+// func (*MessageSegment_MessageElementAt) isMessageSegment_Data() {}
 
-func RegisterMessageElementServer(s *grpc.Server, srv MessageElementServer) {
-	s.RegisterService(&_MessageElement_serviceDesc, srv)
-}
+// var File_message_element_proto protoreflect.FileDescriptor
 
-func _MessageElement_Type_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MessageElementServer).Type(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/model.MessageElement/Type",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MessageElementServer).Type(ctx, req.(*emptypb.Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
+// var file_message_element_proto_rawDesc = []byte{
+// 	0x0a, 0x15, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x65, 0x6c, 0x65, 0x6d, 0x65, 0x6e,
+// 	0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x05, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x1a, 0x1e,
+// 	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f,
+// 	0x77, 0x72, 0x61, 0x70, 0x70, 0x65, 0x72, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1b,
+// 	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f,
+// 	0x65, 0x6d, 0x70, 0x74, 0x79, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x18, 0x6d, 0x65, 0x73,
+// 	0x73, 0x61, 0x67, 0x65, 0x5f, 0x65, 0x6c, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x5f, 0x61, 0x74, 0x2e,
+// 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x75, 0x0a, 0x0e, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
+// 	0x53, 0x65, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18,
+// 	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x47, 0x0a, 0x12, 0x6d,
+// 	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x65, 0x6c, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x5f, 0x61,
+// 	0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x2e,
+// 	0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x45, 0x6c, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x41, 0x74,
+// 	0x48, 0x00, 0x52, 0x10, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x45, 0x6c, 0x65, 0x6d, 0x65,
+// 	0x6e, 0x74, 0x41, 0x74, 0x42, 0x06, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x32, 0x50, 0x0a, 0x0e,
+// 	0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x45, 0x6c, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x3e,
+// 	0x0a, 0x04, 0x54, 0x79, 0x70, 0x65, 0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e,
+// 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a, 0x1c,
+// 	0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66,
+// 	0x2e, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x00, 0x42, 0x0a,
+// 	0x5a, 0x08, 0x2e, 0x2e, 0x2f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+// 	0x6f, 0x33,
+// }
 
-var _MessageElement_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "model.MessageElement",
-	HandlerType: (*MessageElementServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Type",
-			Handler:    _MessageElement_Type_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "message_element.proto",
-}
+// var (
+// 	file_message_element_proto_rawDescOnce sync.Once
+// 	file_message_element_proto_rawDescData = file_message_element_proto_rawDesc
+// )
+
+// func file_message_element_proto_rawDescGZIP() []byte {
+// 	file_message_element_proto_rawDescOnce.Do(func() {
+// 		file_message_element_proto_rawDescData = protoimpl.X.CompressGZIP(file_message_element_proto_rawDescData)
+// 	})
+// 	return file_message_element_proto_rawDescData
+// }
+
+// var file_message_element_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+// var file_message_element_proto_goTypes = []interface{}{
+// 	(*MessageSegment)(nil),         // 0: model.MessageSegment
+// 	(*MessageElementAt)(nil),       // 1: model.MessageElementAt
+// 	(*emptypb.Empty)(nil),          // 2: google.protobuf.Empty
+// 	(*wrapperspb.StringValue)(nil), // 3: google.protobuf.StringValue
+// }
+// var file_message_element_proto_depIdxs = []int32{
+// 	1, // 0: model.MessageSegment.message_element_at:type_name -> model.MessageElementAt
+// 	2, // 1: model.MessageElement.Type:input_type -> google.protobuf.Empty
+// 	3, // 2: model.MessageElement.Type:output_type -> google.protobuf.StringValue
+// 	2, // [2:3] is the sub-list for method output_type
+// 	1, // [1:2] is the sub-list for method input_type
+// 	1, // [1:1] is the sub-list for extension type_name
+// 	1, // [1:1] is the sub-list for extension extendee
+// 	0, // [0:1] is the sub-list for field type_name
+// }
+
+// func init() { file_message_element_proto_init() }
+// func file_message_element_proto_init() {
+// 	if File_message_element_proto != nil {
+// 		return
+// 	}
+// 	file_message_element_at_proto_init()
+// 	if !protoimpl.UnsafeEnabled {
+// 		file_message_element_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+// 			switch v := v.(*MessageSegment); i {
+// 			case 0:
+// 				return &v.state
+// 			case 1:
+// 				return &v.sizeCache
+// 			case 2:
+// 				return &v.unknownFields
+// 			default:
+// 				return nil
+// 			}
+// 		}
+// 	}
+// 	file_message_element_proto_msgTypes[0].OneofWrappers = []interface{}{
+// 		(*MessageSegment_MessageElementAt)(nil),
+// 	}
+// 	type x struct{}
+// 	out := protoimpl.TypeBuilder{
+// 		File: protoimpl.DescBuilder{
+// 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
+// 			RawDescriptor: file_message_element_proto_rawDesc,
+// 			NumEnums:      0,
+// 			NumMessages:   1,
+// 			NumExtensions: 0,
+// 			NumServices:   1,
+// 		},
+// 		GoTypes:           file_message_element_proto_goTypes,
+// 		DependencyIndexes: file_message_element_proto_depIdxs,
+// 		MessageInfos:      file_message_element_proto_msgTypes,
+// 	}.Build()
+// 	File_message_element_proto = out.File
+// 	file_message_element_proto_rawDesc = nil
+// 	file_message_element_proto_goTypes = nil
+// 	file_message_element_proto_depIdxs = nil
+// }
+
+// // Reference imports to suppress errors if they are not otherwise used.
+// var _ context.Context
+// var _ grpc.ClientConnInterface
+
+// // This is a compile-time assertion to ensure that this generated file
+// // is compatible with the grpc package it is being compiled against.
+// const _ = grpc.SupportPackageIsVersion6
+
+// // MessageElementClient is the client API for MessageElement service.
+// //
+// // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+// type MessageElementClient interface {
+// 	Type(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*wrapperspb.StringValue, error)
+// }
+
+// type messageElementClient struct {
+// 	cc grpc.ClientConnInterface
+// }
+
+// func NewMessageElementClient(cc grpc.ClientConnInterface) MessageElementClient {
+// 	return &messageElementClient{cc}
+// }
+
+// func (c *messageElementClient) Type(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*wrapperspb.StringValue, error) {
+// 	out := new(wrapperspb.StringValue)
+// 	err := c.cc.Invoke(ctx, "/model.MessageElement/Type", in, out, opts...)
+// 	if err != nil {
+// 		return nil, err
+// 	}
+// 	return out, nil
+// }
+
+// // MessageElementServer is the server API for MessageElement service.
+// type MessageElementServer interface {
+// 	Type(context.Context, *emptypb.Empty) (*wrapperspb.StringValue, error)
+// }
+
+// // UnimplementedMessageElementServer can be embedded to have forward compatible implementations.
+// type UnimplementedMessageElementServer struct {
+// }
+
+// func (*UnimplementedMessageElementServer) Type(context.Context, *emptypb.Empty) (*wrapperspb.StringValue, error) {
+// 	return nil, status.Errorf(codes.Unimplemented, "method Type not implemented")
+// }
+
+// func RegisterMessageElementServer(s *grpc.Server, srv MessageElementServer) {
+// 	s.RegisterService(&_MessageElement_serviceDesc, srv)
+// }
+
+// func _MessageElement_Type_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// 	in := new(emptypb.Empty)
+// 	if err := dec(in); err != nil {
+// 		return nil, err
+// 	}
+// 	if interceptor == nil {
+// 		return srv.(MessageElementServer).Type(ctx, in)
+// 	}
+// 	info := &grpc.UnaryServerInfo{
+// 		Server:     srv,
+// 		FullMethod: "/model.MessageElement/Type",
+// 	}
+// 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+// 		return srv.(MessageElementServer).Type(ctx, req.(*emptypb.Empty))
+// 	}
+// 	return interceptor(ctx, in, info, handler)
+// }
+
+// var _MessageElement_serviceDesc = grpc.ServiceDesc{
+// 	ServiceName: "model.MessageElement",
+// 	HandlerType: (*MessageElementServer)(nil),
+// 	Methods: []grpc.MethodDesc{
+// 		{
+// 			MethodName: "Type",
+// 			Handler:    _MessageElement_Type_Handler,
+// 		},
+// 	},
+// 	Streams:  []grpc.StreamDesc{},
+// 	Metadata: "message_element.proto",
+// }
