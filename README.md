@@ -1,5 +1,8 @@
 # onebot-sdk
 onebot-sdk
+# Wiki
+介绍实现/命名规则等
+* 地址：[Wiki](./wiki/)
 # 待处理事项
 - [x] model 增加protobuf
 - [ ] 增加普通对象与GRPC对象转换方法
