@@ -11,6 +11,16 @@ func (msg MessageElementDice) Type() string {
 	return "dice"
 }
 
+func (msg MessageElementDice) ToGRPC() *MessageElementDiceGRPC {
+	var result MessageElementDiceGRPC
+	return &result
+}
+
+func (msg *MessageElementDiceGRPC) ToStruct() *MessageElementDice {
+	var result MessageElementDice
+	return &result
+}
+
 func init() {
 	//掷骰子魔法表情
 	messageElementUnmarshalJSONMap["dice"] = func(data []byte) (MessageElement, error) {

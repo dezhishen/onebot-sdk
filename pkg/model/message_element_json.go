@@ -10,6 +10,18 @@ func (msg MessageElementJson) Type() string {
 	return "json"
 }
 
+func (msg MessageElementJson) ToGRPC() *MessageElementJsonGRPC {
+	return &MessageElementJsonGRPC{
+		Data: msg.Data,
+	}
+}
+
+func (msg *MessageElementJsonGRPC) ToStruct() *MessageElementJson {
+	return &MessageElementJson{
+		Data: msg.Data,
+	}
+}
+
 func init() {
 	messageElementUnmarshalJSONMap["json"] = func(data []byte) (MessageElement, error) {
 		var result MessageElementJson

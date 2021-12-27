@@ -5,6 +5,6 @@ option go_package="../model";
 
 message MessageElementPokeGRPC {
 	string poke_type = 1 [json_name="type"];	
-	string id = 2;
+	string ID = 2 [json_name="id"];
 	string name = 3;
 }

@@ -6,7 +6,7 @@ type BoolYes struct {
 
 type BoolYesOfResult struct {
 	Data    *BoolYes `json:"data"`
-	RetCode int      `json:"retcode"`
+	Retcode int64    `json:"retcode"`
 	Status  string   `json:"status"`
 }
 
@@ -18,7 +18,7 @@ type VersionInfoData struct {
 
 type VersionInfoResult struct {
 	Data    *VersionInfoData `json:"data"`
-	RetCode int64            `json:"ret_code"`
+	Retcode int64            `json:"ret_code"`
 	Status  string           `json:"status"` //
 }
 
@@ -29,6 +29,6 @@ type StatusInfoData struct {
 
 type StatusInfoResult struct {
 	Data    *StatusInfoData `json:"data"`
-	RetCode int64           `json:"ret_code"`
+	Retcode int64           `json:"ret_code"`
 	Status  string          `json:"status"`
 }

@@ -3,28 +3,28 @@ package model;
 option go_package="../model";
 
 message AccountGRPC {
-    int64 user_id =1 ;
+    int64 UserID =1 [json_name="user_id"] ;
     string sex =2 ;
     string nickname =3;
-    int64 age =4;
+    uint32 age =4;
     string  remark =5;
 }
 message AccountResultGRPC{
     AccountGRPC data =1;
-    int64 retcode = 2;
+    int64 retcode = 2 ;
     string status =3;
 }
 
 
 message FriendListResultGRPC {
-    repeated AccountGRPC data=1;
-    int64 retcode =2;
-    string status=3;
+    repeated AccountGRPC data = 1;
+    int64 retcode = 2;
+    string status= 3;
 }
 
 message AnonymousGRPC {
     //匿名用户 ID
-    int64 id = 1;
+    int64 ID = 1 [json_name="id"];
     int64 name =2;
     int64 flag =3;
 }
@@ -36,6 +36,8 @@ message CokiesGRPC {
 
 message CokiesResultGRPC {
     CokiesGRPC data = 1;
+    int64 retcode = 2;
+    string status= 3;
 }
 
 message CSRFTokenGRPC {
@@ -44,11 +46,13 @@ message CSRFTokenGRPC {
 
 message CSRFTokenResultGRPC {
     CSRFTokenGRPC  data =1;
+    int64 retcode = 2;
+    string status= 3;
 }
 
 message CredentialsGRPC {
     string cookies =1;
-    int32 csrf_token =2;
+    int32 CSRFToken =2 [json_name="csrf_token"];
 }
 
 message CredentialsResultGRPC {

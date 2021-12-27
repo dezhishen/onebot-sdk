@@ -10,6 +10,17 @@ func (msg MessageElementXml) Type() string {
 	return "xml"
 }
 
+func (msg MessageElementXml) ToGRPC() *MessageElementXmlGRPC {
+	return &MessageElementXmlGRPC{
+		Data: msg.Data,
+	}
+}
+
+func (msg *MessageElementXmlGRPC) ToStruct() *MessageElementXml {
+	return &MessageElementXml{
+		Data: msg.Data,
+	}
+}
 func init() {
 	messageElementUnmarshalJSONMap["xml"] = func(data []byte) (MessageElement, error) {
 		var result MessageElementXml

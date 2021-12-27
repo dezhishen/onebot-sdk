@@ -3,11 +3,23 @@ package model
 import "encoding/json"
 
 type MessageElementReply struct {
-	Id string `json:"id"`
+	ID string `json:"id"`
 }
 
 func (msg MessageElementReply) Type() string {
 	return "reply"
+}
+
+func (msg *MessageElementReply) ToGRPC() *MessageElementReplyGRPC {
+	return &MessageElementReplyGRPC{
+		ID: msg.ID,
+	}
+}
+
+func (msg *MessageElementReplyGRPC) ToStruct() *MessageElementReply {
+	return &MessageElementReply{
+		ID: msg.ID,
+	}
 }
 
 func init() {

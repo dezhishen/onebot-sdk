@@ -13,6 +13,24 @@ func (msg MessageElementLocation) Type() string {
 	return "location"
 }
 
+func (msg MessageElementLocation) ToGRPC() *MessageElementLocationGRPC {
+	return &MessageElementLocationGRPC{
+		Lat:     msg.Lat,
+		Lon:     msg.Lon,
+		Title:   msg.Title,
+		Content: msg.Content,
+	}
+}
+
+func (msg *MessageElementLocationGRPC) ToStruct() *MessageElementLocation {
+	return &MessageElementLocation{
+		Lat:     msg.Lat,
+		Lon:     msg.Lon,
+		Title:   msg.Title,
+		Content: msg.Content,
+	}
+}
+
 func init() {
 	messageElementUnmarshalJSONMap["location"] = func(data []byte) (MessageElement, error) {
 		var result MessageElementLocation

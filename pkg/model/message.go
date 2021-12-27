@@ -53,7 +53,7 @@ type SendMessageResultData struct {
 
 type SendMessageResult struct {
 	Data    *SendMessageResultData `json:"data"`
-	RetCode int                    `json:"retcode"`
+	Retcode int64                  `json:"retcode"`
 	Status  string                 `json:"status"`
 }
 
@@ -91,11 +91,11 @@ func (msgSeg *MessageResultData) UnmarshalJSON(data []byte) error {
 
 type MessageResult struct {
 	Data    []*MessageResultData `json:"data"`
-	RetCode int                  `json:"retcode"`
+	Retcode int64                `json:"retcode"`
 	Status  string               `json:"status"`
 }
 type ForwardMessageResult struct {
 	Data    []*MessageSegment `json:"data"`
-	RetCode int               `json:"retcode"`
+	Retcode int64             `json:"retcode"`
 	Status  string            `json:"status"`
 }

@@ -3,11 +3,23 @@ package model
 import "encoding/json"
 
 type MessageElementForward struct {
-	Id string `json:"id"`
+	ID string `json:"id"`
 }
 
 func (msg MessageElementForward) Type() string {
 	return "forward"
+}
+
+func (msg MessageElementForward) ToGRPC() *MessageElementForwardGRPC {
+	return &MessageElementForwardGRPC{
+		ID: msg.ID,
+	}
+}
+
+func (msg *MessageElementForwardGRPC) ToStruct() *MessageElementForward {
+	return &MessageElementForward{
+		ID: msg.ID,
+	}
 }
 
 func init() {

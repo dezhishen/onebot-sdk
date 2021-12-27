@@ -5,5 +5,5 @@ option go_package="../model";
 
 message MessageElementContactGRPC {
 	string contact_type = 1 [json_name="type"];
-	string id = 2;
+	string ID = 2 [json_name="id"];
 }

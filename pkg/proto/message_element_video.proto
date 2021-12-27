@@ -7,5 +7,5 @@ message MessageElementVideoGRPC  {
 	string url = 2;
 	uint32   cache = 3;
 	uint32   proxy = 4;
-	uint64   timeout = 5;
+	uint32   timeout = 5;
 }
