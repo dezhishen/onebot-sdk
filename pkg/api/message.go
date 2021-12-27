@@ -62,8 +62,8 @@ func SendGroupMsg(msg *model.GroupMsg) (int64, error) {
 	return result.Data.MessageId, nil
 }
 
-func DelMsg(id int) error {
-	reqMap := make(map[string]int)
+func DelMsg(id int64) error {
+	reqMap := make(map[string]int64)
 	reqMap["message_id"] = id
 	requestBody, _ := json.Marshal(reqMap)
 	_, err := http.Post(
@@ -74,8 +74,8 @@ func DelMsg(id int) error {
 	return err
 }
 
-func GetMsg(id int) (*model.MessageData, error) {
-	reqMap := make(map[string]int)
+func GetMsg(id int64) (*model.MessageData, error) {
+	reqMap := make(map[string]int64)
 	reqMap["message_id"] = id
 	requestBody, _ := json.Marshal(reqMap)
 	resp, err := http.Post(
@@ -93,8 +93,8 @@ func GetMsg(id int) (*model.MessageData, error) {
 	return result.Data, nil
 }
 
-func GetForwardMsg(id int) (*model.ForwardMessageData, error) {
-	reqMap := make(map[string]int)
+func GetForwardMsg(id int64) (*model.ForwardMessageData, error) {
+	reqMap := make(map[string]int64)
 	reqMap["message_id"] = id
 	requestBody, _ := json.Marshal(reqMap)
 	resp, err := http.Post(
