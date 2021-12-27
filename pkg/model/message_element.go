@@ -93,7 +93,7 @@ func (msg *MessageSegment) ToGRPC() *MessageSegmentGRPC {
 			MessageElementXml: msg.Data.(*MessageElementXml).ToGRPC(),
 		}
 	default:
-		log.Errorf("未定义的消息类型：%v", result.Type)
+		log.Errorf("未定义的消息类型:%v", result.Type)
 	}
 	return result
 }
@@ -143,7 +143,7 @@ func (msg *MessageSegmentGRPC) ToStruct() *MessageSegment {
 	case "xml":
 		result.Data = msg.GetMessageElementXml().ToStruct()
 	default:
-		log.Errorf("未定义的消息类型：%v", result.Type)
+		log.Errorf("未定义的消息类型:%v", result.Type)
 	}
 	return result
 }
