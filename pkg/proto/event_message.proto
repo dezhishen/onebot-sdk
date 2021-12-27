@@ -10,7 +10,7 @@ message EventMeesageBaseGRPC  {
 	EventBaseGRPC eventBase = 1;
 	string           message_type = 2;
 	string           sub_type =3;
-	int32            message_id = 4;
+	int32            message_id = 4 ;
 	int64            user_id = 5;
 	repeated MessageSegmentGRPC message =6;
 	string           raw_message = 7;
@@ -23,7 +23,7 @@ message EventMessagePrivateGRPC  {
 }
 
 message EventMessageGroupGRPC  {
-	int64 group_id     =1;    
+	int64 group_id = 1;    
 	AnonymousGRPC  anonymous = 2;
 	EventMeesageBaseGRPC eventMeesageBase =3;
 }

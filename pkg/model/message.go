@@ -7,20 +7,20 @@ import (
 )
 
 type PrivateMsg struct {
-	UserID     int64             `json:"user_id"`
-	GroupID    int64             `json:"group_id"`
+	UserId     int64             `json:"user_id"`
+	GroupId    int64             `json:"group_id"`
 	Message    []*MessageSegment `json:"message"`
 	AutoEscape bool              `json:"auto_escape"`
 }
 
 type GroupMsg struct {
-	GroupID    int64             `json:"group_id"`
+	GroupId    int64             `json:"group_id"`
 	Message    []*MessageSegment `json:"message"`
 	AutoEscape bool              `json:"auto_escape"`
 }
 
 type MsgNode struct {
-	ID      int32             `json:"id"`
+	Id      int32             `json:"id"`
 	Name    string            `json:"name"`
 	Uin     int64             `json:"uin"`
 	Content []*MessageSegment `json:"content"`
@@ -28,7 +28,7 @@ type MsgNode struct {
 }
 
 type GroupForwardMsg struct {
-	GroupID  int64      `json:"group_id"`
+	GroupId  int64      `json:"group_id"`
 	Messages []*MsgNode `json:"messages"`
 }
 
@@ -40,8 +40,8 @@ const (
 )
 
 type MsgForSend struct {
-	UserID      int64             `json:"user_id"`
-	GroupID     int64             `json:"group_id"`
+	UserId      int64             `json:"user_id"`
+	GroupId     int64             `json:"group_id"`
 	Message     []*MessageSegment `json:"message"`
 	AutoEscape  bool              `json:"auto_escape"`
 	MessageType MessageType       `json:"message_type"`
@@ -62,10 +62,10 @@ type MessageResultData struct {
 	Time int `json:"time"`
 	//消息类型，同 消息事件
 	MessageType string `json:"message_type"`
-	//消息 ID
-	MessageID int `json:"message_id"`
-	//消息真实 ID
-	RealID int `json:"real_id"`
+	//消息 Id
+	MessageId int `json:"message_id"`
+	//消息真实 Id
+	RealId int `json:"real_id"`
 	//发送人信息，同 消息事件
 	Sender *Sender `json:"sender"`
 	//消息内容

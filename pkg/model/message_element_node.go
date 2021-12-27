@@ -3,7 +3,7 @@ package model
 import "encoding/json"
 
 type MessageElementNode struct {
-	UserID   string            `json:"user_id"`
+	UserId   string            `json:"user_id"`
 	Nickname string            `json:"nickname"`
 	Content  []*MessageSegment `json:"content"`
 }
@@ -12,19 +12,19 @@ func (msg MessageElementNode) Type() string {
 	return "node"
 }
 
-func (msg *MessageElementNode) ToGRPC() *MessageElementNodeGRPC {
-	return &MessageElementNodeGRPC{
-		UserID:   msg.UserID,
+func (msg *MessageElementNodeGRPC) ToStruct() *MessageElementNode {
+	return &MessageElementNode{
+		UserId:   msg.UserId,
 		Nickname: msg.Nickname,
-		Content:  MessageSegmentArray2MessageSegmentGRPCArray(msg.Content),
+		Content:  MessageSegmentGRPCArray2MessageSegmentArray(msg.Content),
 	}
 }
 
-func (msg *MessageElementNodeGRPC) ToStruct() *MessageElementNode {
-	return &MessageElementNode{
-		UserID:   msg.UserID,
+func (msg *MessageElementNode) ToGRPC() *MessageElementNodeGRPC {
+	return &MessageElementNodeGRPC{
+		UserId:   msg.UserId,
 		Nickname: msg.Nickname,
-		Content:  MessageSegmentGRPCArray2MessageSegmentArray(msg.Content),
+		Content:  MessageSegmentArray2MessageSegmentGRPCArray(msg.Content),
 	}
 }
 

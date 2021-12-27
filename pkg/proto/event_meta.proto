@@ -9,7 +9,7 @@ message EventMetaBaseGRPC  {
 }
 
 message EventMetaLifecycleGRPC  {
-	EventBaseGRPC eventBase = 1;
+	EventMetaBaseGRPC eventMetaBase = 1;
 	/*
 		enable、disable、connect	事件子类型，分别表示 OneBot 启用、停用、WebSocket 连接成功
 
@@ -21,8 +21,8 @@ message EventMetaLifecycleGRPC  {
 }
 
 message EventMetaHeartbeatGRPC  {
-	EventBaseGRPC eventBase = 1;
+	EventMetaBaseGRPC eventMetaBase = 1;
 	map<string,string> status = 2;
 	//到下次心跳的间隔，单位毫秒
-	int64 interval = 3;
+	uint64 interval = 3;
 }

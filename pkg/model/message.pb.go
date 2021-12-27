@@ -486,9 +486,9 @@ type MessageResultDataGRPC struct {
 	Time int64 `protobuf:"varint,1,opt,name=time,proto3" json:"time,omitempty"`
 	//消息类型，同 消息事件
 	MessageType string `protobuf:"bytes,2,opt,name=message_type,json=messageType,proto3" json:"message_type,omitempty"`
-	//消息 ID
+	//消息 Id
 	MessageId int64 `protobuf:"varint,3,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
-	//消息真实 ID
+	//消息真实 Id
 	RealId int64 `protobuf:"varint,4,opt,name=real_id,json=realId,proto3" json:"real_id,omitempty"`
 	//发送人信息，同 消息事件
 	Sender *SenderGRPC `protobuf:"bytes,5,opt,name=sender,proto3" json:"sender,omitempty"`

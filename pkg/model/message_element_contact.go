@@ -4,7 +4,7 @@ import "encoding/json"
 
 type MessageElementContact struct {
 	ContactType string `json:"type"`
-	ID          string `json:"id"`
+	Id          string `json:"id"`
 }
 
 func (msg MessageElementContact) Type() string {
@@ -14,14 +14,14 @@ func (msg MessageElementContact) Type() string {
 func (msg MessageElementContact) ToGRPC() *MessageElementContactGRPC {
 	var result MessageElementContactGRPC
 	result.ContactType = msg.ContactType
-	result.ID = msg.ID
+	result.Id = msg.Id
 	return &result
 }
 
 func (msg *MessageElementContactGRPC) ToStruct() *MessageElementContact {
 	var result MessageElementContact
 	result.ContactType = msg.ContactType
-	result.ID = msg.ID
+	result.Id = msg.Id
 	return &result
 }
 

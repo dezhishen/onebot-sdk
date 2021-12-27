@@ -4,6 +4,6 @@ option go_package="../model";
 
 message EventBaseGRPC {
 	int64  time = 1;
-	int64  self_id = 2 ;
+	int64  self_id = 2;
 	string post_type = 3;
 }

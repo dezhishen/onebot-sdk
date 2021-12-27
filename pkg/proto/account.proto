@@ -3,7 +3,7 @@ package model;
 option go_package="../model";
 
 message AccountGRPC {
-    int64 UserID =1 [json_name="user_id"] ;
+    int64 user_id =1;
     string sex =2 ;
     string nickname =3;
     uint32 age =4;
@@ -23,8 +23,8 @@ message FriendListResultGRPC {
 }
 
 message AnonymousGRPC {
-    //匿名用户 ID
-    int64 ID = 1 [json_name="id"];
+    //匿名用户 Id
+    int64 id = 1;
     int64 name =2;
     int64 flag =3;
 }

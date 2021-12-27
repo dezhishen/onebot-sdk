@@ -3,7 +3,7 @@ package model
 import "encoding/json"
 
 type MessageElementForward struct {
-	ID string `json:"id"`
+	Id string `json:"id"`
 }
 
 func (msg MessageElementForward) Type() string {
@@ -12,13 +12,13 @@ func (msg MessageElementForward) Type() string {
 
 func (msg MessageElementForward) ToGRPC() *MessageElementForwardGRPC {
 	return &MessageElementForwardGRPC{
-		ID: msg.ID,
+		Id: msg.Id,
 	}
 }
 
 func (msg *MessageElementForwardGRPC) ToStruct() *MessageElementForward {
 	return &MessageElementForward{
-		ID: msg.ID,
+		Id: msg.Id,
 	}
 }
 

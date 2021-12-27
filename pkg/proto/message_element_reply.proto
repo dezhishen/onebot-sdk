@@ -3,5 +3,5 @@ package model;
 option go_package="../model";
 
 message MessageElementReplyGRPC {
-	string ID = 1 [json_name="id"];
+	string id = 1;
 }

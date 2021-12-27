@@ -1,7 +1,7 @@
 package model
 
 type Account struct {
-	UserID int64 `json:"user_id"`
+	UserId int64 `json:"user_id"`
 	//性别，male 或 female 或 unknown
 	Sex string `json:"sex"`
 	//昵称
@@ -12,7 +12,7 @@ type Account struct {
 
 func (a *Account) ToGRPC() *AccountGRPC {
 	return &AccountGRPC{
-		UserID:   a.UserID,
+		UserId:   a.UserId,
 		Sex:      a.Sex,
 		Nickname: a.Nickname,
 		Age:      a.Age,
@@ -22,7 +22,7 @@ func (a *Account) ToGRPC() *AccountGRPC {
 
 func (a *AccountGRPC) ToStruct() *Account {
 	return &Account{
-		UserID:   a.UserID,
+		UserId:   a.UserId,
 		Sex:      a.Sex,
 		Nickname: a.Nickname,
 		Age:      a.Age,
@@ -91,9 +91,9 @@ func (a *FriendListResultGRPC) ToStruct() *FriendListResult {
 }
 
 type Anonymous struct {
-	//匿名用户 ID
-	ID int64 `json:"id"`
-	//匿名用户 ID
+	//匿名用户 Id
+	Id int64 `json:"id"`
+	//匿名用户 Id
 	Name int64 `json:"name"`
 	//匿名用户 flag，在调用禁言 API 时需要传入
 	Flag int64 `json:"flag"`
@@ -101,7 +101,7 @@ type Anonymous struct {
 
 func (a *Anonymous) ToGRPC() *AnonymousGRPC {
 	return &AnonymousGRPC{
-		ID:   a.ID,
+		Id:   a.Id,
 		Name: a.Name,
 		Flag: a.Flag,
 	}
@@ -109,7 +109,7 @@ func (a *Anonymous) ToGRPC() *AnonymousGRPC {
 
 func (a *AnonymousGRPC) ToStruct() *Anonymous {
 	return &Anonymous{
-		ID:   a.ID,
+		Id:   a.Id,
 		Name: a.Name,
 		Flag: a.Flag,
 	}

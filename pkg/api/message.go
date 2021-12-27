@@ -14,14 +14,14 @@ import (
 func SendMsg(msg *model.MsgForSend) (int, error) {
 	if msg.MessageType == model.PrivateMessageType {
 		return SendPrivateMsg(&model.PrivateMsg{
-			UserID:     msg.UserID,
-			GroupID:    msg.GroupID,
+			UserId:     msg.UserId,
+			GroupId:    msg.GroupId,
 			Message:    msg.Message,
 			AutoEscape: msg.AutoEscape,
 		})
 	}
 	return SendGroupMsg(&model.GroupMsg{
-		GroupID:    msg.GroupID,
+		GroupId:    msg.GroupId,
 		Message:    msg.Message,
 		AutoEscape: msg.AutoEscape})
 }

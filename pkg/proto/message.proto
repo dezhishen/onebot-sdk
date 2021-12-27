@@ -54,9 +54,9 @@ message MessageResultDataGRPC {
 	int64 time = 1;
 	//消息类型，同 消息事件
 	string message_type = 2;
-	//消息 ID
+	//消息 Id
 	int64 message_id = 3;
-	//消息真实 ID
+	//消息真实 Id
 	int64 real_id = 4;
 	//发送人信息，同 消息事件
 	SenderGRPC sender = 5;

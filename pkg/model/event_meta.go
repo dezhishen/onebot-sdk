@@ -5,6 +5,20 @@ type EventMetaBase struct {
 	MetaEventType string `json:"meta_event_type"`
 }
 
+func (a *EventMetaBase) ToGRPC() *EventMetaBaseGRPC {
+	return &EventMetaBaseGRPC{
+		EventBase:     a.EventBase.ToGRPC(),
+		MetaEventType: a.MetaEventType,
+	}
+}
+
+func (a *EventMetaBaseGRPC) ToStruct() *EventMetaBase {
+	return &EventMetaBase{
+		EventBase:     *a.EventBase.ToStruct(),
+		MetaEventType: a.MetaEventType,
+	}
+}
+
 type EventMetaLifecycle struct {
 	EventMetaBase
 	/*
@@ -17,9 +31,39 @@ type EventMetaLifecycle struct {
 	SubType string `json:"sub_type"`
 }
 
+func (a *EventMetaLifecycle) ToGRPC() *EventMetaLifecycleGRPC {
+	return &EventMetaLifecycleGRPC{
+		EventMetaBase: a.EventMetaBase.ToGRPC(),
+		SubType:       a.SubType,
+	}
+}
+
+func (a *EventMetaLifecycleGRPC) ToStruct() *EventMetaLifecycle {
+	return &EventMetaLifecycle{
+		EventMetaBase: *a.EventMetaBase.ToStruct(),
+		SubType:       a.SubType,
+	}
+}
+
 type EventMetaHeartbeat struct {
 	EventMetaBase
-	Status map[string]interface{} `json:"status"`
+	Status map[string]string `json:"status"`
 	//到下次心跳的间隔，单位毫秒
-	Interval int64 `json:"interval"`
+	Interval uint64 `json:"interval"`
+}
+
+func (a *EventMetaHeartbeat) ToGRPC() *EventMetaHeartbeatGRPC {
+	return &EventMetaHeartbeatGRPC{
+		EventMetaBase: a.EventMetaBase.ToGRPC(),
+		Status:        a.Status,
+		Interval:      a.Interval,
+	}
+}
+
+func (a *EventMetaHeartbeatGRPC) ToStruct() *EventMetaHeartbeat {
+	return &EventMetaHeartbeat{
+		EventMetaBase: *a.EventMetaBase.ToStruct(),
+		Status:        a.Status,
+		Interval:      a.Interval,
+	}
 }

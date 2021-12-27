@@ -4,21 +4,21 @@ option go_package="../model";
 
 message SenderGRPC {
 	//	发送者 QQ 号
-	 int64 UserID = 1 [json_name="user_id"];
+	int64 UserId = 1 [json_name="user_id"];
 	//昵称
-	 string nickname = 2;
+	string nickname = 2;
 	//群名片／备注
-	 string card = 3;
+	string card = 3;
 	//性别，male 或 female 或 unknown
-	 string sex = 4;
+	string sex = 4;
 	//	年龄
-	 int32 age = 5;
+	uint32 age = 5;
 	//群名片／备注
-	 string area = 6;
+	string area = 6;
 	//成员等级
-	 string level = 7;
+	string level = 7;
 	//角色 owner/admin/member
-	 string role = 8;
+	string role = 8;
 	//头衔
-	 string title = 9;
+	string title = 9;
 }

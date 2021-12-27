@@ -4,7 +4,7 @@ import "encoding/json"
 
 type MessageElementPoke struct {
 	PokeType string `json:"type"`
-	ID       string `json:"id"`
+	Id       string `json:"id"`
 	Name     string `json:"name"`
 }
 
@@ -15,7 +15,7 @@ func (msg MessageElementPoke) Type() string {
 func (msg *MessageElementPoke) ToGRPC() *MessageElementPokeGRPC {
 	return &MessageElementPokeGRPC{
 		PokeType: msg.PokeType,
-		ID:       msg.ID,
+		Id:       msg.Id,
 		Name:     msg.Name,
 	}
 }
@@ -23,7 +23,7 @@ func (msg *MessageElementPoke) ToGRPC() *MessageElementPokeGRPC {
 func (msg *MessageElementPokeGRPC) ToStruct() *MessageElementPoke {
 	return &MessageElementPoke{
 		PokeType: msg.PokeType,
-		ID:       msg.ID,
+		Id:       msg.Id,
 		Name:     msg.Name,
 	}
 }

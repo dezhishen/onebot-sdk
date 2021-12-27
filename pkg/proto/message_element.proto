@@ -22,7 +22,7 @@ import "message_element_video.proto";
 import "message_element_xml.proto";
 
 message MessageElementNodeGRPC {
-	string           UserID = 1 [json_name="user_id"];
+	string           user_id = 1 ;
 	string           nickname = 2;
 	repeated MessageSegmentGRPC content = 3;
 }

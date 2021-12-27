@@ -8,7 +8,7 @@ message MessageElementImageGRPC {
 	//图片类型
 	string image_type = 2 [json_name="type"];
 	string url = 3;
-	uint32   cache = 4;
-	uint32   proxy = 5;
-	uint32   timeout = 6;
+	uint32 cache = 4;
+	uint32 proxy = 5;
+	uint32 timeout = 6;
 }

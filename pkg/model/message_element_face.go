@@ -3,7 +3,7 @@ package model
 import "encoding/json"
 
 type MessageElementFace struct {
-	ID string `json:"id"`
+	Id string `json:"id"`
 }
 
 func (msg MessageElementFace) Type() string {
@@ -12,13 +12,13 @@ func (msg MessageElementFace) Type() string {
 
 func (msg MessageElementFace) ToGRPC() *MessageElementFaceGRPC {
 	return &MessageElementFaceGRPC{
-		ID: msg.ID,
+		Id: msg.Id,
 	}
 }
 
 func (msg *MessageElementFaceGRPC) ToStruct() *MessageElementFace {
 	return &MessageElementFace{
-		ID: msg.ID,
+		Id: msg.Id,
 	}
 }
 

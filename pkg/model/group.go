@@ -21,7 +21,7 @@ type GroupListResult struct {
 
 type GroupMember struct {
 	GroupId         int    `json:"group_id"`
-	UserID          int    `json:"user_id"`
+	UserId          int    `json:"user_id"`
 	NickName        string `json:"nickname"`
 	Card            string `json:"card"`
 	Sex             int    `json:"sex"`
@@ -65,14 +65,14 @@ type GroupHonorInfo struct {
 }
 
 type CurrentTalkative struct {
-	UserID   int    `json:"user_id"`
+	UserId   int    `json:"user_id"`
 	NickName string `json:"nickname"`
 	Avatar   string `json:"avatar"`    //头像url
 	DayCount int    `json:"day_count"` //持续天数
 }
 
 type HonorOwnerInfo struct {
-	UserID      int    `json:"user_id"`
+	UserId      int    `json:"user_id"`
 	NickName    string `json:"nickname"`
 	Avatar      string `json:"avatar"`
 	Description int    `json:"description"`

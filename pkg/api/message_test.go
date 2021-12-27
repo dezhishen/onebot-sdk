@@ -12,7 +12,7 @@ var groupId int64 = 123456
 func TestSendMsg(t *testing.T) {
 	msg := model.MsgForSend{
 		MessageType: "private",
-		UserID:      userId,
+		UserId:      userId,
 		Message: []*model.MessageSegment{
 			{
 				Type: "text",
@@ -32,7 +32,7 @@ func TestSendMsg(t *testing.T) {
 
 func TestSendGroupMsg(t *testing.T) {
 	msg := model.GroupMsg{
-		GroupID: groupId,
+		GroupId: groupId,
 		Message: []*model.MessageSegment{
 			{
 				Type: "text",
@@ -52,7 +52,7 @@ func TestSendGroupMsg(t *testing.T) {
 
 func TestSendPrivateMsg(t *testing.T) {
 	msg := model.PrivateMsg{
-		UserID: userId,
+		UserId: userId,
 		Message: []*model.MessageSegment{
 			{
 				Type: "text",

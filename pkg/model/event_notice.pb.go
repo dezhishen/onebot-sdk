@@ -248,7 +248,7 @@ type QQFileGRPC struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//文件 ID
+	//文件 Id
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	//文件名
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
@@ -749,7 +749,7 @@ type EventNoticeGroupRecallGRPC struct {
 	UserId int64 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	//操作者 QQ 号
 	OperatorId int64 `protobuf:"varint,3,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	//被撤回的消息 ID
+	//被撤回的消息 Id
 	MessageId int64 `protobuf:"varint,4,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
 }
 
@@ -822,7 +822,7 @@ type EventNoticeFriendRecallGRPC struct {
 	EventNoticeBase *EventNoticeBaseGRPC `protobuf:"bytes,1,opt,name=eventNoticeBase,proto3" json:"eventNoticeBase,omitempty"`
 	//好友 QQ 号
 	UserId int64 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	//被撤回的消息 ID
+	//被撤回的消息 Id
 	MessageId int64 `protobuf:"varint,3,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
 }
 

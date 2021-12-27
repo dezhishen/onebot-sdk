@@ -20,7 +20,7 @@ func TestFace(t *testing.T) {
 	if !ok {
 		panic(errors.New("类型错误"))
 	}
-	if field.ID != "1231" {
+	if field.Id != "1231" {
 		panic(errors.New("类型错误"))
 	}
 }

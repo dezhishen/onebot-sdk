@@ -4,5 +4,5 @@ option go_package="../model";
 
 
 message MessageElementFaceGRPC {
-	string ID = 1 [json_name="id"];
+	string id = 1;
 }

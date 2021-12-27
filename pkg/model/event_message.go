@@ -4,20 +4,74 @@ type EventMeesageBase struct {
 	EventBase
 	MessageType string            `json:"message_type"`
 	SubType     string            `json:"sub_type"`
-	MessageID   int32             `json:"message_id"`
-	UserID      int64             `json:"user_id"`
+	MessageId   int32             `json:"message_id"`
+	UserId      int64             `json:"user_id"`
 	Message     []*MessageSegment `json:"message"`
 	RawMessage  string            `json:"raw_message"`
 	Font        int32             `json:"font"`
 	Sender      *Sender           `json:"sender"`
 }
 
+func (a *EventMeesageBase) ToGRPC() *EventMeesageBaseGRPC {
+	return &EventMeesageBaseGRPC{
+		EventBase:   a.EventBase.ToGRPC(),
+		MessageType: a.MessageType,
+		SubType:     a.SubType,
+		MessageId:   a.MessageId,
+		Message:     MessageSegmentArray2MessageSegmentGRPCArray(a.Message),
+		RawMessage:  a.RawMessage,
+		Font:        a.Font,
+		Sender:      a.Sender.ToGRPC(),
+	}
+}
+
+func (a *EventMeesageBaseGRPC) ToStruct() *EventMeesageBase {
+	return &EventMeesageBase{
+		EventBase:   *a.EventBase.ToStruct(),
+		MessageType: a.MessageType,
+		SubType:     a.SubType,
+		MessageId:   a.MessageId,
+		Message:     MessageSegmentGRPCArray2MessageSegmentArray(a.Message),
+		RawMessage:  a.RawMessage,
+		Font:        a.Font,
+		Sender:      a.Sender.ToStruct(),
+	}
+}
+
 type EventMessagePrivate struct {
 	EventMeesageBase
 }
 
+func (a *EventMessagePrivate) ToGRPC() *EventMessagePrivateGRPC {
+	return &EventMessagePrivateGRPC{
+		EventMeesageBase: a.EventMeesageBase.ToGRPC(),
+	}
+}
+
+func (a *EventMessagePrivateGRPC) ToStruct() *EventMessagePrivate {
+	return &EventMessagePrivate{
+		EventMeesageBase: *a.EventMeesageBase.ToStruct(),
+	}
+}
+
 type EventMessageGroup struct {
-	GroupID   int64      `json:"group_id"`
-	Anonymous *Anonymous `json:"anonymous"`
 	EventMeesageBase
+	GroupId   int64      `json:"group_id"`
+	Anonymous *Anonymous `json:"anonymous"`
+}
+
+func (a *EventMessageGroup) ToGRPC() *EventMessageGroupGRPC {
+	return &EventMessageGroupGRPC{
+		EventMeesageBase: a.EventMeesageBase.ToGRPC(),
+		GroupId:          a.GroupId,
+		Anonymous:        a.Anonymous.ToGRPC(),
+	}
+}
+
+func (a *EventMessageGroupGRPC) ToStruct() *EventMessageGroup {
+	return &EventMessageGroup{
+		EventMeesageBase: *a.EventMeesageBase.ToStruct(),
+		GroupId:          a.GroupId,
+		Anonymous:        a.Anonymous.ToStruct(),
+	}
 }

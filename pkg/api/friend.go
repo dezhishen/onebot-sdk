@@ -5,9 +5,9 @@ import (
 	"github.com/dezhishen/onebot-sdk/pkg/model"
 )
 
-func SendLike(userID int, times int) error {
+func SendLike(userId int, times int) error {
 	req := make(map[string]int)
-	req["user_id"] = userID
+	req["user_id"] = userId
 	req["times"] = times
 	url := "/send_like"
 	return cli.PostWithRequest(url, req)
