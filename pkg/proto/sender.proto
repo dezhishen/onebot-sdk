@@ -2,7 +2,7 @@ syntax = "proto3";
 package model;
 option go_package="../model";
 
-message Sender {
+message SenderGRPC {
 	//	发送者 QQ 号
 	 int64 UserID = 1 [json_name="user_id"];
 	//昵称

@@ -2,9 +2,9 @@ package model
 
 import "encoding/json"
 
-// type MessageElementAt struct {
-// 	Qq string `json:"qq"`
-// }
+type MessageElementAt struct {
+	Qq string `json:"qq"`
+}
 
 func (msg MessageElementAt) Type() string {
 	return "at"

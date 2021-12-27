@@ -2,7 +2,7 @@ syntax = "proto3";
 package model;
 option go_package="../model";
 
-message MessageElementVideo  {
+message MessageElementVideoGRPC  {
 	string file = 1;
 	string url = 2;
 	uint32   cache = 3;

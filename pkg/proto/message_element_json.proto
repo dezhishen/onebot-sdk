@@ -3,6 +3,6 @@ package model;
 option go_package="../model";
 
 
-message MessageElementJson {
+message MessageElementJsonGRPC {
 	string data = 1;
 }

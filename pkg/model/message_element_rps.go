@@ -2,8 +2,8 @@ package model
 
 import "encoding/json"
 
-// type MessageElementRps struct {
-// }
+type MessageElementRps struct {
+}
 
 func (msg MessageElementRps) Type() string {
 	return "rps"

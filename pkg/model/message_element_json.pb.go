@@ -20,7 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type MessageElementJson struct {
+type MessageElementJsonGRPC struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -28,8 +28,8 @@ type MessageElementJson struct {
 	Data string `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
 }
 
-func (x *MessageElementJson) Reset() {
-	*x = MessageElementJson{}
+func (x *MessageElementJsonGRPC) Reset() {
+	*x = MessageElementJsonGRPC{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_message_element_json_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -37,13 +37,13 @@ func (x *MessageElementJson) Reset() {
 	}
 }
 
-func (x *MessageElementJson) String() string {
+func (x *MessageElementJsonGRPC) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MessageElementJson) ProtoMessage() {}
+func (*MessageElementJsonGRPC) ProtoMessage() {}
 
-func (x *MessageElementJson) ProtoReflect() protoreflect.Message {
+func (x *MessageElementJsonGRPC) ProtoReflect() protoreflect.Message {
 	mi := &file_message_element_json_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -55,12 +55,12 @@ func (x *MessageElementJson) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MessageElementJson.ProtoReflect.Descriptor instead.
-func (*MessageElementJson) Descriptor() ([]byte, []int) {
+// Deprecated: Use MessageElementJsonGRPC.ProtoReflect.Descriptor instead.
+func (*MessageElementJsonGRPC) Descriptor() ([]byte, []int) {
 	return file_message_element_json_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *MessageElementJson) GetData() string {
+func (x *MessageElementJsonGRPC) GetData() string {
 	if x != nil {
 		return x.Data
 	}
@@ -72,11 +72,11 @@ var File_message_element_json_proto protoreflect.FileDescriptor
 var file_message_element_json_proto_rawDesc = []byte{
 	0x0a, 0x1a, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x65, 0x6c, 0x65, 0x6d, 0x65, 0x6e,
 	0x74, 0x5f, 0x6a, 0x73, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x05, 0x6d, 0x6f,
-	0x64, 0x65, 0x6c, 0x22, 0x28, 0x0a, 0x12, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x45, 0x6c,
-	0x65, 0x6d, 0x65, 0x6e, 0x74, 0x4a, 0x73, 0x6f, 0x6e, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61, 0x74,
-	0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x42, 0x0a, 0x5a,
-	0x08, 0x2e, 0x2e, 0x2f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x64, 0x65, 0x6c, 0x22, 0x2c, 0x0a, 0x16, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x45, 0x6c,
+	0x65, 0x6d, 0x65, 0x6e, 0x74, 0x4a, 0x73, 0x6f, 0x6e, 0x47, 0x52, 0x50, 0x43, 0x12, 0x12, 0x0a,
+	0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x64, 0x61, 0x74,
+	0x61, 0x42, 0x0a, 0x5a, 0x08, 0x2e, 0x2e, 0x2f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -93,7 +93,7 @@ func file_message_element_json_proto_rawDescGZIP() []byte {
 
 var file_message_element_json_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_message_element_json_proto_goTypes = []interface{}{
-	(*MessageElementJson)(nil), // 0: model.MessageElementJson
+	(*MessageElementJsonGRPC)(nil), // 0: model.MessageElementJsonGRPC
 }
 var file_message_element_json_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -110,7 +110,7 @@ func file_message_element_json_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_message_element_json_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MessageElementJson); i {
+			switch v := v.(*MessageElementJsonGRPC); i {
 			case 0:
 				return &v.state
 			case 1:

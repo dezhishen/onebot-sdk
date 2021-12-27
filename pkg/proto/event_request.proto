@@ -3,14 +3,14 @@ package model;
 option go_package="../model";
 import "event.proto";
 
-message EventRequestBase {
-	EventBase eventBase = 1;
+message EventRequestBaseGRPC {
+	EventBaseGRPC eventBase = 1;
 	//请求类型
 	 string request_type = 2;
 }
 
-message EventRequestFriend {
-	EventRequestBase eventRequestBase = 1;
+message EventRequestFriendGRPC {
+	EventRequestBaseGRPC eventRequestBase = 1;
 	//发送请求的QQ
 	 int64 user_id = 2;
 	//验证信息
@@ -19,8 +19,8 @@ message EventRequestFriend {
 	 string flag =4;
 }
 
-message EventRequestGroup {
-	EventRequestBase eventRequestBase = 1;
+message EventRequestGroupGRPC {
+	EventRequestBaseGRPC eventRequestBase = 1;
 	//add、invite	请求子类型，分别表示加群请求、邀请登录号入群
 	 string sub_type =2;
 	//群号

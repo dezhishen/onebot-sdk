@@ -6,5 +6,6 @@ do
         echo "$file" 
         #echo "protoc --proto_path=$INCLUDE --proto_path=$MYDIR --go_out=plugins=grpc:\model\  $MYDIR/$file"
         protoc --proto_path=$INCLUDE --proto_path=$MYDIR --go_out=plugins=grpc:../model  $MYDIR/$file
+        #echo "$x $file $file = 2;"
     fi
 done   

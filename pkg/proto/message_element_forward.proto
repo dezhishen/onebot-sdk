@@ -3,6 +3,6 @@ package model;
 option go_package="../model";
 
 
-message MessageElementForward {
-	string id = 1;
+message MessageElementForwardGRPC {
+	string ID = 1 [json_name="id"];
 }

@@ -3,6 +3,6 @@ package model;
 option go_package="../model";
 
 
-message MessageElementAt {
+message MessageElementAtGRPC {
 	string qq = 1;
 }

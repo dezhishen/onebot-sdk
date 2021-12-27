@@ -16,7 +16,7 @@ func TestShake(t *testing.T) {
 	if msg[0].Data.Type() != "shake" {
 		panic(errors.New("类型错误"))
 	}
-	_, ok := msg[0].Data.(MessageELementShake)
+	_, ok := msg[0].Data.(MessageElementShake)
 	if !ok {
 		panic(errors.New("类型错误"))
 	}

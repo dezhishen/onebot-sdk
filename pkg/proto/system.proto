@@ -2,36 +2,36 @@ syntax = "proto3";
 package model;
 option go_package = "../model";
 
-message VersionInfoData {
+message VersionInfoDataGRPC {
 	string app_name  = 1;
 	string app_version = 2;
 	string protocol_version  = 3;
 }
 
-message VersionInfoResult {
-	VersionInfoData data = 1;
+message VersionInfoResultGRPC {
+	VersionInfoDataGRPC data = 1;
 	int64 retcode = 2;
 	string status = 3;
 }
 
-message StatusInfoData {
+message StatusInfoDataGRPC {
 	bool online = 1;
 	bool good = 2;
 }
 
-message StatusInfoResult {
-	StatusInfoData data = 1;
+message StatusInfoResultGRPC {
+	StatusInfoDataGRPC data = 1;
 	int64 retcode = 2;
 	string status = 3;
 
 }
 
-message BoolYes {
+message BoolYesGRPC {
 	bool yes = 1;
 }
 
-message BoolYesOfResult {
-	BoolYes data = 1;
+message BoolYesOfResultGRPC {
+	BoolYesGRPC data = 1;
 	int64 retcode = 2; 
 	string status = 3;
 }

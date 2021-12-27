@@ -2,9 +2,9 @@ package model
 
 import "encoding/json"
 
-// type MessageElementForward struct {
-// 	Id string `json:"id"`
-// }
+type MessageElementForward struct {
+	Id string `json:"id"`
+}
 
 func (msg MessageElementForward) Type() string {
 	return "forward"

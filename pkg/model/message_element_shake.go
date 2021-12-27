@@ -2,16 +2,16 @@ package model
 
 import "encoding/json"
 
-// type MessageELementShake struct {
-// }
+type MessageElementShake struct {
+}
 
-func (msg MessageELementShake) Type() string {
+func (msg MessageElementShake) Type() string {
 	return "shake"
 }
 
 func init() {
 	unmarshalJSONMap["shake"] = func(data []byte) (MessageElement, error) {
-		var result MessageELementShake
+		var result MessageElementShake
 		err := json.Unmarshal(data, &result)
 		return &result, err
 	}

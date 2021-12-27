@@ -2,7 +2,7 @@ syntax = "proto3";
 package model;
 option go_package="../model";
 
-message EventBase  {
+message EventBaseGRPC {
 	int64  time = 1;
 	int64  self_id = 2 ;
 	string post_type = 3;

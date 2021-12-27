@@ -21,14 +21,14 @@ const (
 )
 
 //掷骰子魔法表情
-type MessageElementDice struct {
+type MessageElementDiceGRPC struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 }
 
-func (x *MessageElementDice) Reset() {
-	*x = MessageElementDice{}
+func (x *MessageElementDiceGRPC) Reset() {
+	*x = MessageElementDiceGRPC{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_message_element_dice_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -36,13 +36,13 @@ func (x *MessageElementDice) Reset() {
 	}
 }
 
-func (x *MessageElementDice) String() string {
+func (x *MessageElementDiceGRPC) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MessageElementDice) ProtoMessage() {}
+func (*MessageElementDiceGRPC) ProtoMessage() {}
 
-func (x *MessageElementDice) ProtoReflect() protoreflect.Message {
+func (x *MessageElementDiceGRPC) ProtoReflect() protoreflect.Message {
 	mi := &file_message_element_dice_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -54,8 +54,8 @@ func (x *MessageElementDice) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MessageElementDice.ProtoReflect.Descriptor instead.
-func (*MessageElementDice) Descriptor() ([]byte, []int) {
+// Deprecated: Use MessageElementDiceGRPC.ProtoReflect.Descriptor instead.
+func (*MessageElementDiceGRPC) Descriptor() ([]byte, []int) {
 	return file_message_element_dice_proto_rawDescGZIP(), []int{0}
 }
 
@@ -64,9 +64,10 @@ var File_message_element_dice_proto protoreflect.FileDescriptor
 var file_message_element_dice_proto_rawDesc = []byte{
 	0x0a, 0x1a, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x65, 0x6c, 0x65, 0x6d, 0x65, 0x6e,
 	0x74, 0x5f, 0x64, 0x69, 0x63, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x05, 0x6d, 0x6f,
-	0x64, 0x65, 0x6c, 0x22, 0x14, 0x0a, 0x12, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x45, 0x6c,
-	0x65, 0x6d, 0x65, 0x6e, 0x74, 0x44, 0x69, 0x63, 0x65, 0x42, 0x0a, 0x5a, 0x08, 0x2e, 0x2e, 0x2f,
-	0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x64, 0x65, 0x6c, 0x22, 0x18, 0x0a, 0x16, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x45, 0x6c,
+	0x65, 0x6d, 0x65, 0x6e, 0x74, 0x44, 0x69, 0x63, 0x65, 0x47, 0x52, 0x50, 0x43, 0x42, 0x0a, 0x5a,
+	0x08, 0x2e, 0x2e, 0x2f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x33,
 }
 
 var (
@@ -83,7 +84,7 @@ func file_message_element_dice_proto_rawDescGZIP() []byte {
 
 var file_message_element_dice_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_message_element_dice_proto_goTypes = []interface{}{
-	(*MessageElementDice)(nil), // 0: model.MessageElementDice
+	(*MessageElementDiceGRPC)(nil), // 0: model.MessageElementDiceGRPC
 }
 var file_message_element_dice_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -100,7 +101,7 @@ func file_message_element_dice_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_message_element_dice_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MessageElementDice); i {
+			switch v := v.(*MessageElementDiceGRPC); i {
 			case 0:
 				return &v.state
 			case 1:

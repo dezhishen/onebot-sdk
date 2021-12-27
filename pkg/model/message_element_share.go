@@ -2,12 +2,12 @@ package model
 
 import "encoding/json"
 
-// type MessageElementShare struct {
-// 	Url     string `json:"url"`
-// 	Title   string `json:"title"`
-// 	Content string `json:"content"`
-// 	Image   string `json:"image"`
-// }
+type MessageElementShare struct {
+	Url     string `json:"url"`
+	Title   string `json:"title"`
+	Content string `json:"content"`
+	Image   string `json:"image"`
+}
 
 func (msg MessageElementShare) Type() string {
 	return "share"

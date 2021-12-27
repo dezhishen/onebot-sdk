@@ -20,7 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type MessageElementContact struct {
+type MessageElementContactGRPC struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -29,8 +29,8 @@ type MessageElementContact struct {
 	Id          string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
 }
 
-func (x *MessageElementContact) Reset() {
-	*x = MessageElementContact{}
+func (x *MessageElementContactGRPC) Reset() {
+	*x = MessageElementContactGRPC{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_message_element_contact_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -38,13 +38,13 @@ func (x *MessageElementContact) Reset() {
 	}
 }
 
-func (x *MessageElementContact) String() string {
+func (x *MessageElementContactGRPC) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MessageElementContact) ProtoMessage() {}
+func (*MessageElementContactGRPC) ProtoMessage() {}
 
-func (x *MessageElementContact) ProtoReflect() protoreflect.Message {
+func (x *MessageElementContactGRPC) ProtoReflect() protoreflect.Message {
 	mi := &file_message_element_contact_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -56,19 +56,19 @@ func (x *MessageElementContact) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MessageElementContact.ProtoReflect.Descriptor instead.
-func (*MessageElementContact) Descriptor() ([]byte, []int) {
+// Deprecated: Use MessageElementContactGRPC.ProtoReflect.Descriptor instead.
+func (*MessageElementContactGRPC) Descriptor() ([]byte, []int) {
 	return file_message_element_contact_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *MessageElementContact) GetContactType() string {
+func (x *MessageElementContactGRPC) GetContactType() string {
 	if x != nil {
 		return x.ContactType
 	}
 	return ""
 }
 
-func (x *MessageElementContact) GetId() string {
+func (x *MessageElementContactGRPC) GetId() string {
 	if x != nil {
 		return x.Id
 	}
@@ -80,12 +80,13 @@ var File_message_element_contact_proto protoreflect.FileDescriptor
 var file_message_element_contact_proto_rawDesc = []byte{
 	0x0a, 0x1d, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x65, 0x6c, 0x65, 0x6d, 0x65, 0x6e,
 	0x74, 0x5f, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12,
-	0x05, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x22, 0x43, 0x0a, 0x15, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67,
-	0x65, 0x45, 0x6c, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x12,
-	0x1a, 0x0a, 0x0c, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69,
-	0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x42, 0x0a, 0x5a, 0x08, 0x2e,
-	0x2e, 0x2f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x05, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x22, 0x47, 0x0a, 0x19, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67,
+	0x65, 0x45, 0x6c, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x43, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x47,
+	0x52, 0x50, 0x43, 0x12, 0x1a, 0x0a, 0x0c, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x63, 0x74, 0x5f, 0x74,
+	0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12,
+	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x42,
+	0x0a, 0x5a, 0x08, 0x2e, 0x2e, 0x2f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -102,7 +103,7 @@ func file_message_element_contact_proto_rawDescGZIP() []byte {
 
 var file_message_element_contact_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_message_element_contact_proto_goTypes = []interface{}{
-	(*MessageElementContact)(nil), // 0: model.MessageElementContact
+	(*MessageElementContactGRPC)(nil), // 0: model.MessageElementContactGRPC
 }
 var file_message_element_contact_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -119,7 +120,7 @@ func file_message_element_contact_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_message_element_contact_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MessageElementContact); i {
+			switch v := v.(*MessageElementContactGRPC); i {
 			case 0:
 				return &v.state
 			case 1:

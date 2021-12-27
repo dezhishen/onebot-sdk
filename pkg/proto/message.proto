@@ -5,51 +5,51 @@ import "sender.proto";
 import "message_element.proto";
 
 
-message PrivateMsg {
+message PrivateMsgGRPC {
 	int64 user_id = 1;
 	int64 group_id = 2;
-	repeated MessageSegment message = 3;
+	repeated MessageSegmentGRPC message = 3;
 	bool auto_escape = 4;
 }
 
-message GroupMsg {
+message GroupMsgGRPC {
 	int64 group_id = 1;
-	repeated MessageSegment message = 2;
+	repeated MessageSegmentGRPC message = 2;
 	bool auto_escape = 3;
 }
 
-message MsgNode {
+message MsgNodeGRPC {
 	int32 id = 1;
 	string name = 2;
 	int64 uin = 3; 
-	repeated MessageSegment content = 4;
-	repeated MessageSegment seq = 5;
+	repeated MessageSegmentGRPC content = 4;
+	repeated MessageSegmentGRPC seq = 5;
 }
 
-message GroupForwardMsg {
+message GroupForwardMsgGRPC {
 	int64 group_id = 1;
-	repeated MsgNode messages = 2; 
+	repeated MsgNodeGRPC messages = 2; 
 }
 
-message MsgForSend {
+message MsgForSendGRPC {
 	int64 user_id = 1;
 	int64 group_id = 2;
-	repeated MessageSegment message = 3;
+	repeated MessageSegmentGRPC message = 3;
 	bool auto_escape = 4;
 	string message_type = 5;
 }
 
-message SendMessageResultData {
+message SendMessageResultDataGRPC {
 	int64 message_id = 1;
 }
 
-message SendMessageResult {
-	SendMessageResultData data = 1;
+message SendMessageResultGRPC {
+	SendMessageResultDataGRPC data = 1;
 	int32 retcode = 2;
 	string status = 3;
 }
 
-message MessageResultData {
+message MessageResultDataGRPC {
 	//发送时间
 	int64 time = 1;
 	//消息类型，同 消息事件
@@ -59,18 +59,18 @@ message MessageResultData {
 	//消息真实 ID
 	int64 real_id = 4;
 	//发送人信息，同 消息事件
-	Sender sender = 5;
+	SenderGRPC sender = 5;
 	//消息内容
-	MessageElementProtoBuffer message = 6;
+	MessageSegmentGRPC message = 6;
 }
 
-message MessageResult {
-	MessageResultData data = 1;
+message MessageResultGRPC {
+	MessageResultDataGRPC data = 1;
 	int32 retcode = 2;
 	string status = 3;
 }
-message ForwardMessageResult {
-	repeated MessageSegment data = 1;
+message ForwardMessageResultGRPC {
+	repeated MessageSegmentGRPC data = 1;
 	int32 retcode = 2;
 	string status =3;
 }

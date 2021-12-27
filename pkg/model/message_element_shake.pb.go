@@ -20,14 +20,14 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type MessageELementShake struct {
+type MessageElementShakeGRPC struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 }
 
-func (x *MessageELementShake) Reset() {
-	*x = MessageELementShake{}
+func (x *MessageElementShakeGRPC) Reset() {
+	*x = MessageElementShakeGRPC{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_message_element_shake_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -35,13 +35,13 @@ func (x *MessageELementShake) Reset() {
 	}
 }
 
-func (x *MessageELementShake) String() string {
+func (x *MessageElementShakeGRPC) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MessageELementShake) ProtoMessage() {}
+func (*MessageElementShakeGRPC) ProtoMessage() {}
 
-func (x *MessageELementShake) ProtoReflect() protoreflect.Message {
+func (x *MessageElementShakeGRPC) ProtoReflect() protoreflect.Message {
 	mi := &file_message_element_shake_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -53,8 +53,8 @@ func (x *MessageELementShake) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MessageELementShake.ProtoReflect.Descriptor instead.
-func (*MessageELementShake) Descriptor() ([]byte, []int) {
+// Deprecated: Use MessageElementShakeGRPC.ProtoReflect.Descriptor instead.
+func (*MessageElementShakeGRPC) Descriptor() ([]byte, []int) {
 	return file_message_element_shake_proto_rawDescGZIP(), []int{0}
 }
 
@@ -63,9 +63,10 @@ var File_message_element_shake_proto protoreflect.FileDescriptor
 var file_message_element_shake_proto_rawDesc = []byte{
 	0x0a, 0x1b, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x65, 0x6c, 0x65, 0x6d, 0x65, 0x6e,
 	0x74, 0x5f, 0x73, 0x68, 0x61, 0x6b, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x05, 0x6d,
-	0x6f, 0x64, 0x65, 0x6c, 0x22, 0x15, 0x0a, 0x13, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x45,
-	0x4c, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x53, 0x68, 0x61, 0x6b, 0x65, 0x42, 0x0a, 0x5a, 0x08, 0x2e,
-	0x2e, 0x2f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6f, 0x64, 0x65, 0x6c, 0x22, 0x19, 0x0a, 0x17, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x45,
+	0x6c, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x53, 0x68, 0x61, 0x6b, 0x65, 0x47, 0x52, 0x50, 0x43, 0x42,
+	0x0a, 0x5a, 0x08, 0x2e, 0x2e, 0x2f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -82,7 +83,7 @@ func file_message_element_shake_proto_rawDescGZIP() []byte {
 
 var file_message_element_shake_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_message_element_shake_proto_goTypes = []interface{}{
-	(*MessageELementShake)(nil), // 0: model.MessageELementShake
+	(*MessageElementShakeGRPC)(nil), // 0: model.MessageElementShakeGRPC
 }
 var file_message_element_shake_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -99,7 +100,7 @@ func file_message_element_shake_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_message_element_shake_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MessageELementShake); i {
+			switch v := v.(*MessageElementShakeGRPC); i {
 			case 0:
 				return &v.state
 			case 1:

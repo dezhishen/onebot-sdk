@@ -2,9 +2,9 @@ package model
 
 import "encoding/json"
 
-// type MessageElementFace struct {
-// 	ID string `json:"id"`
-// }
+type MessageElementFace struct {
+	ID string `json:"id"`
+}
 
 func (msg MessageElementFace) Type() string {
 	return "face"

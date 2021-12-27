@@ -2,10 +2,10 @@ package model
 
 import "encoding/json"
 
-// type MessageElementContact struct {
-// 	ContactType string `json:"type"`
-// 	Id          string `json:"id"`
-// }
+type MessageElementContact struct {
+	ContactType string `json:"type"`
+	Id          string `json:"id"`
+}
 
 func (msg MessageElementContact) Type() string {
 	return "contact"

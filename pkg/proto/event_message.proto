@@ -1,29 +1,29 @@
 syntax = "proto3";
-package model;
-option go_package="../model";
 import "event.proto";
 import "account.proto";
 import "sender.proto";
 import "message_element.proto";
+package model;
+option go_package="../model";
 
-message EventMeesageBase  {
-	EventBase eventBase = 1;
+message EventMeesageBaseGRPC  {
+	EventBaseGRPC eventBase = 1;
 	string           message_type = 2;
 	string           sub_type =3;
 	int32            message_id = 4;
 	int64            user_id = 5;
-	repeated MessageSegment message =6;
+	repeated MessageSegmentGRPC message =6;
 	string           raw_message = 7;
 	int32            font =8;
-	Sender          sender =9;
+	SenderGRPC          sender =9;
 }
 
-message EventMessagePrivate  {
-	EventMeesageBase eventMeesageBase = 1;
+message EventMessagePrivateGRPC  {
+	EventMeesageBaseGRPC eventMeesageBase = 1;
 }
 
-message EventMessageGroup  {
+message EventMessageGroupGRPC  {
 	int64 group_id     =1;    
-	Anonymous  anonymous = 2;
-	EventMeesageBase eventMeesageBase =3;
+	AnonymousGRPC  anonymous = 2;
+	EventMeesageBaseGRPC eventMeesageBase =3;
 }

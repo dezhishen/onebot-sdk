@@ -14,9 +14,9 @@ type GroupResult struct {
 }
 
 type GroupListResult struct {
-	Data    []Group `json:"data"`
-	RetCode int     `json:"retcode"`
-	Status  string  `json:"status"`
+	Data    []*Group `json:"data"`
+	RetCode int      `json:"retcode"`
+	Status  string   `json:"status"`
 }
 
 type GroupMember struct {
@@ -43,9 +43,9 @@ type GroupMemberResult struct {
 }
 
 type GroupMemberListResult struct {
-	Data    []GroupMember `json:"data"`
-	RetCode int           `json:"retcode"`
-	Status  string        `json:"status"`
+	Data    []*GroupMember `json:"data"`
+	RetCode int            `json:"retcode"`
+	Status  string         `json:"status"`
 }
 
 type GroupHonorInfoResult struct {

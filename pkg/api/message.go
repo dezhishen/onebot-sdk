@@ -74,7 +74,7 @@ func DelMsg(id int) error {
 	return err
 }
 
-func GetMsg(id int) (*model.MessageResultData, error) {
+func GetMsg(id int) ([]*model.MessageResultData, error) {
 	reqMap := make(map[string]int)
 	reqMap["message_id"] = id
 	requestBody, _ := json.Marshal(reqMap)
@@ -93,7 +93,7 @@ func GetMsg(id int) (*model.MessageResultData, error) {
 	return result.Data, nil
 }
 
-func GetForwardMsg(id int) ([]model.MessageSegment, error) {
+func GetForwardMsg(id int) ([]*model.MessageSegment, error) {
 	reqMap := make(map[string]int)
 	reqMap["message_id"] = id
 	requestBody, _ := json.Marshal(reqMap)

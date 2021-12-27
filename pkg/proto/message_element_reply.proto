@@ -2,6 +2,6 @@ syntax = "proto3";
 package model;
 option go_package="../model";
 
-message MessageElementReply {
-	string id = 1;
+message MessageElementReplyGRPC {
+	string ID = 1 [json_name="id"];
 }

@@ -2,9 +2,9 @@ package model
 
 import "encoding/json"
 
-// type MessageElementReply struct {
-// 	Id string `json:"id"`
-// }
+type MessageElementReply struct {
+	Id string `json:"id"`
+}
 
 func (msg MessageElementReply) Type() string {
 	return "reply"

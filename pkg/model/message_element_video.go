@@ -2,13 +2,13 @@ package model
 
 import "encoding/json"
 
-// type MessageElementVideo struct {
-// 	File    string `json:"file"`
-// 	Url     string `json:"url"`
-// 	Cache   uint   `json:"cache"`
-// 	Proxy   uint   `json:"proxy"`
-// 	Timeout uint   `json:"timeout"`
-// }
+type MessageElementVideo struct {
+	File    string `json:"file"`
+	Url     string `json:"url"`
+	Cache   uint32 `json:"cache"`
+	Proxy   uint32 `json:"proxy"`
+	Timeout uint32 `json:"timeout"`
+}
 
 func (msg MessageElementVideo) Type() string {
 	return "video"

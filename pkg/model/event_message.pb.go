@@ -6,389 +6,391 @@
 
 package model
 
-// import (
-// 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-// 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-// 	reflect "reflect"
-// 	sync "sync"
-// )
+import (
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	reflect "reflect"
+	sync "sync"
+)
 
-// const (
-// 	// Verify that this generated code is sufficiently up-to-date.
-// 	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)
-// 	// Verify that runtime/protoimpl is sufficiently up-to-date.
-// 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
-// )
+const (
+	// Verify that this generated code is sufficiently up-to-date.
+	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)
+	// Verify that runtime/protoimpl is sufficiently up-to-date.
+	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
+)
 
-// type EventMeesageBase struct {
-// 	state         protoimpl.MessageState
-// 	sizeCache     protoimpl.SizeCache
-// 	unknownFields protoimpl.UnknownFields
+type EventMeesageBaseGRPC struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
 
-// 	EventBase   *EventBase        `protobuf:"bytes,1,opt,name=eventBase,proto3" json:"eventBase,omitempty"`
-// 	MessageType string            `protobuf:"bytes,2,opt,name=message_type,json=messageType,proto3" json:"message_type,omitempty"`
-// 	SubType     string            `protobuf:"bytes,3,opt,name=sub_type,json=subType,proto3" json:"sub_type,omitempty"`
-// 	MessageId   int32             `protobuf:"varint,4,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
-// 	UserId      int64             `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-// 	Message     []*MessageSegment `protobuf:"bytes,6,rep,name=message,proto3" json:"message,omitempty"`
-// 	RawMessage  string            `protobuf:"bytes,7,opt,name=raw_message,json=rawMessage,proto3" json:"raw_message,omitempty"`
-// 	Font        int32             `protobuf:"varint,8,opt,name=font,proto3" json:"font,omitempty"`
-// 	Sender      *Sender           `protobuf:"bytes,9,opt,name=sender,proto3" json:"sender,omitempty"`
-// }
+	EventBase   *EventBaseGRPC        `protobuf:"bytes,1,opt,name=eventBase,proto3" json:"eventBase,omitempty"`
+	MessageType string                `protobuf:"bytes,2,opt,name=message_type,json=messageType,proto3" json:"message_type,omitempty"`
+	SubType     string                `protobuf:"bytes,3,opt,name=sub_type,json=subType,proto3" json:"sub_type,omitempty"`
+	MessageId   int32                 `protobuf:"varint,4,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
+	UserId      int64                 `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Message     []*MessageSegmentGRPC `protobuf:"bytes,6,rep,name=message,proto3" json:"message,omitempty"`
+	RawMessage  string                `protobuf:"bytes,7,opt,name=raw_message,json=rawMessage,proto3" json:"raw_message,omitempty"`
+	Font        int32                 `protobuf:"varint,8,opt,name=font,proto3" json:"font,omitempty"`
+	Sender      *SenderGRPC           `protobuf:"bytes,9,opt,name=sender,proto3" json:"sender,omitempty"`
+}
 
-// func (x *EventMeesageBase) Reset() {
-// 	*x = EventMeesageBase{}
-// 	if protoimpl.UnsafeEnabled {
-// 		mi := &file_event_message_proto_msgTypes[0]
-// 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-// 		ms.StoreMessageInfo(mi)
-// 	}
-// }
+func (x *EventMeesageBaseGRPC) Reset() {
+	*x = EventMeesageBaseGRPC{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_event_message_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
 
-// func (x *EventMeesageBase) String() string {
-// 	return protoimpl.X.MessageStringOf(x)
-// }
+func (x *EventMeesageBaseGRPC) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
 
-// func (*EventMeesageBase) ProtoMessage() {}
+func (*EventMeesageBaseGRPC) ProtoMessage() {}
 
-// func (x *EventMeesageBase) ProtoReflect() protoreflect.Message {
-// 	mi := &file_event_message_proto_msgTypes[0]
-// 	if protoimpl.UnsafeEnabled && x != nil {
-// 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-// 		if ms.LoadMessageInfo() == nil {
-// 			ms.StoreMessageInfo(mi)
-// 		}
-// 		return ms
-// 	}
-// 	return mi.MessageOf(x)
-// }
+func (x *EventMeesageBaseGRPC) ProtoReflect() protoreflect.Message {
+	mi := &file_event_message_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
 
-// // Deprecated: Use EventMeesageBase.ProtoReflect.Descriptor instead.
-// func (*EventMeesageBase) Descriptor() ([]byte, []int) {
-// 	return file_event_message_proto_rawDescGZIP(), []int{0}
-// }
+// Deprecated: Use EventMeesageBaseGRPC.ProtoReflect.Descriptor instead.
+func (*EventMeesageBaseGRPC) Descriptor() ([]byte, []int) {
+	return file_event_message_proto_rawDescGZIP(), []int{0}
+}
 
-// func (x *EventMeesageBase) GetEventBase() *EventBase {
-// 	if x != nil {
-// 		return x.EventBase
-// 	}
-// 	return nil
-// }
+func (x *EventMeesageBaseGRPC) GetEventBase() *EventBaseGRPC {
+	if x != nil {
+		return x.EventBase
+	}
+	return nil
+}
 
-// func (x *EventMeesageBase) GetMessageType() string {
-// 	if x != nil {
-// 		return x.MessageType
-// 	}
-// 	return ""
-// }
+func (x *EventMeesageBaseGRPC) GetMessageType() string {
+	if x != nil {
+		return x.MessageType
+	}
+	return ""
+}
 
-// func (x *EventMeesageBase) GetSubType() string {
-// 	if x != nil {
-// 		return x.SubType
-// 	}
-// 	return ""
-// }
+func (x *EventMeesageBaseGRPC) GetSubType() string {
+	if x != nil {
+		return x.SubType
+	}
+	return ""
+}
 
-// func (x *EventMeesageBase) GetMessageId() int32 {
-// 	if x != nil {
-// 		return x.MessageId
-// 	}
-// 	return 0
-// }
+func (x *EventMeesageBaseGRPC) GetMessageId() int32 {
+	if x != nil {
+		return x.MessageId
+	}
+	return 0
+}
 
-// func (x *EventMeesageBase) GetUserId() int64 {
-// 	if x != nil {
-// 		return x.UserId
-// 	}
-// 	return 0
-// }
+func (x *EventMeesageBaseGRPC) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
 
-// func (x *EventMeesageBase) GetMessage() []*MessageSegment {
-// 	if x != nil {
-// 		return x.Message
-// 	}
-// 	return nil
-// }
+func (x *EventMeesageBaseGRPC) GetMessage() []*MessageSegmentGRPC {
+	if x != nil {
+		return x.Message
+	}
+	return nil
+}
 
-// func (x *EventMeesageBase) GetRawMessage() string {
-// 	if x != nil {
-// 		return x.RawMessage
-// 	}
-// 	return ""
-// }
+func (x *EventMeesageBaseGRPC) GetRawMessage() string {
+	if x != nil {
+		return x.RawMessage
+	}
+	return ""
+}
 
-// func (x *EventMeesageBase) GetFont() int32 {
-// 	if x != nil {
-// 		return x.Font
-// 	}
-// 	return 0
-// }
+func (x *EventMeesageBaseGRPC) GetFont() int32 {
+	if x != nil {
+		return x.Font
+	}
+	return 0
+}
 
-// func (x *EventMeesageBase) GetSender() *Sender {
-// 	if x != nil {
-// 		return x.Sender
-// 	}
-// 	return nil
-// }
+func (x *EventMeesageBaseGRPC) GetSender() *SenderGRPC {
+	if x != nil {
+		return x.Sender
+	}
+	return nil
+}
 
-// type EventMessagePrivate struct {
-// 	state         protoimpl.MessageState
-// 	sizeCache     protoimpl.SizeCache
-// 	unknownFields protoimpl.UnknownFields
+type EventMessagePrivateGRPC struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
 
-// 	EventMeesageBase *EventMeesageBase `protobuf:"bytes,1,opt,name=eventMeesageBase,proto3" json:"eventMeesageBase,omitempty"`
-// }
+	EventMeesageBase *EventMeesageBaseGRPC `protobuf:"bytes,1,opt,name=eventMeesageBase,proto3" json:"eventMeesageBase,omitempty"`
+}
 
-// func (x *EventMessagePrivate) Reset() {
-// 	*x = EventMessagePrivate{}
-// 	if protoimpl.UnsafeEnabled {
-// 		mi := &file_event_message_proto_msgTypes[1]
-// 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-// 		ms.StoreMessageInfo(mi)
-// 	}
-// }
+func (x *EventMessagePrivateGRPC) Reset() {
+	*x = EventMessagePrivateGRPC{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_event_message_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
 
-// func (x *EventMessagePrivate) String() string {
-// 	return protoimpl.X.MessageStringOf(x)
-// }
+func (x *EventMessagePrivateGRPC) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
 
-// func (*EventMessagePrivate) ProtoMessage() {}
+func (*EventMessagePrivateGRPC) ProtoMessage() {}
 
-// func (x *EventMessagePrivate) ProtoReflect() protoreflect.Message {
-// 	mi := &file_event_message_proto_msgTypes[1]
-// 	if protoimpl.UnsafeEnabled && x != nil {
-// 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-// 		if ms.LoadMessageInfo() == nil {
-// 			ms.StoreMessageInfo(mi)
-// 		}
-// 		return ms
-// 	}
-// 	return mi.MessageOf(x)
-// }
+func (x *EventMessagePrivateGRPC) ProtoReflect() protoreflect.Message {
+	mi := &file_event_message_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
 
-// // Deprecated: Use EventMessagePrivate.ProtoReflect.Descriptor instead.
-// func (*EventMessagePrivate) Descriptor() ([]byte, []int) {
-// 	return file_event_message_proto_rawDescGZIP(), []int{1}
-// }
+// Deprecated: Use EventMessagePrivateGRPC.ProtoReflect.Descriptor instead.
+func (*EventMessagePrivateGRPC) Descriptor() ([]byte, []int) {
+	return file_event_message_proto_rawDescGZIP(), []int{1}
+}
 
-// func (x *EventMessagePrivate) GetEventMeesageBase() *EventMeesageBase {
-// 	if x != nil {
-// 		return x.EventMeesageBase
-// 	}
-// 	return nil
-// }
+func (x *EventMessagePrivateGRPC) GetEventMeesageBase() *EventMeesageBaseGRPC {
+	if x != nil {
+		return x.EventMeesageBase
+	}
+	return nil
+}
 
-// type EventMessageGroup struct {
-// 	state         protoimpl.MessageState
-// 	sizeCache     protoimpl.SizeCache
-// 	unknownFields protoimpl.UnknownFields
+type EventMessageGroupGRPC struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
 
-// 	GroupId          int64             `protobuf:"varint,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
-// 	Anonymous        *Anonymous        `protobuf:"bytes,2,opt,name=anonymous,proto3" json:"anonymous,omitempty"`
-// 	EventMeesageBase *EventMeesageBase `protobuf:"bytes,3,opt,name=eventMeesageBase,proto3" json:"eventMeesageBase,omitempty"`
-// }
+	GroupId          int64                 `protobuf:"varint,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	Anonymous        *AnonymousGRPC        `protobuf:"bytes,2,opt,name=anonymous,proto3" json:"anonymous,omitempty"`
+	EventMeesageBase *EventMeesageBaseGRPC `protobuf:"bytes,3,opt,name=eventMeesageBase,proto3" json:"eventMeesageBase,omitempty"`
+}
 
-// func (x *EventMessageGroup) Reset() {
-// 	*x = EventMessageGroup{}
-// 	if protoimpl.UnsafeEnabled {
-// 		mi := &file_event_message_proto_msgTypes[2]
-// 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-// 		ms.StoreMessageInfo(mi)
-// 	}
-// }
+func (x *EventMessageGroupGRPC) Reset() {
+	*x = EventMessageGroupGRPC{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_event_message_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
 
-// func (x *EventMessageGroup) String() string {
-// 	return protoimpl.X.MessageStringOf(x)
-// }
+func (x *EventMessageGroupGRPC) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
 
-// func (*EventMessageGroup) ProtoMessage() {}
+func (*EventMessageGroupGRPC) ProtoMessage() {}
 
-// func (x *EventMessageGroup) ProtoReflect() protoreflect.Message {
-// 	mi := &file_event_message_proto_msgTypes[2]
-// 	if protoimpl.UnsafeEnabled && x != nil {
-// 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-// 		if ms.LoadMessageInfo() == nil {
-// 			ms.StoreMessageInfo(mi)
-// 		}
-// 		return ms
-// 	}
-// 	return mi.MessageOf(x)
-// }
+func (x *EventMessageGroupGRPC) ProtoReflect() protoreflect.Message {
+	mi := &file_event_message_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
 
-// // Deprecated: Use EventMessageGroup.ProtoReflect.Descriptor instead.
-// func (*EventMessageGroup) Descriptor() ([]byte, []int) {
-// 	return file_event_message_proto_rawDescGZIP(), []int{2}
-// }
+// Deprecated: Use EventMessageGroupGRPC.ProtoReflect.Descriptor instead.
+func (*EventMessageGroupGRPC) Descriptor() ([]byte, []int) {
+	return file_event_message_proto_rawDescGZIP(), []int{2}
+}
 
-// func (x *EventMessageGroup) GetGroupId() int64 {
-// 	if x != nil {
-// 		return x.GroupId
-// 	}
-// 	return 0
-// }
+func (x *EventMessageGroupGRPC) GetGroupId() int64 {
+	if x != nil {
+		return x.GroupId
+	}
+	return 0
+}
 
-// func (x *EventMessageGroup) GetAnonymous() *Anonymous {
-// 	if x != nil {
-// 		return x.Anonymous
-// 	}
-// 	return nil
-// }
+func (x *EventMessageGroupGRPC) GetAnonymous() *AnonymousGRPC {
+	if x != nil {
+		return x.Anonymous
+	}
+	return nil
+}
 
-// func (x *EventMessageGroup) GetEventMeesageBase() *EventMeesageBase {
-// 	if x != nil {
-// 		return x.EventMeesageBase
-// 	}
-// 	return nil
-// }
+func (x *EventMessageGroupGRPC) GetEventMeesageBase() *EventMeesageBaseGRPC {
+	if x != nil {
+		return x.EventMeesageBase
+	}
+	return nil
+}
 
-// var File_event_message_proto protoreflect.FileDescriptor
+var File_event_message_proto protoreflect.FileDescriptor
 
-// var file_event_message_proto_rawDesc = []byte{
-// 	0x0a, 0x13, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x5f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e,
-// 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x05, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x1a, 0x0b, 0x65, 0x76,
-// 	0x65, 0x6e, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x0d, 0x61, 0x63, 0x63, 0x6f, 0x75,
-// 	0x6e, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x0c, 0x73, 0x65, 0x6e, 0x64, 0x65, 0x72,
-// 	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x15, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f,
-// 	0x65, 0x6c, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xc5, 0x02,
-// 	0x0a, 0x10, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x65, 0x73, 0x61, 0x67, 0x65, 0x42, 0x61,
-// 	0x73, 0x65, 0x12, 0x2e, 0x0a, 0x09, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x42, 0x61, 0x73, 0x65, 0x18,
-// 	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x2e, 0x45, 0x76,
-// 	0x65, 0x6e, 0x74, 0x42, 0x61, 0x73, 0x65, 0x52, 0x09, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x42, 0x61,
-// 	0x73, 0x65, 0x12, 0x21, 0x0a, 0x0c, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x74, 0x79,
-// 	0x70, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67,
-// 	0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x19, 0x0a, 0x08, 0x73, 0x75, 0x62, 0x5f, 0x74, 0x79, 0x70,
-// 	0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x73, 0x75, 0x62, 0x54, 0x79, 0x70, 0x65,
-// 	0x12, 0x1d, 0x0a, 0x0a, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x04,
-// 	0x20, 0x01, 0x28, 0x05, 0x52, 0x09, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x49, 0x64, 0x12,
-// 	0x17, 0x0a, 0x07, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03,
-// 	0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x2f, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73,
-// 	0x61, 0x67, 0x65, 0x18, 0x06, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x15, 0x2e, 0x6d, 0x6f, 0x64, 0x65,
-// 	0x6c, 0x2e, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x53, 0x65, 0x67, 0x6d, 0x65, 0x6e, 0x74,
-// 	0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x72, 0x61, 0x77,
-// 	0x5f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a,
-// 	0x72, 0x61, 0x77, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x66, 0x6f,
-// 	0x6e, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x05, 0x52, 0x04, 0x66, 0x6f, 0x6e, 0x74, 0x12, 0x25,
-// 	0x0a, 0x06, 0x73, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x18, 0x09, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0d,
-// 	0x2e, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x2e, 0x53, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x52, 0x06, 0x73,
-// 	0x65, 0x6e, 0x64, 0x65, 0x72, 0x22, 0x5a, 0x0a, 0x13, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x4d, 0x65,
-// 	0x73, 0x73, 0x61, 0x67, 0x65, 0x50, 0x72, 0x69, 0x76, 0x61, 0x74, 0x65, 0x12, 0x43, 0x0a, 0x10,
-// 	0x65, 0x76, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x65, 0x73, 0x61, 0x67, 0x65, 0x42, 0x61, 0x73, 0x65,
-// 	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x2e, 0x45,
-// 	0x76, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x65, 0x73, 0x61, 0x67, 0x65, 0x42, 0x61, 0x73, 0x65, 0x52,
-// 	0x10, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x65, 0x73, 0x61, 0x67, 0x65, 0x42, 0x61, 0x73,
-// 	0x65, 0x22, 0xa3, 0x01, 0x0a, 0x11, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61,
-// 	0x67, 0x65, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x12, 0x19, 0x0a, 0x08, 0x67, 0x72, 0x6f, 0x75, 0x70,
-// 	0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x67, 0x72, 0x6f, 0x75, 0x70,
-// 	0x49, 0x64, 0x12, 0x2e, 0x0a, 0x09, 0x61, 0x6e, 0x6f, 0x6e, 0x79, 0x6d, 0x6f, 0x75, 0x73, 0x18,
-// 	0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x2e, 0x41, 0x6e,
-// 	0x6f, 0x6e, 0x79, 0x6d, 0x6f, 0x75, 0x73, 0x52, 0x09, 0x61, 0x6e, 0x6f, 0x6e, 0x79, 0x6d, 0x6f,
-// 	0x75, 0x73, 0x12, 0x43, 0x0a, 0x10, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x65, 0x73, 0x61,
-// 	0x67, 0x65, 0x42, 0x61, 0x73, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x6d,
-// 	0x6f, 0x64, 0x65, 0x6c, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x65, 0x73, 0x61, 0x67,
-// 	0x65, 0x42, 0x61, 0x73, 0x65, 0x52, 0x10, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x65, 0x73,
-// 	0x61, 0x67, 0x65, 0x42, 0x61, 0x73, 0x65, 0x42, 0x0a, 0x5a, 0x08, 0x2e, 0x2e, 0x2f, 0x6d, 0x6f,
-// 	0x64, 0x65, 0x6c, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
-// }
+var file_event_message_proto_rawDesc = []byte{
+	0x0a, 0x13, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x5f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x05, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x1a, 0x0b, 0x65, 0x76,
+	0x65, 0x6e, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x0d, 0x61, 0x63, 0x63, 0x6f, 0x75,
+	0x6e, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x0c, 0x73, 0x65, 0x6e, 0x64, 0x65, 0x72,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x15, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f,
+	0x65, 0x6c, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xd5, 0x02,
+	0x0a, 0x14, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x65, 0x73, 0x61, 0x67, 0x65, 0x42, 0x61,
+	0x73, 0x65, 0x47, 0x52, 0x50, 0x43, 0x12, 0x32, 0x0a, 0x09, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x42,
+	0x61, 0x73, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x6d, 0x6f, 0x64, 0x65,
+	0x6c, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x42, 0x61, 0x73, 0x65, 0x47, 0x52, 0x50, 0x43, 0x52,
+	0x09, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x42, 0x61, 0x73, 0x65, 0x12, 0x21, 0x0a, 0x0c, 0x6d, 0x65,
+	0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x0b, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x19, 0x0a,
+	0x08, 0x73, 0x75, 0x62, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x07, 0x73, 0x75, 0x62, 0x54, 0x79, 0x70, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x6d, 0x65, 0x73, 0x73,
+	0x61, 0x67, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05, 0x52, 0x09, 0x6d, 0x65,
+	0x73, 0x73, 0x61, 0x67, 0x65, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x75, 0x73, 0x65, 0x72, 0x5f,
+	0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64,
+	0x12, 0x33, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x06, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x19, 0x2e, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x2e, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67,
+	0x65, 0x53, 0x65, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x47, 0x52, 0x50, 0x43, 0x52, 0x07, 0x6d, 0x65,
+	0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x72, 0x61, 0x77, 0x5f, 0x6d, 0x65, 0x73,
+	0x73, 0x61, 0x67, 0x65, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x72, 0x61, 0x77, 0x4d,
+	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x66, 0x6f, 0x6e, 0x74, 0x18, 0x08,
+	0x20, 0x01, 0x28, 0x05, 0x52, 0x04, 0x66, 0x6f, 0x6e, 0x74, 0x12, 0x29, 0x0a, 0x06, 0x73, 0x65,
+	0x6e, 0x64, 0x65, 0x72, 0x18, 0x09, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x6d, 0x6f, 0x64,
+	0x65, 0x6c, 0x2e, 0x53, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x47, 0x52, 0x50, 0x43, 0x52, 0x06, 0x73,
+	0x65, 0x6e, 0x64, 0x65, 0x72, 0x22, 0x62, 0x0a, 0x17, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x4d, 0x65,
+	0x73, 0x73, 0x61, 0x67, 0x65, 0x50, 0x72, 0x69, 0x76, 0x61, 0x74, 0x65, 0x47, 0x52, 0x50, 0x43,
+	0x12, 0x47, 0x0a, 0x10, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x65, 0x73, 0x61, 0x67, 0x65,
+	0x42, 0x61, 0x73, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x6d, 0x6f, 0x64,
+	0x65, 0x6c, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x65, 0x73, 0x61, 0x67, 0x65, 0x42,
+	0x61, 0x73, 0x65, 0x47, 0x52, 0x50, 0x43, 0x52, 0x10, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x4d, 0x65,
+	0x65, 0x73, 0x61, 0x67, 0x65, 0x42, 0x61, 0x73, 0x65, 0x22, 0xaf, 0x01, 0x0a, 0x15, 0x45, 0x76,
+	0x65, 0x6e, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x47,
+	0x52, 0x50, 0x43, 0x12, 0x19, 0x0a, 0x08, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x5f, 0x69, 0x64, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x64, 0x12, 0x32,
+	0x0a, 0x09, 0x61, 0x6e, 0x6f, 0x6e, 0x79, 0x6d, 0x6f, 0x75, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x14, 0x2e, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x2e, 0x41, 0x6e, 0x6f, 0x6e, 0x79, 0x6d,
+	0x6f, 0x75, 0x73, 0x47, 0x52, 0x50, 0x43, 0x52, 0x09, 0x61, 0x6e, 0x6f, 0x6e, 0x79, 0x6d, 0x6f,
+	0x75, 0x73, 0x12, 0x47, 0x0a, 0x10, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x65, 0x73, 0x61,
+	0x67, 0x65, 0x42, 0x61, 0x73, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x6d,
+	0x6f, 0x64, 0x65, 0x6c, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x65, 0x73, 0x61, 0x67,
+	0x65, 0x42, 0x61, 0x73, 0x65, 0x47, 0x52, 0x50, 0x43, 0x52, 0x10, 0x65, 0x76, 0x65, 0x6e, 0x74,
+	0x4d, 0x65, 0x65, 0x73, 0x61, 0x67, 0x65, 0x42, 0x61, 0x73, 0x65, 0x42, 0x0a, 0x5a, 0x08, 0x2e,
+	0x2e, 0x2f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+}
 
-// var (
-// 	file_event_message_proto_rawDescOnce sync.Once
-// 	file_event_message_proto_rawDescData = file_event_message_proto_rawDesc
-// )
+var (
+	file_event_message_proto_rawDescOnce sync.Once
+	file_event_message_proto_rawDescData = file_event_message_proto_rawDesc
+)
 
-// func file_event_message_proto_rawDescGZIP() []byte {
-// 	file_event_message_proto_rawDescOnce.Do(func() {
-// 		file_event_message_proto_rawDescData = protoimpl.X.CompressGZIP(file_event_message_proto_rawDescData)
-// 	})
-// 	return file_event_message_proto_rawDescData
-// }
+func file_event_message_proto_rawDescGZIP() []byte {
+	file_event_message_proto_rawDescOnce.Do(func() {
+		file_event_message_proto_rawDescData = protoimpl.X.CompressGZIP(file_event_message_proto_rawDescData)
+	})
+	return file_event_message_proto_rawDescData
+}
 
-// var file_event_message_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
-// var file_event_message_proto_goTypes = []interface{}{
-// 	(*EventMeesageBase)(nil),    // 0: model.EventMeesageBase
-// 	(*EventMessagePrivate)(nil), // 1: model.EventMessagePrivate
-// 	(*EventMessageGroup)(nil),   // 2: model.EventMessageGroup
-// 	(*EventBase)(nil),           // 3: model.EventBase
-// 	(*MessageSegment)(nil),      // 4: model.MessageSegment
-// 	(*Sender)(nil),              // 5: model.Sender
-// 	(*Anonymous)(nil),           // 6: model.Anonymous
-// }
-// var file_event_message_proto_depIdxs = []int32{
-// 	3, // 0: model.EventMeesageBase.eventBase:type_name -> model.EventBase
-// 	4, // 1: model.EventMeesageBase.message:type_name -> model.MessageSegment
-// 	5, // 2: model.EventMeesageBase.sender:type_name -> model.Sender
-// 	0, // 3: model.EventMessagePrivate.eventMeesageBase:type_name -> model.EventMeesageBase
-// 	6, // 4: model.EventMessageGroup.anonymous:type_name -> model.Anonymous
-// 	0, // 5: model.EventMessageGroup.eventMeesageBase:type_name -> model.EventMeesageBase
-// 	6, // [6:6] is the sub-list for method output_type
-// 	6, // [6:6] is the sub-list for method input_type
-// 	6, // [6:6] is the sub-list for extension type_name
-// 	6, // [6:6] is the sub-list for extension extendee
-// 	0, // [0:6] is the sub-list for field type_name
-// }
+var file_event_message_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_event_message_proto_goTypes = []interface{}{
+	(*EventMeesageBaseGRPC)(nil),    // 0: model.EventMeesageBaseGRPC
+	(*EventMessagePrivateGRPC)(nil), // 1: model.EventMessagePrivateGRPC
+	(*EventMessageGroupGRPC)(nil),   // 2: model.EventMessageGroupGRPC
+	(*EventBaseGRPC)(nil),           // 3: model.EventBaseGRPC
+	(*MessageSegmentGRPC)(nil),      // 4: model.MessageSegmentGRPC
+	(*SenderGRPC)(nil),              // 5: model.SenderGRPC
+	(*AnonymousGRPC)(nil),           // 6: model.AnonymousGRPC
+}
+var file_event_message_proto_depIdxs = []int32{
+	3, // 0: model.EventMeesageBaseGRPC.eventBase:type_name -> model.EventBaseGRPC
+	4, // 1: model.EventMeesageBaseGRPC.message:type_name -> model.MessageSegmentGRPC
+	5, // 2: model.EventMeesageBaseGRPC.sender:type_name -> model.SenderGRPC
+	0, // 3: model.EventMessagePrivateGRPC.eventMeesageBase:type_name -> model.EventMeesageBaseGRPC
+	6, // 4: model.EventMessageGroupGRPC.anonymous:type_name -> model.AnonymousGRPC
+	0, // 5: model.EventMessageGroupGRPC.eventMeesageBase:type_name -> model.EventMeesageBaseGRPC
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
+}
 
-// func init() { file_event_message_proto_init() }
-// func file_event_message_proto_init() {
-// 	if File_event_message_proto != nil {
-// 		return
-// 	}
-// 	file_event_proto_init()
-// 	file_account_proto_init()
-// 	file_sender_proto_init()
-// 	file_message_element_proto_init()
-// 	if !protoimpl.UnsafeEnabled {
-// 		file_event_message_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-// 			switch v := v.(*EventMeesageBase); i {
-// 			case 0:
-// 				return &v.state
-// 			case 1:
-// 				return &v.sizeCache
-// 			case 2:
-// 				return &v.unknownFields
-// 			default:
-// 				return nil
-// 			}
-// 		}
-// 		file_event_message_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-// 			switch v := v.(*EventMessagePrivate); i {
-// 			case 0:
-// 				return &v.state
-// 			case 1:
-// 				return &v.sizeCache
-// 			case 2:
-// 				return &v.unknownFields
-// 			default:
-// 				return nil
-// 			}
-// 		}
-// 		file_event_message_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-// 			switch v := v.(*EventMessageGroup); i {
-// 			case 0:
-// 				return &v.state
-// 			case 1:
-// 				return &v.sizeCache
-// 			case 2:
-// 				return &v.unknownFields
-// 			default:
-// 				return nil
-// 			}
-// 		}
-// 	}
-// 	type x struct{}
-// 	out := protoimpl.TypeBuilder{
-// 		File: protoimpl.DescBuilder{
-// 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-// 			RawDescriptor: file_event_message_proto_rawDesc,
-// 			NumEnums:      0,
-// 			NumMessages:   3,
-// 			NumExtensions: 0,
-// 			NumServices:   0,
-// 		},
-// 		GoTypes:           file_event_message_proto_goTypes,
-// 		DependencyIndexes: file_event_message_proto_depIdxs,
-// 		MessageInfos:      file_event_message_proto_msgTypes,
-// 	}.Build()
-// 	File_event_message_proto = out.File
-// 	file_event_message_proto_rawDesc = nil
-// 	file_event_message_proto_goTypes = nil
-// 	file_event_message_proto_depIdxs = nil
-// }
+func init() { file_event_message_proto_init() }
+func file_event_message_proto_init() {
+	if File_event_message_proto != nil {
+		return
+	}
+	file_event_proto_init()
+	file_account_proto_init()
+	file_sender_proto_init()
+	file_message_element_proto_init()
+	if !protoimpl.UnsafeEnabled {
+		file_event_message_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EventMeesageBaseGRPC); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_event_message_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EventMessagePrivateGRPC); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_event_message_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EventMessageGroupGRPC); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+	}
+	type x struct{}
+	out := protoimpl.TypeBuilder{
+		File: protoimpl.DescBuilder{
+			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
+			RawDescriptor: file_event_message_proto_rawDesc,
+			NumEnums:      0,
+			NumMessages:   3,
+			NumExtensions: 0,
+			NumServices:   0,
+		},
+		GoTypes:           file_event_message_proto_goTypes,
+		DependencyIndexes: file_event_message_proto_depIdxs,
+		MessageInfos:      file_event_message_proto_msgTypes,
+	}.Build()
+	File_event_message_proto = out.File
+	file_event_message_proto_rawDesc = nil
+	file_event_message_proto_goTypes = nil
+	file_event_message_proto_depIdxs = nil
+}

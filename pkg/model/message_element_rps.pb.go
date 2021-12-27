@@ -20,14 +20,14 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type MessageElementRps struct {
+type MessageElementRpsGRPC struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 }
 
-func (x *MessageElementRps) Reset() {
-	*x = MessageElementRps{}
+func (x *MessageElementRpsGRPC) Reset() {
+	*x = MessageElementRpsGRPC{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_message_element_rps_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -35,13 +35,13 @@ func (x *MessageElementRps) Reset() {
 	}
 }
 
-func (x *MessageElementRps) String() string {
+func (x *MessageElementRpsGRPC) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MessageElementRps) ProtoMessage() {}
+func (*MessageElementRpsGRPC) ProtoMessage() {}
 
-func (x *MessageElementRps) ProtoReflect() protoreflect.Message {
+func (x *MessageElementRpsGRPC) ProtoReflect() protoreflect.Message {
 	mi := &file_message_element_rps_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -53,8 +53,8 @@ func (x *MessageElementRps) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MessageElementRps.ProtoReflect.Descriptor instead.
-func (*MessageElementRps) Descriptor() ([]byte, []int) {
+// Deprecated: Use MessageElementRpsGRPC.ProtoReflect.Descriptor instead.
+func (*MessageElementRpsGRPC) Descriptor() ([]byte, []int) {
 	return file_message_element_rps_proto_rawDescGZIP(), []int{0}
 }
 
@@ -63,9 +63,9 @@ var File_message_element_rps_proto protoreflect.FileDescriptor
 var file_message_element_rps_proto_rawDesc = []byte{
 	0x0a, 0x19, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x65, 0x6c, 0x65, 0x6d, 0x65, 0x6e,
 	0x74, 0x5f, 0x72, 0x70, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x05, 0x6d, 0x6f, 0x64,
-	0x65, 0x6c, 0x22, 0x13, 0x0a, 0x11, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x45, 0x6c, 0x65,
-	0x6d, 0x65, 0x6e, 0x74, 0x52, 0x70, 0x73, 0x42, 0x0a, 0x5a, 0x08, 0x2e, 0x2e, 0x2f, 0x6d, 0x6f,
-	0x64, 0x65, 0x6c, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x6c, 0x22, 0x17, 0x0a, 0x15, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x45, 0x6c, 0x65,
+	0x6d, 0x65, 0x6e, 0x74, 0x52, 0x70, 0x73, 0x47, 0x52, 0x50, 0x43, 0x42, 0x0a, 0x5a, 0x08, 0x2e,
+	0x2e, 0x2f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -82,7 +82,7 @@ func file_message_element_rps_proto_rawDescGZIP() []byte {
 
 var file_message_element_rps_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_message_element_rps_proto_goTypes = []interface{}{
-	(*MessageElementRps)(nil), // 0: model.MessageElementRps
+	(*MessageElementRpsGRPC)(nil), // 0: model.MessageElementRpsGRPC
 }
 var file_message_element_rps_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -99,7 +99,7 @@ func file_message_element_rps_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_message_element_rps_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MessageElementRps); i {
+			switch v := v.(*MessageElementRpsGRPC); i {
 			case 0:
 				return &v.state
 			case 1:

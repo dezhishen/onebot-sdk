@@ -2,6 +2,6 @@ syntax = "proto3";
 package model;
 option go_package="../model";
 
-message MessageElementText {
+message MessageElementTextGRPC {
 	string text = 1;
 }

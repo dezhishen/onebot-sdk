@@ -2,7 +2,7 @@ syntax = "proto3";
 package model;
 option go_package="../model";
 
-message MessageElementMusic {
+message MessageElementMusicGRPC {
 	string music_type = 1 [json_name="type"];
 	string url = 2;
 	string audio = 3;

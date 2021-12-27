@@ -2,9 +2,9 @@ package model
 
 import "encoding/json"
 
-// //掷骰子魔法表情
-// type MessageElementDice struct {
-// }
+//掷骰子魔法表情
+type MessageElementDice struct {
+}
 
 //掷骰子魔法表情
 func (msg MessageElementDice) Type() string {

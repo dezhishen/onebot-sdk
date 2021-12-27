@@ -20,7 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type VersionInfoData struct {
+type VersionInfoDataGRPC struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -30,8 +30,8 @@ type VersionInfoData struct {
 	ProtocolVersion string `protobuf:"bytes,3,opt,name=protocol_version,json=protocolVersion,proto3" json:"protocol_version,omitempty"`
 }
 
-func (x *VersionInfoData) Reset() {
-	*x = VersionInfoData{}
+func (x *VersionInfoDataGRPC) Reset() {
+	*x = VersionInfoDataGRPC{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_system_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -39,13 +39,13 @@ func (x *VersionInfoData) Reset() {
 	}
 }
 
-func (x *VersionInfoData) String() string {
+func (x *VersionInfoDataGRPC) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*VersionInfoData) ProtoMessage() {}
+func (*VersionInfoDataGRPC) ProtoMessage() {}
 
-func (x *VersionInfoData) ProtoReflect() protoreflect.Message {
+func (x *VersionInfoDataGRPC) ProtoReflect() protoreflect.Message {
 	mi := &file_system_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -57,44 +57,44 @@ func (x *VersionInfoData) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use VersionInfoData.ProtoReflect.Descriptor instead.
-func (*VersionInfoData) Descriptor() ([]byte, []int) {
+// Deprecated: Use VersionInfoDataGRPC.ProtoReflect.Descriptor instead.
+func (*VersionInfoDataGRPC) Descriptor() ([]byte, []int) {
 	return file_system_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *VersionInfoData) GetAppName() string {
+func (x *VersionInfoDataGRPC) GetAppName() string {
 	if x != nil {
 		return x.AppName
 	}
 	return ""
 }
 
-func (x *VersionInfoData) GetAppVersion() string {
+func (x *VersionInfoDataGRPC) GetAppVersion() string {
 	if x != nil {
 		return x.AppVersion
 	}
 	return ""
 }
 
-func (x *VersionInfoData) GetProtocolVersion() string {
+func (x *VersionInfoDataGRPC) GetProtocolVersion() string {
 	if x != nil {
 		return x.ProtocolVersion
 	}
 	return ""
 }
 
-type VersionInfoResult struct {
+type VersionInfoResultGRPC struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data    *VersionInfoData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Retcode int64            `protobuf:"varint,2,opt,name=retcode,proto3" json:"retcode,omitempty"`
-	Status  string           `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	Data    *VersionInfoDataGRPC `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Retcode int64                `protobuf:"varint,2,opt,name=retcode,proto3" json:"retcode,omitempty"`
+	Status  string               `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
 }
 
-func (x *VersionInfoResult) Reset() {
-	*x = VersionInfoResult{}
+func (x *VersionInfoResultGRPC) Reset() {
+	*x = VersionInfoResultGRPC{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_system_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -102,13 +102,13 @@ func (x *VersionInfoResult) Reset() {
 	}
 }
 
-func (x *VersionInfoResult) String() string {
+func (x *VersionInfoResultGRPC) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*VersionInfoResult) ProtoMessage() {}
+func (*VersionInfoResultGRPC) ProtoMessage() {}
 
-func (x *VersionInfoResult) ProtoReflect() protoreflect.Message {
+func (x *VersionInfoResultGRPC) ProtoReflect() protoreflect.Message {
 	mi := &file_system_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -120,33 +120,33 @@ func (x *VersionInfoResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use VersionInfoResult.ProtoReflect.Descriptor instead.
-func (*VersionInfoResult) Descriptor() ([]byte, []int) {
+// Deprecated: Use VersionInfoResultGRPC.ProtoReflect.Descriptor instead.
+func (*VersionInfoResultGRPC) Descriptor() ([]byte, []int) {
 	return file_system_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *VersionInfoResult) GetData() *VersionInfoData {
+func (x *VersionInfoResultGRPC) GetData() *VersionInfoDataGRPC {
 	if x != nil {
 		return x.Data
 	}
 	return nil
 }
 
-func (x *VersionInfoResult) GetRetcode() int64 {
+func (x *VersionInfoResultGRPC) GetRetcode() int64 {
 	if x != nil {
 		return x.Retcode
 	}
 	return 0
 }
 
-func (x *VersionInfoResult) GetStatus() string {
+func (x *VersionInfoResultGRPC) GetStatus() string {
 	if x != nil {
 		return x.Status
 	}
 	return ""
 }
 
-type StatusInfoData struct {
+type StatusInfoDataGRPC struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -155,8 +155,8 @@ type StatusInfoData struct {
 	Good   bool `protobuf:"varint,2,opt,name=good,proto3" json:"good,omitempty"`
 }
 
-func (x *StatusInfoData) Reset() {
-	*x = StatusInfoData{}
+func (x *StatusInfoDataGRPC) Reset() {
+	*x = StatusInfoDataGRPC{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_system_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -164,13 +164,13 @@ func (x *StatusInfoData) Reset() {
 	}
 }
 
-func (x *StatusInfoData) String() string {
+func (x *StatusInfoDataGRPC) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StatusInfoData) ProtoMessage() {}
+func (*StatusInfoDataGRPC) ProtoMessage() {}
 
-func (x *StatusInfoData) ProtoReflect() protoreflect.Message {
+func (x *StatusInfoDataGRPC) ProtoReflect() protoreflect.Message {
 	mi := &file_system_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -182,37 +182,37 @@ func (x *StatusInfoData) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StatusInfoData.ProtoReflect.Descriptor instead.
-func (*StatusInfoData) Descriptor() ([]byte, []int) {
+// Deprecated: Use StatusInfoDataGRPC.ProtoReflect.Descriptor instead.
+func (*StatusInfoDataGRPC) Descriptor() ([]byte, []int) {
 	return file_system_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *StatusInfoData) GetOnline() bool {
+func (x *StatusInfoDataGRPC) GetOnline() bool {
 	if x != nil {
 		return x.Online
 	}
 	return false
 }
 
-func (x *StatusInfoData) GetGood() bool {
+func (x *StatusInfoDataGRPC) GetGood() bool {
 	if x != nil {
 		return x.Good
 	}
 	return false
 }
 
-type StatusInfoResult struct {
+type StatusInfoResultGRPC struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data    *StatusInfoData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Retcode int64           `protobuf:"varint,2,opt,name=retcode,proto3" json:"retcode,omitempty"`
-	Status  string          `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	Data    *StatusInfoDataGRPC `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Retcode int64               `protobuf:"varint,2,opt,name=retcode,proto3" json:"retcode,omitempty"`
+	Status  string              `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
 }
 
-func (x *StatusInfoResult) Reset() {
-	*x = StatusInfoResult{}
+func (x *StatusInfoResultGRPC) Reset() {
+	*x = StatusInfoResultGRPC{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_system_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -220,13 +220,13 @@ func (x *StatusInfoResult) Reset() {
 	}
 }
 
-func (x *StatusInfoResult) String() string {
+func (x *StatusInfoResultGRPC) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StatusInfoResult) ProtoMessage() {}
+func (*StatusInfoResultGRPC) ProtoMessage() {}
 
-func (x *StatusInfoResult) ProtoReflect() protoreflect.Message {
+func (x *StatusInfoResultGRPC) ProtoReflect() protoreflect.Message {
 	mi := &file_system_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -238,33 +238,33 @@ func (x *StatusInfoResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StatusInfoResult.ProtoReflect.Descriptor instead.
-func (*StatusInfoResult) Descriptor() ([]byte, []int) {
+// Deprecated: Use StatusInfoResultGRPC.ProtoReflect.Descriptor instead.
+func (*StatusInfoResultGRPC) Descriptor() ([]byte, []int) {
 	return file_system_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *StatusInfoResult) GetData() *StatusInfoData {
+func (x *StatusInfoResultGRPC) GetData() *StatusInfoDataGRPC {
 	if x != nil {
 		return x.Data
 	}
 	return nil
 }
 
-func (x *StatusInfoResult) GetRetcode() int64 {
+func (x *StatusInfoResultGRPC) GetRetcode() int64 {
 	if x != nil {
 		return x.Retcode
 	}
 	return 0
 }
 
-func (x *StatusInfoResult) GetStatus() string {
+func (x *StatusInfoResultGRPC) GetStatus() string {
 	if x != nil {
 		return x.Status
 	}
 	return ""
 }
 
-type BoolYes struct {
+type BoolYesGRPC struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -272,8 +272,8 @@ type BoolYes struct {
 	Yes bool `protobuf:"varint,1,opt,name=yes,proto3" json:"yes,omitempty"`
 }
 
-func (x *BoolYes) Reset() {
-	*x = BoolYes{}
+func (x *BoolYesGRPC) Reset() {
+	*x = BoolYesGRPC{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_system_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -281,13 +281,13 @@ func (x *BoolYes) Reset() {
 	}
 }
 
-func (x *BoolYes) String() string {
+func (x *BoolYesGRPC) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*BoolYes) ProtoMessage() {}
+func (*BoolYesGRPC) ProtoMessage() {}
 
-func (x *BoolYes) ProtoReflect() protoreflect.Message {
+func (x *BoolYesGRPC) ProtoReflect() protoreflect.Message {
 	mi := &file_system_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -299,30 +299,30 @@ func (x *BoolYes) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BoolYes.ProtoReflect.Descriptor instead.
-func (*BoolYes) Descriptor() ([]byte, []int) {
+// Deprecated: Use BoolYesGRPC.ProtoReflect.Descriptor instead.
+func (*BoolYesGRPC) Descriptor() ([]byte, []int) {
 	return file_system_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *BoolYes) GetYes() bool {
+func (x *BoolYesGRPC) GetYes() bool {
 	if x != nil {
 		return x.Yes
 	}
 	return false
 }
 
-type BoolYesOfResult struct {
+type BoolYesOfResultGRPC struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data    *BoolYes `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Retcode int64    `protobuf:"varint,2,opt,name=retcode,proto3" json:"retcode,omitempty"`
-	Status  string   `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	Data    *BoolYesGRPC `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Retcode int64        `protobuf:"varint,2,opt,name=retcode,proto3" json:"retcode,omitempty"`
+	Status  string       `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
 }
 
-func (x *BoolYesOfResult) Reset() {
-	*x = BoolYesOfResult{}
+func (x *BoolYesOfResultGRPC) Reset() {
+	*x = BoolYesOfResultGRPC{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_system_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -330,13 +330,13 @@ func (x *BoolYesOfResult) Reset() {
 	}
 }
 
-func (x *BoolYesOfResult) String() string {
+func (x *BoolYesOfResultGRPC) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*BoolYesOfResult) ProtoMessage() {}
+func (*BoolYesOfResultGRPC) ProtoMessage() {}
 
-func (x *BoolYesOfResult) ProtoReflect() protoreflect.Message {
+func (x *BoolYesOfResultGRPC) ProtoReflect() protoreflect.Message {
 	mi := &file_system_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -348,26 +348,26 @@ func (x *BoolYesOfResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BoolYesOfResult.ProtoReflect.Descriptor instead.
-func (*BoolYesOfResult) Descriptor() ([]byte, []int) {
+// Deprecated: Use BoolYesOfResultGRPC.ProtoReflect.Descriptor instead.
+func (*BoolYesOfResultGRPC) Descriptor() ([]byte, []int) {
 	return file_system_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *BoolYesOfResult) GetData() *BoolYes {
+func (x *BoolYesOfResultGRPC) GetData() *BoolYesGRPC {
 	if x != nil {
 		return x.Data
 	}
 	return nil
 }
 
-func (x *BoolYesOfResult) GetRetcode() int64 {
+func (x *BoolYesOfResultGRPC) GetRetcode() int64 {
 	if x != nil {
 		return x.Retcode
 	}
 	return 0
 }
 
-func (x *BoolYesOfResult) GetStatus() string {
+func (x *BoolYesOfResultGRPC) GetStatus() string {
 	if x != nil {
 		return x.Status
 	}
@@ -378,42 +378,44 @@ var File_system_proto protoreflect.FileDescriptor
 
 var file_system_proto_rawDesc = []byte{
 	0x0a, 0x0c, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x05,
-	0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x22, 0x78, 0x0a, 0x0f, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e,
-	0x49, 0x6e, 0x66, 0x6f, 0x44, 0x61, 0x74, 0x61, 0x12, 0x19, 0x0a, 0x08, 0x61, 0x70, 0x70, 0x5f,
-	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x70, 0x70, 0x4e,
-	0x61, 0x6d, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x61, 0x70, 0x70, 0x5f, 0x76, 0x65, 0x72, 0x73, 0x69,
-	0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x61, 0x70, 0x70, 0x56, 0x65, 0x72,
-	0x73, 0x69, 0x6f, 0x6e, 0x12, 0x29, 0x0a, 0x10, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x63, 0x6f, 0x6c,
-	0x5f, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0f,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x63, 0x6f, 0x6c, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x22,
-	0x71, 0x0a, 0x11, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65,
-	0x73, 0x75, 0x6c, 0x74, 0x12, 0x2a, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x0b, 0x32, 0x16, 0x2e, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x2e, 0x56, 0x65, 0x72, 0x73, 0x69,
-	0x6f, 0x6e, 0x49, 0x6e, 0x66, 0x6f, 0x44, 0x61, 0x74, 0x61, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61,
-	0x12, 0x18, 0x0a, 0x07, 0x72, 0x65, 0x74, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x03, 0x52, 0x07, 0x72, 0x65, 0x74, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74,
-	0x61, 0x74, 0x75, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74,
-	0x75, 0x73, 0x22, 0x3c, 0x0a, 0x0e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x49, 0x6e, 0x66, 0x6f,
-	0x44, 0x61, 0x74, 0x61, 0x12, 0x16, 0x0a, 0x06, 0x6f, 0x6e, 0x6c, 0x69, 0x6e, 0x65, 0x18, 0x01,
+	0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x22, 0x7c, 0x0a, 0x13, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e,
+	0x49, 0x6e, 0x66, 0x6f, 0x44, 0x61, 0x74, 0x61, 0x47, 0x52, 0x50, 0x43, 0x12, 0x19, 0x0a, 0x08,
+	0x61, 0x70, 0x70, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,
+	0x61, 0x70, 0x70, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x61, 0x70, 0x70, 0x5f, 0x76,
+	0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x61, 0x70,
+	0x70, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x29, 0x0a, 0x10, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x63, 0x6f, 0x6c, 0x5f, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x0f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x63, 0x6f, 0x6c, 0x56, 0x65, 0x72, 0x73,
+	0x69, 0x6f, 0x6e, 0x22, 0x79, 0x0a, 0x15, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x49, 0x6e,
+	0x66, 0x6f, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x47, 0x52, 0x50, 0x43, 0x12, 0x2e, 0x0a, 0x04,
+	0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x6d, 0x6f, 0x64,
+	0x65, 0x6c, 0x2e, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x49, 0x6e, 0x66, 0x6f, 0x44, 0x61,
+	0x74, 0x61, 0x47, 0x52, 0x50, 0x43, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x12, 0x18, 0x0a, 0x07,
+	0x72, 0x65, 0x74, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x72,
+	0x65, 0x74, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x22, 0x40,
+	0x0a, 0x12, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x49, 0x6e, 0x66, 0x6f, 0x44, 0x61, 0x74, 0x61,
+	0x47, 0x52, 0x50, 0x43, 0x12, 0x16, 0x0a, 0x06, 0x6f, 0x6e, 0x6c, 0x69, 0x6e, 0x65, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x6f, 0x6e, 0x6c, 0x69, 0x6e, 0x65, 0x12, 0x12, 0x0a, 0x04,
 	0x67, 0x6f, 0x6f, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x04, 0x67, 0x6f, 0x6f, 0x64,
-	0x22, 0x6f, 0x0a, 0x10, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65,
-	0x73, 0x75, 0x6c, 0x74, 0x12, 0x29, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x0b, 0x32, 0x15, 0x2e, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x75,
-	0x73, 0x49, 0x6e, 0x66, 0x6f, 0x44, 0x61, 0x74, 0x61, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x12,
-	0x18, 0x0a, 0x07, 0x72, 0x65, 0x74, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03,
-	0x52, 0x07, 0x72, 0x65, 0x74, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61,
-	0x74, 0x75, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75,
-	0x73, 0x22, 0x1b, 0x0a, 0x07, 0x42, 0x6f, 0x6f, 0x6c, 0x59, 0x65, 0x73, 0x12, 0x10, 0x0a, 0x03,
-	0x79, 0x65, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x03, 0x79, 0x65, 0x73, 0x22, 0x67,
-	0x0a, 0x0f, 0x42, 0x6f, 0x6f, 0x6c, 0x59, 0x65, 0x73, 0x4f, 0x66, 0x52, 0x65, 0x73, 0x75, 0x6c,
-	0x74, 0x12, 0x22, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x0e, 0x2e, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x2e, 0x42, 0x6f, 0x6f, 0x6c, 0x59, 0x65, 0x73, 0x52,
-	0x04, 0x64, 0x61, 0x74, 0x61, 0x12, 0x18, 0x0a, 0x07, 0x72, 0x65, 0x74, 0x63, 0x6f, 0x64, 0x65,
-	0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x72, 0x65, 0x74, 0x63, 0x6f, 0x64, 0x65, 0x12,
-	0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x42, 0x0a, 0x5a, 0x08, 0x2e, 0x2e, 0x2f, 0x6d, 0x6f,
-	0x64, 0x65, 0x6c, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x22, 0x77, 0x0a, 0x14, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65,
+	0x73, 0x75, 0x6c, 0x74, 0x47, 0x52, 0x50, 0x43, 0x12, 0x2d, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x2e, 0x53,
+	0x74, 0x61, 0x74, 0x75, 0x73, 0x49, 0x6e, 0x66, 0x6f, 0x44, 0x61, 0x74, 0x61, 0x47, 0x52, 0x50,
+	0x43, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x12, 0x18, 0x0a, 0x07, 0x72, 0x65, 0x74, 0x63, 0x6f,
+	0x64, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x72, 0x65, 0x74, 0x63, 0x6f, 0x64,
+	0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x22, 0x1f, 0x0a, 0x0b, 0x42, 0x6f, 0x6f,
+	0x6c, 0x59, 0x65, 0x73, 0x47, 0x52, 0x50, 0x43, 0x12, 0x10, 0x0a, 0x03, 0x79, 0x65, 0x73, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x03, 0x79, 0x65, 0x73, 0x22, 0x6f, 0x0a, 0x13, 0x42, 0x6f,
+	0x6f, 0x6c, 0x59, 0x65, 0x73, 0x4f, 0x66, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x47, 0x52, 0x50,
+	0x43, 0x12, 0x26, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x12, 0x2e, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x2e, 0x42, 0x6f, 0x6f, 0x6c, 0x59, 0x65, 0x73, 0x47,
+	0x52, 0x50, 0x43, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x12, 0x18, 0x0a, 0x07, 0x72, 0x65, 0x74,
+	0x63, 0x6f, 0x64, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x72, 0x65, 0x74, 0x63,
+	0x6f, 0x64, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x42, 0x0a, 0x5a, 0x08, 0x2e,
+	0x2e, 0x2f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -430,17 +432,17 @@ func file_system_proto_rawDescGZIP() []byte {
 
 var file_system_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_system_proto_goTypes = []interface{}{
-	(*VersionInfoData)(nil),   // 0: model.VersionInfoData
-	(*VersionInfoResult)(nil), // 1: model.VersionInfoResult
-	(*StatusInfoData)(nil),    // 2: model.StatusInfoData
-	(*StatusInfoResult)(nil),  // 3: model.StatusInfoResult
-	(*BoolYes)(nil),           // 4: model.BoolYes
-	(*BoolYesOfResult)(nil),   // 5: model.BoolYesOfResult
+	(*VersionInfoDataGRPC)(nil),   // 0: model.VersionInfoDataGRPC
+	(*VersionInfoResultGRPC)(nil), // 1: model.VersionInfoResultGRPC
+	(*StatusInfoDataGRPC)(nil),    // 2: model.StatusInfoDataGRPC
+	(*StatusInfoResultGRPC)(nil),  // 3: model.StatusInfoResultGRPC
+	(*BoolYesGRPC)(nil),           // 4: model.BoolYesGRPC
+	(*BoolYesOfResultGRPC)(nil),   // 5: model.BoolYesOfResultGRPC
 }
 var file_system_proto_depIdxs = []int32{
-	0, // 0: model.VersionInfoResult.data:type_name -> model.VersionInfoData
-	2, // 1: model.StatusInfoResult.data:type_name -> model.StatusInfoData
-	4, // 2: model.BoolYesOfResult.data:type_name -> model.BoolYes
+	0, // 0: model.VersionInfoResultGRPC.data:type_name -> model.VersionInfoDataGRPC
+	2, // 1: model.StatusInfoResultGRPC.data:type_name -> model.StatusInfoDataGRPC
+	4, // 2: model.BoolYesOfResultGRPC.data:type_name -> model.BoolYesGRPC
 	3, // [3:3] is the sub-list for method output_type
 	3, // [3:3] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name
@@ -455,7 +457,7 @@ func file_system_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_system_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*VersionInfoData); i {
+			switch v := v.(*VersionInfoDataGRPC); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -467,7 +469,7 @@ func file_system_proto_init() {
 			}
 		}
 		file_system_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*VersionInfoResult); i {
+			switch v := v.(*VersionInfoResultGRPC); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -479,7 +481,7 @@ func file_system_proto_init() {
 			}
 		}
 		file_system_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StatusInfoData); i {
+			switch v := v.(*StatusInfoDataGRPC); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -491,7 +493,7 @@ func file_system_proto_init() {
 			}
 		}
 		file_system_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StatusInfoResult); i {
+			switch v := v.(*StatusInfoResultGRPC); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -503,7 +505,7 @@ func file_system_proto_init() {
 			}
 		}
 		file_system_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BoolYes); i {
+			switch v := v.(*BoolYesGRPC); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -515,7 +517,7 @@ func file_system_proto_init() {
 			}
 		}
 		file_system_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BoolYesOfResult); i {
+			switch v := v.(*BoolYesOfResultGRPC); i {
 			case 0:
 				return &v.state
 			case 1:

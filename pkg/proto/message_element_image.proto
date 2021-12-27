@@ -3,7 +3,7 @@ package model;
 option go_package="../model";
 
 
-message MessageElementImage {
+message MessageElementImageGRPC {
 	string file = 1;
 	//图片类型
 	string image_type = 2 [json_name="type"];

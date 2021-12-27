@@ -2,7 +2,7 @@ syntax = "proto3";
 package model;
 option go_package="../model";
 
-message MessageElementLocation {
+message MessageElementLocationGRPC {
 	string lat = 1;
 	string lon = 2;
 	string title = 3;

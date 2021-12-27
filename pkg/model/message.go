@@ -90,12 +90,12 @@ func (msgSeg *MessageResultData) UnmarshalJSON(data []byte) error {
 }
 
 type MessageResult struct {
-	Data    *MessageResultData `json:"data"`
-	RetCode int                `json:"retcode"`
-	Status  string             `json:"status"`
+	Data    []*MessageResultData `json:"data"`
+	RetCode int                  `json:"retcode"`
+	Status  string               `json:"status"`
 }
 type ForwardMessageResult struct {
-	Data    []MessageSegment `json:"data"`
-	RetCode int              `json:"retcode"`
-	Status  string           `json:"status"`
+	Data    []*MessageSegment `json:"data"`
+	RetCode int               `json:"retcode"`
+	Status  string            `json:"status"`
 }

@@ -2,26 +2,26 @@ syntax = "proto3";
 package model;
 option go_package = "../model";
 
-message Group {
+message GroupGRPC {
 	int64 group_id = 1;
 	int64 group_name = 2;
 	string member_count = 3;
 	string max_member_count = 4;
 }
 
-message GroupResult {
-	Group data = 1;
+message GroupResultGRPC {
+	GroupGRPC data = 1;
 	int64 retcode = 2;
 	string status = 3;
 }
 
-message GroupListResult {
-	repeated Group data = 1;
+message GroupListResultGRPC {
+	repeated GroupGRPC data = 1;
 	int64 retcode = 2;
 	string status = 3;
 }
 
-message GroupMember {
+message GroupMemberGRPC {
 	int64 group_id = 1;
 	int64 user_id = 2;
 	string nickname = 3;
@@ -38,48 +38,48 @@ message GroupMember {
 	string card_changeable = 14;
 }
 
-message GroupMemberResult {
-	GroupMember data = 1;
+message GroupMemberResultGRPC {
+	GroupMemberGRPC data = 1;
 	int64 retcode = 2;
 	string status = 3;
 }
 
-message GroupMemberListResult {
-	repeated GroupMember data = 1;
+message GroupMemberListResultGRPC {
+	repeated GroupMemberGRPC data = 1;
 	int64 retcode = 2;
 	string status = 3;
 }
 
-message GroupHonorInfoResult {
-	GroupHonorInfo data = 1;
+message GroupHonorInfoResultGRPC {
+	GroupHonorInfoGRPC data = 1;
 	int64 retcode = 2;
 	string status = 3;
 }
 
-message GroupHonorInfo {
+message GroupHonorInfoGRPC {
 	int64 group_id = 1;
 	//龙王
-	CurrentTalkative current_talkative = 2;
+	CurrentTalkativeGRPC current_talkative = 2;
 	//历史龙王
-	repeated HonorOwnerInfo talkative_list = 3;
+	repeated HonorOwnerInfoGRPC talkative_list = 3;
 	//群聊之火
-	repeated HonorOwnerInfo performer_list = 4;
+	repeated HonorOwnerInfoGRPC performer_list = 4;
 	//群聊炽焰
-	repeated HonorOwnerInfo legend_list = 5;
+	repeated HonorOwnerInfoGRPC legend_list = 5;
 	//冒尖小春笋
-	repeated HonorOwnerInfo strong_newbie_list = 6;
+	repeated HonorOwnerInfoGRPC strong_newbie_list = 6;
 	//快乐之源
-	repeated HonorOwnerInfo emotion_list = 7;
+	repeated HonorOwnerInfoGRPC emotion_list = 7;
 }
 
-message CurrentTalkative {
+message CurrentTalkativeGRPC {
 	int64 user_id = 1;
 	string nickname = 2;
 	string avatar = 3; //头像url
 	int64 day_count = 4; //持续天数
 }
 
-message HonorOwnerInfo {
+message HonorOwnerInfoGRPC {
 	int64 user_id = 1;
 	string nickname = 2;
 	string avatar = 3;

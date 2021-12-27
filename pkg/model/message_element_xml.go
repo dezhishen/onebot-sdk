@@ -2,9 +2,9 @@ package model
 
 import "encoding/json"
 
-// type MessageElementXml struct {
-// 	Data string `json:"data"`
-// }
+type MessageElementXml struct {
+	Data string `json:"data"`
+}
 
 func (msg MessageElementXml) Type() string {
 	return "xml"

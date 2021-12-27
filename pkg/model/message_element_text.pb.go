@@ -20,7 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type MessageElementText struct {
+type MessageElementTextGRPC struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -28,8 +28,8 @@ type MessageElementText struct {
 	Text string `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
 }
 
-func (x *MessageElementText) Reset() {
-	*x = MessageElementText{}
+func (x *MessageElementTextGRPC) Reset() {
+	*x = MessageElementTextGRPC{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_message_element_text_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -37,13 +37,13 @@ func (x *MessageElementText) Reset() {
 	}
 }
 
-func (x *MessageElementText) String() string {
+func (x *MessageElementTextGRPC) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MessageElementText) ProtoMessage() {}
+func (*MessageElementTextGRPC) ProtoMessage() {}
 
-func (x *MessageElementText) ProtoReflect() protoreflect.Message {
+func (x *MessageElementTextGRPC) ProtoReflect() protoreflect.Message {
 	mi := &file_message_element_text_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -55,12 +55,12 @@ func (x *MessageElementText) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MessageElementText.ProtoReflect.Descriptor instead.
-func (*MessageElementText) Descriptor() ([]byte, []int) {
+// Deprecated: Use MessageElementTextGRPC.ProtoReflect.Descriptor instead.
+func (*MessageElementTextGRPC) Descriptor() ([]byte, []int) {
 	return file_message_element_text_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *MessageElementText) GetText() string {
+func (x *MessageElementTextGRPC) GetText() string {
 	if x != nil {
 		return x.Text
 	}
@@ -72,11 +72,11 @@ var File_message_element_text_proto protoreflect.FileDescriptor
 var file_message_element_text_proto_rawDesc = []byte{
 	0x0a, 0x1a, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x65, 0x6c, 0x65, 0x6d, 0x65, 0x6e,
 	0x74, 0x5f, 0x74, 0x65, 0x78, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x05, 0x6d, 0x6f,
-	0x64, 0x65, 0x6c, 0x22, 0x28, 0x0a, 0x12, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x45, 0x6c,
-	0x65, 0x6d, 0x65, 0x6e, 0x74, 0x54, 0x65, 0x78, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x65, 0x78,
-	0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x65, 0x78, 0x74, 0x42, 0x0a, 0x5a,
-	0x08, 0x2e, 0x2e, 0x2f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x64, 0x65, 0x6c, 0x22, 0x2c, 0x0a, 0x16, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x45, 0x6c,
+	0x65, 0x6d, 0x65, 0x6e, 0x74, 0x54, 0x65, 0x78, 0x74, 0x47, 0x52, 0x50, 0x43, 0x12, 0x12, 0x0a,
+	0x04, 0x74, 0x65, 0x78, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x65, 0x78,
+	0x74, 0x42, 0x0a, 0x5a, 0x08, 0x2e, 0x2e, 0x2f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -93,7 +93,7 @@ func file_message_element_text_proto_rawDescGZIP() []byte {
 
 var file_message_element_text_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_message_element_text_proto_goTypes = []interface{}{
-	(*MessageElementText)(nil), // 0: model.MessageElementText
+	(*MessageElementTextGRPC)(nil), // 0: model.MessageElementTextGRPC
 }
 var file_message_element_text_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -110,7 +110,7 @@ func file_message_element_text_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_message_element_text_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MessageElementText); i {
+			switch v := v.(*MessageElementTextGRPC); i {
 			case 0:
 				return &v.state
 			case 1:
