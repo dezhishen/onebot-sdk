@@ -160,7 +160,7 @@ func MessageSegmentGRPCArray2MessageSegmentArray(source []*MessageSegmentGRPC) [
 }
 
 func MessageSegmentArray2MessageSegmentGRPCArray(source []*MessageSegment) []*MessageSegmentGRPC {
-	if source == nil || len(source) == 0 {
+	if len(source) == 0 {
 		return nil
 	}
 	var result []*MessageSegmentGRPC
