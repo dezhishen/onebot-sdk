@@ -11,7 +11,7 @@ import (
 )
 
 // 发送消息
-func SendMsg(msg *model.MsgForSend) (int, error) {
+func SendMsg(msg *model.MsgForSend) (int64, error) {
 	if msg.MessageType == model.PrivateMessageType {
 		return SendPrivateMsg(&model.PrivateMsg{
 			UserId:     msg.UserId,
@@ -27,7 +27,7 @@ func SendMsg(msg *model.MsgForSend) (int, error) {
 }
 
 // 发送私信
-func SendPrivateMsg(msg *model.PrivateMsg) (int, error) {
+func SendPrivateMsg(msg *model.PrivateMsg) (int64, error) {
 	requestBody, _ := json.Marshal(msg)
 	resp, err := http.Post(
 		config.GetHttpUrl()+"/send_private_msg",
@@ -45,7 +45,7 @@ func SendPrivateMsg(msg *model.PrivateMsg) (int, error) {
 }
 
 // 发送群消息
-func SendGroupMsg(msg *model.GroupMsg) (int, error) {
+func SendGroupMsg(msg *model.GroupMsg) (int64, error) {
 	requestBody, _ := json.Marshal(msg)
 	resp, err := http.Post(
 		config.GetHttpUrl()+"/send_group_msg",
@@ -74,7 +74,7 @@ func DelMsg(id int) error {
 	return err
 }
 
-func GetMsg(id int) ([]*model.MessageResultData, error) {
+func GetMsg(id int) (*model.MessageData, error) {
 	reqMap := make(map[string]int)
 	reqMap["message_id"] = id
 	requestBody, _ := json.Marshal(reqMap)
@@ -88,12 +88,12 @@ func GetMsg(id int) ([]*model.MessageResultData, error) {
 	}
 	defer resp.Body.Close()
 	respBodyContent, _ := io.ReadAll(resp.Body)
-	var result model.MessageResult
+	var result model.MessageDataResult
 	json.Unmarshal(respBodyContent, &result)
 	return result.Data, nil
 }
 
-func GetForwardMsg(id int) ([]*model.MessageSegment, error) {
+func GetForwardMsg(id int) (*model.ForwardMessageData, error) {
 	reqMap := make(map[string]int)
 	reqMap["message_id"] = id
 	requestBody, _ := json.Marshal(reqMap)
@@ -107,7 +107,7 @@ func GetForwardMsg(id int) ([]*model.MessageSegment, error) {
 	}
 	defer resp.Body.Close()
 	respBodyContent, _ := io.ReadAll(resp.Body)
-	var result model.ForwardMessageResult
+	var result model.ForwardMessageDataResult
 	json.Unmarshal(respBodyContent, &result)
 	return result.Data, nil
 }

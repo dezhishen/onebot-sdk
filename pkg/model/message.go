@@ -1,16 +1,28 @@
 package model
 
-import (
-	"fmt"
-
-	"github.com/tidwall/gjson"
-)
-
 type PrivateMsg struct {
 	UserId     int64             `json:"user_id"`
 	GroupId    int64             `json:"group_id"`
 	Message    []*MessageSegment `json:"message"`
 	AutoEscape bool              `json:"auto_escape"`
+}
+
+func (msg *PrivateMsgGRPC) ToStruct() *PrivateMsg {
+	return &PrivateMsg{
+		UserId:     msg.UserId,
+		GroupId:    msg.GroupId,
+		Message:    MessageSegmentGRPCArray2MessageSegmentArray(msg.Message),
+		AutoEscape: msg.AutoEscape,
+	}
+}
+
+func (msg *PrivateMsg) ToGRPC() *PrivateMsgGRPC {
+	return &PrivateMsgGRPC{
+		UserId:     msg.UserId,
+		GroupId:    msg.GroupId,
+		AutoEscape: msg.AutoEscape,
+		Message:    MessageSegmentArray2MessageSegmentGRPCArray(msg.Message),
+	}
 }
 
 type GroupMsg struct {
@@ -19,17 +31,20 @@ type GroupMsg struct {
 	AutoEscape bool              `json:"auto_escape"`
 }
 
-type MsgNode struct {
-	Id      int32             `json:"id"`
-	Name    string            `json:"name"`
-	Uin     int64             `json:"uin"`
-	Content []*MessageSegment `json:"content"`
-	Seq     []*MessageSegment `json:"seq"`
+func (msg *GroupMsgGRPC) ToStruct() *GroupMsg {
+	return &GroupMsg{
+		GroupId:    msg.GroupId,
+		Message:    MessageSegmentGRPCArray2MessageSegmentArray(msg.Message),
+		AutoEscape: msg.AutoEscape,
+	}
 }
 
-type GroupForwardMsg struct {
-	GroupId  int64      `json:"group_id"`
-	Messages []*MsgNode `json:"messages"`
+func (msg *GroupMsg) ToGRPC() *GroupMsgGRPC {
+	return &GroupMsgGRPC{
+		GroupId:    msg.GroupId,
+		AutoEscape: msg.AutoEscape,
+		Message:    MessageSegmentArray2MessageSegmentGRPCArray(msg.Message),
+	}
 }
 
 type MessageType string
@@ -47,8 +62,38 @@ type MsgForSend struct {
 	MessageType MessageType       `json:"message_type"`
 }
 
+func (msg *MsgForSendGRPC) ToStruct() *MsgForSend {
+	return &MsgForSend{
+		GroupId:     msg.GroupId,
+		Message:     MessageSegmentGRPCArray2MessageSegmentArray(msg.Message),
+		AutoEscape:  msg.AutoEscape,
+		MessageType: MessageType(msg.MessageType),
+	}
+}
+
+func (msg *MsgForSend) ToGRPC() *MsgForSendGRPC {
+	return &MsgForSendGRPC{
+		GroupId:     msg.GroupId,
+		AutoEscape:  msg.AutoEscape,
+		Message:     MessageSegmentArray2MessageSegmentGRPCArray(msg.Message),
+		MessageType: string(msg.MessageType),
+	}
+}
+
 type SendMessageResultData struct {
-	MessageId int `json:"message_id"`
+	MessageId int64 `json:"message_id"`
+}
+
+func (msg *SendMessageResultDataGRPC) ToStruct() *SendMessageResultData {
+	return &SendMessageResultData{
+		MessageId: msg.MessageId,
+	}
+}
+
+func (msg *SendMessageResultData) ToGRPC() *SendMessageResultDataGRPC {
+	return &SendMessageResultDataGRPC{
+		MessageId: msg.MessageId,
+	}
 }
 
 type SendMessageResult struct {
@@ -57,45 +102,115 @@ type SendMessageResult struct {
 	Status  string                 `json:"status"`
 }
 
-type MessageResultData struct {
+func (a *SendMessageResult) ToGRPC() *SendMessageResultGRPC {
+	return &SendMessageResultGRPC{
+		Data:    a.Data.ToGRPC(),
+		Retcode: a.Retcode,
+		Status:  a.Status,
+	}
+}
+
+func (a *SendMessageResultGRPC) ToStruct() *SendMessageResult {
+	return &SendMessageResult{
+		Data:    a.Data.ToStruct(),
+		Retcode: a.Retcode,
+		Status:  a.Status,
+	}
+}
+
+type MessageData struct {
 	//发送时间
-	Time int `json:"time"`
+	Time int64 `json:"time"`
 	//消息类型，同 消息事件
 	MessageType string `json:"message_type"`
 	//消息 Id
-	MessageId int `json:"message_id"`
+	MessageId int64 `json:"message_id"`
 	//消息真实 Id
-	RealId int `json:"real_id"`
+	RealId int64 `json:"real_id"`
 	//发送人信息，同 消息事件
 	Sender *Sender `json:"sender"`
 	//消息内容
-	Message *MessageElement `json:"message"`
+	Message []*MessageSegment `json:"message"`
 }
 
-func (msgSeg *MessageResultData) UnmarshalJSON(data []byte) error {
-	if len(data) == 0 || data[0] == 'n' { // copied from the Q, can be improved
-		return nil
+func (a *MessageData) ToGRPC() *MessageDataGRPC {
+	return &MessageDataGRPC{
+		Time:        a.Time,
+		MessageType: a.MessageType,
+		MessageId:   a.MessageId,
+		RealId:      a.RealId,
+		Sender:      a.Sender.ToGRPC(),
+		Message:     MessageSegmentArray2MessageSegmentGRPCArray(a.Message),
 	}
-	messageType := gjson.GetBytes(data, "type").Str
-	decoder, ok := messageElementUnmarshalJSONMap[messageType]
-	if !ok {
-		return fmt.Errorf("未找到指定的消息类型,%v", messageType)
-	}
-	element, err := decoder([]byte(gjson.GetBytes(data, "message").Raw))
-	if !ok {
-		return fmt.Errorf("未找到指定的消息类型,%v", messageType)
-	}
-	msgSeg.Message = &element
-	return err
 }
 
-type MessageResult struct {
-	Data    []*MessageResultData `json:"data"`
-	Retcode int64                `json:"retcode"`
-	Status  string               `json:"status"`
+func (a *MessageDataGRPC) ToStruct() *MessageData {
+	return &MessageData{
+		Time:        a.Time,
+		MessageType: a.MessageType,
+		MessageId:   a.MessageId,
+		RealId:      a.RealId,
+		Sender:      a.Sender.ToStruct(),
+		Message:     MessageSegmentGRPCArray2MessageSegmentArray(a.Message),
+	}
 }
-type ForwardMessageResult struct {
-	Data    []*MessageSegment `json:"data"`
-	Retcode int64             `json:"retcode"`
-	Status  string            `json:"status"`
+
+type MessageDataResult struct {
+	Data    *MessageData `json:"data"`
+	Retcode int64        `json:"retcode"`
+	Status  string       `json:"status"`
+}
+
+func (a *MessageDataResult) ToGRPC() *MessageDataResultGRPC {
+	return &MessageDataResultGRPC{
+		Data:    a.Data.ToGRPC(),
+		Retcode: a.Retcode,
+		Status:  a.Status,
+	}
+}
+
+func (a *MessageDataResultGRPC) ToStruct() *MessageDataResult {
+	return &MessageDataResult{
+		Data:    a.Data.ToStruct(),
+		Retcode: a.Retcode,
+		Status:  a.Status,
+	}
+}
+
+type ForwardMessageData struct {
+	Message []*MessageSegment `json:"message"`
+}
+
+func (a *ForwardMessageData) ToGRPC() *ForwardMessageDataGRPC {
+	return &ForwardMessageDataGRPC{
+		Message: MessageSegmentArray2MessageSegmentGRPCArray(a.Message),
+	}
+}
+
+func (a *ForwardMessageDataGRPC) ToStruct() *ForwardMessageData {
+	return &ForwardMessageData{
+		Message: MessageSegmentGRPCArray2MessageSegmentArray(a.Message),
+	}
+}
+
+type ForwardMessageDataResult struct {
+	Data    *ForwardMessageData `json:"data"`
+	Retcode int64               `json:"retcode"`
+	Status  string              `json:"status"`
+}
+
+func (a *ForwardMessageDataResult) ToGRPC() *ForwardMessageDataResultGRPC {
+	return &ForwardMessageDataResultGRPC{
+		Data:    a.Data.ToGRPC(),
+		Retcode: a.Retcode,
+		Status:  a.Status,
+	}
+}
+
+func (a *ForwardMessageDataResultGRPC) ToStruct() *ForwardMessageDataResult {
+	return &ForwardMessageDataResult{
+		Data:    a.Data.ToStruct(),
+		Retcode: a.Retcode,
+		Status:  a.Status,
+	}
 }

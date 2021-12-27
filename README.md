@@ -5,7 +5,7 @@ onebot-sdk
 * 地址：[Wiki](./wiki/)
 # 待处理事项
 - [x] model 增加protobuf
-- [ ] 增加普通对象与GRPC对象转换方法
+- [x] 增加普通对象与GRPC对象转换方法
 # 快速开始
 ## 发送API
 直接调用[./pkg/api/](./pkg/api/)下面的方法,例如

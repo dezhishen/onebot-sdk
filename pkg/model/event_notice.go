@@ -5,17 +5,17 @@ type EventNoticeBase struct {
 	NoticeType string `json:"notice_type"`
 }
 
-func (a *EventNoticeBase) ToGRPC() *EventNoticeBaseGRPC {
+func (e *EventNoticeBase) ToGRPC() *EventNoticeBaseGRPC {
 	return &EventNoticeBaseGRPC{
-		EventBase:  a.EventBase.ToGRPC(),
-		NoticeType: a.NoticeType,
+		EventBase:  e.EventBase.ToGRPC(),
+		NoticeType: e.NoticeType,
 	}
 }
 
-func (a *EventNoticeBaseGRPC) ToStruct() *EventNoticeBase {
+func (e *EventNoticeBaseGRPC) ToStruct() *EventNoticeBase {
 	return &EventNoticeBase{
-		EventBase:  *a.EventBase.ToStruct(),
-		NoticeType: a.NoticeType,
+		EventBase:  *e.EventBase.ToStruct(),
+		NoticeType: e.NoticeType,
 	}
 }
 
@@ -25,17 +25,17 @@ type EventNoticeGroupBase struct {
 	GroupId int64 `json:"group_id"`
 }
 
-func (a *EventNoticeGroupBase) ToGRPC() *EventNoticeGroupBaseGRPC {
+func (e *EventNoticeGroupBase) ToGRPC() *EventNoticeGroupBaseGRPC {
 	return &EventNoticeGroupBaseGRPC{
-		EventNoticeBase: a.EventNoticeBase.ToGRPC(),
-		GroupId:         a.GroupId,
+		EventNoticeBase: e.EventNoticeBase.ToGRPC(),
+		GroupId:         e.GroupId,
 	}
 }
 
-func (a *EventNoticeGroupBaseGRPC) ToStruct() *EventNoticeGroupBase {
+func (e *EventNoticeGroupBaseGRPC) ToStruct() *EventNoticeGroupBase {
 	return &EventNoticeGroupBase{
-		EventNoticeBase: *a.EventNoticeBase.ToStruct(),
-		GroupId:         a.GroupId,
+		EventNoticeBase: *e.EventNoticeBase.ToStruct(),
+		GroupId:         e.GroupId,
 	}
 }
 
@@ -45,17 +45,17 @@ type EventNoticeNotifyBase struct {
 	SubType string `json:"sub_type"`
 }
 
-func (a *EventNoticeNotifyBase) ToGRPC() *EventNoticeNotifyBaseGRPC {
+func (e *EventNoticeNotifyBase) ToGRPC() *EventNoticeNotifyBaseGRPC {
 	return &EventNoticeNotifyBaseGRPC{
-		EventNoticeBase: a.EventNoticeBase.ToGRPC(),
-		SubType:         a.SubType,
+		EventNoticeBase: e.EventNoticeBase.ToGRPC(),
+		SubType:         e.SubType,
 	}
 }
 
-func (a *EventNoticeNotifyBaseGRPC) ToStruct() *EventNoticeNotifyBase {
+func (e *EventNoticeNotifyBaseGRPC) ToStruct() *EventNoticeNotifyBase {
 	return &EventNoticeNotifyBase{
-		EventNoticeBase: *a.EventNoticeBase.ToStruct(),
-		SubType:         a.SubType,
+		EventNoticeBase: *e.EventNoticeBase.ToStruct(),
+		SubType:         e.SubType,
 	}
 }
 
@@ -65,17 +65,17 @@ type EventNoticeNotifyGroupBase struct {
 	SubType string `json:"sub_type"`
 }
 
-func (a *EventNoticeNotifyGroupBase) ToGRPC() *EventNoticeNotifyGroupBaseGRPC {
+func (e *EventNoticeNotifyGroupBase) ToGRPC() *EventNoticeNotifyGroupBaseGRPC {
 	return &EventNoticeNotifyGroupBaseGRPC{
-		EventNoticeGroupBase: a.EventNoticeGroupBase.ToGRPC(),
-		SubType:              a.SubType,
+		EventNoticeGroupBase: e.EventNoticeGroupBase.ToGRPC(),
+		SubType:              e.SubType,
 	}
 }
 
-func (a *EventNoticeNotifyGroupBaseGRPC) ToStruct() *EventNoticeNotifyGroupBase {
+func (e *EventNoticeNotifyGroupBaseGRPC) ToStruct() *EventNoticeNotifyGroupBase {
 	return &EventNoticeNotifyGroupBase{
-		EventNoticeGroupBase: *a.EventNoticeGroupBase.ToStruct(),
-		SubType:              a.SubType,
+		EventNoticeGroupBase: *e.EventNoticeGroupBase.ToStruct(),
+		SubType:              e.SubType,
 	}
 }
 
@@ -90,21 +90,21 @@ type QQFile struct {
 	Busid int64 `json:"busid"`
 }
 
-func (a *QQFile) ToGRPC() *QQFileGRPC {
+func (e *QQFile) ToGRPC() *QQFileGRPC {
 	return &QQFileGRPC{
-		Id:    a.Id,
-		Name:  a.Name,
-		Size:  a.Size,
-		Busid: a.Busid,
+		Id:    e.Id,
+		Name:  e.Name,
+		Size:  e.Size,
+		Busid: e.Busid,
 	}
 }
 
-func (a *QQFileGRPC) ToStruct() *QQFile {
+func (e *QQFileGRPC) ToStruct() *QQFile {
 	return &QQFile{
-		Id:    a.Id,
-		Name:  a.Name,
-		Size:  a.Size,
-		Busid: a.Busid,
+		Id:    e.Id,
+		Name:  e.Name,
+		Size:  e.Size,
+		Busid: e.Busid,
 	}
 }
 
@@ -115,19 +115,19 @@ type EventNoticeGroupUpload struct {
 	File   *QQFile `json:"file"`
 }
 
-func (a *EventNoticeGroupUpload) ToGRPC() *EventNoticeGroupUploadGRPC {
+func (e *EventNoticeGroupUpload) ToGRPC() *EventNoticeGroupUploadGRPC {
 	return &EventNoticeGroupUploadGRPC{
-		EventNoticeGroupBase: a.EventNoticeGroupBase.ToGRPC(),
-		UserId:               a.UserId,
-		File:                 a.File.ToGRPC(),
+		EventNoticeGroupBase: e.EventNoticeGroupBase.ToGRPC(),
+		UserId:               e.UserId,
+		File:                 e.File.ToGRPC(),
 	}
 }
 
-func (a *EventNoticeGroupUploadGRPC) ToStruct() *EventNoticeGroupUpload {
+func (e *EventNoticeGroupUploadGRPC) ToStruct() *EventNoticeGroupUpload {
 	return &EventNoticeGroupUpload{
-		EventNoticeGroupBase: *a.EventNoticeGroupBase.ToStruct(),
-		UserId:               a.UserId,
-		File:                 a.File.ToStruct(),
+		EventNoticeGroupBase: *e.EventNoticeGroupBase.ToStruct(),
+		UserId:               e.UserId,
+		File:                 e.File.ToStruct(),
 	}
 }
 
@@ -137,6 +137,22 @@ type EventNoticeGroupAdmin struct {
 	SubType string `json:"sub_type"`
 	//管理员 QQ 号
 	UserId int64 `json:"user_id"`
+}
+
+func (e *EventNoticeGroupAdmin) ToGRPC() *EventNoticeGroupAdminGRPC {
+	return &EventNoticeGroupAdminGRPC{
+		EventNoticeGroupBase: e.EventNoticeGroupBase.ToGRPC(),
+		UserId:               e.UserId,
+		SubType:              e.SubType,
+	}
+}
+
+func (e *EventNoticeGroupAdminGRPC) ToStruct() *EventNoticeGroupAdmin {
+	return &EventNoticeGroupAdmin{
+		EventNoticeGroupBase: *e.EventNoticeGroupBase.ToStruct(),
+		UserId:               e.UserId,
+		SubType:              e.SubType,
+	}
 }
 
 //群成员减少
@@ -150,6 +166,24 @@ type EventNoticeGroupDecrease struct {
 	OperatorId int64 `json:"operator_id"`
 }
 
+func (e *EventNoticeGroupDecrease) ToGRPC() *EventNoticeGroupDecreaseGRPC {
+	return &EventNoticeGroupDecreaseGRPC{
+		EventNoticeGroupBase: e.EventNoticeGroupBase.ToGRPC(),
+		UserId:               e.UserId,
+		SubType:              e.SubType,
+		OperatorId:           e.OperatorId,
+	}
+}
+
+func (e *EventNoticeGroupDecreaseGRPC) ToStruct() *EventNoticeGroupDecrease {
+	return &EventNoticeGroupDecrease{
+		EventNoticeGroupBase: *e.EventNoticeGroupBase.ToStruct(),
+		UserId:               e.UserId,
+		SubType:              e.SubType,
+		OperatorId:           e.OperatorId,
+	}
+}
+
 //群成员增加
 type EventNoticeGroupIncrease struct {
 	EventNoticeGroupBase
@@ -159,6 +193,24 @@ type EventNoticeGroupIncrease struct {
 	UserId int64 `json:"user_id"`
 	//操作者 QQ 号
 	OperatorId int64 `json:"operator_id"`
+}
+
+func (e *EventNoticeGroupIncrease) ToGRPC() *EventNoticeGroupIncreaseGRPC {
+	return &EventNoticeGroupIncreaseGRPC{
+		EventNoticeGroupBase: e.EventNoticeGroupBase.ToGRPC(),
+		UserId:               e.UserId,
+		SubType:              e.SubType,
+		OperatorId:           e.OperatorId,
+	}
+}
+
+func (e *EventNoticeGroupIncreaseGRPC) ToStruct() *EventNoticeGroupIncrease {
+	return &EventNoticeGroupIncrease{
+		EventNoticeGroupBase: *e.EventNoticeGroupBase.ToStruct(),
+		UserId:               e.UserId,
+		SubType:              e.SubType,
+		OperatorId:           e.OperatorId,
+	}
 }
 
 //群禁言
@@ -174,11 +226,45 @@ type EventNoticeGroupBan struct {
 	Duration int64 `json:"duration"`
 }
 
+func (e *EventNoticeGroupBan) ToGRPC() *EventNoticeGroupBanGRPC {
+	return &EventNoticeGroupBanGRPC{
+		EventNoticeGroupBase: e.EventNoticeGroupBase.ToGRPC(),
+		UserId:               e.UserId,
+		SubType:              e.SubType,
+		OperatorId:           e.OperatorId,
+		Duration:             e.Duration,
+	}
+}
+
+func (e *EventNoticeGroupBanGRPC) ToStruct() *EventNoticeGroupBan {
+	return &EventNoticeGroupBan{
+		EventNoticeGroupBase: *e.EventNoticeGroupBase.ToStruct(),
+		UserId:               e.UserId,
+		SubType:              e.SubType,
+		OperatorId:           e.OperatorId,
+		Duration:             e.Duration,
+	}
+}
+
 //好友添加
 type EventNoticeFriendAdd struct {
 	EventNoticeBase
 	//新添加好友 QQ 号
 	UserId int64 `json:"user_id"`
+}
+
+func (e *EventNoticeFriendAdd) ToGRPC() *EventNoticeFriendAddGRPC {
+	return &EventNoticeFriendAddGRPC{
+		EventNoticeBase: e.EventNoticeBase.ToGRPC(),
+		UserId:          e.UserId,
+	}
+}
+
+func (e *EventNoticeFriendAddGRPC) ToStruct() *EventNoticeFriendAdd {
+	return &EventNoticeFriendAdd{
+		EventNoticeBase: *e.EventNoticeBase.ToStruct(),
+		UserId:          e.UserId,
+	}
 }
 
 //群消息撤回
@@ -192,6 +278,24 @@ type EventNoticeGroupRecall struct {
 	MessageId int64 `json:"message_id"`
 }
 
+func (e *EventNoticeGroupRecall) ToGRPC() *EventNoticeGroupRecallGRPC {
+	return &EventNoticeGroupRecallGRPC{
+		EventNoticeGroupBase: e.EventNoticeGroupBase.ToGRPC(),
+		UserId:               e.UserId,
+		OperatorId:           e.OperatorId,
+		MessageId:            e.MessageId,
+	}
+}
+
+func (e *EventNoticeGroupRecallGRPC) ToStruct() *EventNoticeGroupRecall {
+	return &EventNoticeGroupRecall{
+		EventNoticeGroupBase: *e.EventNoticeGroupBase.ToStruct(),
+		UserId:               e.UserId,
+		OperatorId:           e.OperatorId,
+		MessageId:            e.MessageId,
+	}
+}
+
 //好友消息撤回
 type EventNoticeFriendRecall struct {
 	EventNoticeBase
@@ -199,6 +303,22 @@ type EventNoticeFriendRecall struct {
 	UserId int64 `json:"user_id"`
 	//被撤回的消息 Id
 	MessageId int64 `json:"message_id"`
+}
+
+func (e *EventNoticeFriendRecall) ToGRPC() *EventNoticeFriendRecallGRPC {
+	return &EventNoticeFriendRecallGRPC{
+		EventNoticeBase: e.EventNoticeBase.ToGRPC(),
+		UserId:          e.UserId,
+		MessageId:       e.MessageId,
+	}
+}
+
+func (e *EventNoticeFriendRecallGRPC) ToStruct() *EventNoticeFriendRecall {
+	return &EventNoticeFriendRecall{
+		EventNoticeBase: *e.EventNoticeBase.ToStruct(),
+		UserId:          e.UserId,
+		MessageId:       e.MessageId,
+	}
 }
 
 //群内戳一戳
@@ -210,6 +330,22 @@ type EventNoticeGroupNotifyPoke struct {
 	TargetId int64 `json:"target_id"`
 }
 
+func (e *EventNoticeGroupNotifyPoke) ToGRPC() *EventNoticeGroupNotifyPokeGRPC {
+	return &EventNoticeGroupNotifyPokeGRPC{
+		EventNoticeNotifyGroupBase: e.EventNoticeNotifyGroupBase.ToGRPC(),
+		UserId:                     e.UserId,
+		TargetId:                   e.TargetId,
+	}
+}
+
+func (e *EventNoticeGroupNotifyPokeGRPC) ToStruct() *EventNoticeGroupNotifyPoke {
+	return &EventNoticeGroupNotifyPoke{
+		EventNoticeNotifyGroupBase: *e.EventNoticeNotifyGroupBase.ToStruct(),
+		UserId:                     e.UserId,
+		TargetId:                   e.TargetId,
+	}
+}
+
 //群红包运气王
 type EventNoticeGroupNotifyLuckyKing struct {
 	EventNoticeNotifyGroupBase
@@ -219,6 +355,22 @@ type EventNoticeGroupNotifyLuckyKing struct {
 	TargetId int64 `json:"target_id"`
 }
 
+func (e *EventNoticeGroupNotifyLuckyKing) ToGRPC() *EventNoticeGroupNotifyLuckyKingGRPC {
+	return &EventNoticeGroupNotifyLuckyKingGRPC{
+		EventNoticeNotifyGroupBase: e.EventNoticeNotifyGroupBase.ToGRPC(),
+		UserId:                     e.UserId,
+		TargetId:                   e.TargetId,
+	}
+}
+
+func (e *EventNoticeGroupNotifyLuckyKingGRPC) ToStruct() *EventNoticeGroupNotifyLuckyKing {
+	return &EventNoticeGroupNotifyLuckyKing{
+		EventNoticeNotifyGroupBase: *e.EventNoticeNotifyGroupBase.ToStruct(),
+		UserId:                     e.UserId,
+		TargetId:                   e.TargetId,
+	}
+}
+
 //群成员荣誉变更
 type EventNoticeGroupNotifyHonor struct {
 	EventNoticeNotifyGroupBase
@@ -226,4 +378,20 @@ type EventNoticeGroupNotifyHonor struct {
 	HonorType string `json:"honor_type"`
 	//成员 QQ 号
 	UserId int64 `json:"user_id"`
+}
+
+func (e *EventNoticeGroupNotifyHonor) ToGRPC() *EventNoticeGroupNotifyHonorGRPC {
+	return &EventNoticeGroupNotifyHonorGRPC{
+		EventNoticeNotifyGroupBase: e.EventNoticeNotifyGroupBase.ToGRPC(),
+		UserId:                     e.UserId,
+		HonorType:                  e.HonorType,
+	}
+}
+
+func (e *EventNoticeGroupNotifyHonorGRPC) ToStruct() *EventNoticeGroupNotifyHonor {
+	return &EventNoticeGroupNotifyHonor{
+		EventNoticeNotifyGroupBase: *e.EventNoticeNotifyGroupBase.ToStruct(),
+		UserId:                     e.UserId,
+		HonorType:                  e.HonorType,
+	}
 }
