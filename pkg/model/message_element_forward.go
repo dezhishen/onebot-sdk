@@ -11,7 +11,7 @@ func (msg MessageElementForward) Type() string {
 }
 
 func init() {
-	unmarshalJSONMap["forward"] = func(data []byte) (MessageElement, error) {
+	messageElementUnmarshalJSONMap["forward"] = func(data []byte) (MessageElement, error) {
 		var result MessageElementForward
 		err := json.Unmarshal(data, &result)
 		return &result, err

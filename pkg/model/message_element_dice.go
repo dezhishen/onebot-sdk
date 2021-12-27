@@ -13,7 +13,7 @@ func (msg MessageElementDice) Type() string {
 
 func init() {
 	//掷骰子魔法表情
-	unmarshalJSONMap["dice"] = func(data []byte) (MessageElement, error) {
+	messageElementUnmarshalJSONMap["dice"] = func(data []byte) (MessageElement, error) {
 		var result MessageElementDice
 		err := json.Unmarshal(data, &result)
 		return &result, err

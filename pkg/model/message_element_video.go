@@ -15,7 +15,7 @@ func (msg MessageElementVideo) Type() string {
 }
 
 func init() {
-	unmarshalJSONMap["video"] = func(data []byte) (MessageElement, error) {
+	messageElementUnmarshalJSONMap["video"] = func(data []byte) (MessageElement, error) {
 		var result MessageElementVideo
 		err := json.Unmarshal(data, &result)
 		return &result, err

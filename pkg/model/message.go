@@ -77,7 +77,7 @@ func (msgSeg *MessageResultData) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 	messageType := gjson.GetBytes(data, "type").Str
-	decoder, ok := unmarshalJSONMap[messageType]
+	decoder, ok := messageElementUnmarshalJSONMap[messageType]
 	if !ok {
 		return fmt.Errorf("未找到指定的消息类型,%v", messageType)
 	}

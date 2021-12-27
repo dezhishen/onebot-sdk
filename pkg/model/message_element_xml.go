@@ -11,7 +11,7 @@ func (msg MessageElementXml) Type() string {
 }
 
 func init() {
-	unmarshalJSONMap["xml"] = func(data []byte) (MessageElement, error) {
+	messageElementUnmarshalJSONMap["xml"] = func(data []byte) (MessageElement, error) {
 		var result MessageElementXml
 		err := json.Unmarshal(data, &result)
 		return &result, err

@@ -16,7 +16,7 @@ func (msg MessageElementMusic) Type() string {
 }
 
 func init() {
-	unmarshalJSONMap["music"] = func(data []byte) (MessageElement, error) {
+	messageElementUnmarshalJSONMap["music"] = func(data []byte) (MessageElement, error) {
 		var result MessageElementMusic
 		err := json.Unmarshal(data, &result)
 		return &result, err

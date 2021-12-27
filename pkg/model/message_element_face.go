@@ -11,7 +11,7 @@ func (msg MessageElementFace) Type() string {
 }
 
 func init() {
-	unmarshalJSONMap["face"] = func(data []byte) (MessageElement, error) {
+	messageElementUnmarshalJSONMap["face"] = func(data []byte) (MessageElement, error) {
 		var result MessageElementFace
 		err := json.Unmarshal(data, &result)
 		return &result, err

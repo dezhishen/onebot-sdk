@@ -14,7 +14,7 @@ func (msg MessageElementShare) Type() string {
 }
 
 func init() {
-	unmarshalJSONMap["share"] = func(data []byte) (MessageElement, error) {
+	messageElementUnmarshalJSONMap["share"] = func(data []byte) (MessageElement, error) {
 		var result MessageElementShare
 		err := json.Unmarshal(data, &result)
 		return &result, err

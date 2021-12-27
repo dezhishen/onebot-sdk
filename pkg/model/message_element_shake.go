@@ -10,7 +10,7 @@ func (msg MessageElementShake) Type() string {
 }
 
 func init() {
-	unmarshalJSONMap["shake"] = func(data []byte) (MessageElement, error) {
+	messageElementUnmarshalJSONMap["shake"] = func(data []byte) (MessageElement, error) {
 		var result MessageElementShake
 		err := json.Unmarshal(data, &result)
 		return &result, err

@@ -10,7 +10,7 @@ func (msg MessageElementRps) Type() string {
 }
 
 func init() {
-	unmarshalJSONMap["rps"] = func(data []byte) (MessageElement, error) {
+	messageElementUnmarshalJSONMap["rps"] = func(data []byte) (MessageElement, error) {
 		var result MessageElementRps
 		err := json.Unmarshal(data, &result)
 		return &result, err

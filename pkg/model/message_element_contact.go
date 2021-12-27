@@ -12,7 +12,7 @@ func (msg MessageElementContact) Type() string {
 }
 
 func init() {
-	unmarshalJSONMap["contact"] = func(data []byte) (MessageElement, error) {
+	messageElementUnmarshalJSONMap["contact"] = func(data []byte) (MessageElement, error) {
 		var result MessageElementContact
 		err := json.Unmarshal(data, &result)
 		return &result, err
