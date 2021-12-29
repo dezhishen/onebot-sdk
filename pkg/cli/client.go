@@ -29,7 +29,7 @@ func PostForResult(url string, result interface{}) error {
 	resp, err := http.Post(
 		config.GetHttpUrl()+url,
 		"application/json",
-		nil,
+		bytes.NewBuffer([]byte("{}")),
 	)
 	if err != nil {
 		return err
@@ -54,7 +54,7 @@ func Post(url string) error {
 	_, err := http.Post(
 		config.GetHttpUrl()+url,
 		"application/json",
-		nil,
+		bytes.NewBuffer([]byte("{}")),
 	)
 	return err
 }
