@@ -14,7 +14,7 @@ func GetLoginInfo() (*model.Account, error) {
 	return result.Data, nil
 }
 
-func GetStrangerInfo(userId int, noCache bool) (*model.Account, error) {
+func GetStrangerInfo(userId int64, noCache bool) (*model.Account, error) {
 	req := make(map[string]interface{})
 	req["user_id"] = userId
 	req["no_cache"] = noCache
