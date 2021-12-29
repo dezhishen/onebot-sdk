@@ -9,7 +9,7 @@ func CleanCache() error {
 	return cli.Post("/clean_cache")
 }
 
-func SetRestart(delay int) error {
+func SetRestart(delay int64) error {
 	reqMap := make(map[string]interface{})
 	reqMap["delay"] = delay
 

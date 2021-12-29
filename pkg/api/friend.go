@@ -5,8 +5,8 @@ import (
 	"github.com/dezhishen/onebot-sdk/pkg/model"
 )
 
-func SendLike(userId int, times int) error {
-	req := make(map[string]int)
+func SendLike(userId int64, times int64) error {
+	req := make(map[string]int64)
 	req["user_id"] = userId
 	req["times"] = times
 	url := "/send_like"
