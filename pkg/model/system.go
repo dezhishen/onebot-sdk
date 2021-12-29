@@ -23,19 +23,25 @@ type BoolYesOfResult struct {
 }
 
 func (a *BoolYesOfResult) ToGRPC() *BoolYesOfResultGRPC {
-	return &BoolYesOfResultGRPC{
-		Data:    a.Data.ToGRPC(),
+	result := &BoolYesOfResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToGRPC()
+	}
+	return result
 }
 
 func (a *BoolYesOfResultGRPC) ToStruct() *BoolYesOfResult {
-	return &BoolYesOfResult{
-		Data:    a.Data.ToStruct(),
+	result := &BoolYesOfResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToStruct()
+	}
+	return result
 }
 
 type VersionInfoData struct {
@@ -67,19 +73,25 @@ type VersionInfoResult struct {
 }
 
 func (a *VersionInfoResult) ToGRPC() *VersionInfoResultGRPC {
-	return &VersionInfoResultGRPC{
-		Data:    a.Data.ToGRPC(),
+	result := &VersionInfoResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToGRPC()
+	}
+	return result
 }
 
 func (a *VersionInfoResultGRPC) ToStruct() *VersionInfoResult {
-	return &VersionInfoResult{
-		Data:    a.Data.ToStruct(),
+	result := &VersionInfoResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToStruct()
+	}
+	return result
 }
 
 type StatusInfoData struct {
@@ -108,17 +120,23 @@ type StatusInfoResult struct {
 }
 
 func (a *StatusInfoResult) ToGRPC() *StatusInfoResultGRPC {
-	return &StatusInfoResultGRPC{
-		Data:    a.Data.ToGRPC(),
+	result := &StatusInfoResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToGRPC()
+	}
+	return result
 }
 
 func (a *StatusInfoResultGRPC) ToStruct() *StatusInfoResult {
-	return &StatusInfoResult{
-		Data:    a.Data.ToStruct(),
+	result := &StatusInfoResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToStruct()
+	}
+	return result
 }

@@ -103,19 +103,25 @@ type SendMessageResult struct {
 }
 
 func (a *SendMessageResult) ToGRPC() *SendMessageResultGRPC {
-	return &SendMessageResultGRPC{
-		Data:    a.Data.ToGRPC(),
+	result := &SendMessageResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToGRPC()
+	}
+	return result
 }
 
 func (a *SendMessageResultGRPC) ToStruct() *SendMessageResult {
-	return &SendMessageResult{
-		Data:    a.Data.ToStruct(),
+	result := &SendMessageResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToStruct()
+	}
+	return result
 }
 
 type MessageData struct {
@@ -134,25 +140,31 @@ type MessageData struct {
 }
 
 func (a *MessageData) ToGRPC() *MessageDataGRPC {
-	return &MessageDataGRPC{
+	result := &MessageDataGRPC{
 		Time:        a.Time,
 		MessageType: a.MessageType,
 		MessageId:   a.MessageId,
 		RealId:      a.RealId,
-		Sender:      a.Sender.ToGRPC(),
 		Message:     MessageSegmentArray2MessageSegmentGRPCArray(a.Message),
 	}
+	if a.Sender != nil {
+		result.Sender = a.Sender.ToGRPC()
+	}
+	return result
 }
 
 func (a *MessageDataGRPC) ToStruct() *MessageData {
-	return &MessageData{
+	result := &MessageData{
 		Time:        a.Time,
 		MessageType: a.MessageType,
 		MessageId:   a.MessageId,
 		RealId:      a.RealId,
-		Sender:      a.Sender.ToStruct(),
 		Message:     MessageSegmentGRPCArray2MessageSegmentArray(a.Message),
 	}
+	if a.Sender != nil {
+		result.Sender = a.Sender.ToStruct()
+	}
+	return result
 }
 
 type MessageDataResult struct {
@@ -162,19 +174,25 @@ type MessageDataResult struct {
 }
 
 func (a *MessageDataResult) ToGRPC() *MessageDataResultGRPC {
-	return &MessageDataResultGRPC{
-		Data:    a.Data.ToGRPC(),
+	result := &MessageDataResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToGRPC()
+	}
+	return result
 }
 
 func (a *MessageDataResultGRPC) ToStruct() *MessageDataResult {
-	return &MessageDataResult{
-		Data:    a.Data.ToStruct(),
+	result := &MessageDataResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToStruct()
+	}
+	return result
 }
 
 type ForwardMessageData struct {
@@ -200,17 +218,23 @@ type ForwardMessageDataResult struct {
 }
 
 func (a *ForwardMessageDataResult) ToGRPC() *ForwardMessageDataResultGRPC {
-	return &ForwardMessageDataResultGRPC{
-		Data:    a.Data.ToGRPC(),
+	result := &ForwardMessageDataResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToGRPC()
+	}
+	return result
 }
 
 func (a *ForwardMessageDataResultGRPC) ToStruct() *ForwardMessageDataResult {
-	return &ForwardMessageDataResult{
-		Data:    a.Data.ToStruct(),
+	result := &ForwardMessageDataResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToStruct()
+	}
+	return result
 }

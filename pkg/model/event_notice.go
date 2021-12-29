@@ -116,19 +116,25 @@ type EventNoticeGroupUpload struct {
 }
 
 func (e *EventNoticeGroupUpload) ToGRPC() *EventNoticeGroupUploadGRPC {
-	return &EventNoticeGroupUploadGRPC{
+	result := &EventNoticeGroupUploadGRPC{
 		EventNoticeGroupBase: e.EventNoticeGroupBase.ToGRPC(),
 		UserId:               e.UserId,
-		File:                 e.File.ToGRPC(),
 	}
+	if e.File != nil {
+		result.File = e.File.ToGRPC()
+	}
+	return result
 }
 
 func (e *EventNoticeGroupUploadGRPC) ToStruct() *EventNoticeGroupUpload {
-	return &EventNoticeGroupUpload{
+	result := &EventNoticeGroupUpload{
 		EventNoticeGroupBase: *e.EventNoticeGroupBase.ToStruct(),
 		UserId:               e.UserId,
-		File:                 e.File.ToStruct(),
 	}
+	if e.File != nil {
+		result.File = e.File.ToStruct()
+	}
+	return result
 }
 
 type EventNoticeGroupAdmin struct {

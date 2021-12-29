@@ -53,19 +53,25 @@ type AccountResult struct {
 }
 
 func (a *AccountResult) ToGRPC() *AccountResultGRPC {
-	return &AccountResultGRPC{
-		Data:    a.Data.ToGRPC(),
+	res := &AccountResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		res.Data = a.Data.ToGRPC()
+	}
+	return res
 }
 
 func (a *AccountResultGRPC) ToStruct() *AccountResult {
-	return &AccountResult{
-		Data:    a.Data.ToStruct(),
+	res := &AccountResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		res.Data = a.Data.ToStruct()
+	}
+	return res
 }
 
 type FriendListResult struct {
@@ -138,19 +144,25 @@ type CokiesResult struct {
 }
 
 func (a *CokiesResult) ToGRPC() *CokiesResultGRPC {
-	return &CokiesResultGRPC{
-		Data:    a.Data.ToGRPC(),
+	result := &CokiesResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToGRPC()
+	}
+	return result
 }
 
 func (a *CokiesResultGRPC) ToStruct() *CokiesResult {
-	return &CokiesResult{
-		Data:    a.Data.ToStruct(),
+	result := &CokiesResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToStruct()
+	}
+	return result
 }
 
 type CSRFToken struct {
@@ -176,19 +188,25 @@ type CSRFTokenResult struct {
 }
 
 func (a *CSRFTokenResult) ToGRPC() *CSRFTokenResultGRPC {
-	return &CSRFTokenResultGRPC{
-		Data:    a.Data.ToGRPC(),
+	result := &CSRFTokenResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToGRPC()
+	}
+	return result
 }
 
 func (a *CSRFTokenResultGRPC) ToStruct() *CSRFTokenResult {
-	return &CSRFTokenResult{
-		Data:    a.Data.ToStruct(),
+	result := &CSRFTokenResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToStruct()
+	}
+	return result
 }
 
 type Credentials struct {
@@ -217,19 +235,26 @@ type CredentialsResult struct {
 }
 
 func (a *CredentialsResult) ToGRPC() *CredentialsResultGRPC {
-	return &CredentialsResultGRPC{
-		Data:    a.Data.ToGRPC(),
+	result := &CredentialsResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+
+	if a.Data != nil {
+		result.Data = a.Data.ToGRPC()
+	}
+	return result
 }
 
 func (a *CredentialsResultGRPC) ToStruct() *CredentialsResult {
-	return &CredentialsResult{
-		Data:    a.Data.ToStruct(),
+	result := &CredentialsResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToStruct()
+	}
+	return result
 }
 
 type File struct {
@@ -255,17 +280,23 @@ type FileResult struct {
 }
 
 func (a *FileResult) ToGRPC() *FileResultGRPC {
-	return &FileResultGRPC{
-		Data:    a.Data.ToGRPC(),
+	result := &FileResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToGRPC()
+	}
+	return result
 }
 
 func (a *FileResultGRPC) ToStruct() *FileResult {
-	return &FileResult{
-		Data:    a.Data.ToStruct(),
+	result := &FileResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToStruct()
+	}
+	return result
 }

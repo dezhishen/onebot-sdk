@@ -47,19 +47,25 @@ func GroupGRPCArray2GroupArray(source []*GroupGRPC) []*Group {
 }
 
 func (a *GroupResult) ToGRPC() *GroupResultGRPC {
-	return &GroupResultGRPC{
-		Data:    a.Data.ToGRPC(),
+	result := &GroupResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToGRPC()
+	}
+	return result
 }
 
 func (a *GroupResultGRPC) ToStruct() *GroupResult {
-	return &GroupResult{
-		Data:    a.Data.ToStruct(),
+	result := &GroupResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToStruct()
+	}
+	return result
 }
 
 type GroupListResult struct {
@@ -160,19 +166,25 @@ type GroupMemberResult struct {
 }
 
 func (a *GroupMemberResult) ToGRPC() *GroupMemberResultGRPC {
-	return &GroupMemberResultGRPC{
-		Data:    a.Data.ToGRPC(),
+	result := &GroupMemberResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToGRPC()
+	}
+	return result
 }
 
 func (a *GroupMemberResultGRPC) ToStruct() *GroupMemberResult {
-	return &GroupMemberResult{
-		Data:    a.Data.ToStruct(),
+	result := &GroupMemberResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToStruct()
+	}
+	return result
 }
 
 type GroupMemberListResult struct {
@@ -204,19 +216,25 @@ type GroupHonorInfoResult struct {
 }
 
 func (a *GroupHonorInfoResult) ToGRPC() *GroupHonorInfoResultGRPC {
-	return &GroupHonorInfoResultGRPC{
-		Data:    a.Data.ToGRPC(),
+	result := &GroupHonorInfoResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToGRPC()
+	}
+	return result
 }
 
 func (a *GroupHonorInfoResultGRPC) ToStruct() *GroupHonorInfoResult {
-	return &GroupHonorInfoResult{
-		Data:    a.Data.ToStruct(),
+	result := &GroupHonorInfoResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 	}
+	if a.Data != nil {
+		result.Data = a.Data.ToStruct()
+	}
+	return result
 }
 
 type GroupHonorInfo struct {
@@ -230,27 +248,33 @@ type GroupHonorInfo struct {
 }
 
 func (a *GroupHonorInfo) ToGRPC() *GroupHonorInfoGRPC {
-	return &GroupHonorInfoGRPC{
+	result := &GroupHonorInfoGRPC{
 		GroupId:          a.GroupId,
-		CurrentTalkative: a.CurrentTalkative.ToGRPC(),
 		TalkativeList:    HonorOwnerInfoArray2HonorOwnerInfoGRPCArray(a.TalkativeList),
 		PerformerList:    HonorOwnerInfoArray2HonorOwnerInfoGRPCArray(a.PerformerList),
 		LegendList:       HonorOwnerInfoArray2HonorOwnerInfoGRPCArray(a.LegendList),
 		StrongNewbieList: HonorOwnerInfoArray2HonorOwnerInfoGRPCArray(a.StrongNewbieList),
 		EmotionList:      HonorOwnerInfoArray2HonorOwnerInfoGRPCArray(a.EmotionList),
 	}
+	if a.CurrentTalkative != nil {
+		result.CurrentTalkative = a.CurrentTalkative.ToGRPC()
+	}
+	return result
 }
 
 func (a *GroupHonorInfoGRPC) ToStruct() *GroupHonorInfo {
-	return &GroupHonorInfo{
+	result := &GroupHonorInfo{
 		GroupId:          a.GroupId,
-		CurrentTalkative: a.CurrentTalkative.ToStruct(),
 		TalkativeList:    HonorOwnerInfoGRPCArray2HonorOwnerInfoArray(a.TalkativeList),
 		PerformerList:    HonorOwnerInfoGRPCArray2HonorOwnerInfoArray(a.PerformerList),
 		LegendList:       HonorOwnerInfoGRPCArray2HonorOwnerInfoArray(a.LegendList),
 		StrongNewbieList: HonorOwnerInfoGRPCArray2HonorOwnerInfoArray(a.StrongNewbieList),
 		EmotionList:      HonorOwnerInfoGRPCArray2HonorOwnerInfoArray(a.EmotionList),
 	}
+	if a.CurrentTalkative != nil {
+		result.CurrentTalkative = a.CurrentTalkative.ToStruct()
+	}
+	return result
 }
 
 type CurrentTalkative struct {

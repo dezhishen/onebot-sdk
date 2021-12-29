@@ -13,7 +13,7 @@ type EventMeesageBase struct {
 }
 
 func (a *EventMeesageBase) ToGRPC() *EventMeesageBaseGRPC {
-	return &EventMeesageBaseGRPC{
+	result := &EventMeesageBaseGRPC{
 		EventBase:   a.EventBase.ToGRPC(),
 		MessageType: a.MessageType,
 		SubType:     a.SubType,
@@ -21,12 +21,15 @@ func (a *EventMeesageBase) ToGRPC() *EventMeesageBaseGRPC {
 		Message:     MessageSegmentArray2MessageSegmentGRPCArray(a.Message),
 		RawMessage:  a.RawMessage,
 		Font:        a.Font,
-		Sender:      a.Sender.ToGRPC(),
 	}
+	if a.Sender != nil {
+		result.Sender = a.Sender.ToGRPC()
+	}
+	return result
 }
 
 func (a *EventMeesageBaseGRPC) ToStruct() *EventMeesageBase {
-	return &EventMeesageBase{
+	result := &EventMeesageBase{
 		EventBase:   *a.EventBase.ToStruct(),
 		MessageType: a.MessageType,
 		SubType:     a.SubType,
@@ -34,8 +37,11 @@ func (a *EventMeesageBaseGRPC) ToStruct() *EventMeesageBase {
 		Message:     MessageSegmentGRPCArray2MessageSegmentArray(a.Message),
 		RawMessage:  a.RawMessage,
 		Font:        a.Font,
-		Sender:      a.Sender.ToStruct(),
 	}
+	if a.Sender != nil {
+		result.Sender = a.Sender.ToStruct()
+	}
+	return result
 }
 
 type EventMessagePrivate struct {
@@ -61,17 +67,23 @@ type EventMessageGroup struct {
 }
 
 func (a *EventMessageGroup) ToGRPC() *EventMessageGroupGRPC {
-	return &EventMessageGroupGRPC{
+	res := &EventMessageGroupGRPC{
 		EventMeesageBase: a.EventMeesageBase.ToGRPC(),
 		GroupId:          a.GroupId,
-		Anonymous:        a.Anonymous.ToGRPC(),
 	}
+	if a.Anonymous != nil {
+		res.Anonymous = a.Anonymous.ToGRPC()
+	}
+	return res
 }
 
 func (a *EventMessageGroupGRPC) ToStruct() *EventMessageGroup {
-	return &EventMessageGroup{
+	res := &EventMessageGroup{
 		EventMeesageBase: *a.EventMeesageBase.ToStruct(),
 		GroupId:          a.GroupId,
-		Anonymous:        a.Anonymous.ToStruct(),
 	}
+	if a.Anonymous != nil {
+		res.Anonymous = a.Anonymous.ToStruct()
+	}
+	return res
 }
