@@ -11,7 +11,7 @@ var metaHeartbeatHandlers []func(data model.EventMetaHeartbeat) error
 
 func init() {
 	setHandler(
-		EventTypeRequest,
+		EventTypeMetaEvent,
 		metaHandler,
 	)
 }
