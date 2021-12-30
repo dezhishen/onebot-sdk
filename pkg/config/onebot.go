@@ -38,7 +38,7 @@ func GetHttpHost() string {
 }
 
 func GetHttpPort() uint {
-	return uint(getConfigIntWithDefault("http", "host", 5700))
+	return uint(getConfigIntWithDefault("http", "port", 5700))
 }
 
 func GetWsHost() string {
@@ -46,5 +46,5 @@ func GetWsHost() string {
 }
 
 func GetWsPort() uint {
-	return uint(getConfigIntWithDefault("websocket", "host", 6700))
+	return uint(getConfigIntWithDefault("websocket", "port", 6700))
 }

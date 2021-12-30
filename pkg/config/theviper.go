@@ -18,7 +18,7 @@ func init() {
 }
 
 func loadConfig(name string) *viper.Viper {
-	exists := pathExists(fmt.Sprintf("%v%v", configPath, "config"))
+	exists := pathExists(configPath)
 	if !exists {
 		return nil
 	}
