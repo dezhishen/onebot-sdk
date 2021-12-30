@@ -47,7 +47,7 @@ func StartWs() error {
 		if err != nil {
 			log.Printf("handle listen decoder err :%v,raw:%v", err, message)
 		}
-		log.Infof("received event,post_type:%v", eventBaseInfo.PostType)
+		log.Tracef("received event,post_type:%v", eventBaseInfo.PostType)
 		handler, ok := allhandler[eventBaseInfo.PostType]
 		if ok {
 			err = handler(message)
