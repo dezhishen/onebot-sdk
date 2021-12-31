@@ -9,11 +9,11 @@ type MessageElementLocation struct {
 	Content string `json:"content"`
 }
 
-func (msg MessageElementLocation) Type() string {
+func (msg *MessageElementLocation) Type() string {
 	return "location"
 }
 
-func (msg MessageElementLocation) ToGRPC() *MessageElementLocationGRPC {
+func (msg *MessageElementLocation) ToGRPC() *MessageElementLocationGRPC {
 	return &MessageElementLocationGRPC{
 		Lat:     msg.Lat,
 		Lon:     msg.Lon,

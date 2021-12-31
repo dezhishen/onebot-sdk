@@ -11,11 +11,11 @@ type MessageElementMusic struct {
 	Image     string `json:"image"`
 }
 
-func (msg MessageElementMusic) Type() string {
+func (msg *MessageElementMusic) Type() string {
 	return "music"
 }
 
-func (msg MessageElementMusic) ToGRPC() *MessageElementMusicGRPC {
+func (msg *MessageElementMusic) ToGRPC() *MessageElementMusicGRPC {
 	return &MessageElementMusicGRPC{
 		MusicType: msg.MusicType,
 		Url:       msg.Url,

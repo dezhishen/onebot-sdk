@@ -10,11 +10,11 @@ type MessageElementVideo struct {
 	Timeout uint32 `json:"timeout"`
 }
 
-func (msg MessageElementVideo) Type() string {
+func (msg *MessageElementVideo) Type() string {
 	return "video"
 }
 
-func (msg MessageElementVideo) ToGRPC() *MessageElementVideoGRPC {
+func (msg *MessageElementVideo) ToGRPC() *MessageElementVideoGRPC {
 	return &MessageElementVideoGRPC{
 		File:    msg.File,
 		Url:     msg.Url,

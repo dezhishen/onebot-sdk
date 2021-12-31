@@ -16,7 +16,7 @@ func TestContact(t *testing.T) {
 	if msg[0].Data.Type() != "contact" {
 		panic(errors.New("类型错误"))
 	}
-	_, ok := msg[0].Data.(MessageElementContact)
+	_, ok := msg[0].Data.(*MessageElementContact)
 	if !ok {
 		panic(errors.New("类型错误"))
 	}

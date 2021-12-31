@@ -16,7 +16,7 @@ func TestImage(t *testing.T) {
 	if msg[0].Data.Type() != "image" {
 		panic(errors.New("类型错误"))
 	}
-	field, ok := msg[0].Data.(MessageElementImage)
+	field, ok := msg[0].Data.(*MessageElementImage)
 	if !ok {
 		panic(errors.New("类型错误"))
 	}

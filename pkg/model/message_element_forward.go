@@ -6,11 +6,11 @@ type MessageElementForward struct {
 	Id string `json:"id"`
 }
 
-func (msg MessageElementForward) Type() string {
+func (msg *MessageElementForward) Type() string {
 	return "forward"
 }
 
-func (msg MessageElementForward) ToGRPC() *MessageElementForwardGRPC {
+func (msg *MessageElementForward) ToGRPC() *MessageElementForwardGRPC {
 	return &MessageElementForwardGRPC{
 		Id: msg.Id,
 	}

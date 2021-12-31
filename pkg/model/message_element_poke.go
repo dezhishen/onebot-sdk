@@ -8,7 +8,7 @@ type MessageElementPoke struct {
 	Name     string `json:"name"`
 }
 
-func (msg MessageElementPoke) Type() string {
+func (msg *MessageElementPoke) Type() string {
 	return "poke"
 }
 

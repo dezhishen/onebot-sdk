@@ -6,7 +6,7 @@ type MessageElementReply struct {
 	Id string `json:"id"`
 }
 
-func (msg MessageElementReply) Type() string {
+func (msg *MessageElementReply) Type() string {
 	return "reply"
 }
 

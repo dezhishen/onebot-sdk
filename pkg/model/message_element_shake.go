@@ -5,11 +5,11 @@ import "encoding/json"
 type MessageElementShake struct {
 }
 
-func (msg MessageElementShake) Type() string {
+func (msg *MessageElementShake) Type() string {
 	return "shake"
 }
 
-func (msg MessageElementShake) ToGRPC() *MessageElementShakeGRPC {
+func (msg *MessageElementShake) ToGRPC() *MessageElementShakeGRPC {
 	var result MessageElementShakeGRPC
 	return &result
 }

@@ -16,7 +16,7 @@ func TestLocation(t *testing.T) {
 	if msg[0].Data.Type() != "location" {
 		panic(errors.New("类型错误"))
 	}
-	_, ok := msg[0].Data.(MessageElementLocation)
+	_, ok := msg[0].Data.(*MessageElementLocation)
 	if !ok {
 		panic(errors.New("类型错误"))
 	}

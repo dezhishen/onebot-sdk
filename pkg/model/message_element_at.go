@@ -6,11 +6,11 @@ type MessageElementAt struct {
 	Qq string `json:"qq"`
 }
 
-func (msg MessageElementAt) Type() string {
+func (msg *MessageElementAt) Type() string {
 	return "at"
 }
 
-func (msg MessageElementAt) ToGRPC() *MessageElementAtGRPC {
+func (msg *MessageElementAt) ToGRPC() *MessageElementAtGRPC {
 	var result MessageElementAtGRPC
 	result.Qq = msg.Qq
 	return &result

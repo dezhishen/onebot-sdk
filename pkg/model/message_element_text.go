@@ -10,7 +10,7 @@ func (msg *MessageElementText) Type() string {
 	return "text"
 }
 
-func (msg MessageElementText) ToGRPC() *MessageElementTextGRPC {
+func (msg *MessageElementText) ToGRPC() *MessageElementTextGRPC {
 	return &MessageElementTextGRPC{
 		Text: msg.Text,
 	}

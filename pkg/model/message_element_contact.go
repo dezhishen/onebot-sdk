@@ -7,11 +7,11 @@ type MessageElementContact struct {
 	Id          string `json:"id"`
 }
 
-func (msg MessageElementContact) Type() string {
+func (msg *MessageElementContact) Type() string {
 	return "contact"
 }
 
-func (msg MessageElementContact) ToGRPC() *MessageElementContactGRPC {
+func (msg *MessageElementContact) ToGRPC() *MessageElementContactGRPC {
 	var result MessageElementContactGRPC
 	result.ContactType = msg.ContactType
 	result.Id = msg.Id

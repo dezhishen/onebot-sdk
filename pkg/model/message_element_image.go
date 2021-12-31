@@ -12,11 +12,11 @@ type MessageElementImage struct {
 	Timeout   uint32 `json:"timeout"`
 }
 
-func (msg MessageElementImage) Type() string {
+func (msg *MessageElementImage) Type() string {
 	return "image"
 }
 
-func (msg MessageElementImage) ToGRPC() *MessageElementImageGRPC {
+func (msg *MessageElementImage) ToGRPC() *MessageElementImageGRPC {
 	return &MessageElementImageGRPC{
 		File:      msg.File,
 		ImageType: msg.ImageType,

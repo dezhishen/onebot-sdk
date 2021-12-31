@@ -8,7 +8,7 @@ type MessageElementNode struct {
 	Content  []*MessageSegment `json:"content"`
 }
 
-func (msg MessageElementNode) Type() string {
+func (msg *MessageElementNode) Type() string {
 	return "node"
 }
 
@@ -32,6 +32,6 @@ func init() {
 	messageElementUnmarshalJSONMap["node"] = func(data []byte) (MessageElement, error) {
 		var result MessageElementNode
 		err := json.Unmarshal(data, &result)
-		return result, err
+		return &result, err
 	}
 }

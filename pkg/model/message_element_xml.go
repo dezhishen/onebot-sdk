@@ -6,11 +6,11 @@ type MessageElementXml struct {
 	Data string `json:"data"`
 }
 
-func (msg MessageElementXml) Type() string {
+func (msg *MessageElementXml) Type() string {
 	return "xml"
 }
 
-func (msg MessageElementXml) ToGRPC() *MessageElementXmlGRPC {
+func (msg *MessageElementXml) ToGRPC() *MessageElementXmlGRPC {
 	return &MessageElementXmlGRPC{
 		Data: msg.Data,
 	}

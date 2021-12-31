@@ -6,7 +6,7 @@ type MessageElementRecord struct {
 	File string `json:"file"`
 }
 
-func (msg MessageElementRecord) Type() string {
+func (msg *MessageElementRecord) Type() string {
 	return "record"
 }
 

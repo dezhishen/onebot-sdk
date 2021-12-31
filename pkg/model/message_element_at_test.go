@@ -16,7 +16,7 @@ func TestAt(t *testing.T) {
 	if msg[0].Data.Type() != "at" {
 		panic(errors.New("类型错误"))
 	}
-	_, ok := msg[0].Data.(MessageElementAt)
+	_, ok := msg[0].Data.(*MessageElementAt)
 	if !ok {
 		panic(errors.New("类型错误"))
 	}

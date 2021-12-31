@@ -6,11 +6,11 @@ type MessageElementJson struct {
 	Data string `json:"data"`
 }
 
-func (msg MessageElementJson) Type() string {
+func (msg *MessageElementJson) Type() string {
 	return "json"
 }
 
-func (msg MessageElementJson) ToGRPC() *MessageElementJsonGRPC {
+func (msg *MessageElementJson) ToGRPC() *MessageElementJsonGRPC {
 	return &MessageElementJsonGRPC{
 		Data: msg.Data,
 	}

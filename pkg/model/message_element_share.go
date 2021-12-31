@@ -9,11 +9,11 @@ type MessageElementShare struct {
 	Image   string `json:"image"`
 }
 
-func (msg MessageElementShare) Type() string {
+func (msg *MessageElementShare) Type() string {
 	return "share"
 }
 
-func (msg MessageElementShare) ToGRPC() *MessageElementShareGRPC {
+func (msg *MessageElementShare) ToGRPC() *MessageElementShareGRPC {
 	return &MessageElementShareGRPC{
 		Url:     msg.Url,
 		Title:   msg.Title,

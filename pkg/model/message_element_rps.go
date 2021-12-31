@@ -5,11 +5,11 @@ import "encoding/json"
 type MessageElementRps struct {
 }
 
-func (msg MessageElementRps) Type() string {
+func (msg *MessageElementRps) Type() string {
 	return "rps"
 }
 
-func (msg MessageElementRps) ToGRPC() *MessageElementRpsGRPC {
+func (msg *MessageElementRps) ToGRPC() *MessageElementRpsGRPC {
 	var result MessageElementRpsGRPC
 	return &result
 }

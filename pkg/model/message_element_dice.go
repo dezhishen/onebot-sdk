@@ -7,11 +7,11 @@ type MessageElementDice struct {
 }
 
 //掷骰子魔法表情
-func (msg MessageElementDice) Type() string {
+func (msg *MessageElementDice) Type() string {
 	return "dice"
 }
 
-func (msg MessageElementDice) ToGRPC() *MessageElementDiceGRPC {
+func (msg *MessageElementDice) ToGRPC() *MessageElementDiceGRPC {
 	var result MessageElementDiceGRPC
 	return &result
 }

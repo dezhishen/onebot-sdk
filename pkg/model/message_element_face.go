@@ -6,11 +6,11 @@ type MessageElementFace struct {
 	Id string `json:"id"`
 }
 
-func (msg MessageElementFace) Type() string {
+func (msg *MessageElementFace) Type() string {
 	return "face"
 }
 
-func (msg MessageElementFace) ToGRPC() *MessageElementFaceGRPC {
+func (msg *MessageElementFace) ToGRPC() *MessageElementFaceGRPC {
 	return &MessageElementFaceGRPC{
 		Id: msg.Id,
 	}
