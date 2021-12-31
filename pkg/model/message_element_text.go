@@ -6,7 +6,7 @@ type MessageElementText struct {
 	Text string `json:"text"`
 }
 
-func (msg MessageElementText) Type() string {
+func (msg *MessageElementText) Type() string {
 	return "text"
 }
 
