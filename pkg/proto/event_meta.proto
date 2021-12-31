@@ -19,10 +19,30 @@ message EventMetaLifecycleGRPC  {
 	*/
 	 string sub_type =2;
 }
+message EventMetaHeartbeatStatusStatGRPC {
+	uint64 packet_received = 1;
+	uint64 packet_sent = 2;
+	uint64 packet_lost = 3;
+	uint64 message_received = 4;
+	uint64 message_sent = 5;
+	uint64 disconnect_times = 6;
+	uint64 lost_times = 7;
+	uint64 last_message_time = 8;
+}
+
+message EventMetaHeartbeatStatusGRPC  {
+	bool app_enabled = 1;
+	bool app_good = 2;
+	bool app_initialized = 3;
+	bool good = 4;
+	bool online = 5;
+	bool plugins_good = 6;
+	EventMetaHeartbeatStatusStatGRPC stat = 7;
+}
 
 message EventMetaHeartbeatGRPC  {
 	EventMetaBaseGRPC eventMetaBase = 1;
-	map<string,string> status = 2;
+	EventMetaHeartbeatStatusGRPC status = 2;
 	//到下次心跳的间隔，单位毫秒
 	uint64 interval = 3;
 }
