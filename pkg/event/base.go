@@ -93,15 +93,25 @@ func StartWsWithContext(ctx context.Context) error {
 			// log.Infof("received event,post_type:%v", eventBaseInfo.PostType)
 			handler, ok := allhandler[eventBaseInfo.PostType]
 			if ok {
-				err = handler(message)
-				if err != nil {
-					log.Errorf("handler event error:%v", err)
-				}
+				defer func() {
+					if err := recover(); err != nil {
+						// 打印异常，关闭资源，退出此函数
+						log.Errorf("处理回调函数发生错误...%v", err)
+					}
+				}()
+				go runHandler(handler, message)
 			} else {
 				log.Errorf("undefine event post_type:%v", eventBaseInfo.PostType)
 			}
 		}
 
+	}
+}
+
+func runHandler(callback func(data []byte) error, message []byte) {
+	err := callback(message)
+	if err != nil {
+		log.Errorf("handler event error:%v", err)
 	}
 }
 
