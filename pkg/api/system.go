@@ -32,18 +32,18 @@ func GetStatus() (*model.StatusInfoResult, error) {
 	return &result, nil
 }
 
-func CanSendImage() (bool, error) {
+func CanSendImage() (*model.BoolYesOfResult, error) {
 	var result model.BoolYesOfResult
 	if err := cli.PostForResult("/can_send_image", &result); err != nil {
-		return false, err
+		return &result, err
 	}
-	return result.Data.Yes, nil
+	return &result, nil
 }
 
-func CanSendRecord() (bool, error) {
+func CanSendRecord() (*model.BoolYesOfResult, error) {
 	var result model.BoolYesOfResult
 	if err := cli.PostForResult("/can_send_record", &result); err != nil {
-		return false, err
+		return &result, err
 	}
-	return result.Data.Yes, nil
+	return &result, nil
 }
