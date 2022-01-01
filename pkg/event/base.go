@@ -88,14 +88,14 @@ func StartWsWithContext(ctx context.Context) error {
 			err = json.Unmarshal(message, &eventBaseInfo)
 			if err != nil {
 				log.Printf("handle listen decoder err :%v,raw:%v", err, message)
+				continue
 			}
-			log.Infof("received event,post_type:%v", eventBaseInfo.PostType)
+			// log.Infof("received event,post_type:%v", eventBaseInfo.PostType)
 			handler, ok := allhandler[eventBaseInfo.PostType]
 			if ok {
 				err = handler(message)
 				if err != nil {
 					log.Errorf("handler event error:%v", err)
-
 				}
 			} else {
 				log.Errorf("undefine event post_type:%v", eventBaseInfo.PostType)

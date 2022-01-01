@@ -34,6 +34,8 @@ message SendMessageResultGRPC {
 	SendMessageResultDataGRPC data = 1;
 	int64 retcode = 2;
 	string status = 3;
+    string msg = 4;
+    string wording = 5;
 }
 
 message MessageDataGRPC {
@@ -56,6 +58,8 @@ message MessageDataResultGRPC {
 	MessageDataGRPC data = 1;
 	int64 retcode = 2;
 	string status = 3;
+    string msg = 4;
+    string wording = 5;
 }
 
 message ForwardMessageDataGRPC {
@@ -66,4 +70,6 @@ message ForwardMessageDataResultGRPC {
 	ForwardMessageDataGRPC data = 1;
 	int64 retcode = 2;
 	string status =3;
+    string msg = 4;
+    string wording = 5;
 }

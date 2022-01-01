@@ -160,7 +160,7 @@ func SetGroupAddRequest(flag, subType, reason string, approve bool) error {
 }
 
 //获取群信息
-func GetGroupInfo(groupId int64, noCache bool) (*model.Group, error) {
+func GetGroupInfo(groupId int64, noCache bool) (*model.GroupResult, error) {
 	req := make(map[string]interface{})
 	req["group_id"] = groupId
 	req["no_cache"] = noCache
@@ -171,11 +171,11 @@ func GetGroupInfo(groupId int64, noCache bool) (*model.Group, error) {
 		return nil, err
 	}
 
-	return result.Data, nil
+	return &result, nil
 }
 
 //获取群列表
-func GetGroupList() ([]*model.Group, error) {
+func GetGroupList() (*model.GroupListResult, error) {
 	var result model.GroupListResult
 	url := "/get_group_list"
 
@@ -183,11 +183,11 @@ func GetGroupList() ([]*model.Group, error) {
 		return nil, err
 	}
 
-	return result.Data, nil
+	return &result, nil
 }
 
 //获取群成员信息
-func GetGroupMemberInfo(groupId, userId int64, noCache bool) (*model.GroupMember, error) {
+func GetGroupMemberInfo(groupId, userId int64, noCache bool) (*model.GroupMemberResult, error) {
 	req := make(map[string]interface{})
 	req["group_id"] = groupId
 	req["user_id"] = userId
@@ -198,22 +198,22 @@ func GetGroupMemberInfo(groupId, userId int64, noCache bool) (*model.GroupMember
 	if err := cli.PostWithRequsetForResult(url, req, &result); err != nil {
 		return nil, err
 	}
-	return result.Data, nil
+	return &result, nil
 }
 
 //获取群成员列表
-func GetGroupMemberListInfo() ([]*model.GroupMember, error) {
+func GetGroupMemberListInfo() (*model.GroupMemberListResult, error) {
 	var result model.GroupMemberListResult
 	url := "/get_group_member_list"
 
 	if err := cli.PostForResult(url, &result); err != nil {
 		return nil, err
 	}
-	return result.Data, nil
+	return &result, nil
 }
 
 //获取群荣誉信息
-func GetGroupHonorInfo(groupId int64, honorType string) (*model.GroupHonorInfo, error) {
+func GetGroupHonorInfo(groupId int64, honorType string) (*model.GroupHonorInfoResult, error) {
 	req := make(map[string]interface{})
 	req["group_id"] = groupId
 	req["type"] = honorType
@@ -223,5 +223,5 @@ func GetGroupHonorInfo(groupId int64, honorType string) (*model.GroupHonorInfo, 
 	if err := cli.PostWithRequsetForResult(url, req, &result); err != nil {
 		return nil, err
 	}
-	return result.Data, nil
+	return &result, nil
 }

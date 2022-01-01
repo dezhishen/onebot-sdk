@@ -5,16 +5,16 @@ import (
 	"github.com/dezhishen/onebot-sdk/pkg/model"
 )
 
-func GetLoginInfo() (*model.Account, error) {
+func GetLoginInfo() (*model.AccountResult, error) {
 	url := "/get_login_info"
 	var result model.AccountResult
 	if err := cli.PostForResult(url, &result); err != nil {
 		return nil, err
 	}
-	return result.Data, nil
+	return &result, nil
 }
 
-func GetStrangerInfo(userId int64, noCache bool) (*model.Account, error) {
+func GetStrangerInfo(userId int64, noCache bool) (*model.AccountResult, error) {
 	req := make(map[string]interface{})
 	req["user_id"] = userId
 	req["no_cache"] = noCache
@@ -23,10 +23,10 @@ func GetStrangerInfo(userId int64, noCache bool) (*model.Account, error) {
 	if err := cli.PostWithRequsetForResult(url, req, &result); err != nil {
 		return nil, err
 	}
-	return result.Data, nil
+	return &result, nil
 }
 
-func GetCookies(domin string) (*model.Cokies, error) {
+func GetCookies(domin string) (*model.CokiesResult, error) {
 	req := make(map[string]interface{})
 	req["domain"] = domin
 	url := "/get_cookies"
@@ -34,19 +34,19 @@ func GetCookies(domin string) (*model.Cokies, error) {
 	if err := cli.PostWithRequsetForResult(url, req, &result); err != nil {
 		return nil, err
 	}
-	return result.Data, nil
+	return &result, nil
 }
 
-func GetCSRFToken() (*model.CSRFToken, error) {
+func GetCSRFToken() (*model.CSRFTokenResult, error) {
 	url := "/get_csrf_token"
 	var result model.CSRFTokenResult
 	if err := cli.PostForResult(url, &result); err != nil {
 		return nil, err
 	}
-	return result.Data, nil
+	return &result, nil
 }
 
-func GetCredentials(domin string) (*model.Credentials, error) {
+func GetCredentials(domin string) (*model.CredentialsResult, error) {
 	req := make(map[string]interface{})
 	req["domain"] = domin
 	url := "/get_credentials"
@@ -54,10 +54,10 @@ func GetCredentials(domin string) (*model.Credentials, error) {
 	if err := cli.PostWithRequsetForResult(url, req, &result); err != nil {
 		return nil, err
 	}
-	return result.Data, nil
+	return &result, nil
 }
 
-func GetRecord(file string, out_format string) (*model.File, error) {
+func GetRecord(file string, out_format string) (*model.FileResult, error) {
 	req := make(map[string]interface{})
 	req["file"] = file
 	req["out_format"] = out_format
@@ -66,10 +66,10 @@ func GetRecord(file string, out_format string) (*model.File, error) {
 	if err := cli.PostWithRequsetForResult(url, req, &result); err != nil {
 		return nil, err
 	}
-	return result.Data, nil
+	return &result, nil
 }
 
-func GetImage(file string) (*model.File, error) {
+func GetImage(file string) (*model.FileResult, error) {
 	req := make(map[string]interface{})
 	req["file"] = file
 	url := "/get_image"
@@ -77,5 +77,5 @@ func GetImage(file string) (*model.File, error) {
 	if err := cli.PostWithRequsetForResult(url, req, &result); err != nil {
 		return nil, err
 	}
-	return result.Data, nil
+	return &result, nil
 }

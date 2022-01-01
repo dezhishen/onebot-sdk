@@ -20,12 +20,16 @@ type BoolYesOfResult struct {
 	Data    *BoolYes `json:"data"`
 	Retcode int64    `json:"retcode"`
 	Status  string   `json:"status"`
+	Msg     string   `json:"msg"`
+	Wording string   `json:"wording"`
 }
 
 func (a *BoolYesOfResult) ToGRPC() *BoolYesOfResultGRPC {
 	result := &BoolYesOfResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToGRPC()
@@ -37,6 +41,8 @@ func (a *BoolYesOfResultGRPC) ToStruct() *BoolYesOfResult {
 	result := &BoolYesOfResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToStruct()
@@ -70,12 +76,16 @@ type VersionInfoResult struct {
 	Data    *VersionInfoData `json:"data"`
 	Retcode int64            `json:"ret_code"`
 	Status  string           `json:"status"` //
+	Msg     string           `json:"msg"`
+	Wording string           `json:"wording"`
 }
 
 func (a *VersionInfoResult) ToGRPC() *VersionInfoResultGRPC {
 	result := &VersionInfoResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToGRPC()
@@ -87,6 +97,8 @@ func (a *VersionInfoResultGRPC) ToStruct() *VersionInfoResult {
 	result := &VersionInfoResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToStruct()
@@ -94,35 +106,39 @@ func (a *VersionInfoResultGRPC) ToStruct() *VersionInfoResult {
 	return result
 }
 
-type StatusInfoData struct {
+type StatusInfo struct {
 	Online bool `json:"online"`
 	Good   bool `json:"good"`
 }
 
-func (a *StatusInfoData) ToGRPC() *StatusInfoDataGRPC {
-	return &StatusInfoDataGRPC{
+func (a *StatusInfo) ToGRPC() *StatusInfoGRPC {
+	return &StatusInfoGRPC{
 		Online: a.Online,
 		Good:   a.Good,
 	}
 }
 
-func (a *StatusInfoDataGRPC) ToStruct() *StatusInfoData {
-	return &StatusInfoData{
+func (a *StatusInfoGRPC) ToStruct() *StatusInfo {
+	return &StatusInfo{
 		Online: a.Online,
 		Good:   a.Good,
 	}
 }
 
 type StatusInfoResult struct {
-	Data    *StatusInfoData `json:"data"`
-	Retcode int64           `json:"ret_code"`
-	Status  string          `json:"status"`
+	Data    *StatusInfo `json:"data"`
+	Retcode int64       `json:"ret_code"`
+	Status  string      `json:"status"`
+	Msg     string      `json:"msg"`
+	Wording string      `json:"wording"`
 }
 
 func (a *StatusInfoResult) ToGRPC() *StatusInfoResultGRPC {
 	result := &StatusInfoResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToGRPC()
@@ -134,6 +150,8 @@ func (a *StatusInfoResultGRPC) ToStruct() *StatusInfoResult {
 	result := &StatusInfoResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToStruct()

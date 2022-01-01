@@ -50,12 +50,16 @@ type AccountResult struct {
 	Data    *Account `json:"data"`
 	Retcode int64    `json:"retcode"`
 	Status  string   `json:"status"`
+	Msg     string   `json:"msg"`
+	Wording string   `json:"wording"`
 }
 
 func (a *AccountResult) ToGRPC() *AccountResultGRPC {
 	res := &AccountResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		res.Data = a.Data.ToGRPC()
@@ -67,6 +71,8 @@ func (a *AccountResultGRPC) ToStruct() *AccountResult {
 	res := &AccountResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		res.Data = a.Data.ToStruct()
@@ -78,6 +84,8 @@ type FriendListResult struct {
 	Data    []*Account `json:"data"`
 	Retcode int64      `json:"retcode"`
 	Status  string     `json:"status"`
+	Msg     string     `json:"msg"`
+	Wording string     `json:"wording"`
 }
 
 func (a *FriendListResult) ToGRPC() *FriendListResultGRPC {
@@ -85,6 +93,8 @@ func (a *FriendListResult) ToGRPC() *FriendListResultGRPC {
 		Data:    AccountArray2AccountGRPCArray(a.Data),
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 }
 
@@ -93,6 +103,8 @@ func (a *FriendListResultGRPC) ToStruct() *FriendListResult {
 		Data:    AccountGRPCArray2AccountArray(a.Data),
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 }
 
@@ -141,12 +153,16 @@ type CokiesResult struct {
 	Data    *Cokies `json:"data"`
 	Retcode int64   `json:"retcode"`
 	Status  string  `json:"status"`
+	Msg     string  `json:"msg"`
+	Wording string  `json:"wording"`
 }
 
 func (a *CokiesResult) ToGRPC() *CokiesResultGRPC {
 	result := &CokiesResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToGRPC()
@@ -158,6 +174,8 @@ func (a *CokiesResultGRPC) ToStruct() *CokiesResult {
 	result := &CokiesResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToStruct()
@@ -185,12 +203,16 @@ type CSRFTokenResult struct {
 	Data    *CSRFToken `json:"data"`
 	Retcode int64      `json:"retcode"`
 	Status  string     `json:"status"`
+	Msg     string     `json:"msg"`
+	Wording string     `json:"wording"`
 }
 
 func (a *CSRFTokenResult) ToGRPC() *CSRFTokenResultGRPC {
 	result := &CSRFTokenResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToGRPC()
@@ -202,6 +224,8 @@ func (a *CSRFTokenResultGRPC) ToStruct() *CSRFTokenResult {
 	result := &CSRFTokenResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToStruct()
@@ -232,12 +256,16 @@ type CredentialsResult struct {
 	Data    *Credentials `json:"data"`
 	Retcode int64        `json:"retcode"`
 	Status  string       `json:"status"`
+	Msg     string       `json:"msg"`
+	Wording string       `json:"wording"`
 }
 
 func (a *CredentialsResult) ToGRPC() *CredentialsResultGRPC {
 	result := &CredentialsResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 
 	if a.Data != nil {
@@ -250,6 +278,8 @@ func (a *CredentialsResultGRPC) ToStruct() *CredentialsResult {
 	result := &CredentialsResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToStruct()
@@ -277,12 +307,16 @@ type FileResult struct {
 	Data    *File  `json:"data"`
 	Retcode int64  `json:"retcode"`
 	Status  string `json:"status"`
+	Msg     string `json:"msg"`
+	Wording string `json:"wording"`
 }
 
 func (a *FileResult) ToGRPC() *FileResultGRPC {
 	result := &FileResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToGRPC()
@@ -294,6 +328,8 @@ func (a *FileResultGRPC) ToStruct() *FileResult {
 	result := &FileResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToStruct()

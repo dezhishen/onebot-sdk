@@ -23,11 +23,11 @@ func SetFriendAddRequest(flag string, approve bool, remark string) error {
 	return cli.PostWithRequest(url, req)
 }
 
-func GetFriendList() ([]*model.Account, error) {
+func GetFriendList() (*model.FriendListResult, error) {
 	var result model.FriendListResult
 	url := "/get_friend_list"
 	if err := cli.PostForResult(url, &result); err != nil {
 		return nil, err
 	}
-	return result.Data, nil
+	return &result, nil
 }

@@ -10,9 +10,11 @@ message AccountGRPC {
     string  remark =5;
 }
 message AccountResultGRPC{
-    AccountGRPC data =1;
-    int64 retcode = 2 ;
-    string status =3;
+    AccountGRPC data = 1;
+    int64 retcode = 2;
+    string status = 3;
+    string msg = 4;
+    string wording = 5;
 }
 
 
@@ -20,6 +22,8 @@ message FriendListResultGRPC {
     repeated AccountGRPC data = 1;
     int64 retcode = 2;
     string status= 3;
+    string msg = 4;
+    string wording = 5;
 }
 
 message AnonymousGRPC {
@@ -38,6 +42,8 @@ message CokiesResultGRPC {
     CokiesGRPC data = 1;
     int64 retcode = 2;
     string status= 3;
+    string msg = 4;
+    string wording = 5;
 }
 
 message CSRFTokenGRPC {
@@ -48,6 +54,8 @@ message CSRFTokenResultGRPC {
     CSRFTokenGRPC  data =1;
     int64 retcode = 2;
     string status= 3;
+    string msg = 4;
+    string wording = 5;
 }
 
 message CredentialsGRPC {
@@ -59,6 +67,8 @@ message CredentialsResultGRPC {
     CredentialsGRPC data = 1;
     int64 retcode  =2;
     string status=3;
+    string msg = 4;
+    string wording = 5;
 }
 
 message FileGRPC {
@@ -69,4 +79,6 @@ message FileResultGRPC {
     FileGRPC data = 1;
     int64  retcode =2;
     string status=3;
+    string msg = 4;
+    string wording = 5;
 }

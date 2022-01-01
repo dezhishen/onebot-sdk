@@ -28,6 +28,8 @@ type GroupResult struct {
 	Data    *Group `json:"data"`
 	Retcode int64  `json:"retcode"`
 	Status  string `json:"status"`
+	Msg     string `json:"msg"`
+	Wording string `json:"wording"`
 }
 
 func GroupArray2GroupGRPCArray(source []*Group) []*GroupGRPC {
@@ -50,6 +52,8 @@ func (a *GroupResult) ToGRPC() *GroupResultGRPC {
 	result := &GroupResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToGRPC()
@@ -61,6 +65,8 @@ func (a *GroupResultGRPC) ToStruct() *GroupResult {
 	result := &GroupResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToStruct()
@@ -72,6 +78,8 @@ type GroupListResult struct {
 	Data    []*Group `json:"data"`
 	Retcode int64    `json:"retcode"`
 	Status  string   `json:"status"`
+	Msg     string   `json:"msg"`
+	Wording string   `json:"wording"`
 }
 
 func (a *GroupListResult) ToGRPC() *GroupListResultGRPC {
@@ -79,6 +87,8 @@ func (a *GroupListResult) ToGRPC() *GroupListResultGRPC {
 		Data:    GroupArray2GroupGRPCArray(a.Data),
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 }
 
@@ -87,6 +97,8 @@ func (a *GroupListResultGRPC) ToStruct() *GroupListResult {
 		Data:    GroupGRPCArray2GroupArray(a.Data),
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 }
 
@@ -163,12 +175,16 @@ type GroupMemberResult struct {
 	Data    *GroupMember `json:"data"`
 	Retcode int64        `json:"retcode"`
 	Status  string       `json:"status"`
+	Msg     string       `json:"msg"`
+	Wording string       `json:"wording"`
 }
 
 func (a *GroupMemberResult) ToGRPC() *GroupMemberResultGRPC {
 	result := &GroupMemberResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToGRPC()
@@ -180,6 +196,8 @@ func (a *GroupMemberResultGRPC) ToStruct() *GroupMemberResult {
 	result := &GroupMemberResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToStruct()
@@ -191,6 +209,8 @@ type GroupMemberListResult struct {
 	Data    []*GroupMember `json:"data"`
 	Retcode int64          `json:"retcode"`
 	Status  string         `json:"status"`
+	Msg     string         `json:"msg"`
+	Wording string         `json:"wording"`
 }
 
 func (a *GroupMemberListResult) ToGRPC() *GroupMemberListResultGRPC {
@@ -198,6 +218,8 @@ func (a *GroupMemberListResult) ToGRPC() *GroupMemberListResultGRPC {
 		Data:    GroupMemberArray2GroupMemberGRPCArray(a.Data),
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 }
 
@@ -206,6 +228,8 @@ func (a *GroupMemberListResultGRPC) ToStruct() *GroupMemberListResult {
 		Data:    GroupMemberGRPCArray2GroupMemberArray(a.Data),
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 }
 
@@ -213,12 +237,16 @@ type GroupHonorInfoResult struct {
 	Data    *GroupHonorInfo `json:"data"`
 	Retcode int64           `json:"retcode"`
 	Status  string          `json:"status"`
+	Msg     string          `json:"msg"`
+	Wording string          `json:"wording"`
 }
 
 func (a *GroupHonorInfoResult) ToGRPC() *GroupHonorInfoResultGRPC {
 	result := &GroupHonorInfoResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToGRPC()
@@ -230,6 +258,8 @@ func (a *GroupHonorInfoResultGRPC) ToStruct() *GroupHonorInfoResult {
 	result := &GroupHonorInfoResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToStruct()

@@ -12,18 +12,21 @@ message VersionInfoResultGRPC {
 	VersionInfoDataGRPC data = 1;
 	int64 retcode = 2;
 	string status = 3;
+    string msg = 4;
+    string wording = 5;
 }
 
-message StatusInfoDataGRPC {
+message StatusInfoGRPC {
 	bool online = 1;
 	bool good = 2;
 }
 
 message StatusInfoResultGRPC {
-	StatusInfoDataGRPC data = 1;
+	StatusInfoGRPC data = 1;
 	int64 retcode = 2;
 	string status = 3;
-
+    string msg = 4;
+    string wording = 5;
 }
 
 message BoolYesGRPC {
@@ -34,4 +37,6 @@ message BoolYesOfResultGRPC {
 	BoolYesGRPC data = 1;
 	int64 retcode = 2; 
 	string status = 3;
+    string msg = 4;
+    string wording = 5;
 }

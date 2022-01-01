@@ -16,20 +16,20 @@ func SetRestart(delay int64) error {
 	return cli.PostWithRequest("/set_restart", reqMap)
 }
 
-func GetVersionInfo() (*model.VersionInfoData, error) {
+func GetVersionInfo() (*model.VersionInfoResult, error) {
 	var result model.VersionInfoResult
 	if err := cli.PostForResult("/get_version_info", &result); err != nil {
 		return nil, err
 	}
-	return result.Data, nil
+	return &result, nil
 }
 
-func GetStatus() (*model.StatusInfoData, error) {
+func GetStatus() (*model.StatusInfoResult, error) {
 	var result model.StatusInfoResult
 	if err := cli.PostForResult("/get_status", &result); err != nil {
 		return nil, err
 	}
-	return result.Data, nil
+	return &result, nil
 }
 
 func CanSendImage() (bool, error) {

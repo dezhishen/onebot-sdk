@@ -100,12 +100,16 @@ type SendMessageResult struct {
 	Data    *SendMessageResultData `json:"data"`
 	Retcode int64                  `json:"retcode"`
 	Status  string                 `json:"status"`
+	Msg     string                 `json:"msg"`
+	Wording string                 `json:"wording"`
 }
 
 func (a *SendMessageResult) ToGRPC() *SendMessageResultGRPC {
 	result := &SendMessageResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToGRPC()
@@ -117,6 +121,8 @@ func (a *SendMessageResultGRPC) ToStruct() *SendMessageResult {
 	result := &SendMessageResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToStruct()
@@ -171,12 +177,16 @@ type MessageDataResult struct {
 	Data    *MessageData `json:"data"`
 	Retcode int64        `json:"retcode"`
 	Status  string       `json:"status"`
+	Msg     string       `json:"msg"`
+	Wording string       `json:"wording"`
 }
 
 func (a *MessageDataResult) ToGRPC() *MessageDataResultGRPC {
 	result := &MessageDataResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToGRPC()
@@ -188,6 +198,8 @@ func (a *MessageDataResultGRPC) ToStruct() *MessageDataResult {
 	result := &MessageDataResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToStruct()
@@ -215,12 +227,16 @@ type ForwardMessageDataResult struct {
 	Data    *ForwardMessageData `json:"data"`
 	Retcode int64               `json:"retcode"`
 	Status  string              `json:"status"`
+	Msg     string              `json:"msg"`
+	Wording string              `json:"wording"`
 }
 
 func (a *ForwardMessageDataResult) ToGRPC() *ForwardMessageDataResultGRPC {
 	result := &ForwardMessageDataResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToGRPC()
@@ -232,6 +248,8 @@ func (a *ForwardMessageDataResultGRPC) ToStruct() *ForwardMessageDataResult {
 	result := &ForwardMessageDataResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
 	}
 	if a.Data != nil {
 		result.Data = a.Data.ToStruct()
