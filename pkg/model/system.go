@@ -50,22 +50,22 @@ func (a *BoolYesOfResultGRPC) ToStruct() *BoolYesOfResult {
 	return result
 }
 
-type VersionInfoData struct {
+type VersionInfo struct {
 	AppName         string `json:"app_name"`        //app_name  = 1;
 	AppVersion      string `json:"app_version"`     //app_version = 2;
 	ProtocolVersion string `json:"protocl_version"` //protocol_version  = 3;
 }
 
-func (a *VersionInfoData) ToGRPC() *VersionInfoDataGRPC {
-	return &VersionInfoDataGRPC{
+func (a *VersionInfo) ToGRPC() *VersionInfoGRPC {
+	return &VersionInfoGRPC{
 		AppName:         a.AppName,
 		AppVersion:      a.AppVersion,
 		ProtocolVersion: a.ProtocolVersion,
 	}
 }
 
-func (a *VersionInfoDataGRPC) ToStruct() *VersionInfoData {
-	return &VersionInfoData{
+func (a *VersionInfoGRPC) ToStruct() *VersionInfo {
+	return &VersionInfo{
 		AppName:         a.AppName,
 		AppVersion:      a.AppVersion,
 		ProtocolVersion: a.ProtocolVersion,
@@ -73,11 +73,11 @@ func (a *VersionInfoDataGRPC) ToStruct() *VersionInfoData {
 }
 
 type VersionInfoResult struct {
-	Data    *VersionInfoData `json:"data"`
-	Retcode int64            `json:"ret_code"`
-	Status  string           `json:"status"` //
-	Msg     string           `json:"msg"`
-	Wording string           `json:"wording"`
+	Data    *VersionInfo `json:"data"`
+	Retcode int64        `json:"ret_code"`
+	Status  string       `json:"status"` //
+	Msg     string       `json:"msg"`
+	Wording string       `json:"wording"`
 }
 
 func (a *VersionInfoResult) ToGRPC() *VersionInfoResultGRPC {

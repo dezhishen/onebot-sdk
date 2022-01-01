@@ -2,14 +2,14 @@ syntax = "proto3";
 package model;
 option go_package = "../model";
 
-message VersionInfoDataGRPC {
+message VersionInfoGRPC {
 	string app_name  = 1;
 	string app_version = 2;
 	string protocol_version  = 3;
 }
 
 message VersionInfoResultGRPC {
-	VersionInfoDataGRPC data = 1;
+	VersionInfoGRPC data = 1;
 	int64 retcode = 2;
 	string status = 3;
     string msg = 4;
