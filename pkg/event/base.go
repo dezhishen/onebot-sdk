@@ -26,86 +26,17 @@ var allhandler = make(map[string]func(data []byte) error)
 func StartWs() error {
 	log.Warn("使用该方法将无法控制WS的关闭，推荐使用StartWsWithContext()")
 	url := fmt.Sprintf("ws://%v:%v", config.GetWsHost(), config.GetWsPort())
-	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	log.Infof("开始建立连接...地址:%v", url)
-	c, _, err := websocket.Dial(ctx, url, nil)
-	if err != nil {
-		log.Infof("建立连接出现错误...,错误信息%v", err)
-		return err
-	}
-	log.Info("建立连接成功！")
-	defer c.Close(websocket.StatusNormalClosure, "disconnected")
-	for {
-		_, message, err := c.Read(ctx)
-		if err != nil {
-			log.Println("read:", err)
-			continue
-		}
-		var eventBaseInfo model.EventBase
-		err = json.Unmarshal(message, &eventBaseInfo)
-		if err != nil {
-			log.Printf("handle listen decoder err :%v,raw:%v", err, message)
-		}
-		log.Tracef("received event,post_type:%v", eventBaseInfo.PostType)
-		handler, ok := allhandler[eventBaseInfo.PostType]
-		if ok {
-			err = handler(message)
-			if err != nil {
-				log.Errorf("handler event error:%v", err)
+	return listen(url, ctx)
 
-			}
-		} else {
-			log.Errorf("undefine event post_type:%v", eventBaseInfo.PostType)
-		}
-	}
 }
 
 // StartWs 开始监听
 // 监听前请注册相关事件
 func StartWsWithContext(ctx context.Context) error {
 	url := fmt.Sprintf("ws://%v:%v", config.GetWsHost(), config.GetWsPort())
-	log.Infof("开始建立连接...地址:%v", url)
-	c, _, err := websocket.Dial(ctx, url, nil)
-	if err != nil {
-		log.Errorf("建立连接出现错误...,错误信息%v", err)
-		return err
-	}
-	log.Info("建立连接成功！")
-	defer c.Close(websocket.StatusNormalClosure, "disconnected")
-	for {
-		select {
-		case <-ctx.Done():
-			log.Info("关闭连接...")
-			return nil
-		default:
-			_, message, err := c.Read(ctx)
-			if err != nil {
-				log.Println("read:", err)
-				continue
-			}
-			var eventBaseInfo model.EventBase
-			err = json.Unmarshal(message, &eventBaseInfo)
-			if err != nil {
-				log.Printf("handle listen decoder err :%v,raw:%v", err, message)
-				continue
-			}
-			// log.Infof("received event,post_type:%v", eventBaseInfo.PostType)
-			handler, ok := allhandler[eventBaseInfo.PostType]
-			if ok {
-				defer func() {
-					if err := recover(); err != nil {
-						// 打印异常，关闭资源，退出此函数
-						log.Errorf("处理回调函数发生错误...%v", err)
-					}
-				}()
-				go runHandler(handler, message)
-			} else {
-				log.Errorf("undefine event post_type:%v", eventBaseInfo.PostType)
-			}
-		}
-
-	}
+	return listen(url, ctx)
 }
 
 func runHandler(callback func(data []byte) error, message []byte) {
@@ -117,4 +48,56 @@ func runHandler(callback func(data []byte) error, message []byte) {
 
 func setHandler(eventType string, handler func(data []byte) error) {
 	allhandler[eventType] = handler
+}
+
+func listen(url string, ctx context.Context) error {
+	log.Infof("开始建立连接...地址:%v", url)
+	c, _, err := websocket.Dial(ctx, url, nil)
+	if err != nil {
+		log.Infof("建立连接出现错误...,错误信息%v", err)
+		return err
+	}
+	log.Info("建立连接成功！")
+	defer c.Close(websocket.StatusNormalClosure, "disconnected")
+	for {
+		_, message, err := c.Read(ctx)
+		if err != nil {
+			log.Errorf("websocket发生错误:%v,将在3s后重试...", err)
+			time.Sleep(3 * time.Second)
+			for i := 1; i < 5; i++ {
+				log.Infof("尝试重连....,第%v次", i)
+				c, _, err = websocket.Dial(ctx, url, nil)
+				if err != nil {
+					internal := 3 * i
+					log.Errorf("第%v次重连失败，将在%vs后重试", i, internal)
+					// for j := 0; j < i; j++ {
+					time.Sleep(time.Duration(internal) * time.Second)
+					// }
+				}
+			}
+			if err != nil {
+				log.Errorf("重连失败...,%v", err)
+				return err
+			}
+			continue
+		}
+		var eventBaseInfo model.EventBase
+		err = json.Unmarshal(message, &eventBaseInfo)
+		if err != nil {
+			log.Printf("handle listen decoder err :%v,raw:%v", err, message)
+		}
+		log.Tracef("received event,post_type:%v", eventBaseInfo.PostType)
+		handler, ok := allhandler[eventBaseInfo.PostType]
+		if ok {
+			defer func() {
+				if err := recover(); err != nil {
+					// 打印异常，关闭资源，退出此函数
+					log.Errorf("处理回调函数发生错误...%v", err)
+				}
+			}()
+			go runHandler(handler, message)
+		} else {
+			log.Errorf("undefine event post_type:%v", eventBaseInfo.PostType)
+		}
+	}
 }
