@@ -9,7 +9,8 @@ import (
 	"github.com/dezhishen/onebot-sdk/pkg/config"
 	"github.com/dezhishen/onebot-sdk/pkg/model"
 	log "github.com/sirupsen/logrus"
-	"nhooyr.io/websocket"
+
+	"github.com/gorilla/websocket"
 )
 
 const (
@@ -52,21 +53,21 @@ func setHandler(eventType string, handler func(data []byte) error) {
 
 func listen(url string, ctx context.Context) error {
 	log.Infof("开始建立连接...地址:%v", url)
-	c, _, err := websocket.Dial(ctx, url, nil)
+	c, _, err := websocket.DefaultDialer.DialContext(ctx, url, nil)
 	if err != nil {
 		log.Infof("建立连接出现错误...,错误信息%v", err)
 		return err
 	}
 	log.Info("建立连接成功！")
-	defer c.Close(websocket.StatusNormalClosure, "disconnected")
+	defer c.Close()
 	for {
-		_, message, err := c.Read(ctx)
+		_, message, err := c.ReadMessage()
 		if err != nil {
 			log.Errorf("websocket发生错误:%v,将在3s后重试...", err)
 			time.Sleep(3 * time.Second)
 			for i := 1; i < 5; i++ {
 				log.Infof("尝试重连....,第%v次", i)
-				c, _, err = websocket.Dial(ctx, url, nil)
+				c, _, err = websocket.DefaultDialer.DialContext(ctx, url, nil)
 				if err != nil {
 					internal := 3 * i
 					log.Errorf("第%v次重连失败，将在%vs后重试", i, internal)
