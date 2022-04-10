@@ -43,3 +43,10 @@ func pathExists(path string) bool {
 	}
 	return false
 }
+
+func GetViper() *viper.Viper {
+	if c, ok := all_config[configName]; ok {
+		return c
+	}
+	return nil
+}
