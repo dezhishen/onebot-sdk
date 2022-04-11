@@ -182,8 +182,8 @@ func (msgSeg *MessageSegment) UnmarshalJSON(data []byte) error {
 		return fmt.Errorf("未找到指定的消息类型,%v", messageType)
 	}
 	element, err := decoder([]byte(gjson.GetBytes(data, "data").Raw))
-	if !ok {
-		return fmt.Errorf("未找到指定的消息类型,%v", messageType)
+	if err != nil {
+		return fmt.Errorf("json转换失败,%v", err)
 	}
 	msgSeg.Type = messageType
 	msgSeg.Data = element
