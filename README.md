@@ -4,8 +4,14 @@ onebot-sdk
 介绍实现/命名规则等
 * 地址：[Wiki](./wiki/)
 # 待处理事项
-- 无
+- [ ] 支持[onebot-v12](https://12.onebot.dev/)
 # 快速开始
+## 引用
+```
+go get github.com/dezhishen/onebot-sdk@${tag}
+```
+`${tag}`请参考[releases](https://github.com/dezhishen/onebot-sdk/releases)中的版本号和对应的onebot协议
+**11.x支持onebotv11协议，其他版本类似**
 ## 发送API
 直接调用[./pkg/api/](./pkg/api/)下面的方法,例如
 ```
