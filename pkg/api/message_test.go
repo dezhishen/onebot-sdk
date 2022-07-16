@@ -6,13 +6,13 @@ import (
 	"github.com/dezhishen/onebot-sdk/pkg/model"
 )
 
-var userId int64 = 1179551960
-var groupId int64 = 727670105
+var userIdForTest int64 = 1179551960
+var groupIdForTest int64 = 727670105
 
 func TestSendMsg(t *testing.T) {
 	msg := model.MsgForSend{
 		MessageType: "private",
-		UserId:      userId,
+		UserId:      userIdForTest,
 		Message: []*model.MessageSegment{
 			{
 				Type: "text",
@@ -32,7 +32,7 @@ func TestSendMsg(t *testing.T) {
 
 func TestSendGroupMsg(t *testing.T) {
 	msg := model.GroupMsg{
-		GroupId: groupId,
+		GroupId: groupIdForTest,
 		Message: []*model.MessageSegment{
 			{
 				Type: "text",
@@ -52,7 +52,7 @@ func TestSendGroupMsg(t *testing.T) {
 
 func TestSendPrivateMsg(t *testing.T) {
 	msg := model.PrivateMsg{
-		UserId: userId,
+		UserId: userIdForTest,
 		Message: []*model.MessageSegment{
 			{
 				Type: "text",
@@ -75,7 +75,7 @@ func TestSendGroupForwardMessage(t *testing.T) {
 		{
 			Type: "text",
 			Data: &model.MessageElementText{
-				Text: "测试消息",
+				Text: "测试转发消息",
 			},
 		},
 	}
@@ -93,6 +93,6 @@ func TestSendGroupForwardMessage(t *testing.T) {
 			Content: msg,
 		},
 	})
-
-	SendGroupForwardMsg(groupId, forwardMsg)
+	SendGroupForwardMsg(groupIdForTest, forwardMsg)
+	SendGroupForwardMsgByRawMsg(groupIdForTest, loginInfo.Data.UserId, loginInfo.Data.Nickname, msg)
 }

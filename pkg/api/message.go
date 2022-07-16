@@ -115,9 +115,23 @@ func GetForwardMsg(id int64) (*model.ForwardMessageDataResult, error) {
 	return &result, nil
 }
 
-func SendGroupForwardMsg(GroupId int64, messages []*model.MessageSegment) (*model.SendGroupForwardMessageDataResult, error) {
+func SendGroupForwardMsgByRawMsg(groupId, uin int64, name string, msg []*model.MessageSegment) (*model.SendGroupForwardMessageDataResult, error) {
+	var forwardMsg []*model.MessageSegment
+	forwardMsg = append(forwardMsg, &model.MessageSegment{
+		Type: "node",
+		Data: &model.MessageElementNode{
+			Uin:     uin,
+			Name:    name,
+			Content: msg,
+		},
+	})
+
+	return SendGroupForwardMsg(groupId, forwardMsg)
+}
+
+func SendGroupForwardMsg(groupId int64, messages []*model.MessageSegment) (*model.SendGroupForwardMessageDataResult, error) {
 	reqMap := make(map[string]interface{})
-	reqMap["group_id"] = GroupId
+	reqMap["group_id"] = groupId
 	reqMap["messages"] = messages
 	requestBody, _ := json.Marshal(reqMap)
 	resp, err := http.Post(
