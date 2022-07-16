@@ -22,7 +22,7 @@ import "message_element_video.proto";
 import "message_element_xml.proto";
 
 message MessageElementNodeGRPC {
-	int32	id = 1;
+	string	id = 1;
 	string           name = 2;
 	int64           uin = 3;
 	repeated MessageSegmentGRPC content = 4;
