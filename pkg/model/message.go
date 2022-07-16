@@ -256,3 +256,30 @@ func (a *ForwardMessageDataResultGRPC) ToStruct() *ForwardMessageDataResult {
 	}
 	return result
 }
+
+type SendGroupForwardMessageDataResult struct {
+	Retcode int64  `json:"retcode"`
+	Status  string `json:"status"`
+	Msg     string `json:"msg"`
+	Wording string `json:"wording"`
+}
+
+func (a *SendGroupForwardMessageDataResult) ToGRPC() *SendGroupForwardMessageDataResultGRPC {
+	result := &SendGroupForwardMessageDataResultGRPC{
+		Retcode: a.Retcode,
+		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
+	}
+	return result
+}
+
+func (a *SendGroupForwardMessageDataResultGRPC) ToStruct() *SendGroupForwardMessageDataResult {
+	result := &SendGroupForwardMessageDataResult{
+		Retcode: a.Retcode,
+		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
+	}
+	return result
+}

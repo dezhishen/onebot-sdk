@@ -3,9 +3,10 @@ package model
 import "encoding/json"
 
 type MessageElementNode struct {
-	UserId   string            `json:"user_id"`
-	Nickname string            `json:"nickname"`
-	Content  []*MessageSegment `json:"content"`
+	Id      int32             `json:"id"`
+	Name    string            `json:"name"`
+	Uin     int64             `json:"uin"`
+	Content []*MessageSegment `json:"content"`
 }
 
 func (msg *MessageElementNode) Type() string {
@@ -14,17 +15,19 @@ func (msg *MessageElementNode) Type() string {
 
 func (msg *MessageElementNodeGRPC) ToStruct() *MessageElementNode {
 	return &MessageElementNode{
-		UserId:   msg.UserId,
-		Nickname: msg.Nickname,
-		Content:  MessageSegmentGRPCArray2MessageSegmentArray(msg.Content),
+		Id:      msg.Id,
+		Name:    msg.Name,
+		Uin:     msg.Uin,
+		Content: MessageSegmentGRPCArray2MessageSegmentArray(msg.Content),
 	}
 }
 
 func (msg *MessageElementNode) ToGRPC() *MessageElementNodeGRPC {
 	return &MessageElementNodeGRPC{
-		UserId:   msg.UserId,
-		Nickname: msg.Nickname,
-		Content:  MessageSegmentArray2MessageSegmentGRPCArray(msg.Content),
+		Id:      msg.Id,
+		Name:    msg.Name,
+		Uin:     msg.Uin,
+		Content: MessageSegmentArray2MessageSegmentGRPCArray(msg.Content),
 	}
 }
 

@@ -73,3 +73,11 @@ message ForwardMessageDataResultGRPC {
     string msg = 4;
     string wording = 5;
 }
+
+
+message SendGroupForwardMessageDataResultGRPC {
+	int64 retcode = 1;
+	string status = 2;
+    string msg = 3;
+    string wording = 4;
+}
