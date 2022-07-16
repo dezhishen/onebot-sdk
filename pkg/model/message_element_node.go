@@ -3,7 +3,7 @@ package model
 import "encoding/json"
 
 type MessageElementNode struct {
-	Id      string            `json:"id"`
+	Id      string            `json:"id,omitempty"`
 	Name    string            `json:"name"`
 	Uin     int64             `json:"uin"`
 	Content []*MessageSegment `json:"content"`

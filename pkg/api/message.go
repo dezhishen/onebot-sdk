@@ -115,11 +115,12 @@ func GetForwardMsg(id int64) (*model.ForwardMessageDataResult, error) {
 	return &result, nil
 }
 
-func SendGroupForwardMsg(GroupId int64, messages *model.MessageSegment) (*model.SendGroupForwardMessageDataResult, error) {
+func SendGroupForwardMsg(GroupId int64, messages []*model.MessageSegment) (*model.SendGroupForwardMessageDataResult, error) {
 	reqMap := make(map[string]interface{})
 	reqMap["group_id"] = GroupId
 	reqMap["messages"] = messages
 	requestBody, _ := json.Marshal(reqMap)
+	println(string(requestBody))
 	resp, err := http.Post(
 		config.GetHttpUrl()+"/send_group_forward_msg",
 		"application/json",
