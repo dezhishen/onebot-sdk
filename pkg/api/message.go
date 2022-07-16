@@ -120,7 +120,6 @@ func SendGroupForwardMsg(GroupId int64, messages []*model.MessageSegment) (*mode
 	reqMap["group_id"] = GroupId
 	reqMap["messages"] = messages
 	requestBody, _ := json.Marshal(reqMap)
-	println(string(requestBody))
 	resp, err := http.Post(
 		config.GetHttpUrl()+"/send_group_forward_msg",
 		"application/json",
