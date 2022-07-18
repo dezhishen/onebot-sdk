@@ -8,6 +8,7 @@ import (
 
 	"github.com/dezhishen/onebot-sdk/pkg/config"
 	"github.com/dezhishen/onebot-sdk/pkg/model"
+	"github.com/sirupsen/logrus"
 )
 
 // 发送消息
@@ -70,7 +71,7 @@ func DelMsg(id int64) error {
 	reqMap["message_id"] = id
 	requestBody, _ := json.Marshal(reqMap)
 	_, err := http.Post(
-		config.GetHttpUrl()+"/get_msg",
+		config.GetHttpUrl()+"/delete_msg",
 		"application/json",
 		bytes.NewBuffer(requestBody),
 	)
@@ -144,6 +145,7 @@ func SendGroupForwardMsg(groupId int64, messages []*model.MessageSegment) (*mode
 	}
 	defer resp.Body.Close()
 	respBodyContent, _ := io.ReadAll(resp.Body)
+	logrus.Info(string(respBodyContent))
 	var result model.SendGroupForwardMessageDataResult
 	json.Unmarshal(respBodyContent, &result)
 	return &result, nil
