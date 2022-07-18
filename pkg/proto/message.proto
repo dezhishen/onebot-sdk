@@ -75,9 +75,14 @@ message ForwardMessageDataResultGRPC {
 }
 
 
+
+message SendGroupForwardMessageDataGRPC {
+	int64 message_id = 1;
+}
 message SendGroupForwardMessageDataResultGRPC {
 	int64 retcode = 1;
 	string status = 2;
     string msg = 3;
     string wording = 4;
+	SendGroupForwardMessageDataGRPC data = 5;
 }

@@ -1,7 +1,7 @@
 http:
   schema: "http"
-  host: go-cqhttp
+  host: 192.168.31.169
   port: 5700
 websocket:
-  host: go-cqhttp
+  host: 192.168.31.169
   port: 6700

@@ -657,21 +657,69 @@ func (x *ForwardMessageDataResultGRPC) GetWording() string {
 	return ""
 }
 
+type SendGroupForwardMessageDataGRPC struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	MessageId int64 `protobuf:"varint,1,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
+}
+
+func (x *SendGroupForwardMessageDataGRPC) Reset() {
+	*x = SendGroupForwardMessageDataGRPC{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_message_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SendGroupForwardMessageDataGRPC) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendGroupForwardMessageDataGRPC) ProtoMessage() {}
+
+func (x *SendGroupForwardMessageDataGRPC) ProtoReflect() protoreflect.Message {
+	mi := &file_message_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendGroupForwardMessageDataGRPC.ProtoReflect.Descriptor instead.
+func (*SendGroupForwardMessageDataGRPC) Descriptor() ([]byte, []int) {
+	return file_message_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *SendGroupForwardMessageDataGRPC) GetMessageId() int64 {
+	if x != nil {
+		return x.MessageId
+	}
+	return 0
+}
+
 type SendGroupForwardMessageDataResultGRPC struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Retcode int64  `protobuf:"varint,1,opt,name=retcode,proto3" json:"retcode,omitempty"`
-	Status  string `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
-	Msg     string `protobuf:"bytes,3,opt,name=msg,proto3" json:"msg,omitempty"`
-	Wording string `protobuf:"bytes,4,opt,name=wording,proto3" json:"wording,omitempty"`
+	Retcode int64                            `protobuf:"varint,1,opt,name=retcode,proto3" json:"retcode,omitempty"`
+	Status  string                           `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	Msg     string                           `protobuf:"bytes,3,opt,name=msg,proto3" json:"msg,omitempty"`
+	Wording string                           `protobuf:"bytes,4,opt,name=wording,proto3" json:"wording,omitempty"`
+	Data    *SendGroupForwardMessageDataGRPC `protobuf:"bytes,5,opt,name=data,proto3" json:"data,omitempty"`
 }
 
 func (x *SendGroupForwardMessageDataResultGRPC) Reset() {
 	*x = SendGroupForwardMessageDataResultGRPC{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_message_proto_msgTypes[9]
+		mi := &file_message_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -684,7 +732,7 @@ func (x *SendGroupForwardMessageDataResultGRPC) String() string {
 func (*SendGroupForwardMessageDataResultGRPC) ProtoMessage() {}
 
 func (x *SendGroupForwardMessageDataResultGRPC) ProtoReflect() protoreflect.Message {
-	mi := &file_message_proto_msgTypes[9]
+	mi := &file_message_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -697,7 +745,7 @@ func (x *SendGroupForwardMessageDataResultGRPC) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use SendGroupForwardMessageDataResultGRPC.ProtoReflect.Descriptor instead.
 func (*SendGroupForwardMessageDataResultGRPC) Descriptor() ([]byte, []int) {
-	return file_message_proto_rawDescGZIP(), []int{9}
+	return file_message_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *SendGroupForwardMessageDataResultGRPC) GetRetcode() int64 {
@@ -726,6 +774,13 @@ func (x *SendGroupForwardMessageDataResultGRPC) GetWording() string {
 		return x.Wording
 	}
 	return ""
+}
+
+func (x *SendGroupForwardMessageDataResultGRPC) GetData() *SendGroupForwardMessageDataGRPC {
+	if x != nil {
+		return x.Data
+	}
+	return nil
 }
 
 var File_message_proto protoreflect.FileDescriptor
@@ -819,17 +874,25 @@ var file_message_proto_rawDesc = []byte{
 	0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12,
 	0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73,
 	0x67, 0x12, 0x18, 0x0a, 0x07, 0x77, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x67, 0x18, 0x05, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x07, 0x77, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x67, 0x22, 0x85, 0x01, 0x0a, 0x25,
-	0x53, 0x65, 0x6e, 0x64, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x46, 0x6f, 0x72, 0x77, 0x61, 0x72, 0x64,
-	0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x44, 0x61, 0x74, 0x61, 0x52, 0x65, 0x73, 0x75, 0x6c,
-	0x74, 0x47, 0x52, 0x50, 0x43, 0x12, 0x18, 0x0a, 0x07, 0x72, 0x65, 0x74, 0x63, 0x6f, 0x64, 0x65,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x72, 0x65, 0x74, 0x63, 0x6f, 0x64, 0x65, 0x12,
-	0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67, 0x18, 0x03,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x12, 0x18, 0x0a, 0x07, 0x77, 0x6f, 0x72,
-	0x64, 0x69, 0x6e, 0x67, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x77, 0x6f, 0x72, 0x64,
-	0x69, 0x6e, 0x67, 0x42, 0x0a, 0x5a, 0x08, 0x2e, 0x2e, 0x2f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x28, 0x09, 0x52, 0x07, 0x77, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x67, 0x22, 0x40, 0x0a, 0x1f, 0x53,
+	0x65, 0x6e, 0x64, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x46, 0x6f, 0x72, 0x77, 0x61, 0x72, 0x64, 0x4d,
+	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x44, 0x61, 0x74, 0x61, 0x47, 0x52, 0x50, 0x43, 0x12, 0x1d,
+	0x0a, 0x0a, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x03, 0x52, 0x09, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x49, 0x64, 0x22, 0xc1, 0x01,
+	0x0a, 0x25, 0x53, 0x65, 0x6e, 0x64, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x46, 0x6f, 0x72, 0x77, 0x61,
+	0x72, 0x64, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x44, 0x61, 0x74, 0x61, 0x52, 0x65, 0x73,
+	0x75, 0x6c, 0x74, 0x47, 0x52, 0x50, 0x43, 0x12, 0x18, 0x0a, 0x07, 0x72, 0x65, 0x74, 0x63, 0x6f,
+	0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x72, 0x65, 0x74, 0x63, 0x6f, 0x64,
+	0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x12, 0x18, 0x0a, 0x07, 0x77,
+	0x6f, 0x72, 0x64, 0x69, 0x6e, 0x67, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x77, 0x6f,
+	0x72, 0x64, 0x69, 0x6e, 0x67, 0x12, 0x3a, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x05, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x2e, 0x53, 0x65, 0x6e, 0x64,
+	0x47, 0x72, 0x6f, 0x75, 0x70, 0x46, 0x6f, 0x72, 0x77, 0x61, 0x72, 0x64, 0x4d, 0x65, 0x73, 0x73,
+	0x61, 0x67, 0x65, 0x44, 0x61, 0x74, 0x61, 0x47, 0x52, 0x50, 0x43, 0x52, 0x04, 0x64, 0x61, 0x74,
+	0x61, 0x42, 0x0a, 0x5a, 0x08, 0x2e, 0x2e, 0x2f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -844,7 +907,7 @@ func file_message_proto_rawDescGZIP() []byte {
 	return file_message_proto_rawDescData
 }
 
-var file_message_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_message_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_message_proto_goTypes = []interface{}{
 	(*PrivateMsgGRPC)(nil),                        // 0: model.PrivateMsgGRPC
 	(*GroupMsgGRPC)(nil),                          // 1: model.GroupMsgGRPC
@@ -855,25 +918,27 @@ var file_message_proto_goTypes = []interface{}{
 	(*MessageDataResultGRPC)(nil),                 // 6: model.MessageDataResultGRPC
 	(*ForwardMessageDataGRPC)(nil),                // 7: model.ForwardMessageDataGRPC
 	(*ForwardMessageDataResultGRPC)(nil),          // 8: model.ForwardMessageDataResultGRPC
-	(*SendGroupForwardMessageDataResultGRPC)(nil), // 9: model.SendGroupForwardMessageDataResultGRPC
-	(*MessageSegmentGRPC)(nil),                    // 10: model.MessageSegmentGRPC
-	(*SenderGRPC)(nil),                            // 11: model.SenderGRPC
+	(*SendGroupForwardMessageDataGRPC)(nil),       // 9: model.SendGroupForwardMessageDataGRPC
+	(*SendGroupForwardMessageDataResultGRPC)(nil), // 10: model.SendGroupForwardMessageDataResultGRPC
+	(*MessageSegmentGRPC)(nil),                    // 11: model.MessageSegmentGRPC
+	(*SenderGRPC)(nil),                            // 12: model.SenderGRPC
 }
 var file_message_proto_depIdxs = []int32{
-	10, // 0: model.PrivateMsgGRPC.message:type_name -> model.MessageSegmentGRPC
-	10, // 1: model.GroupMsgGRPC.message:type_name -> model.MessageSegmentGRPC
-	10, // 2: model.MsgForSendGRPC.message:type_name -> model.MessageSegmentGRPC
+	11, // 0: model.PrivateMsgGRPC.message:type_name -> model.MessageSegmentGRPC
+	11, // 1: model.GroupMsgGRPC.message:type_name -> model.MessageSegmentGRPC
+	11, // 2: model.MsgForSendGRPC.message:type_name -> model.MessageSegmentGRPC
 	3,  // 3: model.SendMessageResultGRPC.data:type_name -> model.SendMessageResultDataGRPC
-	11, // 4: model.MessageDataGRPC.sender:type_name -> model.SenderGRPC
-	10, // 5: model.MessageDataGRPC.message:type_name -> model.MessageSegmentGRPC
+	12, // 4: model.MessageDataGRPC.sender:type_name -> model.SenderGRPC
+	11, // 5: model.MessageDataGRPC.message:type_name -> model.MessageSegmentGRPC
 	5,  // 6: model.MessageDataResultGRPC.data:type_name -> model.MessageDataGRPC
-	10, // 7: model.ForwardMessageDataGRPC.message:type_name -> model.MessageSegmentGRPC
+	11, // 7: model.ForwardMessageDataGRPC.message:type_name -> model.MessageSegmentGRPC
 	7,  // 8: model.ForwardMessageDataResultGRPC.data:type_name -> model.ForwardMessageDataGRPC
-	9,  // [9:9] is the sub-list for method output_type
-	9,  // [9:9] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	9,  // 9: model.SendGroupForwardMessageDataResultGRPC.data:type_name -> model.SendGroupForwardMessageDataGRPC
+	10, // [10:10] is the sub-list for method output_type
+	10, // [10:10] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_message_proto_init() }
@@ -993,6 +1058,18 @@ func file_message_proto_init() {
 			}
 		}
 		file_message_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SendGroupForwardMessageDataGRPC); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_message_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SendGroupForwardMessageDataResultGRPC); i {
 			case 0:
 				return &v.state
@@ -1011,7 +1088,7 @@ func file_message_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_message_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

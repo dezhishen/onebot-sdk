@@ -257,11 +257,28 @@ func (a *ForwardMessageDataResultGRPC) ToStruct() *ForwardMessageDataResult {
 	return result
 }
 
+type SendGroupForwardMessageData struct {
+	MessageId int64 `json:"message_id"`
+}
+
+func (a *SendGroupForwardMessageData) ToGRPC() *SendGroupForwardMessageDataGRPC {
+	return &SendGroupForwardMessageDataGRPC{
+		MessageId: a.MessageId,
+	}
+}
+
+func (a *SendGroupForwardMessageDataGRPC) ToStruct() *SendGroupForwardMessageData {
+	return &SendGroupForwardMessageData{
+		MessageId: a.MessageId,
+	}
+}
+
 type SendGroupForwardMessageDataResult struct {
-	Retcode int64  `json:"retcode"`
-	Status  string `json:"status"`
-	Msg     string `json:"msg"`
-	Wording string `json:"wording"`
+	Retcode int64                        `json:"retcode"`
+	Data    *SendGroupForwardMessageData `json:"data"`
+	Status  string                       `json:"status"`
+	Msg     string                       `json:"msg"`
+	Wording string                       `json:"wording"`
 }
 
 func (a *SendGroupForwardMessageDataResult) ToGRPC() *SendGroupForwardMessageDataResultGRPC {
@@ -270,6 +287,9 @@ func (a *SendGroupForwardMessageDataResult) ToGRPC() *SendGroupForwardMessageDat
 		Status:  a.Status,
 		Msg:     a.Msg,
 		Wording: a.Wording,
+	}
+	if a.Data != nil {
+		result.Data = a.Data.ToGRPC()
 	}
 	return result
 }
@@ -280,6 +300,9 @@ func (a *SendGroupForwardMessageDataResultGRPC) ToStruct() *SendGroupForwardMess
 		Status:  a.Status,
 		Msg:     a.Msg,
 		Wording: a.Wording,
+	}
+	if a.Data != nil {
+		result.Data = a.Data.ToStruct()
 	}
 	return result
 }
