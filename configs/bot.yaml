@@ -1,7 +1,6 @@
-http:
-  schema: "http"
-  host: go-cqhttp
-  port: 5700
-websocket:
-  host: go-cqhttp
-  port: 6700
+onebot:
+  server: 
+    type: ws
+    url: ""
+    access-token: ""
+    

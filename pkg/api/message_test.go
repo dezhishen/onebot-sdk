@@ -22,7 +22,12 @@ func TestSendMsg(t *testing.T) {
 			},
 		},
 	}
-	got, err := SendMsg(&msg)
+	cli, err := NewOnebotApiClientByConfigPath("")
+	if err != nil {
+		t.Errorf("NewOnebotApiClientByConfigPath() error = %v", err)
+		return
+	}
+	got, err := cli.SendMsg(&msg)
 	if err != nil {
 		t.Errorf("SendMsg() error = %v", err)
 		return
@@ -42,7 +47,12 @@ func TestSendGroupMsg(t *testing.T) {
 			},
 		},
 	}
-	got, err := SendGroupMsg(&msg)
+	cli, err := NewOnebotApiClientByConfigPath("")
+	if err != nil {
+		t.Errorf("NewOnebotApiClientByConfigPath() error = %v", err)
+		return
+	}
+	got, err := cli.SendGroupMsg(&msg)
 	if err != nil {
 		t.Errorf("SendGroupMsg() error = %v", err)
 		return
@@ -62,7 +72,12 @@ func TestSendPrivateMsg(t *testing.T) {
 			},
 		},
 	}
-	got, err := SendPrivateMsg(&msg)
+	cli, err := NewOnebotApiClientByConfigPath("")
+	if err != nil {
+		t.Errorf("NewOnebotApiClientByConfigPath() error = %v", err)
+		return
+	}
+	got, err := cli.SendPrivateMsg(&msg)
 	if err != nil {
 		t.Errorf("SendPrivate() error = %v", err)
 		return
@@ -79,7 +94,12 @@ func TestSendGroupForwardMessage(t *testing.T) {
 			},
 		},
 	}
-	loginInfo, err := GetLoginInfo()
+	cli, err := NewOnebotApiClientByConfigPath("")
+	if err != nil {
+		t.Errorf("NewOnebotApiClientByConfigPath() error = %v", err)
+		return
+	}
+	loginInfo, err := cli.GetLoginInfo()
 	if err != nil {
 		t.Errorf("get login info () error = %v", err)
 		return
@@ -93,6 +113,6 @@ func TestSendGroupForwardMessage(t *testing.T) {
 			Content: msg,
 		},
 	})
-	SendGroupForwardMsg(groupIdForTest, forwardMsg)
-	SendGroupForwardMsgByRawMsg(groupIdForTest, loginInfo.Data.UserId, loginInfo.Data.Nickname, msg)
+	cli.SendGroupForwardMsg(groupIdForTest, forwardMsg)
+	cli.SendGroupForwardMsgByRawMsg(groupIdForTest, loginInfo.Data.UserId, loginInfo.Data.Nickname, msg)
 }

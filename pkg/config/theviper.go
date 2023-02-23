@@ -11,26 +11,33 @@ const configPath = "./configs"
 
 const configName = "bot"
 
-var all_config = make(map[string]*viper.Viper)
+// var all_config OnebotConfig
 
-func init() {
-	loadConfig(configName)
-}
+// func init() {
+// 	loadConfig(configName)
+// }
 
-func loadConfig(name string) *viper.Viper {
+func LoadConfig(name string) (*OnebotConfig, error) {
 	exists := pathExists(configPath)
 	if !exists {
-		return nil
+		return nil, fmt.Errorf("config path not exists: %v", configPath)
 	}
 	c := viper.New()
 	c.AddConfigPath("./configs")
 	c.SetConfigName(name)
 	c.SetConfigType("yaml")
-	if err := c.ReadInConfig(); err != nil {
-		panic(fmt.Sprintf("读取配置文件错误:%v", err))
+	err := c.ReadInConfig()
+	if err != nil {
+		fmt.Println(err)
+		return nil, err
 	}
-	all_config[name] = c
-	return c
+	conf := OnebotConfig{}
+	err = c.Unmarshal(&conf)
+	if err != nil {
+		fmt.Println(err)
+		return nil, err
+	}
+	return &conf, nil
 }
 
 func pathExists(path string) bool {
@@ -42,11 +49,4 @@ func pathExists(path string) bool {
 		return false
 	}
 	return false
-}
-
-func GetViper() *viper.Viper {
-	if c, ok := all_config[configName]; ok {
-		return c
-	}
-	return nil
 }

@@ -1,27 +1,51 @@
 package api
 
 import (
-	"bytes"
-	"encoding/json"
-	"io"
-	"net/http"
-
+	"github.com/dezhishen/onebot-sdk/pkg/client"
 	"github.com/dezhishen/onebot-sdk/pkg/config"
 	"github.com/dezhishen/onebot-sdk/pkg/model"
-	"github.com/sirupsen/logrus"
 )
 
+type onebotApiMessageClient interface {
+	// 发送消息
+	SendMsg(msg *model.MsgForSend) (*model.SendMessageResult, error)
+	// 发送私信
+	SendPrivateMsg(msg *model.PrivateMsg) (*model.SendMessageResult, error)
+	// 发送群消息
+	SendGroupMsg(msg *model.GroupMsg) (*model.SendMessageResult, error)
+	// 撤回消息
+	DelMsg(id int64) error
+	// 获取消息
+	GetMsg(id int64) (*model.MessageDataResult, error)
+	// 获取合并转发消息
+	GetForwardMsg(id int64) (*model.ForwardMessageDataResult, error)
+	// 发送合并转发消息
+	SendGroupForwardMsgByRawMsg(groupId, uin int64, name string, msg []*model.MessageSegment) (*model.SendGroupForwardMessageDataResult, error)
+	// 发送合并转发消息
+	SendGroupForwardMsg(groupId int64, messages []*model.MessageSegment) (*model.SendGroupForwardMessageDataResult, error)
+}
+
+type httpOnebotApiMessageClient struct {
+	*client.HttpCli
+}
+
+func NewOnebotApiMessageClient(conf *config.OnebotConfig) (onebotApiMessageClient, error) {
+	return &httpOnebotApiMessageClient{
+		client.NewHttpCli(conf),
+	}, nil
+}
+
 // 发送消息
-func SendMsg(msg *model.MsgForSend) (*model.SendMessageResult, error) {
+func (cli *httpOnebotApiMessageClient) SendMsg(msg *model.MsgForSend) (*model.SendMessageResult, error) {
 	if msg.MessageType == model.PrivateMessageType {
-		return SendPrivateMsg(&model.PrivateMsg{
+		return cli.SendPrivateMsg(&model.PrivateMsg{
 			UserId:     msg.UserId,
 			GroupId:    msg.GroupId,
 			Message:    msg.Message,
 			AutoEscape: msg.AutoEscape,
 		})
 	}
-	return SendGroupMsg(
+	return cli.SendGroupMsg(
 		&model.GroupMsg{
 			GroupId:    msg.GroupId,
 			Message:    msg.Message,
@@ -31,92 +55,59 @@ func SendMsg(msg *model.MsgForSend) (*model.SendMessageResult, error) {
 }
 
 // 发送私信
-func SendPrivateMsg(msg *model.PrivateMsg) (*model.SendMessageResult, error) {
-	requestBody, _ := json.Marshal(msg)
-	resp, err := http.Post(
-		config.GetHttpUrl()+"/send_private_msg",
-		"application/json",
-		bytes.NewBuffer(requestBody),
-	)
-	if err != nil {
+func (cli *httpOnebotApiMessageClient) SendPrivateMsg(msg *model.PrivateMsg) (*model.SendMessageResult, error) {
+	var result model.SendMessageResult
+	url := "/send_private_msg"
+	if err := cli.PostWithRequsetForResult(url, msg, &result); err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
-	respBodyContent, _ := io.ReadAll(resp.Body)
-	var result model.SendMessageResult
-	err = json.Unmarshal(respBodyContent, &result)
-	return &result, err
-}
-
-// 发送群消息
-func SendGroupMsg(msg *model.GroupMsg) (*model.SendMessageResult, error) {
-	requestBody, _ := json.Marshal(msg)
-	resp, err := http.Post(
-		config.GetHttpUrl()+"/send_group_msg",
-		"application/json",
-		bytes.NewBuffer(requestBody),
-	)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-	respBodyContent, _ := io.ReadAll(resp.Body)
-	var result model.SendMessageResult
-	json.Unmarshal(respBodyContent, &result)
 	return &result, nil
 }
 
-func DelMsg(id int64) error {
-	reqMap := make(map[string]int64)
-	reqMap["message_id"] = id
-	requestBody, _ := json.Marshal(reqMap)
-	_, err := http.Post(
-		config.GetHttpUrl()+"/delete_msg",
-		"application/json",
-		bytes.NewBuffer(requestBody),
+// 发送群消息
+func (cli *httpOnebotApiMessageClient) SendGroupMsg(msg *model.GroupMsg) (*model.SendMessageResult, error) {
+	var result model.SendMessageResult
+	url := "/send_group_msg"
+	if err := cli.PostWithRequsetForResult(url, msg, &result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+func (cli *httpOnebotApiMessageClient) DelMsg(id int64) error {
+	req := make(map[string]int64)
+	req["message_id"] = id
+	url := "/delete_msg"
+	err := cli.PostWithRequest(
+		url,
+		req,
 	)
 	return err
 }
 
-func GetMsg(id int64) (*model.MessageDataResult, error) {
-	reqMap := make(map[string]int64)
-	reqMap["message_id"] = id
-	requestBody, _ := json.Marshal(reqMap)
-	resp, err := http.Post(
-		config.GetHttpUrl()+"/get_msg",
-		"application/json",
-		bytes.NewBuffer(requestBody),
-	)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-	respBodyContent, _ := io.ReadAll(resp.Body)
+func (cli *httpOnebotApiMessageClient) GetMsg(id int64) (*model.MessageDataResult, error) {
+	req := make(map[string]int64)
+	req["message_id"] = id
 	var result model.MessageDataResult
-	json.Unmarshal(respBodyContent, &result)
-	return &result, nil
-}
-
-func GetForwardMsg(id int64) (*model.ForwardMessageDataResult, error) {
-	reqMap := make(map[string]int64)
-	reqMap["message_id"] = id
-	requestBody, _ := json.Marshal(reqMap)
-	resp, err := http.Post(
-		config.GetHttpUrl()+"/get_msg",
-		"application/json",
-		bytes.NewBuffer(requestBody),
-	)
-	if err != nil {
+	url := "/get_msg"
+	if err := cli.PostWithRequsetForResult(url, req, &result); err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
-	respBodyContent, _ := io.ReadAll(resp.Body)
-	var result model.ForwardMessageDataResult
-	json.Unmarshal(respBodyContent, &result)
 	return &result, nil
 }
 
-func SendGroupForwardMsgByRawMsg(groupId, uin int64, name string, msg []*model.MessageSegment) (*model.SendGroupForwardMessageDataResult, error) {
+func (cli *httpOnebotApiMessageClient) GetForwardMsg(id int64) (*model.ForwardMessageDataResult, error) {
+	req := make(map[string]int64)
+	req["message_id"] = id
+	url := "/get_forward_msg"
+	var result model.ForwardMessageDataResult
+	if err := cli.PostWithRequsetForResult(url, req, &result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+func (cli *httpOnebotApiMessageClient) SendGroupForwardMsgByRawMsg(groupId, uin int64, name string, msg []*model.MessageSegment) (*model.SendGroupForwardMessageDataResult, error) {
 	var forwardMsg []*model.MessageSegment
 	forwardMsg = append(forwardMsg, &model.MessageSegment{
 		Type: "node",
@@ -126,27 +117,17 @@ func SendGroupForwardMsgByRawMsg(groupId, uin int64, name string, msg []*model.M
 			Content: msg,
 		},
 	})
-
-	return SendGroupForwardMsg(groupId, forwardMsg)
+	return cli.SendGroupForwardMsg(groupId, forwardMsg)
 }
 
-func SendGroupForwardMsg(groupId int64, messages []*model.MessageSegment) (*model.SendGroupForwardMessageDataResult, error) {
-	reqMap := make(map[string]interface{})
-	reqMap["group_id"] = groupId
-	reqMap["messages"] = messages
-	requestBody, _ := json.Marshal(reqMap)
-	resp, err := http.Post(
-		config.GetHttpUrl()+"/send_group_forward_msg",
-		"application/json",
-		bytes.NewBuffer(requestBody),
-	)
-	if err != nil {
+func (cli *httpOnebotApiMessageClient) SendGroupForwardMsg(groupId int64, messages []*model.MessageSegment) (*model.SendGroupForwardMessageDataResult, error) {
+	req := make(map[string]interface{})
+	req["group_id"] = groupId
+	req["messages"] = messages
+	var result model.SendGroupForwardMessageDataResult
+	url := "/send_group_forward_msg"
+	if err := cli.PostWithRequsetForResult(url, req, &result); err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
-	respBodyContent, _ := io.ReadAll(resp.Body)
-	logrus.Info(string(respBodyContent))
-	var result model.SendGroupForwardMessageDataResult
-	json.Unmarshal(respBodyContent, &result)
 	return &result, nil
 }

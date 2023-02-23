@@ -1,11 +1,37 @@
 package api
 
 import (
-	"github.com/dezhishen/onebot-sdk/pkg/cli"
+	"fmt"
+
+	"github.com/dezhishen/onebot-sdk/pkg/client"
+	"github.com/dezhishen/onebot-sdk/pkg/config"
 	"github.com/dezhishen/onebot-sdk/pkg/model"
 )
 
-func GetLoginInfo() (*model.AccountResult, error) {
+type onebotApiAccountClient interface {
+	GetLoginInfo() (*model.AccountResult, error)
+	GetStrangerInfo(userId int64, noCache bool) (*model.AccountResult, error)
+	GetCookies(domin string) (*model.CokiesResult, error)
+	GetCSRFToken() (*model.CSRFTokenResult, error)
+	GetCredentials(domin string) (*model.CredentialsResult, error)
+	GetRecord(file string, outFormat string) (*model.FileResult, error)
+	GetImage(file string) (*model.FileResult, error)
+}
+
+type httpOnebotApiAccountClient struct {
+	*client.HttpCli
+}
+
+func NewOnebotApiAccountClient(conf *config.OnebotConfig) (onebotApiAccountClient, error) {
+	if conf.Type == "http" {
+		return &httpOnebotApiAccountClient{
+			client.NewHttpCli(conf),
+		}, nil
+	}
+	return nil, fmt.Errorf("not support type %s", conf.Type)
+}
+
+func (cli *httpOnebotApiAccountClient) GetLoginInfo() (*model.AccountResult, error) {
 	url := "/get_login_info"
 	var result model.AccountResult
 	if err := cli.PostForResult(url, &result); err != nil {
@@ -14,7 +40,7 @@ func GetLoginInfo() (*model.AccountResult, error) {
 	return &result, nil
 }
 
-func GetStrangerInfo(userId int64, noCache bool) (*model.AccountResult, error) {
+func (cli *httpOnebotApiAccountClient) GetStrangerInfo(userId int64, noCache bool) (*model.AccountResult, error) {
 	req := make(map[string]interface{})
 	req["user_id"] = userId
 	req["no_cache"] = noCache
@@ -26,7 +52,7 @@ func GetStrangerInfo(userId int64, noCache bool) (*model.AccountResult, error) {
 	return &result, nil
 }
 
-func GetCookies(domin string) (*model.CokiesResult, error) {
+func (cli *httpOnebotApiAccountClient) GetCookies(domin string) (*model.CokiesResult, error) {
 	req := make(map[string]interface{})
 	req["domain"] = domin
 	url := "/get_cookies"
@@ -37,7 +63,7 @@ func GetCookies(domin string) (*model.CokiesResult, error) {
 	return &result, nil
 }
 
-func GetCSRFToken() (*model.CSRFTokenResult, error) {
+func (cli *httpOnebotApiAccountClient) GetCSRFToken() (*model.CSRFTokenResult, error) {
 	url := "/get_csrf_token"
 	var result model.CSRFTokenResult
 	if err := cli.PostForResult(url, &result); err != nil {
@@ -46,7 +72,7 @@ func GetCSRFToken() (*model.CSRFTokenResult, error) {
 	return &result, nil
 }
 
-func GetCredentials(domin string) (*model.CredentialsResult, error) {
+func (cli *httpOnebotApiAccountClient) GetCredentials(domin string) (*model.CredentialsResult, error) {
 	req := make(map[string]interface{})
 	req["domain"] = domin
 	url := "/get_credentials"
@@ -57,7 +83,7 @@ func GetCredentials(domin string) (*model.CredentialsResult, error) {
 	return &result, nil
 }
 
-func GetRecord(file string, out_format string) (*model.FileResult, error) {
+func (cli *httpOnebotApiAccountClient) GetRecord(file string, out_format string) (*model.FileResult, error) {
 	req := make(map[string]interface{})
 	req["file"] = file
 	req["out_format"] = out_format
@@ -69,7 +95,7 @@ func GetRecord(file string, out_format string) (*model.FileResult, error) {
 	return &result, nil
 }
 
-func GetImage(file string) (*model.FileResult, error) {
+func (cli *httpOnebotApiAccountClient) GetImage(file string) (*model.FileResult, error) {
 	req := make(map[string]interface{})
 	req["file"] = file
 	url := "/get_image"
