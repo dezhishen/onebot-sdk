@@ -9,8 +9,6 @@ import (
 
 const configPath = "./configs"
 
-const configName = "bot"
-
 // var all_config OnebotConfig
 
 // func init() {
@@ -31,13 +29,13 @@ func LoadConfig(name string) (*OnebotConfig, error) {
 		fmt.Println(err)
 		return nil, err
 	}
-	conf := OnebotConfig{}
-	err = c.Unmarshal(&conf)
+	conf := &OnebotConfig{}
+	err = c.Unmarshal(conf)
 	if err != nil {
 		fmt.Println(err)
 		return nil, err
 	}
-	return &conf, nil
+	return conf, nil
 }
 
 func pathExists(path string) bool {

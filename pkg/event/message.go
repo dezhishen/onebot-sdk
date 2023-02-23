@@ -6,17 +6,26 @@ import (
 	"github.com/dezhishen/onebot-sdk/pkg/model"
 )
 
-var messagePrivateHandlers []func(data model.EventMessagePrivate) error
-var messageGroupHandlers []func(data model.EventMessageGroup) error
-
-func init() {
-	setHandler(
-		EventTypeMessage,
-		messageHandler,
-	)
+type onebotMessageEventCli interface {
+	onebotBaseEventCli
+	ListenMessagePrivate(handler func(data model.EventMessagePrivate) error)
+	ListenMessageGroup(handler func(data model.EventMessageGroup) error)
 }
 
-func messageHandler(data []byte) error {
+func NewOnebotMessageEventCli() (onebotMessageEventCli, error) {
+	return &websocketOnebotMessageEventCli{}, nil
+}
+
+type websocketOnebotMessageEventCli struct {
+	messagePrivateHandlers []func(data model.EventMessagePrivate) error
+	messageGroupHandlers   []func(data model.EventMessageGroup) error
+}
+
+func (c *websocketOnebotMessageEventCli) EventType() OnebotEventType {
+	return OnebotEventTypeMessage
+}
+
+func (c *websocketOnebotMessageEventCli) Handler(data []byte) error {
 	var message model.EventMeesageBase
 	err := json.Unmarshal(data, &message)
 	if err != nil {
@@ -28,7 +37,7 @@ func messageHandler(data []byte) error {
 		if err != nil {
 			return err
 		}
-		for _, e := range messageGroupHandlers {
+		for _, e := range c.messageGroupHandlers {
 			err = e(groupMessage)
 			if err != nil {
 				return err
@@ -40,7 +49,7 @@ func messageHandler(data []byte) error {
 		if err != nil {
 			return err
 		}
-		for _, e := range messagePrivateHandlers {
+		for _, e := range c.messagePrivateHandlers {
 			err = e(privateMessage)
 			if err != nil {
 				return err
@@ -48,12 +57,13 @@ func messageHandler(data []byte) error {
 		}
 	}
 	return nil
+	// setHandler(c.EventType(), handler)
 }
 
-func ListenMessagePrivate(handler func(data model.EventMessagePrivate) error) {
-	messagePrivateHandlers = append(messagePrivateHandlers, handler)
+func (c *websocketOnebotMessageEventCli) ListenMessagePrivate(handler func(data model.EventMessagePrivate) error) {
+	c.messagePrivateHandlers = append(c.messagePrivateHandlers, handler)
 }
 
-func ListenMessageGroup(handler func(data model.EventMessageGroup) error) {
-	messageGroupHandlers = append(messageGroupHandlers, handler)
+func (c *websocketOnebotMessageEventCli) ListenMessageGroup(handler func(data model.EventMessageGroup) error) {
+	c.messageGroupHandlers = append(c.messageGroupHandlers, handler)
 }

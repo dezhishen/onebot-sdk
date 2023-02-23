@@ -5,12 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch",
+            "name": "Event",
             "type": "go",
             "request": "launch",
             "mode": "debug",
-            "program": "${workspaceFolder}/cmd/main.go",
-            "cwd": "${workspaceFolder}",
+            "program": "${workspaceFolder}/examples/event/main.go",
+            "cwd": "${workspaceFolder}/examples/event",
+        },
+        {
+            "name": "Api",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/examples/api/main.go",
+            "cwd": "${workspaceFolder}/examples/api",
         }
     ]
 }

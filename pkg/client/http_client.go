@@ -3,6 +3,7 @@ package client
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"strings"
@@ -16,11 +17,22 @@ type HttpCli struct {
 	accessToken string
 }
 
-func NewHttpCli(server *config.OnebotConfig) *HttpCli {
+type accessTokenTransport struct {
+	http.RoundTripper
+	accessToken string
+}
+
+func (ct *accessTokenTransport) RoundTrip(req *http.Request) (*http.Response, error) {
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", ct.accessToken))
+	return ct.RoundTripper.RoundTrip(req)
+}
+func NewHttpCli(conf *config.OnebotConfig) *HttpCli {
 	return &HttpCli{
-		cli:         http.Client{},
-		endpoint:    server.Endpoint,
-		accessToken: server.AccessToken,
+		cli: http.Client{
+			Transport: &accessTokenTransport{http.DefaultTransport, conf.AccessToken},
+		},
+		endpoint:    conf.Endpoint,
+		accessToken: conf.AccessToken,
 	}
 }
 

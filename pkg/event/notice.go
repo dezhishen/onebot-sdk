@@ -6,26 +6,48 @@ import (
 	"github.com/dezhishen/onebot-sdk/pkg/model"
 )
 
-var noticeGroupUploadHandlers []func(data model.EventNoticeGroupUpload) error
-var noticeGroupAdminHandlers []func(data model.EventNoticeGroupAdmin) error
-var noticeGroupDecreaseHandlers []func(data model.EventNoticeGroupDecrease) error
-var noticeGroupIncreaseHandlers []func(data model.EventNoticeGroupIncrease) error
-var noticeGroupBanHandlers []func(data model.EventNoticeGroupBan) error
-var noticeGroupRecallHandlers []func(data model.EventNoticeGroupRecall) error
-var noticeGroupNotifyPokeHandlers []func(data model.EventNoticeGroupNotifyPoke) error
-var noticeGroupNotifyLuckyKingHandlers []func(data model.EventNoticeGroupNotifyLuckyKing) error
-var noticeGroupNotifyHonorHandlers []func(data model.EventNoticeGroupNotifyHonor) error
-var noticeFriendAddHandlers []func(data model.EventNoticeFriendAdd) error
-var noticeFriendRecallHandlers []func(data model.EventNoticeFriendRecall) error
-
-func init() {
-	setHandler(
-		EventTypeNotice,
-		noticeHandler,
-	)
+type onebotNoticeEventCli interface {
+	onebotBaseEventCli
+	ListenNoticeGroupUpload(handler func(data model.EventNoticeGroupUpload) error)
+	ListenNoticeGroupAdmin(handler func(data model.EventNoticeGroupAdmin) error)
+	ListenNoticeGroupDecrease(handler func(data model.EventNoticeGroupDecrease) error)
+	ListenNoticeGroupIncrease(handler func(data model.EventNoticeGroupIncrease) error)
+	ListenNoticeGroupBan(handler func(data model.EventNoticeGroupBan) error)
+	ListenNoticeFriendAdd(handler func(data model.EventNoticeFriendAdd) error)
+	ListenNoticeGroupRecall(handler func(data model.EventNoticeGroupRecall) error)
+	ListenNoticeFriendRecall(handler func(data model.EventNoticeFriendRecall) error)
+	ListenNoticeGroupNotifyPoke(handler func(data model.EventNoticeGroupNotifyPoke) error)
+	ListenNoticeGroupNotifyHonor(handler func(data model.EventNoticeGroupNotifyHonor) error)
+	ListenNoticeGroupNotifyLuckyKing(handler func(data model.EventNoticeGroupNotifyLuckyKing) error)
 }
 
-func noticeHandler(data []byte) error {
+type websocketNoticeEventCli struct {
+	noticeGroupUploadHandlers          []func(data model.EventNoticeGroupUpload) error
+	noticeGroupAdminHandlers           []func(data model.EventNoticeGroupAdmin) error
+	noticeGroupDecreaseHandlers        []func(data model.EventNoticeGroupDecrease) error
+	noticeGroupIncreaseHandlers        []func(data model.EventNoticeGroupIncrease) error
+	noticeGroupBanHandlers             []func(data model.EventNoticeGroupBan) error
+	noticeGroupRecallHandlers          []func(data model.EventNoticeGroupRecall) error
+	noticeGroupNotifyPokeHandlers      []func(data model.EventNoticeGroupNotifyPoke) error
+	noticeGroupNotifyLuckyKingHandlers []func(data model.EventNoticeGroupNotifyLuckyKing) error
+	noticeGroupNotifyHonorHandlers     []func(data model.EventNoticeGroupNotifyHonor) error
+	noticeFriendAddHandlers            []func(data model.EventNoticeFriendAdd) error
+	noticeFriendRecallHandlers         []func(data model.EventNoticeFriendRecall) error
+}
+
+func NewOnebotNoticeEventCli() (onebotNoticeEventCli, error) {
+	return &websocketNoticeEventCli{}, nil
+}
+
+func (c *websocketNoticeEventCli) EventType() OnebotEventType {
+	return OnebotEventTypeNotice
+}
+
+func (c *websocketNoticeEventCli) Handler(data []byte) error {
+	return c.noticeHandler(data)
+}
+
+func (c *websocketNoticeEventCli) noticeHandler(data []byte) error {
 	var notice model.EventNoticeBase
 	err := json.Unmarshal(data, &notice)
 	if err != nil {
@@ -37,7 +59,7 @@ func noticeHandler(data []byte) error {
 		if err != nil {
 			return err
 		}
-		for _, e := range noticeGroupUploadHandlers {
+		for _, e := range c.noticeGroupUploadHandlers {
 			err = e(relNotice)
 			if err != nil {
 				return err
@@ -49,7 +71,7 @@ func noticeHandler(data []byte) error {
 		if err != nil {
 			return err
 		}
-		for _, e := range noticeGroupAdminHandlers {
+		for _, e := range c.noticeGroupAdminHandlers {
 			err = e(relNotice)
 			if err != nil {
 				return err
@@ -61,7 +83,7 @@ func noticeHandler(data []byte) error {
 		if err != nil {
 			return err
 		}
-		for _, e := range noticeGroupDecreaseHandlers {
+		for _, e := range c.noticeGroupDecreaseHandlers {
 			err = e(relNotice)
 			if err != nil {
 				return err
@@ -73,7 +95,7 @@ func noticeHandler(data []byte) error {
 		if err != nil {
 			return err
 		}
-		for _, e := range noticeGroupIncreaseHandlers {
+		for _, e := range c.noticeGroupIncreaseHandlers {
 			err = e(relNotice)
 			if err != nil {
 				return err
@@ -85,7 +107,7 @@ func noticeHandler(data []byte) error {
 		if err != nil {
 			return err
 		}
-		for _, e := range noticeGroupBanHandlers {
+		for _, e := range c.noticeGroupBanHandlers {
 			err = e(relNotice)
 			if err != nil {
 				return err
@@ -97,7 +119,7 @@ func noticeHandler(data []byte) error {
 		if err != nil {
 			return err
 		}
-		for _, e := range noticeFriendAddHandlers {
+		for _, e := range c.noticeFriendAddHandlers {
 			err = e(relNotice)
 			if err != nil {
 				return err
@@ -109,7 +131,7 @@ func noticeHandler(data []byte) error {
 		if err != nil {
 			return err
 		}
-		for _, e := range noticeGroupRecallHandlers {
+		for _, e := range c.noticeGroupRecallHandlers {
 			err = e(relNotice)
 			if err != nil {
 				return err
@@ -121,7 +143,7 @@ func noticeHandler(data []byte) error {
 		if err != nil {
 			return err
 		}
-		for _, e := range noticeFriendRecallHandlers {
+		for _, e := range c.noticeFriendRecallHandlers {
 			err = e(relNotice)
 			if err != nil {
 				return err
@@ -139,7 +161,7 @@ func noticeHandler(data []byte) error {
 			if err != nil {
 				return err
 			}
-			for _, e := range noticeGroupNotifyHonorHandlers {
+			for _, e := range c.noticeGroupNotifyHonorHandlers {
 				err = e(relNotice)
 				if err != nil {
 					return err
@@ -151,7 +173,7 @@ func noticeHandler(data []byte) error {
 			if err != nil {
 				return err
 			}
-			for _, e := range noticeGroupNotifyLuckyKingHandlers {
+			for _, e := range c.noticeGroupNotifyLuckyKingHandlers {
 				err = e(relNotice)
 				if err != nil {
 					return err
@@ -163,7 +185,7 @@ func noticeHandler(data []byte) error {
 			if err != nil {
 				return err
 			}
-			for _, e := range noticeGroupNotifyPokeHandlers {
+			for _, e := range c.noticeGroupNotifyPokeHandlers {
 				err = e(relNotice)
 				if err != nil {
 					return err
@@ -174,46 +196,46 @@ func noticeHandler(data []byte) error {
 	return nil
 }
 
-func ListenNoticeGroupUpload(handler func(data model.EventNoticeGroupUpload) error) {
-	noticeGroupUploadHandlers = append(noticeGroupUploadHandlers, handler)
+func (c *websocketNoticeEventCli) ListenNoticeGroupUpload(handler func(data model.EventNoticeGroupUpload) error) {
+	c.noticeGroupUploadHandlers = append(c.noticeGroupUploadHandlers, handler)
 }
 
-func ListenNoticeGroupAdmin(handler func(data model.EventNoticeGroupAdmin) error) {
-	noticeGroupAdminHandlers = append(noticeGroupAdminHandlers, handler)
+func (c *websocketNoticeEventCli) ListenNoticeGroupAdmin(handler func(data model.EventNoticeGroupAdmin) error) {
+	c.noticeGroupAdminHandlers = append(c.noticeGroupAdminHandlers, handler)
 }
 
-func ListenNoticeGroupDecrease(handler func(data model.EventNoticeGroupDecrease) error) {
-	noticeGroupDecreaseHandlers = append(noticeGroupDecreaseHandlers, handler)
+func (c *websocketNoticeEventCli) ListenNoticeGroupDecrease(handler func(data model.EventNoticeGroupDecrease) error) {
+	c.noticeGroupDecreaseHandlers = append(c.noticeGroupDecreaseHandlers, handler)
 }
 
-func ListenNoticeGroupIncrease(handler func(data model.EventNoticeGroupIncrease) error) {
-	noticeGroupIncreaseHandlers = append(noticeGroupIncreaseHandlers, handler)
+func (c *websocketNoticeEventCli) ListenNoticeGroupIncrease(handler func(data model.EventNoticeGroupIncrease) error) {
+	c.noticeGroupIncreaseHandlers = append(c.noticeGroupIncreaseHandlers, handler)
 }
 
-func ListenNoticeGroupBan(handler func(data model.EventNoticeGroupBan) error) {
-	noticeGroupBanHandlers = append(noticeGroupBanHandlers, handler)
+func (c *websocketNoticeEventCli) ListenNoticeGroupBan(handler func(data model.EventNoticeGroupBan) error) {
+	c.noticeGroupBanHandlers = append(c.noticeGroupBanHandlers, handler)
 }
 
-func ListenNoticeFriendAdd(handler func(data model.EventNoticeFriendAdd) error) {
-	noticeFriendAddHandlers = append(noticeFriendAddHandlers, handler)
+func (c *websocketNoticeEventCli) ListenNoticeFriendAdd(handler func(data model.EventNoticeFriendAdd) error) {
+	c.noticeFriendAddHandlers = append(c.noticeFriendAddHandlers, handler)
 }
 
-func ListenNoticeGroupRecall(handler func(data model.EventNoticeGroupRecall) error) {
-	noticeGroupRecallHandlers = append(noticeGroupRecallHandlers, handler)
+func (c *websocketNoticeEventCli) ListenNoticeGroupRecall(handler func(data model.EventNoticeGroupRecall) error) {
+	c.noticeGroupRecallHandlers = append(c.noticeGroupRecallHandlers, handler)
 }
 
-func ListenNoticeFriendRecall(handler func(data model.EventNoticeFriendRecall) error) {
-	noticeFriendRecallHandlers = append(noticeFriendRecallHandlers, handler)
+func (c *websocketNoticeEventCli) ListenNoticeFriendRecall(handler func(data model.EventNoticeFriendRecall) error) {
+	c.noticeFriendRecallHandlers = append(c.noticeFriendRecallHandlers, handler)
 }
 
-func ListenNoticeGroupNotifyPoke(handler func(data model.EventNoticeGroupNotifyPoke) error) {
-	noticeGroupNotifyPokeHandlers = append(noticeGroupNotifyPokeHandlers, handler)
+func (c *websocketNoticeEventCli) ListenNoticeGroupNotifyPoke(handler func(data model.EventNoticeGroupNotifyPoke) error) {
+	c.noticeGroupNotifyPokeHandlers = append(c.noticeGroupNotifyPokeHandlers, handler)
 }
 
-func ListenNoticeGroupNotifyHonor(handler func(data model.EventNoticeGroupNotifyHonor) error) {
-	noticeGroupNotifyHonorHandlers = append(noticeGroupNotifyHonorHandlers, handler)
+func (c *websocketNoticeEventCli) ListenNoticeGroupNotifyHonor(handler func(data model.EventNoticeGroupNotifyHonor) error) {
+	c.noticeGroupNotifyHonorHandlers = append(c.noticeGroupNotifyHonorHandlers, handler)
 }
 
-func ListenNoticeGroupNotifyLuckyKing(handler func(data model.EventNoticeGroupNotifyLuckyKing) error) {
-	noticeGroupNotifyLuckyKingHandlers = append(noticeGroupNotifyLuckyKingHandlers, handler)
+func (c *websocketNoticeEventCli) ListenNoticeGroupNotifyLuckyKing(handler func(data model.EventNoticeGroupNotifyLuckyKing) error) {
+	c.noticeGroupNotifyLuckyKingHandlers = append(c.noticeGroupNotifyLuckyKingHandlers, handler)
 }
