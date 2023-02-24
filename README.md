@@ -1,5 +1,36 @@
 # onebot-sdk
 onebot-sdk
+# 注意事项
+- `*11.0.15*`之后（不包含）出现不兼容变动
+## 配置变更
+- 原配置
+	```
+		http:
+		  schema: "http"
+		  host: 127.0.0.1
+		  port: 5700
+		websocket:
+		  host: 127.0.0.1
+		  port: 6700
+		SUPERUSERS: # 超级管理员账号
+		 - 123456789
+	```
+- 新配置
+	```
+		type: "" #连接方式 http/websocket
+		endpoint: "" #连接地址 https://onebot.xxx.xxx / wss://xxxxxx
+		access_token: "" # 权限拦截 
+	```
+## 需要进行实例化
+```
+import (
+	"github.com/dezhishen/onebot-sdk/pkg/api"
+        "github.com/dezhishen/onebot-sdk/pkg/config"
+)
+
+onebotApi,err := NewOnebotApiClientByConfigPath(path string)
+// or onebotApi,err := NewOnebotApiClientByConfig(config *config.OnebotConfig)
+```
 # Wiki
 介绍实现/命名规则等
 * 地址：[Wiki](./wiki/)
