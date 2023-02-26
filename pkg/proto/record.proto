@@ -1,0 +1,16 @@
+syntax = "proto3";
+package model;
+option go_package="../model";
+
+message RecordGRPC {
+	string file = 1;
+	string out_format = 2;
+}
+
+message RecordResultGRPC {
+	RecordGRPC data = 1;
+	int64 retcode = 2;
+	string status = 3;
+	string msg = 4;
+	string wording = 5;
+}

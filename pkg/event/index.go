@@ -4,13 +4,12 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"time"
 
 	log "github.com/sirupsen/logrus"
 
+	"github.com/dezhishen/onebot-sdk/pkg/client"
 	"github.com/dezhishen/onebot-sdk/pkg/config"
 	"github.com/dezhishen/onebot-sdk/pkg/model"
-	"github.com/gorilla/websocket"
 )
 
 type onebotBaseEventCli interface {
@@ -24,6 +23,7 @@ type onebotEventcli struct {
 	onebotRequestEventCli // 请求事件
 	onebotMetaEventCli    // 元事件
 	conf                  config.OnebotConfig
+	ws                    *client.WebsocketCli
 	allHandler            map[OnebotEventType]onebotBaseEventCli
 	// StartWsWithContext(ctx context.Context) error
 }
@@ -77,7 +77,7 @@ func NewOnebotEventCli(conf *config.OnebotConfig) (*onebotEventcli, error) {
 }
 
 func (cli *onebotEventcli) StartWithContext(ctx context.Context) error {
-	var url = cli.conf.Endpoint
+	var url = cli.conf.Endpoint + "/event"
 	// url := cli.conf.Endpoint
 	if cli.conf.AccessToken != "" {
 		url += "?access_token=" + cli.conf.AccessToken
@@ -86,42 +86,13 @@ func (cli *onebotEventcli) StartWithContext(ctx context.Context) error {
 }
 
 func (cli *onebotEventcli) listen(url string, ctx context.Context) error {
-	log.Infof("开始建立连接...地址:%v", url)
-	c, _, err := websocket.DefaultDialer.DialContext(ctx, url, nil)
-	if err != nil {
-		log.Infof("建立连接出现错误...,错误信息%v", err)
-		return err
-	}
-	log.Info("建立连接成功！")
-	defer c.Close()
-	for {
-		_, message, err := c.ReadMessage()
-		if err != nil {
-			log.Errorf("websocket发生错误:%v,将在3s后重试...", err)
-			time.Sleep(3 * time.Second)
-			for i := 1; i < 5; i++ {
-				log.Infof("尝试重连....,第%v次", i)
-				c, _, err = websocket.DefaultDialer.DialContext(ctx, url, nil)
-				if err != nil {
-					internal := 3 * i
-					log.Errorf("第%v次重连失败，将在%vs后重试", i, internal)
-					// for j := 0; j < i; j++ {
-					time.Sleep(time.Duration(internal) * time.Second)
-					// }
-				}
-			}
-			if err != nil {
-				log.Errorf("重连失败...,%v", err)
-				return err
-			}
-			continue
-		}
+	err := cli.ws.Listen(ctx, func(message []byte) error {
 		var eventBaseInfo model.EventBase
-		err = json.Unmarshal(message, &eventBaseInfo)
+		err := json.Unmarshal(message, &eventBaseInfo)
 		if err != nil {
-			log.Errorf("handle listen decoder err :%v,raw:%v", err, message)
+			return fmt.Errorf("handle listen decoder err :%v,raw:%v", err, message)
 		}
-		log.Infof("received event,post_type:%v", eventBaseInfo.PostType)
+		log.Debugf("received event,post_type:%v", eventBaseInfo.PostType)
 		var eventType = OnebotEventType(eventBaseInfo.PostType)
 		handler, ok := cli.allHandler[eventType]
 		if ok {
@@ -132,10 +103,10 @@ func (cli *onebotEventcli) listen(url string, ctx context.Context) error {
 				}
 			}()
 			go runHandler(handler, message)
-		} else {
-			log.Errorf("undefine event post_type:%v", eventBaseInfo.PostType)
 		}
-	}
+		return nil
+	})
+	return err
 }
 
 func runHandler(handler onebotBaseEventCli, message []byte) {

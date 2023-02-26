@@ -1,0 +1,50 @@
+syntax = "proto3";
+package model;
+option go_package="../model";
+
+message ImageGRPC {
+	int32  size = 1;
+	string filename = 2;
+    string url = 3;
+}
+
+message ImageResultGRPC {
+    int64  retcode =1;
+    string status=2;
+    string msg = 3;
+    string wording = 4;
+    ImageGRPC data = 5;
+}
+
+message CoordinateGRPC {
+    int32 x = 1;
+    int32 y = 2;
+}
+
+message TextDetectionGRPC {
+    /*
+    Text        string       `json:"text"`
+	Confidence  int32        `json:"confidence"`
+	Coordinates []Coordinate `json:"coordinates"`
+    */
+    string text = 1;
+    int32 confidence = 2;
+    repeated CoordinateGRPC coordinates = 3;
+}
+
+message OcrImageGRPC {
+    /*
+    Texts    []TextDetection `json:"texts"`
+	Language string          `json:"language"`
+    */
+    repeated TextDetectionGRPC texts = 1;
+    string language = 2;
+}
+
+message OcrImageResultGRPC {
+    int64  retcode =1;
+    string status=2;
+    string msg = 3;
+    string wording = 4;
+    OcrImageGRPC data = 5;
+}

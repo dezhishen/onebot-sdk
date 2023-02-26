@@ -257,32 +257,35 @@ func (a *ForwardMessageDataResultGRPC) ToStruct() *ForwardMessageDataResult {
 	return result
 }
 
-type SendGroupForwardMessageData struct {
+type SendForwardMessageData struct {
 	MessageId int64 `json:"message_id"`
+	ForwardId int64 `json:"forward_id"`
 }
 
-func (a *SendGroupForwardMessageData) ToGRPC() *SendGroupForwardMessageDataGRPC {
-	return &SendGroupForwardMessageDataGRPC{
+func (a *SendForwardMessageData) ToGRPC() *SendForwardMessageDataGRPC {
+	return &SendForwardMessageDataGRPC{
 		MessageId: a.MessageId,
+		ForwardId: a.ForwardId,
 	}
 }
 
-func (a *SendGroupForwardMessageDataGRPC) ToStruct() *SendGroupForwardMessageData {
-	return &SendGroupForwardMessageData{
+func (a *SendForwardMessageDataGRPC) ToStruct() *SendForwardMessageData {
+	return &SendForwardMessageData{
 		MessageId: a.MessageId,
+		ForwardId: a.ForwardId,
 	}
 }
 
-type SendGroupForwardMessageDataResult struct {
-	Retcode int64                        `json:"retcode"`
-	Data    *SendGroupForwardMessageData `json:"data"`
-	Status  string                       `json:"status"`
-	Msg     string                       `json:"msg"`
-	Wording string                       `json:"wording"`
+type SendForwardMessageDataResult struct {
+	Retcode int64                   `json:"retcode"`
+	Data    *SendForwardMessageData `json:"data"`
+	Status  string                  `json:"status"`
+	Msg     string                  `json:"msg"`
+	Wording string                  `json:"wording"`
 }
 
-func (a *SendGroupForwardMessageDataResult) ToGRPC() *SendGroupForwardMessageDataResultGRPC {
-	result := &SendGroupForwardMessageDataResultGRPC{
+func (a *SendForwardMessageDataResult) ToGRPC() *SendForwardMessageDataResultGRPC {
+	result := &SendForwardMessageDataResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 		Msg:     a.Msg,
@@ -294,8 +297,8 @@ func (a *SendGroupForwardMessageDataResult) ToGRPC() *SendGroupForwardMessageDat
 	return result
 }
 
-func (a *SendGroupForwardMessageDataResultGRPC) ToStruct() *SendGroupForwardMessageDataResult {
-	result := &SendGroupForwardMessageDataResult{
+func (a *SendForwardMessageDataResultGRPC) ToStruct() *SendForwardMessageDataResult {
+	result := &SendForwardMessageDataResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 		Msg:     a.Msg,
@@ -305,4 +308,28 @@ func (a *SendGroupForwardMessageDataResultGRPC) ToStruct() *SendGroupForwardMess
 		result.Data = a.Data.ToStruct()
 	}
 	return result
+}
+
+type Messages struct {
+	Messages []*MessageSegment `json:"messages"`
+}
+
+func (a *Messages) ToGRPC() *MessagesGRPC {
+	return &MessagesGRPC{
+		Messages: MessageSegmentArray2MessageSegmentGRPCArray(a.Messages),
+	}
+}
+
+func (a *MessagesGRPC) ToStruct() *Messages {
+	return &Messages{
+		Messages: MessageSegmentGRPCArray2MessageSegmentArray(a.Messages),
+	}
+}
+
+type MessagesResult struct {
+	Retcode int64     `json:"retcode"`
+	Data    *Messages `json:"data"`
+	Status  string    `json:"status"`
+	Msg     string    `json:"msg"`
+	Wording string    `json:"wording"`
 }

@@ -2,15 +2,15 @@ syntax = "proto3";
 package model;
 option go_package = "../model";
 
-message GroupGRPC {
+message GroupInfoGRPC {
 	int64 group_id = 1;
 	string group_name = 2;
 	int32 member_count = 3;
 	int32 max_member_count = 4;
 }
 
-message GroupResultGRPC {
-	GroupGRPC data = 1;
+message GroupInfoResultGRPC {
+	GroupInfoGRPC data = 1;
 	int64 retcode = 2;
 	string status = 3;
     string msg = 4;
@@ -18,14 +18,14 @@ message GroupResultGRPC {
 }
 
 message GroupListResultGRPC {
-	repeated GroupGRPC data = 1;
+	repeated GroupInfoGRPC data = 1;
 	int64 retcode = 2;
 	string status = 3;
     string msg = 4;
     string wording = 5;
 }
 
-message GroupMemberGRPC {
+message GroupMemberInfoGRPC {
 	int64 group_id = 1;
 	int64 user_id = 2;
 	string nickname = 3;
@@ -42,8 +42,8 @@ message GroupMemberGRPC {
 	bool card_changeable = 14;
 }
 
-message GroupMemberResultGRPC {
-	GroupMemberGRPC data = 1;
+message GroupMemberInfoResultGRPC {
+	GroupMemberInfoGRPC data = 1;
 	int64 retcode = 2;
 	string status = 3;
     string msg = 4;
@@ -51,7 +51,7 @@ message GroupMemberResultGRPC {
 }
 
 message GroupMemberListResultGRPC {
-	repeated GroupMemberGRPC data = 1;
+	repeated GroupMemberInfoGRPC data = 1;
 	int64 retcode = 2;
 	string status = 3;
     string msg = 4;
@@ -94,4 +94,89 @@ message HonorOwnerInfoGRPC {
 	string nickname = 2;
 	string avatar = 3;
 	string description = 4;
+}
+
+message InvitedRequestGRPC {
+	int64 request_id = 1;
+	int64 invitor_uin = 2;
+	string invitor_nick = 3;
+	int64 group_id = 4;
+	string group_name = 5;
+	bool checked = 6;
+	int64 actor = 7;
+}
+
+message JoinRequestGRPC {
+	int64 request_id = 1;
+	int64 requester_uin = 2;
+	string requester_nick = 3;
+	string message = 4;
+	int64 group_id = 5;
+	string group_name = 6;
+	bool checked = 7;
+	int64 actor = 8;
+}
+
+message GroupSystemMsgGRPC {
+	repeated InvitedRequestGRPC invited_requests = 1;
+	repeated JoinRequestGRPC join_requests = 2;
+}
+
+message GroupSystemMsgResultGRPC {
+	GroupSystemMsgGRPC data = 1;
+	int64 retcode = 2;
+	string status = 3;
+	string msg = 4;
+	string wording = 5;
+}
+
+message EssenceMsgGRPC {
+	int64 sender_id = 1;
+	string sender_nick = 2;
+	int64 sender_time = 3;
+	int64 operator_id = 4;
+	string operator_nick = 5;
+	int64 operator_time = 6;
+	int32 message_id = 7;
+}
+
+message EssenceMsgListResultGRPC {
+	repeated EssenceMsgGRPC data = 1;
+	int64 retcode = 2;
+	string status = 3;
+	string msg = 4;
+	string wording = 5;
+}
+
+message GroupAtAllRemainGRPC {
+	bool can_at_all = 1;
+	int32 remain_at_all_count_for_group = 2;
+	int32 remain_at_all_count_for_uin = 3;
+}
+
+message GroupAtAllRemainResultGRPC {
+	GroupAtAllRemainGRPC data = 1;
+	int64 retcode = 2;
+	string status = 3;
+	string msg = 4;
+	string wording = 5;
+}
+
+message GroupNoticeMessageGRPC {
+	string text = 1;
+	repeated string images = 2;
+}
+
+message GroupNoticeGRPC {
+	int64 sender_id = 1;
+	int64 publish_time = 2;
+	GroupNoticeMessageGRPC message = 3;
+}
+
+message GroupNoticeResultGRPC {
+	GroupNoticeGRPC data = 1;
+	int64 retcode = 2;
+	string status = 3;
+	string msg = 4;
+	string wording = 5;
 }

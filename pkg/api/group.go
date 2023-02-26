@@ -30,11 +30,11 @@ type onebotApiGroupClient interface {
 	// 处理加群请求／邀请
 	SetGroupAddRequest(flag, subType, reason string, approve bool) error
 	// 获取群信息
-	GetGroupInfo(groupId int64, noCache bool) (*model.GroupResult, error)
+	GetGroupInfo(groupId int64, noCache bool) (*model.GroupInfoResult, error)
 	// 获取群列表
 	GetGroupList(groupId int64, noCache bool) (*model.GroupListResult, error)
 	// 获取群成员信息
-	GetGroupMemberInfo(groupId, userId int64, noCache bool) (*model.GroupMemberResult, error)
+	GetGroupMemberInfo(groupId, userId int64, noCache bool) (*model.GroupMemberInfoResult, error)
 	// 获取群成员列表
 	GetGroupMemberListInfo() (*model.GroupMemberListResult, error)
 	// 获取群荣誉信息
@@ -206,12 +206,12 @@ func (cli *httpOnebotApiGroupClient) SetGroupAddRequest(flag, subType, reason st
 }
 
 // 获取群信息
-func (cli *httpOnebotApiGroupClient) GetGroupInfo(groupId int64, noCache bool) (*model.GroupResult, error) {
+func (cli *httpOnebotApiGroupClient) GetGroupInfo(groupId int64, noCache bool) (*model.GroupInfoResult, error) {
 	req := make(map[string]interface{})
 	req["group_id"] = groupId
 	req["no_cache"] = noCache
 
-	var result model.GroupResult
+	var result model.GroupInfoResult
 	url := "/get_group_info"
 	if err := cli.PostWithRequsetForResult(url, req, &result); err != nil {
 		return nil, err
@@ -234,13 +234,13 @@ func (cli *httpOnebotApiGroupClient) GetGroupList(groupId int64, noCache bool) (
 }
 
 // 获取群成员信息
-func (cli *httpOnebotApiGroupClient) GetGroupMemberInfo(groupId, userId int64, noCache bool) (*model.GroupMemberResult, error) {
+func (cli *httpOnebotApiGroupClient) GetGroupMemberInfo(groupId, userId int64, noCache bool) (*model.GroupMemberInfoResult, error) {
 	req := make(map[string]interface{})
 	req["group_id"] = groupId
 	req["user_id"] = userId
 	req["no_cache"] = noCache
 
-	var result model.GroupMemberResult
+	var result model.GroupMemberInfoResult
 	url := "/get_group_member_info"
 	if err := cli.PostWithRequsetForResult(url, req, &result); err != nil {
 		return nil, err

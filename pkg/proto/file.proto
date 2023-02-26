@@ -1,0 +1,18 @@
+syntax = "proto3";
+package model;
+option go_package = "../model";
+
+message GroupFileSystemInfoGRPC {
+    int32 file_count = 1;
+    int32 limit_count = 2;
+    int64 used_space = 3;
+    int64 total_space = 4;
+}
+
+message GroupFileSystemInfoResultGRPC {
+    GroupFileSystemInfoGRPC data = 1;
+    int64 retcode = 2;
+    string status = 3;
+    string msg = 4;
+    string wording = 5;
+}

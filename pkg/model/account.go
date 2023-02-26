@@ -287,32 +287,55 @@ func (a *CredentialsResultGRPC) ToStruct() *CredentialsResult {
 	return result
 }
 
-type File struct {
-	File string `json:"file"`
+type Variant struct {
+	ModelShow string `json:"model_show"`
+	NeedPay   bool   `json:"need_pay"`
 }
 
-func (a *File) ToGRPC() *FileGRPC {
-	return &FileGRPC{
-		File: a.File,
+func (a *Variant) ToGRPC() *VariantGRPC {
+	return &VariantGRPC{
+		ModelShow: a.ModelShow,
+		NeedPay:   a.NeedPay,
 	}
 }
 
-func (a *FileGRPC) ToStruct() *File {
-	return &File{
-		File: a.File,
+func (a *VariantGRPC) ToStruct() *Variant {
+	return &Variant{
+		ModelShow: a.ModelShow,
+		NeedPay:   a.NeedPay,
 	}
 }
 
-type FileResult struct {
-	Data    *File  `json:"data"`
-	Retcode int64  `json:"retcode"`
-	Status  string `json:"status"`
-	Msg     string `json:"msg"`
-	Wording string `json:"wording"`
+type ModelShow struct {
+	Variants []Variant `json:"variants"`
 }
 
-func (a *FileResult) ToGRPC() *FileResultGRPC {
-	result := &FileResultGRPC{
+func (a *ModelShow) ToGRPC() *ModelShowGRPC {
+	result := &ModelShowGRPC{}
+	for _, v := range a.Variants {
+		result.Variants = append(result.Variants, v.ToGRPC())
+	}
+	return result
+}
+
+func (a *ModelShowGRPC) ToStruct() *ModelShow {
+	result := &ModelShow{}
+	for _, v := range a.Variants {
+		result.Variants = append(result.Variants, *v.ToStruct())
+	}
+	return result
+}
+
+type ModelShowResult struct {
+	Data    *ModelShow `json:"data"`
+	Retcode int64      `json:"retcode"`
+	Status  string     `json:"status"`
+	Msg     string     `json:"msg"`
+	Wording string     `json:"wording"`
+}
+
+func (a *ModelShowResult) ToGRPC() *ModelShowResultGRPC {
+	result := &ModelShowResultGRPC{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 		Msg:     a.Msg,
@@ -324,8 +347,70 @@ func (a *FileResult) ToGRPC() *FileResultGRPC {
 	return result
 }
 
-func (a *FileResultGRPC) ToStruct() *FileResult {
-	result := &FileResult{
+func (a *ModelShowResultGRPC) ToStruct() *ModelShowResult {
+	result := &ModelShowResult{
+		Retcode: a.Retcode,
+		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
+	}
+	if a.Data != nil {
+		result.Data = a.Data.ToStruct()
+	}
+	return result
+}
+
+type QQProfileResult struct {
+	Data    *QQProfile `json:"data"`
+	Retcode int64      `json:"retcode"`
+	Status  string     `json:"status"`
+	Msg     string     `json:"msg"`
+	Wording string     `json:"wording"`
+}
+
+type QQProfile struct {
+	Nickname     string `json:"nickname"`
+	Company      string `json:"company"`
+	Email        string `json:"email"`
+	Collage      string `json:"collage"`
+	PersonalNote string `json:"personal_note"`
+}
+
+func (a *QQProfile) ToGRPC() *QQProfileGRPC {
+	return &QQProfileGRPC{
+		Nickname:     a.Nickname,
+		Company:      a.Company,
+		Email:        a.Email,
+		Collage:      a.Collage,
+		PersonalNote: a.PersonalNote,
+	}
+}
+
+func (a *QQProfileGRPC) ToStruct() *QQProfile {
+	return &QQProfile{
+		Nickname:     a.Nickname,
+		Company:      a.Company,
+		Email:        a.Email,
+		Collage:      a.Collage,
+		PersonalNote: a.PersonalNote,
+	}
+}
+
+func (a *QQProfileResult) ToGRPC() *QQProfileResultGRPC {
+	result := &QQProfileResultGRPC{
+		Retcode: a.Retcode,
+		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
+	}
+	if a.Data != nil {
+		result.Data = a.Data.ToGRPC()
+	}
+	return result
+}
+
+func (a *QQProfileResultGRPC) ToStruct() *QQProfileResult {
+	result := &QQProfileResult{
 		Retcode: a.Retcode,
 		Status:  a.Status,
 		Msg:     a.Msg,

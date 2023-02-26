@@ -26,7 +26,11 @@ func (ct *accessTokenTransport) RoundTrip(req *http.Request) (*http.Response, er
 	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", ct.accessToken))
 	return ct.RoundTripper.RoundTrip(req)
 }
+
 func NewHttpCli(conf *config.OnebotConfig) *HttpCli {
+	if strings.HasSuffix("/", conf.Endpoint) {
+		conf.Endpoint = strings.TrimSuffix(conf.Endpoint, "/")
+	}
 	return &HttpCli{
 		cli: http.Client{
 			Transport: &accessTokenTransport{http.DefaultTransport, conf.AccessToken},
@@ -37,11 +41,7 @@ func NewHttpCli(conf *config.OnebotConfig) *HttpCli {
 }
 
 func concatUrl(basePath, url string) string {
-	basePath = strings.TrimSuffix(basePath, "/")
-	if !strings.HasPrefix(url, "/") {
-		url = "/" + url
-	}
-	return basePath + url
+	return basePath + "/" + url
 }
 
 func (c *HttpCli) PostWithRequsetForResult(url string, req, result interface{}) error {
