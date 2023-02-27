@@ -54,7 +54,8 @@ func (cli *WebsocketCli) SendWithOutParam(action string) error {
 	}
 	return err
 }
-func (cli *WebsocketCli) Send(action string, req interface{}) error {
+
+func (cli *WebsocketCli) SendWithOutParamForResult(action string, result interface{}) error {
 	url := fmt.Sprintf("%s/api", cli.endpoint)
 	if cli.accessToken != "" {
 		url = fmt.Sprintf("%s?access_token=%s", url, cli.accessToken)
@@ -68,7 +69,54 @@ func (cli *WebsocketCli) Send(action string, req interface{}) error {
 	}
 	reqData := actionReq{
 		Action: action,
-		Params: req,
+	}
+	err := cli.actionCli.WriteJSON(reqData)
+	if err != nil {
+		cli.actionCli.Close()
+		cli.actionCli = nil
+	}
+	return err
+}
+
+func (cli *WebsocketCli) Send(action string, params interface{}) error {
+	url := fmt.Sprintf("%s/api", cli.endpoint)
+	if cli.accessToken != "" {
+		url = fmt.Sprintf("%s?access_token=%s", url, cli.accessToken)
+	}
+	if cli.actionCli == nil {
+		var err error
+		cli.actionCli, _, err = websocket.DefaultDialer.Dial(url, nil)
+		if err != nil {
+			return err
+		}
+	}
+	reqData := actionReq{
+		Action: action,
+		Params: params,
+	}
+	err := cli.actionCli.WriteJSON(reqData)
+	if err != nil {
+		cli.actionCli.Close()
+		cli.actionCli = nil
+	}
+	return err
+}
+
+func (cli *WebsocketCli) SendForResult(action string, params interface{}, result interface{}) error {
+	url := fmt.Sprintf("%s/api", cli.endpoint)
+	if cli.accessToken != "" {
+		url = fmt.Sprintf("%s?access_token=%s", url, cli.accessToken)
+	}
+	if cli.actionCli == nil {
+		var err error
+		cli.actionCli, _, err = websocket.DefaultDialer.Dial(url, nil)
+		if err != nil {
+			return err
+		}
+	}
+	reqData := actionReq{
+		Action: action,
+		Params: params,
 	}
 	err := cli.actionCli.WriteJSON(reqData)
 	if err != nil {
