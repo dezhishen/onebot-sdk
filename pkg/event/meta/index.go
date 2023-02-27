@@ -1,18 +1,19 @@
-package event
+package meta
 
 import (
 	"encoding/json"
 
+	"github.com/dezhishen/onebot-sdk/pkg/event/base"
 	"github.com/dezhishen/onebot-sdk/pkg/model"
 )
 
-type onebotMetaEventCli interface {
-	onebotBaseEventCli
+type OnebotMetaEventCli interface {
+	base.OnebotBaseEventCli
 	ListenMetaLifecycle(handler func(data model.EventMetaLifecycle) error)
 	ListenMetaHeartBeat(handler func(data model.EventMetaHeartbeat) error)
 }
 
-func NewOnebotMetaEventCli() (onebotMetaEventCli, error) {
+func NewOnebotMetaEventCli() (OnebotMetaEventCli, error) {
 	return &websocketOnebotMetaEventCli{}, nil
 }
 
@@ -21,8 +22,8 @@ type websocketOnebotMetaEventCli struct {
 	metaHeartbeatHandlers []func(data model.EventMetaHeartbeat) error
 }
 
-func (c *websocketOnebotMetaEventCli) EventType() OnebotEventType {
-	return OnebotEventTypeMetaEvent
+func (c *websocketOnebotMetaEventCli) EventType() base.OnebotEventType {
+	return base.OnebotEventTypeMetaEvent
 }
 
 func (c *websocketOnebotMetaEventCli) Handler(data []byte) error {

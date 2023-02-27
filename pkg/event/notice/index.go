@@ -1,13 +1,14 @@
-package event
+package notice
 
 import (
 	"encoding/json"
 
+	"github.com/dezhishen/onebot-sdk/pkg/event/base"
 	"github.com/dezhishen/onebot-sdk/pkg/model"
 )
 
-type onebotNoticeEventCli interface {
-	onebotBaseEventCli
+type OnebotNoticeEventCli interface {
+	base.OnebotBaseEventCli
 	ListenNoticeGroupUpload(handler func(data model.EventNoticeGroupUpload) error)
 	ListenNoticeGroupAdmin(handler func(data model.EventNoticeGroupAdmin) error)
 	ListenNoticeGroupDecrease(handler func(data model.EventNoticeGroupDecrease) error)
@@ -35,12 +36,12 @@ type websocketNoticeEventCli struct {
 	noticeFriendRecallHandlers         []func(data model.EventNoticeFriendRecall) error
 }
 
-func NewOnebotNoticeEventCli() (onebotNoticeEventCli, error) {
+func NewOnebotNoticeEventCli() (OnebotNoticeEventCli, error) {
 	return &websocketNoticeEventCli{}, nil
 }
 
-func (c *websocketNoticeEventCli) EventType() OnebotEventType {
-	return OnebotEventTypeNotice
+func (c *websocketNoticeEventCli) EventType() base.OnebotEventType {
+	return base.OnebotEventTypeNotice
 }
 
 func (c *websocketNoticeEventCli) Handler(data []byte) error {

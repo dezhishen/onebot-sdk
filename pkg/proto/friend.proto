@@ -1,0 +1,56 @@
+syntax = "proto3";
+package model;
+option go_package = "../model";
+
+message StrangerInfoGRPC {
+// 	UserId int64 `json:"user_id"`
+    int64 user_id = 1;
+// 	Nickname string `json:"nickname"`
+    string nickname = 2;
+// 	Sex string `json:"sex"`
+    string sex = 3;
+// 	Age int32 `json:"age"`
+    int32 age = 4;
+// 	Qid string `json:"qid"`
+    string qid = 5;
+// 	Level int32 `json:"level"`
+    int32 level = 6;
+// 	LoginDays int32 `json:"login_days"`
+    int32 login_days = 7;
+}
+
+message StrangerInfoResultGRPC {
+    // 	Data    *StrangerInfo `json:"data"`
+    StrangerInfoGRPC data = 1;
+    // 	Retcode int64         `json:"retcode"`
+    int64 retcode = 2;
+    // 	Status  string        `json:"status"`
+    string status = 3;
+    // 	Msg     string        `json:"msg"`
+    string msg = 4;
+    // 	Wording string        `json:"wording"`
+    string wording = 5;
+
+}
+
+message FriendGRPC {
+// 	UserId int64 `json:"user_id"`
+    int64 user_id = 1;
+// 	Nickname string `json:"nickname"`
+    string nickname = 2;
+// 	Remark string `json:"remark"`
+    string remark = 3;
+}
+
+message FriendListResultGRPC {
+    // 	Data    []*Friend `json:"data"`
+    repeated FriendGRPC data = 1;
+    // 	Retcode int64     `json:"retcode"`
+    int64 retcode = 2;
+    // 	Status  string    `json:"status"`
+    string status = 3;
+    // 	Msg     string    `json:"msg"`
+    string msg = 4;
+    // 	Wording string    `json:"wording"`
+    string wording = 5;
+}

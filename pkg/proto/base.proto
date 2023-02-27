@@ -1,0 +1,21 @@
+syntax = "proto3";
+package model;
+option go_package="../model";
+
+message BoolYesGRPC {
+	bool yes = 1;
+}
+
+message BoolYesOfResultGRPC {
+	BoolYesGRPC data = 1;
+	int64 retcode = 2; 
+	string status = 3;
+    string msg = 4;
+    string wording = 5;
+}
+
+message AnonymousGRPC {
+	int64 id = 1;
+	string name = 2;
+	string flag = 3;
+}

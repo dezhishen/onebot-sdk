@@ -1,0 +1,130 @@
+syntax = "proto3";
+package model;
+option go_package = "../model";
+
+message CookiesGRPC {
+	string cookies = 1;
+}
+
+message CookiesResultGRPC {
+	CookiesGRPC data = 1;
+	int64 retcode = 2;
+	string status = 3;
+	string msg = 4;
+	string wording = 5;
+}
+
+message CsrfTokenGRPC {
+	int32 token = 1;
+}
+
+message CsrfTokenResultGRPC {
+	CsrfTokenGRPC data = 1;
+	int64 retcode = 2;
+	string status = 3;
+	string msg = 4;
+	string wording = 5;
+}
+
+message CredentialsGRPC {
+	string cookies = 1;
+	int32 token = 2;
+}
+
+message CredentialsResultGRPC {
+	CredentialsGRPC data = 1;
+	int64 retcode = 2;
+	string status = 3;
+	string msg = 4;
+	string wording = 5;
+}
+
+message VersionInfoGRPC {
+	string app_name = 1;
+	string app_version = 2;
+	string app_full_name = 3;
+	string protocol_version = 4;
+	string coolq_edition = 5;
+	string coolq_directory = 6;
+	bool go_cqhttp = 7;
+	string plugin_version = 8;
+	int32 plugin_build_number = 9;
+	string plugin_build_configuration = 10;
+	string runtime_version = 11;
+	string runtime_os = 12;
+	string version = 13;
+	int32 protocol = 14;
+}
+
+message VersionInfoResultGRPC {
+	VersionInfoGRPC data = 1;
+	int64 retcode = 2;
+	string status = 3;
+	string msg = 4;
+	string wording = 5;
+}
+
+message StatisticsGRPC {
+	uint64 packet_received = 1;
+	uint64 packet_sent = 2;
+	uint32 packet_lost = 3;
+	uint64 message_received = 4;
+	uint64 message_sent = 5;
+	uint32 disconnect_times = 6;
+	uint32 lost_times = 7;
+	int64 last_message_time = 8;
+}
+
+message StatusGRPC {
+	bool app_initialized = 1;
+	bool app_enabled = 2;
+	bool plugins_good = 3;
+	bool app_good = 4;
+	bool online = 5;
+	bool good = 6;
+	StatisticsGRPC stat = 7;
+}
+
+message StatusResultGRPC {
+	StatusGRPC data = 1;
+	int64 retcode = 2;
+	string status = 3;
+	string msg = 4;
+	string wording = 5;
+}
+
+message DownloadFileGRPC {
+	string file = 1;
+}
+
+message DownloadFileResultGRPC {
+	DownloadFileGRPC data = 1;
+	int64 retcode = 2;
+	string status = 3;
+	string msg = 4;
+	string wording = 5;
+}
+
+message CheckUrlSafelyGRPC {
+	int32 level = 1;
+} 
+
+message CheckUrlSafelyResultGRPC {
+	CheckUrlSafelyGRPC data = 1;
+	int64 retcode = 2;
+	string status = 3;
+	string msg = 4;
+	string wording = 5;
+}
+
+message WordSlicesGRPC {
+	repeated string slices = 1;
+}
+
+message WordSlicesResultGRPC {
+	WordSlicesGRPC data = 1;
+	int64 retcode = 2;
+	string status = 3;
+	string msg = 4;
+	string wording = 5;
+}

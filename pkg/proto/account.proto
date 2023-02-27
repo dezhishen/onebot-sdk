@@ -4,11 +4,9 @@ option go_package="../model";
 
 message AccountGRPC {
     int64 user_id =1;
-    string sex =2 ;
-    string nickname =3;
-    uint32 age =4;
-    string  remark =5;
+    string nickname =2;
 }
+
 message AccountResultGRPC{
     AccountGRPC data = 1;
     int64 retcode = 2;
@@ -17,88 +15,6 @@ message AccountResultGRPC{
     string wording = 5;
 }
 
-
-message FriendListResultGRPC {
-    repeated AccountGRPC data = 1;
-    int64 retcode = 2;
-    string status= 3;
-    string msg = 4;
-    string wording = 5;
-}
-
-message AnonymousGRPC {
-    //匿名用户 Id
-    int64 id = 1;
-    int64 name =2;
-    int64 flag =3;
-}
-
-
-message CokiesGRPC {
-    string  cookies = 1;
-}
-
-message CokiesResultGRPC {
-    CokiesGRPC data = 1;
-    int64 retcode = 2;
-    string status= 3;
-    string msg = 4;
-    string wording = 5;
-}
-
-message CSRFTokenGRPC {
-    string  token = 1;
-}
-
-message CSRFTokenResultGRPC {
-    CSRFTokenGRPC  data =1;
-    int64 retcode = 2;
-    string status= 3;
-    string msg = 4;
-    string wording = 5;
-}
-
-message CredentialsGRPC {
-    string cookies =1;
-    int32 CSRFToken =2 [json_name="csrf_token"];
-}
-
-message CredentialsResultGRPC {
-    CredentialsGRPC data = 1;
-    int64 retcode  =2;
-    string status=3;
-    string msg = 4;
-    string wording = 5;
-}
-
-message FileGRPC {
-    string file = 1;
-}
-
-message FileResultGRPC {
-    FileGRPC data = 1;
-    int64  retcode =2;
-    string status=3;
-    string msg = 4;
-    string wording = 5;
-}
-
-message VariantGRPC {
-    string model_show =1;
-    bool need_pay =2;
-}
-
-message ModelShowGRPC{
-    repeated VariantGRPC variants = 1;
-}
-
-message ModelShowResultGRPC {
-    ModelShowGRPC data = 1;
-    int64  retcode =2;
-    string status=3;
-    string msg = 4;
-    string wording = 5;
-}
 
 message QQProfileGRPC  {
     string nickname =1;
@@ -110,6 +26,42 @@ message QQProfileGRPC  {
 }
 message QQProfileResultGRPC  {
     QQProfileGRPC data = 1;
+    int64  retcode =2;
+    string status=3;
+    string msg = 4;
+    string wording = 5;
+}
+
+message VariantGRPC {
+    string model_show = 1;
+    bool need_pay = 2;
+}
+
+message ModelShowGRPC {
+    repeated VariantGRPC variants = 1;
+}
+
+message ModelShowResultGRPC {
+    ModelShowGRPC data = 1;
+    int64  retcode =2;
+    string status=3;
+    string msg = 4;
+    string wording = 5;
+}
+
+
+message DeviceGRPC {
+    int64 app_id =1;
+    string device_name =2;
+    string device_kind =3;
+}
+
+message OnlineClientsGRPC {
+    repeated DeviceGRPC clients = 1;
+}
+
+message OnlineClientsResultGRPC {
+    OnlineClientsGRPC data = 1;
     int64  retcode =2;
     string status=3;
     string msg = 4;

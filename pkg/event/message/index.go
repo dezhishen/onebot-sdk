@@ -1,18 +1,19 @@
-package event
+package message
 
 import (
 	"encoding/json"
 
+	"github.com/dezhishen/onebot-sdk/pkg/event/base"
 	"github.com/dezhishen/onebot-sdk/pkg/model"
 )
 
-type onebotMessageEventCli interface {
-	onebotBaseEventCli
+type OnebotMessageEventCli interface {
+	base.OnebotBaseEventCli
 	ListenMessagePrivate(handler func(data model.EventMessagePrivate) error)
 	ListenMessageGroup(handler func(data model.EventMessageGroup) error)
 }
 
-func NewOnebotMessageEventCli() (onebotMessageEventCli, error) {
+func NewOnebotMessageEventCli() (OnebotMessageEventCli, error) {
 	return &websocketOnebotMessageEventCli{}, nil
 }
 
@@ -21,8 +22,8 @@ type websocketOnebotMessageEventCli struct {
 	messageGroupHandlers   []func(data model.EventMessageGroup) error
 }
 
-func (c *websocketOnebotMessageEventCli) EventType() OnebotEventType {
-	return OnebotEventTypeMessage
+func (c *websocketOnebotMessageEventCli) EventType() base.OnebotEventType {
+	return base.OnebotEventTypeMessage
 }
 
 func (c *websocketOnebotMessageEventCli) Handler(data []byte) error {
@@ -57,7 +58,6 @@ func (c *websocketOnebotMessageEventCli) Handler(data []byte) error {
 		}
 	}
 	return nil
-	// setHandler(c.EventType(), handler)
 }
 
 func (c *websocketOnebotMessageEventCli) ListenMessagePrivate(handler func(data model.EventMessagePrivate) error) {

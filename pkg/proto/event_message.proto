@@ -1,7 +1,7 @@
 syntax = "proto3";
 import "event.proto";
-import "account.proto";
 import "sender.proto";
+import "base.proto";
 import "message_element.proto";
 package model;
 option go_package="../model";

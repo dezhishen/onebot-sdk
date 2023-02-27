@@ -9,22 +9,22 @@ import (
 
 	"github.com/dezhishen/onebot-sdk/pkg/client"
 	"github.com/dezhishen/onebot-sdk/pkg/config"
+	"github.com/dezhishen/onebot-sdk/pkg/event/base"
+	"github.com/dezhishen/onebot-sdk/pkg/event/message"
+	"github.com/dezhishen/onebot-sdk/pkg/event/meta"
+	"github.com/dezhishen/onebot-sdk/pkg/event/notice"
+	"github.com/dezhishen/onebot-sdk/pkg/event/request"
 	"github.com/dezhishen/onebot-sdk/pkg/model"
 )
 
-type onebotBaseEventCli interface {
-	EventType() OnebotEventType
-	Handler(data []byte) error
-}
-
 type onebotEventcli struct {
-	onebotMessageEventCli // 消息事件
-	onebotNoticeEventCli  // 通知事件
-	onebotRequestEventCli // 请求事件
-	onebotMetaEventCli    // 元事件
-	conf                  config.OnebotConfig
-	ws                    *client.WebsocketCli
-	allHandler            map[OnebotEventType]onebotBaseEventCli
+	message.OnebotMessageEventCli // 消息事件
+	notice.OnebotNoticeEventCli   // 通知事件
+	request.OnebotRequestEventCli // 请求事件
+	meta.OnebotMetaEventCli       // 元事件
+	conf                          config.OnebotConfig
+	ws                            *client.WebsocketCli
+	allHandler                    map[base.OnebotEventType]base.OnebotBaseEventCli
 	// StartWsWithContext(ctx context.Context) error
 }
 
@@ -43,36 +43,36 @@ func NewOnebotEventCli(conf *config.OnebotConfig) (*onebotEventcli, error) {
 	}
 	var result = &onebotEventcli{
 		conf:       *conf,
-		allHandler: make(map[OnebotEventType]onebotBaseEventCli),
+		allHandler: make(map[base.OnebotEventType]base.OnebotBaseEventCli),
 	}
 	// 消息事件
-	messageEventHandler, err := NewOnebotMessageEventCli()
+	messageEventHandler, err := message.NewOnebotMessageEventCli()
 	if err != nil {
 		return nil, err
 	}
-	result.allHandler[OnebotEventTypeMessage] = messageEventHandler
-	result.onebotMessageEventCli = messageEventHandler
+	result.allHandler[base.OnebotEventTypeMessage] = messageEventHandler
+	result.OnebotMessageEventCli = messageEventHandler
 	// 元事件
-	metaEventHandler, err := NewOnebotMetaEventCli()
+	metaEventHandler, err := meta.NewOnebotMetaEventCli()
 	if err != nil {
 		return nil, err
 	}
-	result.allHandler[OnebotEventTypeMetaEvent] = metaEventHandler
-	result.onebotMetaEventCli = metaEventHandler
+	result.allHandler[base.OnebotEventTypeMetaEvent] = metaEventHandler
+	result.OnebotMetaEventCli = metaEventHandler
 	// 通知事件
-	noticeEventHandler, err := NewOnebotNoticeEventCli()
+	noticeEventHandler, err := notice.NewOnebotNoticeEventCli()
 	if err != nil {
 		return nil, err
 	}
-	result.allHandler[OnebotEventTypeNotice] = noticeEventHandler
-	result.onebotNoticeEventCli = noticeEventHandler
+	result.allHandler[base.OnebotEventTypeNotice] = noticeEventHandler
+	result.OnebotNoticeEventCli = noticeEventHandler
 	// 请求事件
-	requestEventHandler, err := NewOnebotRequestEventCli()
+	requestEventHandler, err := request.NewOnebotRequestEventCli()
 	if err != nil {
 		return nil, err
 	}
-	result.allHandler[OnebotEventTypeRequest] = requestEventHandler
-	result.onebotRequestEventCli = requestEventHandler
+	result.allHandler[base.OnebotEventTypeRequest] = requestEventHandler
+	result.OnebotRequestEventCli = requestEventHandler
 	return result, nil
 }
 
@@ -93,7 +93,7 @@ func (cli *onebotEventcli) listen(url string, ctx context.Context) error {
 			return fmt.Errorf("handle listen decoder err :%v,raw:%v", err, message)
 		}
 		log.Debugf("received event,post_type:%v", eventBaseInfo.PostType)
-		var eventType = OnebotEventType(eventBaseInfo.PostType)
+		var eventType = base.OnebotEventType(eventBaseInfo.PostType)
 		handler, ok := cli.allHandler[eventType]
 		if ok {
 			defer func() {
@@ -109,7 +109,7 @@ func (cli *onebotEventcli) listen(url string, ctx context.Context) error {
 	return err
 }
 
-func runHandler(handler onebotBaseEventCli, message []byte) {
+func runHandler(handler base.OnebotBaseEventCli, message []byte) {
 	defer func() {
 		if err := recover(); err != nil {
 			// 打印异常，关闭资源，退出此函数

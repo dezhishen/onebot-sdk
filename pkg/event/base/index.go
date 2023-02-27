@@ -1,4 +1,4 @@
-package event
+package base
 
 type OnebotEventType string
 
@@ -8,3 +8,8 @@ const (
 	OnebotEventTypeRequest   OnebotEventType = "request"
 	OnebotEventTypeMetaEvent OnebotEventType = "meta_event"
 )
+
+type OnebotBaseEventCli interface {
+	EventType() OnebotEventType
+	Handler(data []byte) error
+}
