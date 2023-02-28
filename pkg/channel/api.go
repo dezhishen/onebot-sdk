@@ -13,15 +13,18 @@ type ApiChannel interface {
 	PostByRequestForResult(url string, req, result interface{}) error
 }
 
-func NewApiChannel(conf *config.OnebotConfig) (ApiChannel, error) {
-	if conf.Api == nil {
+func NewApiChannel(conf *config.OnebotApiConfig) (ApiChannel, error) {
+	if conf == nil {
 		return nil, errors.New("api config not found")
 	}
-	if conf.Api.Type == "http" {
-		return NewHttpApiChannel(conf.Api), nil
+	if conf.Type == "http" {
+		return NewHttpApiChannel(conf)
 	}
-	if conf.Api.Type == "websocket" {
-		return NewWebsocketApiChannel(conf.Api), nil
+	if conf.Type == "websocket" {
+		return NewWebsocketApiChannel(conf)
+	}
+	if conf.Type == "websocket-reverse" {
+		return NewWebsocketReverseApiChannel(conf)
 	}
 	return nil, errors.New("channel not support")
 }

@@ -27,7 +27,7 @@ func (ct *accessTokenTransport) RoundTrip(req *http.Request) (*http.Response, er
 	return ct.RoundTripper.RoundTrip(req)
 }
 
-func NewHttpApiChannel(conf *config.OnebotApiConfig) ApiChannel {
+func NewHttpApiChannel(conf *config.OnebotApiConfig) (ApiChannel, error) {
 	if strings.HasSuffix("/", conf.Endpoint) {
 		conf.Endpoint = strings.TrimSuffix(conf.Endpoint, "/")
 	}
@@ -43,7 +43,7 @@ func NewHttpApiChannel(conf *config.OnebotApiConfig) ApiChannel {
 		cli:         httpCli,
 		endpoint:    conf.Endpoint,
 		accessToken: conf.AccessToken,
-	}
+	}, nil
 }
 
 func concatUrl(basePath, url string) string {

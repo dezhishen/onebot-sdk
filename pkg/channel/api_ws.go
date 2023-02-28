@@ -14,7 +14,8 @@ import (
 
 type WebsocketApiChannel struct {
 	Ctx             context.Context
-	actionCli       *websocket.Conn
+	ready           chan bool
+	Conn            *websocket.Conn
 	endpoint        string
 	accessToken     string
 	resultCallbacks map[string]map[string]func(data []byte) error
@@ -35,57 +36,46 @@ type actionResult struct {
 	Echo    string      `json:"echo"`
 }
 
-func NewWebsocketApiChannel(conf *config.OnebotApiConfig) ApiChannel {
+func NewWebsocketApiChannel(conf *config.OnebotApiConfig) (ApiChannel, error) {
 	if strings.HasSuffix("/", conf.Endpoint) {
 		conf.Endpoint = strings.TrimSuffix(conf.Endpoint, "/")
 	}
 	result := &WebsocketApiChannel{
 		endpoint:        conf.Endpoint,
+		ready:           make(chan bool),
 		Ctx:             context.Background(),
 		accessToken:     conf.AccessToken,
 		resultCallbacks: make(map[string]map[string]func(data []byte) error),
 	}
-	go result.listenApiResult()
-	return result
+	go func() {
+		err := result.listenApiResult()
+		if err != nil {
+			log.Errorf("listen api result error: %s", err)
+			panic(err)
+		}
+	}()
+	if <-result.ready {
+		return result, nil
+	} else {
+		return nil, fmt.Errorf("websocket api channel init failed")
+	}
 }
 
 func (cli *WebsocketApiChannel) Post(action string) error {
-	url := fmt.Sprintf("%s/api", cli.endpoint)
-	if cli.accessToken != "" {
-		url = fmt.Sprintf("%s?access_token=%s", url, cli.accessToken)
-	}
-	if cli.actionCli == nil {
-		var err error
-		cli.actionCli, _, err = websocket.DefaultDialer.Dial(url, nil)
-		if err != nil {
-			return err
-		}
-	}
 	echo := fmt.Sprintf("%s/%d", action, time.Now().UnixNano())
 	reqData := actionReq{
 		Action: action,
 		Echo:   echo,
 	}
-	err := cli.actionCli.WriteJSON(reqData)
+	err := cli.Conn.WriteJSON(reqData)
 	if err != nil {
-		cli.actionCli.Close()
-		cli.actionCli = nil
+		cli.Conn.Close()
+		cli.Conn = nil
 	}
 	return err
 }
 
 func (cli *WebsocketApiChannel) PostForResult(action string, result interface{}) error {
-	url := fmt.Sprintf("%s/api", cli.endpoint)
-	if cli.accessToken != "" {
-		url = fmt.Sprintf("%s?access_token=%s", url, cli.accessToken)
-	}
-	if cli.actionCli == nil {
-		var err error
-		cli.actionCli, _, err = websocket.DefaultDialer.Dial(url, nil)
-		if err != nil {
-			return err
-		}
-	}
 	reqId := fmt.Sprintf("%d", time.Now().UnixNano())
 	echo := fmt.Sprintf("%s/%s", action, reqId)
 	reqData := actionReq{
@@ -99,10 +89,10 @@ func (cli *WebsocketApiChannel) PostForResult(action string, result interface{})
 		cli.unregisterCallback(action, reqId)
 		close(channel)
 	}()
-	err := cli.actionCli.WriteJSON(reqData)
+	err := cli.Conn.WriteJSON(reqData)
 	if err != nil {
-		cli.actionCli.Close()
-		cli.actionCli = nil
+		cli.Conn.Close()
+		cli.Conn = nil
 	}
 	// 等待回调
 	<-channel
@@ -113,41 +103,19 @@ func (cli *WebsocketApiChannel) PostForResult(action string, result interface{})
 }
 
 func (cli *WebsocketApiChannel) PostByRequest(action string, params interface{}) error {
-	url := fmt.Sprintf("%s/api", cli.endpoint)
-	if cli.accessToken != "" {
-		url = fmt.Sprintf("%s?access_token=%s", url, cli.accessToken)
-	}
-	if cli.actionCli == nil {
-		var err error
-		cli.actionCli, _, err = websocket.DefaultDialer.Dial(url, nil)
-		if err != nil {
-			return err
-		}
-	}
 	reqData := actionReq{
 		Action: action,
 		Params: params,
 	}
-	err := cli.actionCli.WriteJSON(reqData)
+	err := cli.Conn.WriteJSON(reqData)
 	if err != nil {
-		cli.actionCli.Close()
-		cli.actionCli = nil
+		cli.Conn.Close()
+		cli.Conn = nil
 	}
 	return err
 }
 
 func (cli *WebsocketApiChannel) PostByRequestForResult(action string, params interface{}, result interface{}) error {
-	url := fmt.Sprintf("%s/api", cli.endpoint)
-	if cli.accessToken != "" {
-		url = fmt.Sprintf("%s?access_token=%s", url, cli.accessToken)
-	}
-	if cli.actionCli == nil {
-		var err error
-		cli.actionCli, _, err = websocket.DefaultDialer.Dial(url, nil)
-		if err != nil {
-			return err
-		}
-	}
 	reqId := fmt.Sprintf("%d", time.Now().UnixNano())
 	echo := fmt.Sprintf("%s/%s", action, reqId)
 	reqData := actionReq{
@@ -162,10 +130,10 @@ func (cli *WebsocketApiChannel) PostByRequestForResult(action string, params int
 		cli.unregisterCallback(action, reqId)
 		close(channel)
 	}()
-	err := cli.actionCli.WriteJSON(reqData)
+	err := cli.Conn.WriteJSON(reqData)
 	if err != nil {
-		cli.actionCli.Close()
-		cli.actionCli = nil
+		cli.Conn.Close()
+		cli.Conn = nil
 	}
 	<-channel
 	if err != nil {
@@ -181,25 +149,27 @@ func (cli *WebsocketApiChannel) listenApiResult() error {
 	}
 	// url := cli.endpoint + "?access_token=" + cli.accessToken
 	log.Infof("开始建立连接...地址:%v", url)
-	c, _, err := websocket.DefaultDialer.DialContext(cli.Ctx, url, nil)
+	var err error
+	cli.Conn, _, err = websocket.DefaultDialer.DialContext(cli.Ctx, url, nil)
 	if err != nil {
 		log.Infof("建立连接出现错误...,错误信息%v", err)
 		return err
 	}
 	log.Info("建立连接成功！")
-	defer c.Close()
+	cli.ready <- true
+	defer cli.Conn.Close()
 	for {
 		select {
 		case <-cli.Ctx.Done():
 			return nil
 		default:
-			_, message, err := c.ReadMessage()
+			_, message, err := cli.Conn.ReadMessage()
 			if err != nil {
 				log.Errorf("websocket发生错误:%v,将在3s后重试...", err)
 				time.Sleep(3 * time.Second)
 				for i := 1; i < 5; i++ {
 					log.Infof("尝试重连....,第%v次", i)
-					c, _, err = websocket.DefaultDialer.DialContext(cli.Ctx, url, nil)
+					cli.Conn, _, err = websocket.DefaultDialer.DialContext(cli.Ctx, url, nil)
 					if err != nil {
 						internal := 3 * i
 						log.Errorf("第%v次重连失败，将在%vs后重试", i, internal)

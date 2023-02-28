@@ -30,15 +30,7 @@ type OnebotApiClient struct {
 	request.OnebotApiRequestClient
 }
 
-func NewOnebotApiClientByConfigPath(path string) (*OnebotApiClient, error) {
-	conf, err := config.LoadConfig(path)
-	if err != nil {
-		return nil, err
-	}
-	return NewOnebotApiClientByConfig(conf)
-}
-
-func NewOnebotApiClientByConfig(config *config.OnebotConfig) (*OnebotApiClient, error) {
+func NewOnebotApiClient(config *config.OnebotApiConfig) (*OnebotApiClient, error) {
 	if config == nil {
 		return nil, fmt.Errorf("config is nil")
 	}
