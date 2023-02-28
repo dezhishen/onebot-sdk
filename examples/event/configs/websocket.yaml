@@ -1,0 +1,4 @@
+event:
+  type: "websocket"
+  addr: "0.0.0.0:8080"
+  accessToken: ""

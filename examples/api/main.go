@@ -8,6 +8,8 @@ import (
 
 func main() {
 	conf, err := config.LoadConfig("websocket-reverse")
+	// conf, err := config.LoadConfig("websocket")
+	// conf, err := config.LoadConfig("http")
 	if err != nil {
 		panic(err)
 	}
@@ -17,7 +19,8 @@ func main() {
 	}
 	result, err := cli.SendGroupMsg(
 		&model.GroupMsg{
-			GroupId: 727670105,
+			// change this to your group id
+			GroupId: 123456,
 			Message: []*model.MessageSegment{
 				{
 					Type: "text",

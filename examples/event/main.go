@@ -13,6 +13,9 @@ import (
 
 func main() {
 	conf, err := config.LoadConfig("http-reverse")
+	// conf, err := config.LoadConfig("websocket-reverse")
+	// conf, err := config.LoadConfig("websocket")
+
 	if err != nil {
 		panic(err)
 	}

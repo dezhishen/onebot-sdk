@@ -1,0 +1,4 @@
+event:
+  type: "websocket-reverse"
+  addr: "0.0.0.0:8080"
+  accessToken: ""
