@@ -1,4 +1,4 @@
-package client
+package channel
 
 import (
 	"bytes"
@@ -11,7 +11,7 @@ import (
 	"github.com/dezhishen/onebot-sdk/pkg/config"
 )
 
-type HttpCli struct {
+type HttpChannel struct {
 	cli         http.Client
 	endpoint    string
 	accessToken string
@@ -27,14 +27,20 @@ func (ct *accessTokenTransport) RoundTrip(req *http.Request) (*http.Response, er
 	return ct.RoundTripper.RoundTrip(req)
 }
 
-func NewHttpCli(conf *config.OnebotConfig) *HttpCli {
+func NewHttpApiChannel(conf *config.OnebotApiConfig) ApiChannel {
 	if strings.HasSuffix("/", conf.Endpoint) {
 		conf.Endpoint = strings.TrimSuffix(conf.Endpoint, "/")
 	}
-	return &HttpCli{
-		cli: http.Client{
+	var httpCli http.Client
+	if conf.AccessToken != "" {
+		httpCli = http.Client{
 			Transport: &accessTokenTransport{http.DefaultTransport, conf.AccessToken},
-		},
+		}
+	} else {
+		httpCli = http.Client{}
+	}
+	return &HttpChannel{
+		cli:         httpCli,
 		endpoint:    conf.Endpoint,
 		accessToken: conf.AccessToken,
 	}
@@ -44,7 +50,7 @@ func concatUrl(basePath, url string) string {
 	return basePath + "/" + url
 }
 
-func (c *HttpCli) PostWithRequsetForResult(url string, req, result interface{}) error {
+func (c *HttpChannel) PostByRequestForResult(url string, req, result interface{}) error {
 	requestBody, _ := json.Marshal(req)
 	resp, err := c.cli.Post(
 		concatUrl(c.endpoint, url),
@@ -60,7 +66,7 @@ func (c *HttpCli) PostWithRequsetForResult(url string, req, result interface{}) 
 	return nil
 }
 
-func (c *HttpCli) PostForResult(url string, result interface{}) error {
+func (c *HttpChannel) PostForResult(url string, result interface{}) error {
 	resp, err := c.cli.Post(
 		concatUrl(c.endpoint, url),
 		"application/json",
@@ -75,7 +81,7 @@ func (c *HttpCli) PostForResult(url string, result interface{}) error {
 	return nil
 }
 
-func (c *HttpCli) PostWithRequest(url string, req interface{}) error {
+func (c *HttpChannel) PostByRequest(url string, req interface{}) error {
 	requestBody, _ := json.Marshal(req)
 	_, err := c.cli.Post(
 		concatUrl(c.endpoint, url),
@@ -85,7 +91,7 @@ func (c *HttpCli) PostWithRequest(url string, req interface{}) error {
 	return err
 }
 
-func (c *HttpCli) Post(url string) error {
+func (c *HttpChannel) Post(url string) error {
 	_, err := c.cli.Post(
 		concatUrl(c.endpoint, url),
 		"application/json",

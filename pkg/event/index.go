@@ -7,7 +7,7 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
-	"github.com/dezhishen/onebot-sdk/pkg/client"
+	"github.com/dezhishen/onebot-sdk/pkg/channel"
 	"github.com/dezhishen/onebot-sdk/pkg/config"
 	"github.com/dezhishen/onebot-sdk/pkg/event/base"
 	"github.com/dezhishen/onebot-sdk/pkg/event/message"
@@ -18,31 +18,25 @@ import (
 )
 
 type onebotEventcli struct {
-	message.OnebotMessageEventCli // 消息事件
-	notice.OnebotNoticeEventCli   // 通知事件
-	request.OnebotRequestEventCli // 请求事件
-	meta.OnebotMetaEventCli       // 元事件
-	conf                          config.OnebotConfig
-	ws                            *client.WebsocketCli
+	message.OnebotMessageEventCli                      // 消息事件
+	notice.OnebotNoticeEventCli                        // 通知事件
+	request.OnebotRequestEventCli                      // 请求事件
+	meta.OnebotMetaEventCli                            // 元事件
+	_channel                      channel.EventChannel // 事件通道
 	allHandler                    map[base.OnebotEventType]base.OnebotBaseEventCli
 	// StartWsWithContext(ctx context.Context) error
 }
 
-func NewOnebotEventCli(conf *config.OnebotConfig) (*onebotEventcli, error) {
+func NewOnebotEventCli(conf *config.OnebotEventConfig) (*onebotEventcli, error) {
 	if conf == nil {
 		return nil, fmt.Errorf("config is nil")
 	}
-	if conf.Type == "" {
-		return nil, fmt.Errorf("type is empty")
-	}
-	if conf.Type != "websocket" {
-		return nil, fmt.Errorf("type is not websocket")
-	}
-	if conf.Endpoint == "" {
-		return nil, fmt.Errorf("endpoint is empty")
+	_channel, err := channel.NewEventChannel(conf)
+	if err != nil {
+		return nil, err
 	}
 	var result = &onebotEventcli{
-		conf:       *conf,
+		_channel:   _channel,
 		allHandler: make(map[base.OnebotEventType]base.OnebotBaseEventCli),
 	}
 	// 消息事件
@@ -76,17 +70,8 @@ func NewOnebotEventCli(conf *config.OnebotConfig) (*onebotEventcli, error) {
 	return result, nil
 }
 
-func (cli *onebotEventcli) StartWithContext(ctx context.Context) error {
-	var url = cli.conf.Endpoint + "/event"
-	// url := cli.conf.Endpoint
-	if cli.conf.AccessToken != "" {
-		url += "?access_token=" + cli.conf.AccessToken
-	}
-	return cli.listen(url, ctx)
-}
-
-func (cli *onebotEventcli) listen(url string, ctx context.Context) error {
-	err := cli.ws.Listen(ctx, func(message []byte) error {
+func (cli *onebotEventcli) listen(ctx context.Context) error {
+	err := cli._channel.StartListen(ctx, func(message []byte) error {
 		var eventBaseInfo model.EventBase
 		err := json.Unmarshal(message, &eventBaseInfo)
 		if err != nil {
@@ -107,6 +92,10 @@ func (cli *onebotEventcli) listen(url string, ctx context.Context) error {
 		return nil
 	})
 	return err
+}
+
+func (cli *onebotEventcli) StartListenWithCtx(ctx context.Context) error {
+	return cli.listen(ctx)
 }
 
 func runHandler(handler base.OnebotBaseEventCli, message []byte) {

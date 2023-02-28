@@ -1,4 +1,4 @@
-package client
+package channel
 
 import (
 	"context"
@@ -12,7 +12,8 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-type WebsocketCli struct {
+type WebsocketApiChannel struct {
+	Ctx             context.Context
 	actionCli       *websocket.Conn
 	endpoint        string
 	accessToken     string
@@ -34,18 +35,21 @@ type actionResult struct {
 	Echo    string      `json:"echo"`
 }
 
-func NewWebsocketCli(conf *config.OnebotConfig) *WebsocketCli {
+func NewWebsocketApiChannel(conf *config.OnebotApiConfig) ApiChannel {
 	if strings.HasSuffix("/", conf.Endpoint) {
 		conf.Endpoint = strings.TrimSuffix(conf.Endpoint, "/")
 	}
-	return &WebsocketCli{
+	result := &WebsocketApiChannel{
 		endpoint:        conf.Endpoint,
+		Ctx:             context.Background(),
 		accessToken:     conf.AccessToken,
 		resultCallbacks: make(map[string]map[string]func(data []byte) error),
 	}
+	go result.listenApiResult()
+	return result
 }
 
-func (cli *WebsocketCli) SendWithOutParam(action string) error {
+func (cli *WebsocketApiChannel) Post(action string) error {
 	url := fmt.Sprintf("%s/api", cli.endpoint)
 	if cli.accessToken != "" {
 		url = fmt.Sprintf("%s?access_token=%s", url, cli.accessToken)
@@ -70,7 +74,7 @@ func (cli *WebsocketCli) SendWithOutParam(action string) error {
 	return err
 }
 
-func (cli *WebsocketCli) SendWithOutParamForResult(action string, result interface{}) error {
+func (cli *WebsocketApiChannel) PostForResult(action string, result interface{}) error {
 	url := fmt.Sprintf("%s/api", cli.endpoint)
 	if cli.accessToken != "" {
 		url = fmt.Sprintf("%s?access_token=%s", url, cli.accessToken)
@@ -89,8 +93,8 @@ func (cli *WebsocketCli) SendWithOutParamForResult(action string, result interfa
 		Echo:   echo,
 	}
 	// 注册回调
-	channel := make(chan []byte)
-	cli.registerCallbackWithChannel(action, reqId, channel)
+	channel := make(chan byte)
+	cli.registerCallbackWithChannel(action, reqId, channel, result)
 	defer func() {
 		cli.unregisterCallback(action, reqId)
 		close(channel)
@@ -101,15 +105,14 @@ func (cli *WebsocketCli) SendWithOutParamForResult(action string, result interfa
 		cli.actionCli = nil
 	}
 	// 等待回调
-	data := <-channel
-	err = json.Unmarshal(data, result)
+	<-channel
 	if err != nil {
 		log.Errorf("unmarshal result error: %s", err)
 	}
 	return err
 }
 
-func (cli *WebsocketCli) Send(action string, params interface{}) error {
+func (cli *WebsocketApiChannel) PostByRequest(action string, params interface{}) error {
 	url := fmt.Sprintf("%s/api", cli.endpoint)
 	if cli.accessToken != "" {
 		url = fmt.Sprintf("%s?access_token=%s", url, cli.accessToken)
@@ -133,7 +136,7 @@ func (cli *WebsocketCli) Send(action string, params interface{}) error {
 	return err
 }
 
-func (cli *WebsocketCli) SendForResult(action string, params interface{}, result interface{}) error {
+func (cli *WebsocketApiChannel) PostByRequestForResult(action string, params interface{}, result interface{}) error {
 	url := fmt.Sprintf("%s/api", cli.endpoint)
 	if cli.accessToken != "" {
 		url = fmt.Sprintf("%s?access_token=%s", url, cli.accessToken)
@@ -153,8 +156,8 @@ func (cli *WebsocketCli) SendForResult(action string, params interface{}, result
 		Echo:   echo,
 	}
 	// 注册回调
-	channel := make(chan []byte)
-	cli.registerCallbackWithChannel(action, reqId, channel)
+	channel := make(chan byte)
+	cli.registerCallbackWithChannel(action, reqId, channel, result)
 	defer func() {
 		cli.unregisterCallback(action, reqId)
 		close(channel)
@@ -164,22 +167,21 @@ func (cli *WebsocketCli) SendForResult(action string, params interface{}, result
 		cli.actionCli.Close()
 		cli.actionCli = nil
 	}
-	data := <-channel
-	err = json.Unmarshal(data, result)
+	<-channel
 	if err != nil {
 		log.Errorf("unmarshal result error: %s", err)
 	}
 	return err
 }
 
-func (cli *WebsocketCli) listenApiResult(ctx context.Context) error {
+func (cli *WebsocketApiChannel) listenApiResult() error {
 	url := fmt.Sprintf("%s/api", cli.endpoint)
 	if cli.accessToken != "" {
 		url = fmt.Sprintf("%s?access_token=%s", url, cli.accessToken)
 	}
 	// url := cli.endpoint + "?access_token=" + cli.accessToken
 	log.Infof("开始建立连接...地址:%v", url)
-	c, _, err := websocket.DefaultDialer.DialContext(ctx, url, nil)
+	c, _, err := websocket.DefaultDialer.DialContext(cli.Ctx, url, nil)
 	if err != nil {
 		log.Infof("建立连接出现错误...,错误信息%v", err)
 		return err
@@ -188,7 +190,7 @@ func (cli *WebsocketCli) listenApiResult(ctx context.Context) error {
 	defer c.Close()
 	for {
 		select {
-		case <-ctx.Done():
+		case <-cli.Ctx.Done():
 			return nil
 		default:
 			_, message, err := c.ReadMessage()
@@ -197,7 +199,7 @@ func (cli *WebsocketCli) listenApiResult(ctx context.Context) error {
 				time.Sleep(3 * time.Second)
 				for i := 1; i < 5; i++ {
 					log.Infof("尝试重连....,第%v次", i)
-					c, _, err = websocket.DefaultDialer.DialContext(ctx, url, nil)
+					c, _, err = websocket.DefaultDialer.DialContext(cli.Ctx, url, nil)
 					if err != nil {
 						internal := 3 * i
 						log.Errorf("第%v次重连失败，将在%vs后重试", i, internal)
@@ -230,7 +232,7 @@ func (cli *WebsocketCli) listenApiResult(ctx context.Context) error {
 	}
 }
 
-func (cli *WebsocketCli) Listen(ctx context.Context, callback func(message []byte) error) error {
+func (cli *WebsocketApiChannel) Listen(ctx context.Context, callback func(message []byte) error) error {
 	url := fmt.Sprintf("%s/event", cli.endpoint)
 	if cli.accessToken != "" {
 		url = fmt.Sprintf("%s?access_token=%s", url, cli.accessToken)
@@ -281,22 +283,24 @@ func (cli *WebsocketCli) Listen(ctx context.Context, callback func(message []byt
 	}
 }
 
-func (cli *WebsocketCli) registerCallbackWithChannel(
+func (cli *WebsocketApiChannel) registerCallbackWithChannel(
 	action string,
 	reqId string,
-	channel chan []byte,
+	channel chan byte,
+	result interface{},
 ) {
 	if _, ok := cli.resultCallbacks[action]; !ok {
 		cli.resultCallbacks[action] = make(map[string]func(data []byte) error)
 	}
 	cli.resultCallbacks[action][reqId] =
 		func(data []byte) error {
-			channel <- data
+			json.Unmarshal(data, result)
+			channel <- 1
 			return nil
 		}
 }
 
-func (cli *WebsocketCli) unregisterCallback(
+func (cli *WebsocketApiChannel) unregisterCallback(
 	action string,
 	reqId string,
 ) {
@@ -305,7 +309,7 @@ func (cli *WebsocketCli) unregisterCallback(
 	}
 }
 
-func (cli *WebsocketCli) handlerCallback(
+func (cli *WebsocketApiChannel) handlerCallback(
 	echo string,
 	message []byte,
 ) {

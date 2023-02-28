@@ -2,7 +2,7 @@ package cqhttp
 
 import "github.com/dezhishen/onebot-sdk/pkg/model"
 
-type OnebotApiCqhttp interface {
+type OnebotApiCqhttpClient interface {
 	// 获取 Cookies
 	// get_cookies
 	// domain 指定域名
