@@ -21,6 +21,15 @@ type HttpReverseEventChannel struct {
 
 func NewHttpReverseEventChannel(conf *config.OnebotEventConfig) (EventChannel, error) {
 	router := gin.Default()
+	if conf.AccessToken != "" {
+		router.Use(func(c *gin.Context) {
+			if c.GetHeader("Authorization") != "Bearer "+conf.AccessToken {
+				c.AbortWithStatus(http.StatusUnauthorized)
+				return
+			}
+			c.Next()
+		})
+	}
 	/*
 		X-Signature的内容中，sha1的值的计算方式为：
 		获取请求体的内容，即 requestBody

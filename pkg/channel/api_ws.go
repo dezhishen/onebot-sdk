@@ -19,6 +19,7 @@ type WebsocketApiChannel struct {
 	endpoint        string
 	accessToken     string
 	resultCallbacks map[string]map[string]func(data []byte) error
+	// todo add secret support
 }
 
 type actionReq struct {

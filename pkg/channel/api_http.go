@@ -15,6 +15,7 @@ type HttpChannel struct {
 	cli         http.Client
 	endpoint    string
 	accessToken string
+	// todo add secret support
 }
 
 type accessTokenTransport struct {
