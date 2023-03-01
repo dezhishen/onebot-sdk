@@ -17,7 +17,7 @@ import (
 	"github.com/dezhishen/onebot-sdk/pkg/model"
 )
 
-type onebotEventcli struct {
+type OnebotEventcli struct {
 	message.OnebotMessageEventCli                      // 消息事件
 	notice.OnebotNoticeEventCli                        // 通知事件
 	request.OnebotRequestEventCli                      // 请求事件
@@ -27,7 +27,7 @@ type onebotEventcli struct {
 	// StartWsWithContext(ctx context.Context) error
 }
 
-func NewOnebotEventCli(conf *config.OnebotEventConfig) (*onebotEventcli, error) {
+func NewOnebotEventCli(conf *config.OnebotEventConfig) (*OnebotEventcli, error) {
 	if conf == nil {
 		return nil, fmt.Errorf("config is nil")
 	}
@@ -35,7 +35,7 @@ func NewOnebotEventCli(conf *config.OnebotEventConfig) (*onebotEventcli, error) 
 	if err != nil {
 		return nil, err
 	}
-	var result = &onebotEventcli{
+	var result = &OnebotEventcli{
 		_channel:   _channel,
 		allHandler: make(map[base.OnebotEventType]base.OnebotBaseEventCli),
 	}
@@ -70,7 +70,7 @@ func NewOnebotEventCli(conf *config.OnebotEventConfig) (*onebotEventcli, error) 
 	return result, nil
 }
 
-func (cli *onebotEventcli) listen(ctx context.Context) error {
+func (cli *OnebotEventcli) listen(ctx context.Context) error {
 	err := cli._channel.StartListen(ctx, func(message []byte) error {
 		var eventBaseInfo model.EventBase
 		err := json.Unmarshal(message, &eventBaseInfo)
@@ -94,7 +94,7 @@ func (cli *onebotEventcli) listen(ctx context.Context) error {
 	return err
 }
 
-func (cli *onebotEventcli) StartListenWithCtx(ctx context.Context) error {
+func (cli *OnebotEventcli) StartListenWithCtx(ctx context.Context) error {
 	return cli.listen(ctx)
 }
 
