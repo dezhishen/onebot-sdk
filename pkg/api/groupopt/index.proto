@@ -33,13 +33,13 @@ message SetGroupSpecialTitleRequest {
 	int64 group_id = 1;
 	int64 user_id = 2;
 	string special_title = 3;
-	int32 duration = 4;
+	uint32 duration = 4;
 }
 
 message SetGroupBanRequest {
 	int64 group_id = 1;
 	int64 user_id = 2;
-	int32 duration = 3;
+	uint32 duration = 3;
 }
 
 message SetGroupWholeBanequest {
@@ -51,7 +51,7 @@ message SetGroupAnonymousBanRequest {
 	int64 group_id = 1;
 	model.AnonymousGRPC anonymous = 2;
 	string anonymous_flag = 3;
-	int32 duration = 4;
+	uint32 duration = 4;
 }
 
 message SetGroupAnonymousRequest{
