@@ -41,8 +41,12 @@ onebot-sdk
 - [x] websocket支持
 - [x] 反向websocket支持
 - [x] access-token支持
+- [x] 调用超时设置支持
+	- [x] api调用可以配置超时时间，单位ms,默认值为10000
+- [ ] 消息格式支持
+	- [x] array支持
+	- [ ] CQ码支持
 - [ ] secret支持
-- [ ] 调用超时设置支持
 - [ ] 支持[onebot-v12](https://12.onebot.dev/)
 # 快速开始
 ## 引用

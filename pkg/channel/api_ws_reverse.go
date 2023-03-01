@@ -26,6 +26,7 @@ type WebsocketReverseApiChannel struct {
 	ready           chan bool
 	svc             *http.Server
 	resultCallbacks map[string]map[string]func(data []byte) error
+	timeout         time.Duration
 }
 
 func NewWebsocketReverseApiChannel(conf *config.OnebotApiConfig) (ApiChannel, error) {
@@ -36,8 +37,13 @@ func NewWebsocketReverseApiChannel(conf *config.OnebotApiConfig) (ApiChannel, er
 		使用密钥为 secret的HMAC算法加密 requestBody
 		得到的HMAC加密值以Hex格式输出为字符串
 	*/
+	if conf.Timeout == 0 {
+		// 默认10s
+		conf.Timeout = DEFAULT_TIMEOUT
+	}
 	ws := &WebsocketReverseApiChannel{
 		ready:           make(chan bool),
+		timeout:         time.Duration(conf.Timeout) * time.Millisecond,
 		resultCallbacks: make(map[string]map[string]func(data []byte) error),
 	}
 	router.Use(func(c *gin.Context) {
@@ -173,11 +179,12 @@ func (cli *WebsocketReverseApiChannel) PostForResult(action string, result inter
 		cli.Conn = nil
 	}
 	// 等待回调
-	<-channel
-	if err != nil {
-		log.Errorf("unmarshal result error: %s", err)
+	select {
+	case <-channel:
+		return nil
+	case <-time.After(cli.timeout):
+		return fmt.Errorf("request timeout")
 	}
-	return err
 }
 
 func (cli *WebsocketReverseApiChannel) PostByRequest(action string, params interface{}) error {
@@ -213,11 +220,12 @@ func (cli *WebsocketReverseApiChannel) PostByRequestForResult(action string, par
 		cli.Conn.Close()
 		cli.Conn = nil
 	}
-	<-channel
-	if err != nil {
-		log.Errorf("unmarshal result error: %s", err)
+	select {
+	case <-channel:
+		return nil
+	case <-time.After(cli.timeout):
+		return fmt.Errorf("request timeout")
 	}
-	return err
 }
 
 func (cli *WebsocketReverseApiChannel) registerCallbackWithChannel(

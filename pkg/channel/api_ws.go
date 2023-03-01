@@ -19,6 +19,7 @@ type WebsocketApiChannel struct {
 	endpoint        string
 	accessToken     string
 	resultCallbacks map[string]map[string]func(data []byte) error
+	timeout         time.Duration
 	// todo add secret support
 }
 
@@ -41,10 +42,15 @@ func NewWebsocketApiChannel(conf *config.OnebotApiConfig) (ApiChannel, error) {
 	if strings.HasSuffix("/", conf.Endpoint) {
 		conf.Endpoint = strings.TrimSuffix(conf.Endpoint, "/")
 	}
+	if conf.Timeout == 0 {
+		// 默认10s
+		conf.Timeout = DEFAULT_TIMEOUT
+	}
 	result := &WebsocketApiChannel{
 		endpoint:        conf.Endpoint,
 		ready:           make(chan bool),
 		Ctx:             context.Background(),
+		timeout:         time.Duration(conf.Timeout) * time.Millisecond,
 		accessToken:     conf.AccessToken,
 		resultCallbacks: make(map[string]map[string]func(data []byte) error),
 	}
@@ -96,11 +102,12 @@ func (cli *WebsocketApiChannel) PostForResult(action string, result interface{})
 		cli.Conn = nil
 	}
 	// 等待回调
-	<-channel
-	if err != nil {
-		log.Errorf("unmarshal result error: %s", err)
+	select {
+	case <-channel:
+		return nil
+	case <-time.After(cli.timeout):
+		return fmt.Errorf("request timeout")
 	}
-	return err
 }
 
 func (cli *WebsocketApiChannel) PostByRequest(action string, params interface{}) error {
@@ -136,11 +143,12 @@ func (cli *WebsocketApiChannel) PostByRequestForResult(action string, params int
 		cli.Conn.Close()
 		cli.Conn = nil
 	}
-	<-channel
-	if err != nil {
-		log.Errorf("unmarshal result error: %s", err)
+	select {
+	case <-channel:
+		return nil
+	case <-time.After(cli.timeout):
+		return fmt.Errorf("request timeout")
 	}
-	return err
 }
 
 func (cli *WebsocketApiChannel) listenApiResult() error {
