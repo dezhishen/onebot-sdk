@@ -11,6 +11,17 @@ func (msg *MessageElementContact) Type() string {
 	return "contact"
 }
 
+func (msg *MessageElementContact) Enabled() bool {
+	return false
+}
+
+// ProcessGRPC
+func (msg *MessageElementContact) ProcessGRPC(segment *MessageSegmentGRPC) {
+	segment.Data = &MessageSegmentGRPC_MessageElementContact{
+		MessageElementContact: msg.ToGRPC(),
+	}
+}
+
 func (msg *MessageElementContact) ToGRPC() *MessageElementContactGRPC {
 	var result MessageElementContactGRPC
 	result.ContactType = msg.ContactType
@@ -30,5 +41,16 @@ func init() {
 		var result MessageElementContact
 		err := json.Unmarshal(data, &result)
 		return &result, err
+	}
+	messageSegmentGRPCToStructMap["contact"] = func(msg *MessageSegmentGRPC) (MessageElement, error) {
+		if msg.Data == nil {
+			return nil, nil
+		}
+		switch data := msg.Data.(type) {
+		case *MessageSegmentGRPC_MessageElementContact:
+			return data.MessageElementContact.ToStruct(), nil
+		default:
+			return nil, nil
+		}
 	}
 }

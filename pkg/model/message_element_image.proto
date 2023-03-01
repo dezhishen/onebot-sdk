@@ -4,11 +4,34 @@ option go_package="github.com/dezhishen/onebot-sdk/pkg/model;model";
 
 
 message MessageElementImageGRPC {
+	// 文件名
 	string file = 1;
-	//图片类型
+	// 图片类型
 	string image_type = 2 [json_name="type"];
-	string url = 3;
-	uint32 cache = 4;
-	uint32 proxy = 5;
-	uint32 timeout = 6;
+	// 图片子类型, 只出现在群聊
+	// 0	正常图片
+	// 1	表情包, 在客户端会被分类到表情包图片并缩放显示
+	// 2	热图
+	// 3	斗图
+	// 4	智图?
+	// 7	贴图
+	// 8	自拍
+	// 9	贴图广告?
+	// 10	有待测试
+	// 13	热搜图
+	string sub_type = 3;
+	// 图片 URL
+	string url = 4;
+	// 是否使用缓存 0/1 只在通过网络 URL 发送时有效, 表示是否使用已缓存的文件, 默认 1
+	string cache = 5;
+	// 发送秀图时的特效id, 默认为40000
+	// 40000	普通
+	// 40001	幻影
+	// 40002	抖动
+	// 40003	生日
+	// 40004	爱你
+	// 40005	征友
+	string id = 6;
+	// 通过网络下载图片时的线程数, 默认单线程. (在资源不支持并发时会自动处理)
+	string c = 7;
 }

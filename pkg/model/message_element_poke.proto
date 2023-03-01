@@ -4,7 +4,5 @@ option go_package="github.com/dezhishen/onebot-sdk/pkg/model;model";
 
 
 message MessageElementPokeGRPC {
-	string poke_type = 1 [json_name="type"];	
-	string id = 2;
-	string name = 3;
+	int64 qq = 1;
 }

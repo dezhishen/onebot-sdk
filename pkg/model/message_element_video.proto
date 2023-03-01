@@ -3,9 +3,10 @@ package model;
 option go_package="github.com/dezhishen/onebot-sdk/pkg/model;model";
 
 message MessageElementVideoGRPC  {
+	// file	string	-	视频地址, 支持http和file发送
 	string file = 1;
-	string url = 2;
-	uint32   cache = 3;
-	uint32   proxy = 4;
-	uint32   timeout = 5;
+	// cover	string	-	视频封面, 支持http, file和base64发送, 格式必须为jpg
+	string cover = 2;
+	// c	int	2 3	通过网络下载视频时的线程数, 默认单线程. (在资源不支持并发时会自动处理)
+	uint32 c = 3;
 }

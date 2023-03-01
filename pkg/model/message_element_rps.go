@@ -9,6 +9,17 @@ func (msg *MessageElementRps) Type() string {
 	return "rps"
 }
 
+func (msg *MessageElementRps) Enabled() bool {
+	return false
+}
+
+// ProcessGRPC
+func (msg *MessageElementRps) ProcessGRPC(segment *MessageSegmentGRPC) {
+	segment.Data = &MessageSegmentGRPC_MessageElementRps{
+		MessageElementRps: msg.ToGRPC(),
+	}
+}
+
 func (msg *MessageElementRps) ToGRPC() *MessageElementRpsGRPC {
 	var result MessageElementRpsGRPC
 	return &result
@@ -24,5 +35,16 @@ func init() {
 		var result MessageElementRps
 		err := json.Unmarshal(data, &result)
 		return &result, err
+	}
+	messageSegmentGRPCToStructMap["rps"] = func(msg *MessageSegmentGRPC) (MessageElement, error) {
+		if msg.Data == nil {
+			return nil, nil
+		}
+		switch data := msg.Data.(type) {
+		case *MessageSegmentGRPC_MessageElementRps:
+			return data.MessageElementRps.ToStruct(), nil
+		default:
+			return nil, nil
+		}
 	}
 }

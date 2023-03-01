@@ -9,6 +9,17 @@ func (msg *MessageElementShake) Type() string {
 	return "shake"
 }
 
+func (msg *MessageElementShake) Enabled() bool {
+	return false
+}
+
+// ProcessGRPC
+func (msg *MessageElementShake) ProcessGRPC(segment *MessageSegmentGRPC) {
+	segment.Data = &MessageSegmentGRPC_MessageElementShake{
+		MessageElementShake: msg.ToGRPC(),
+	}
+}
+
 func (msg *MessageElementShake) ToGRPC() *MessageElementShakeGRPC {
 	var result MessageElementShakeGRPC
 	return &result
@@ -24,5 +35,16 @@ func init() {
 		var result MessageElementShake
 		err := json.Unmarshal(data, &result)
 		return &result, err
+	}
+	messageSegmentGRPCToStructMap["shake"] = func(msg *MessageSegmentGRPC) (MessageElement, error) {
+		if msg.Data == nil {
+			return nil, nil
+		}
+		switch data := msg.Data.(type) {
+		case *MessageSegmentGRPC_MessageElementShake:
+			return data.MessageElementShake.ToStruct(), nil
+		default:
+			return nil, nil
+		}
 	}
 }

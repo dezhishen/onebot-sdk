@@ -3,5 +3,14 @@ package model;
 option go_package="github.com/dezhishen/onebot-sdk/pkg/model;model";
 
 message MessageElementReplyGRPC {
-	string id = 1;
+	// id	int	回复时所引用的消息id, 必须为本群消息.
+	int64 id = 1;
+	// 	text	string	自定义回复的信息
+	string text = 2;
+	// qq	int64	自定义回复时的自定义QQ, 如果使用自定义信息必须指定.
+	int64 qq = 3;
+	// time	int64	自定义回复时的时间, 格式为Unix时间
+	int64 time = 4;
+	// seq	int64	起始消息序号, 可通过 get_msg 获得
+	int64 seq = 5;
 }

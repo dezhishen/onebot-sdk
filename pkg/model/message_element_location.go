@@ -13,6 +13,17 @@ func (msg *MessageElementLocation) Type() string {
 	return "location"
 }
 
+func (msg *MessageElementLocation) Enabled() bool {
+	return false
+}
+
+// ProcessGRPC
+func (msg *MessageElementLocation) ProcessGRPC(segment *MessageSegmentGRPC) {
+	segment.Data = &MessageSegmentGRPC_MessageElementLocation{
+		MessageElementLocation: msg.ToGRPC(),
+	}
+}
+
 func (msg *MessageElementLocation) ToGRPC() *MessageElementLocationGRPC {
 	return &MessageElementLocationGRPC{
 		Lat:     msg.Lat,
@@ -36,5 +47,16 @@ func init() {
 		var result MessageElementLocation
 		err := json.Unmarshal(data, &result)
 		return &result, err
+	}
+	messageSegmentGRPCToStructMap["jsolocationn"] = func(msg *MessageSegmentGRPC) (MessageElement, error) {
+		if msg.Data == nil {
+			return nil, nil
+		}
+		switch data := msg.Data.(type) {
+		case *MessageSegmentGRPC_MessageElementLocation:
+			return data.MessageElementLocation.ToStruct(), nil
+		default:
+			return nil, nil
+		}
 	}
 }

@@ -5,4 +5,5 @@ option go_package="github.com/dezhishen/onebot-sdk/pkg/model;model";
 
 message MessageElementAtGRPC {
 	string qq = 1;
+	string name = 2;
 }

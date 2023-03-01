@@ -1,53 +1,68 @@
 syntax = "proto3";
 package model;
 option go_package="github.com/dezhishen/onebot-sdk/pkg/model;model";
+import "message_element_anonymous.proto";
 import "message_element_at.proto";
+import "message_element_cardimage.proto";
 import "message_element_contact.proto";
 import "message_element_dice.proto";
 import "message_element_face.proto";
 import "message_element_forward.proto";
+import "message_element_gift.proto";
 import "message_element_image.proto";
 import "message_element_json.proto";
 import "message_element_location.proto";
 import "message_element_music.proto";
 import "message_element_poke.proto";
 import "message_element_record.proto";
+import "message_element_redbag.proto";
 import "message_element_reply.proto";
 import "message_element_rps.proto";
 import "message_element_shake.proto";
 import "message_element_share.proto";
 import "message_element_text.proto";
+import "message_element_tts.proto";
 import "message_element_video.proto";
 import "message_element_xml.proto";
 
 message MessageElementNodeGRPC {
-	string	id = 1;
-	string           name = 2;
-	int64           uin = 3;
-	repeated MessageSegmentGRPC content = 4;
+	// id	int32	转发消息id	直接引用他人的消息合并转发, 实际查看顺序为原消息发送顺序 与下面的自定义消息二选一
+	string id = 1;
+	// name	string	发送者显示名字	用于自定义消息 (自定义消息并合并转发, 实际查看顺序为自定义消息段顺序)
+	string name = 2;
+	// uin	int64	发送者QQ号	用于自定义消息
+	int64 uin = 3;
+	// content	message	具体消息	用于自定义消息 不支持转发套娃
+	optional MessageSegmentGRPC content = 4;
+	optional MessageSegmentGRPC seq = 5;
 }
 
 message MessageSegmentGRPC {
 	string type = 1;
 	oneof data {
-		MessageElementAtGRPC message_element_at = 2;
-		MessageElementContactGRPC message_element_contact = 3;
-		MessageElementDiceGRPC message_element_dice = 4;
-		MessageElementFaceGRPC message_element_face = 5;
-		MessageElementForwardGRPC message_element_forward = 6;
-		MessageElementImageGRPC message_element_image = 7;
-		MessageElementJsonGRPC message_element_json = 8;
-		MessageElementLocationGRPC message_element_location = 9;
-		MessageElementMusicGRPC message_element_music = 10;
-		MessageElementNodeGRPC message_element_node = 11;
-		MessageElementPokeGRPC message_element_poke = 12;
-		MessageElementRecordGRPC message_element_record = 13;
-		MessageElementReplyGRPC message_element_reply = 14;
-		MessageElementRpsGRPC message_element_rps = 15;
-		MessageElementShakeGRPC message_element_shake = 16;
-		MessageElementShareGRPC message_element_share = 17;
-		MessageElementTextGRPC message_element_text = 18;
-		MessageElementVideoGRPC message_element_video = 19;
-		MessageElementXmlGRPC message_element_xml = 20;
+		MessageElementAnonymousGRPC message_element_anonymous = 2;
+		MessageElementAtGRPC message_element_at = 3;
+		MessageElementCardimageGRPC message_element_cardimage = 4;
+		MessageElementContactGRPC message_element_contact = 5;
+		MessageElementDiceGRPC message_element_dice = 6;
+		MessageElementFaceGRPC message_element_face = 7;
+		MessageElementForwardGRPC message_element_forward = 8;
+		MessageElementGiftGRPC message_element_gift = 9;
+		MessageElementImageGRPC message_element_image = 10;
+		MessageElementJsonGRPC message_element_json = 11;
+		MessageElementLocationGRPC message_element_location = 12;
+		MessageElementMusicGRPC message_element_music = 13;
+		MessageElementPokeGRPC message_element_poke = 14;
+		MessageElementRecordGRPC message_element_record = 15;
+		MessageElementRedbagGRPC message_element_redbag = 16;
+		MessageElementReplyGRPC message_element_reply = 17;
+		MessageElementRpsGRPC message_element_rps = 18;
+		MessageElementShakeGRPC message_element_shake = 19;
+		MessageElementShareGRPC message_element_share = 20;
+		MessageElementTextGRPC message_element_text = 21;
+		MessageElementTtsGRPC message_element_tts = 22;
+		MessageElementVideoGRPC message_element_video = 23;
+		MessageElementXmlGRPC message_element_xml = 24;
+		MessageElementNodeGRPC message_element_node = 25;
 	}
 }

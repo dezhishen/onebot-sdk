@@ -1,8 +1,4 @@
 syntax = "proto3";
 package model;
 option go_package="github.com/dezhishen/onebot-sdk/pkg/model;model";
-
-message MessageElementXmlGRPC  {
-	 string data = 1;
-	 int32 resid = 2;
-}
+// to see message_element.proto

@@ -19,84 +19,13 @@ func (msg *MessageSegment) ToGRPC() *MessageSegmentGRPC {
 	result := &MessageSegmentGRPC{
 		Type: msg.Type,
 	}
-	switch msg.Type {
-	case "at":
-		result.Data = &MessageSegmentGRPC_MessageElementAt{
-			MessageElementAt: msg.Data.(*MessageElementAt).ToGRPC(),
-		}
-	case "contact":
-		result.Data = &MessageSegmentGRPC_MessageElementContact{
-			MessageElementContact: msg.Data.(*MessageElementContact).ToGRPC(),
-		}
-	case "dice":
-		result.Data = &MessageSegmentGRPC_MessageElementDice{
-			MessageElementDice: msg.Data.(*MessageElementDice).ToGRPC(),
-		}
-	case "face":
-		result.Data = &MessageSegmentGRPC_MessageElementFace{
-			MessageElementFace: msg.Data.(*MessageElementFace).ToGRPC(),
-		}
-	case "forward":
-		result.Data = &MessageSegmentGRPC_MessageElementForward{
-			MessageElementForward: msg.Data.(*MessageElementForward).ToGRPC(),
-		}
-	case "image":
-		result.Data = &MessageSegmentGRPC_MessageElementImage{
-			MessageElementImage: msg.Data.(*MessageElementImage).ToGRPC(),
-		}
-	case "json":
-		result.Data = &MessageSegmentGRPC_MessageElementJson{
-			MessageElementJson: msg.Data.(*MessageElementJson).ToGRPC(),
-		}
-	case "location":
-		result.Data = &MessageSegmentGRPC_MessageElementLocation{
-			MessageElementLocation: msg.Data.(*MessageElementLocation).ToGRPC(),
-		}
-	case "music":
-		result.Data = &MessageSegmentGRPC_MessageElementMusic{
-			MessageElementMusic: msg.Data.(*MessageElementMusic).ToGRPC(),
-		}
-	case "poke":
-		result.Data = &MessageSegmentGRPC_MessageElementPoke{
-			MessageElementPoke: msg.Data.(*MessageElementPoke).ToGRPC(),
-		}
-	case "record":
-		result.Data = &MessageSegmentGRPC_MessageElementRecord{
-			MessageElementRecord: msg.Data.(*MessageElementRecord).ToGRPC(),
-		}
-	case "reply":
-		result.Data = &MessageSegmentGRPC_MessageElementReply{
-			MessageElementReply: msg.Data.(*MessageElementReply).ToGRPC(),
-		}
-	case "rps":
-		result.Data = &MessageSegmentGRPC_MessageElementRps{
-			MessageElementRps: msg.Data.(*MessageElementRps).ToGRPC(),
-		}
-	case "shake":
-		result.Data = &MessageSegmentGRPC_MessageElementShake{
-			MessageElementShake: msg.Data.(*MessageElementShake).ToGRPC(),
-		}
-	case "share":
-		result.Data = &MessageSegmentGRPC_MessageElementShare{
-			MessageElementShare: msg.Data.(*MessageElementShare).ToGRPC(),
-		}
-	case "text":
-		result.Data = &MessageSegmentGRPC_MessageElementText{
-			MessageElementText: msg.Data.(*MessageElementText).ToGRPC(),
-		}
-	case "video":
-		result.Data = &MessageSegmentGRPC_MessageElementVideo{
-			MessageElementVideo: msg.Data.(*MessageElementVideo).ToGRPC(),
-		}
-	case "xml":
-		result.Data = &MessageSegmentGRPC_MessageElementXml{
-			MessageElementXml: msg.Data.(*MessageElementXml).ToGRPC(),
-		}
-	default:
-		log.Errorf("未定义的消息类型:%v", result.Type)
+	if msg.Data != nil {
+		msg.Data.ProcessGRPC(result)
 	}
 	return result
 }
+
+var messageSegmentGRPCToStructMap = make(map[string]func(msg *MessageSegmentGRPC) (MessageElement, error))
 
 func (msg *MessageSegmentGRPC) ToStruct() *MessageSegment {
 	if msg == nil {
@@ -105,46 +34,16 @@ func (msg *MessageSegmentGRPC) ToStruct() *MessageSegment {
 	result := &MessageSegment{
 		Type: msg.Type,
 	}
-	switch msg.Type {
-	case "at":
-		result.Data = msg.GetMessageElementAt().ToStruct()
-	case "contact":
-		result.Data = msg.GetMessageElementContact().ToStruct()
-	case "dice":
-		result.Data = msg.GetMessageElementDice().ToStruct()
-	case "face":
-		result.Data = msg.GetMessageElementFace().ToStruct()
-	case "forward":
-		result.Data = msg.GetMessageElementForward().ToStruct()
-	case "image":
-		result.Data = msg.GetMessageElementImage().ToStruct()
-	case "json":
-		result.Data = msg.GetMessageElementJson().ToStruct()
-	case "location":
-		result.Data = msg.GetMessageElementLocation().ToStruct()
-	case "music":
-		result.Data = msg.GetMessageElementMusic().ToStruct()
-	case "poke":
-		result.Data = msg.GetMessageElementPoke().ToStruct()
-	case "record":
-		result.Data = msg.GetMessageElementRecord().ToStruct()
-	case "reply":
-		result.Data = msg.GetMessageElementReply().ToStruct()
-	case "rps":
-		result.Data = msg.GetMessageElementRps().ToStruct()
-	case "shake":
-		result.Data = msg.GetMessageElementShake().ToStruct()
-	case "share":
-		result.Data = msg.GetMessageElementShare().ToStruct()
-	case "text":
-		result.Data = msg.GetMessageElementText().ToStruct()
-	case "video":
-		result.Data = msg.GetMessageElementVideo().ToStruct()
-	case "xml":
-		result.Data = msg.GetMessageElementXml().ToStruct()
-	default:
-		log.Errorf("未定义的消息类型:%v", result.Type)
+	if _, ok := messageSegmentGRPCToStructMap[msg.Type]; !ok {
+		log.Errorf("未定义的消息类型:%v", msg.Type)
+		return nil
 	}
+	data, err := messageSegmentGRPCToStructMap[msg.Type](msg)
+	if err != nil {
+		log.Errorf("消息类型转换失败:%v", err)
+		return nil
+	}
+	result.Data = data
 	return result
 }
 
@@ -192,4 +91,6 @@ func (msgSeg *MessageSegment) UnmarshalJSON(data []byte) error {
 
 type MessageElement interface {
 	Type() string
+	Enabled() bool
+	ProcessGRPC(msg *MessageSegmentGRPC)
 }

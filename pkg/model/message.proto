@@ -4,7 +4,6 @@ option go_package="github.com/dezhishen/onebot-sdk/pkg/model;model";
 import "sender.proto";
 import "message_element.proto";
 
-
 message PrivateMsgGRPC {
 	int64 user_id = 1;
 	int64 group_id = 2;

@@ -11,6 +11,17 @@ func (msg *MessageElementDice) Type() string {
 	return "dice"
 }
 
+func (msg *MessageElementDice) Enabled() bool {
+	return false
+}
+
+// ProcessGRPC
+func (msg *MessageElementDice) ProcessGRPC(segment *MessageSegmentGRPC) {
+	segment.Data = &MessageSegmentGRPC_MessageElementDice{
+		MessageElementDice: msg.ToGRPC(),
+	}
+}
+
 func (msg *MessageElementDice) ToGRPC() *MessageElementDiceGRPC {
 	var result MessageElementDiceGRPC
 	return &result
@@ -28,4 +39,16 @@ func init() {
 		err := json.Unmarshal(data, &result)
 		return &result, err
 	}
+	messageSegmentGRPCToStructMap["dice"] = func(msg *MessageSegmentGRPC) (MessageElement, error) {
+		if msg.Data == nil {
+			return nil, nil
+		}
+		switch data := msg.Data.(type) {
+		case *MessageSegmentGRPC_MessageElementDice:
+			return data.MessageElementDice.ToStruct(), nil
+		default:
+			return nil, nil
+		}
+	}
+
 }

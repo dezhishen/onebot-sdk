@@ -4,9 +4,10 @@ option go_package="github.com/dezhishen/onebot-sdk/pkg/model;model";
 
 message MessageElementMusicGRPC {
 	string music_type = 1 [json_name="type"];
-	string url = 2;
-	string audio = 3;
-	string title = 4;
-	string content = 5;
-	string image = 6;
+	string id = 2;
+	string url = 3;
+	string audio = 4;
+	string title = 5;
+	string content = 6;
+	string image = 7;
 }

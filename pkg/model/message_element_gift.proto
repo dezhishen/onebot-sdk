@@ -1,0 +1,24 @@
+syntax = "proto3";
+package model;
+option go_package="github.com/dezhishen/onebot-sdk/pkg/model;model";
+
+message MessageElementGiftGRPC {
+	// qq	int64	接收礼物的成员	
+	int64 Qq = 1;
+	// id	int	礼物的类型
+	// 0	甜 Wink
+	// 1	快乐肥宅水
+	// 2	幸运手链
+	// 3	卡布奇诺
+	// 4	猫咪手表
+	// 5	绒绒手套
+	// 6	彩虹糖果
+	// 7	坚强
+	// 8	告白话筒
+	// 9	牵你的手
+	// 10	可爱猫咪
+	// 11	神秘面具
+	// 12	我超忙的
+	// 13	爱心口罩
+	int64 id = 2;
+}
