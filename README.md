@@ -36,8 +36,13 @@ onebot-sdk
 介绍实现/命名规则等
 * 地址：[Wiki](./wiki/)
 # 待处理事项
-- [ ] access-token支持
-- [ ] 正向websocket支持
+- [x] http支持
+- [x] 反向http支持
+- [x] websocket支持
+- [x] 反向websocket支持
+- [x] access-token支持
+- [ ] secret支持
+- [ ] 调用超时设置支持
 - [ ] 支持[onebot-v12](https://12.onebot.dev/)
 # 快速开始
 ## 引用
