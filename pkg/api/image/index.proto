@@ -1,0 +1,21 @@
+syntax = "proto3";
+package image;
+import "image.proto";
+import "base.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/Empty.proto";
+option go_package="github.com/dezhishen/onebot-sdk/pkg/api/image;image";
+
+
+service OnebotApiImageGRPCService {
+	// 获取图片
+	// get_image
+	rpc GetImage(google.protobuf.StringValue) returns (model.ImageResultGRPC) {}
+	// 检查是否可以发送图片
+	// can_send_image
+	rpc CanSendImage(google.protobuf.Empty) returns (model.BoolYesOfResultGRPC) {}
+
+	// 图片ORC识别
+	// ocr_image
+	rpc OcrImage(google.protobuf.StringValue) returns (model.OcrImageResultGRPC) {}
+}

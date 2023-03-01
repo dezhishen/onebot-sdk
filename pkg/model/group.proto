@@ -1,6 +1,6 @@
 syntax = "proto3";
 package model;
-option go_package = "../model";
+option go_package="github.com/dezhishen/onebot-sdk/pkg/model;model";
 
 message GroupInfoGRPC {
 	int64 group_id = 1;

@@ -170,6 +170,537 @@ func (x *GroupFileSystemInfoResultGRPC) GetWording() string {
 	return ""
 }
 
+type FileGRPC struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// // group_id	int32	群号
+	// GroupId int32 `json:"group_id"`
+	GroupId int32 `protobuf:"varint,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	// // file_id	string	文件ID
+	// FileId string `json:"file_id"`
+	FileId string `protobuf:"bytes,2,opt,name=file_id,json=fileId,proto3" json:"file_id,omitempty"`
+	// // file_name	string	文件名
+	// FileName string `json:"file_name"`
+	FileName string `protobuf:"bytes,3,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
+	// // busid	int32	文件类型
+	// Busid int32 `json:"busid"`
+	Busid int32 `protobuf:"varint,4,opt,name=busid,proto3" json:"busid,omitempty"`
+	// // file_size	int64	文件大小
+	// FileSize int64 `json:"file_size"`
+	FileSize int64 `protobuf:"varint,5,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
+	// // upload_time	int64	上传时间
+	// UploadTime int64 `json:"upload_time"`
+	UploadTime int64 `protobuf:"varint,6,opt,name=upload_time,json=uploadTime,proto3" json:"upload_time,omitempty"`
+	// // dead_time	int64	过期时间,永久文件恒为0
+	// DeadTime int64 `json:"dead_time"`
+	DeadTime int64 `protobuf:"varint,7,opt,name=dead_time,json=deadTime,proto3" json:"dead_time,omitempty"`
+	// // modify_time	int64	最后修改时间
+	// ModifyTime int64 `json:"modify_time"`
+	ModifyTime int64 `protobuf:"varint,8,opt,name=modify_time,json=modifyTime,proto3" json:"modify_time,omitempty"`
+	// // download_times	int32	下载次数
+	// DownloadTimes int32 `json:"download_times"`
+	DownloadTimes int32 `protobuf:"varint,9,opt,name=download_times,json=downloadTimes,proto3" json:"download_times,omitempty"`
+	// // uploader	int64	上传者ID
+	// Uploader int64 `json:"uploader"`
+	Uploader int64 `protobuf:"varint,10,opt,name=uploader,proto3" json:"uploader,omitempty"`
+	// // uploader_name	string	上传者名字
+	// UploaderName string `json:"uploader_name"`
+	UploaderName string `protobuf:"bytes,11,opt,name=uploader_name,json=uploaderName,proto3" json:"uploader_name,omitempty"`
+}
+
+func (x *FileGRPC) Reset() {
+	*x = FileGRPC{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_file_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *FileGRPC) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FileGRPC) ProtoMessage() {}
+
+func (x *FileGRPC) ProtoReflect() protoreflect.Message {
+	mi := &file_file_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FileGRPC.ProtoReflect.Descriptor instead.
+func (*FileGRPC) Descriptor() ([]byte, []int) {
+	return file_file_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *FileGRPC) GetGroupId() int32 {
+	if x != nil {
+		return x.GroupId
+	}
+	return 0
+}
+
+func (x *FileGRPC) GetFileId() string {
+	if x != nil {
+		return x.FileId
+	}
+	return ""
+}
+
+func (x *FileGRPC) GetFileName() string {
+	if x != nil {
+		return x.FileName
+	}
+	return ""
+}
+
+func (x *FileGRPC) GetBusid() int32 {
+	if x != nil {
+		return x.Busid
+	}
+	return 0
+}
+
+func (x *FileGRPC) GetFileSize() int64 {
+	if x != nil {
+		return x.FileSize
+	}
+	return 0
+}
+
+func (x *FileGRPC) GetUploadTime() int64 {
+	if x != nil {
+		return x.UploadTime
+	}
+	return 0
+}
+
+func (x *FileGRPC) GetDeadTime() int64 {
+	if x != nil {
+		return x.DeadTime
+	}
+	return 0
+}
+
+func (x *FileGRPC) GetModifyTime() int64 {
+	if x != nil {
+		return x.ModifyTime
+	}
+	return 0
+}
+
+func (x *FileGRPC) GetDownloadTimes() int32 {
+	if x != nil {
+		return x.DownloadTimes
+	}
+	return 0
+}
+
+func (x *FileGRPC) GetUploader() int64 {
+	if x != nil {
+		return x.Uploader
+	}
+	return 0
+}
+
+func (x *FileGRPC) GetUploaderName() string {
+	if x != nil {
+		return x.UploaderName
+	}
+	return ""
+}
+
+type FolderGRPC struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// // group_id	int32	群号
+	// GroupId int32 `json:"group_id"`
+	GroupId int32 `protobuf:"varint,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	// // folder_id	string	文件夹ID
+	// FolderId string `json:"folder_id"`
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// // folder_name	string	文件名
+	// FolderName string `json:"folder_name"`
+	FolderName string `protobuf:"bytes,3,opt,name=folder_name,json=folderName,proto3" json:"folder_name,omitempty"`
+	// // create_time	int64	创建时间
+	// CreateTime int64 `json:"create_time"`
+	CreateTime int64 `protobuf:"varint,4,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	// // creator	int64	创建者
+	// Creator int64 `json:"creator"`
+	Creator int64 `protobuf:"varint,5,opt,name=creator,proto3" json:"creator,omitempty"`
+	// // creator_name	string	创建者名字
+	// CreatorName string `json:"creator_name"`
+	CreatorName string `protobuf:"bytes,6,opt,name=creator_name,json=creatorName,proto3" json:"creator_name,omitempty"`
+	// // total_file_count	int32	子文件数量
+	// TotalFileCount int32 `json:"total_file_count"`
+	TotalFileCount int32 `protobuf:"varint,7,opt,name=total_file_count,json=totalFileCount,proto3" json:"total_file_count,omitempty"`
+}
+
+func (x *FolderGRPC) Reset() {
+	*x = FolderGRPC{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_file_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *FolderGRPC) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FolderGRPC) ProtoMessage() {}
+
+func (x *FolderGRPC) ProtoReflect() protoreflect.Message {
+	mi := &file_file_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FolderGRPC.ProtoReflect.Descriptor instead.
+func (*FolderGRPC) Descriptor() ([]byte, []int) {
+	return file_file_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *FolderGRPC) GetGroupId() int32 {
+	if x != nil {
+		return x.GroupId
+	}
+	return 0
+}
+
+func (x *FolderGRPC) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *FolderGRPC) GetFolderName() string {
+	if x != nil {
+		return x.FolderName
+	}
+	return ""
+}
+
+func (x *FolderGRPC) GetCreateTime() int64 {
+	if x != nil {
+		return x.CreateTime
+	}
+	return 0
+}
+
+func (x *FolderGRPC) GetCreator() int64 {
+	if x != nil {
+		return x.Creator
+	}
+	return 0
+}
+
+func (x *FolderGRPC) GetCreatorName() string {
+	if x != nil {
+		return x.CreatorName
+	}
+	return ""
+}
+
+func (x *FolderGRPC) GetTotalFileCount() int32 {
+	if x != nil {
+		return x.TotalFileCount
+	}
+	return 0
+}
+
+type GroupFilesGRPC struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Files   []*File   `json:"files"`
+	Files []*FileGRPC `protobuf:"bytes,1,rep,name=files,proto3" json:"files,omitempty"`
+	// Folders []*Folder `json:"folders"`
+	Folders []*FolderGRPC `protobuf:"bytes,2,rep,name=folders,proto3" json:"folders,omitempty"`
+}
+
+func (x *GroupFilesGRPC) Reset() {
+	*x = GroupFilesGRPC{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_file_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GroupFilesGRPC) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GroupFilesGRPC) ProtoMessage() {}
+
+func (x *GroupFilesGRPC) ProtoReflect() protoreflect.Message {
+	mi := &file_file_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GroupFilesGRPC.ProtoReflect.Descriptor instead.
+func (*GroupFilesGRPC) Descriptor() ([]byte, []int) {
+	return file_file_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GroupFilesGRPC) GetFiles() []*FileGRPC {
+	if x != nil {
+		return x.Files
+	}
+	return nil
+}
+
+func (x *GroupFilesGRPC) GetFolders() []*FolderGRPC {
+	if x != nil {
+		return x.Folders
+	}
+	return nil
+}
+
+// type GroupFilesResult struct {
+// 	Data *GroupFiles `json:"data"`
+// 	// retcode	int64	返回码
+// 	Retcode int64 `json:"retcode"`
+// 	// status	string	状态
+// 	Status string `json:"status"`
+// 	// msg	string	错误信息
+// 	Msg string `json:"msg"`
+// 	// wording	string	错误信息
+// 	Wording string `json:"wording"`
+// }
+type GroupFilesResultGRPC struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Data    *GroupFilesGRPC `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Retcode int64           `protobuf:"varint,2,opt,name=retcode,proto3" json:"retcode,omitempty"`
+	Status  string          `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	Msg     string          `protobuf:"bytes,4,opt,name=msg,proto3" json:"msg,omitempty"`
+	Wording string          `protobuf:"bytes,5,opt,name=wording,proto3" json:"wording,omitempty"`
+}
+
+func (x *GroupFilesResultGRPC) Reset() {
+	*x = GroupFilesResultGRPC{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_file_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GroupFilesResultGRPC) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GroupFilesResultGRPC) ProtoMessage() {}
+
+func (x *GroupFilesResultGRPC) ProtoReflect() protoreflect.Message {
+	mi := &file_file_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GroupFilesResultGRPC.ProtoReflect.Descriptor instead.
+func (*GroupFilesResultGRPC) Descriptor() ([]byte, []int) {
+	return file_file_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GroupFilesResultGRPC) GetData() *GroupFilesGRPC {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *GroupFilesResultGRPC) GetRetcode() int64 {
+	if x != nil {
+		return x.Retcode
+	}
+	return 0
+}
+
+func (x *GroupFilesResultGRPC) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *GroupFilesResultGRPC) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *GroupFilesResultGRPC) GetWording() string {
+	if x != nil {
+		return x.Wording
+	}
+	return ""
+}
+
+type FileUrlGRPC struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+}
+
+func (x *FileUrlGRPC) Reset() {
+	*x = FileUrlGRPC{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_file_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *FileUrlGRPC) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FileUrlGRPC) ProtoMessage() {}
+
+func (x *FileUrlGRPC) ProtoReflect() protoreflect.Message {
+	mi := &file_file_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FileUrlGRPC.ProtoReflect.Descriptor instead.
+func (*FileUrlGRPC) Descriptor() ([]byte, []int) {
+	return file_file_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *FileUrlGRPC) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
+type FileUrlResultGRPC struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Data    *FileUrlGRPC `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Retcode int64        `protobuf:"varint,2,opt,name=retcode,proto3" json:"retcode,omitempty"`
+	Status  string       `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	Msg     string       `protobuf:"bytes,4,opt,name=msg,proto3" json:"msg,omitempty"`
+	Wording string       `protobuf:"bytes,5,opt,name=wording,proto3" json:"wording,omitempty"`
+}
+
+func (x *FileUrlResultGRPC) Reset() {
+	*x = FileUrlResultGRPC{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_file_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *FileUrlResultGRPC) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FileUrlResultGRPC) ProtoMessage() {}
+
+func (x *FileUrlResultGRPC) ProtoReflect() protoreflect.Message {
+	mi := &file_file_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FileUrlResultGRPC.ProtoReflect.Descriptor instead.
+func (*FileUrlResultGRPC) Descriptor() ([]byte, []int) {
+	return file_file_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *FileUrlResultGRPC) GetData() *FileUrlGRPC {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *FileUrlResultGRPC) GetRetcode() int64 {
+	if x != nil {
+		return x.Retcode
+	}
+	return 0
+}
+
+func (x *FileUrlResultGRPC) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *FileUrlResultGRPC) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *FileUrlResultGRPC) GetWording() string {
+	if x != nil {
+		return x.Wording
+	}
+	return ""
+}
+
 var File_file_proto protoreflect.FileDescriptor
 
 var file_file_proto_rawDesc = []byte{
@@ -195,8 +726,75 @@ var file_file_proto_rawDesc = []byte{
 	0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67, 0x18, 0x04,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x12, 0x18, 0x0a, 0x07, 0x77, 0x6f, 0x72,
 	0x64, 0x69, 0x6e, 0x67, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x77, 0x6f, 0x72, 0x64,
-	0x69, 0x6e, 0x67, 0x42, 0x0a, 0x5a, 0x08, 0x2e, 0x2e, 0x2f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x69, 0x6e, 0x67, 0x22, 0xd5, 0x02, 0x0a, 0x08, 0x46, 0x69, 0x6c, 0x65, 0x47, 0x52, 0x50, 0x43,
+	0x12, 0x19, 0x0a, 0x08, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x05, 0x52, 0x07, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x66,
+	0x69, 0x6c, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x66, 0x69,
+	0x6c, 0x65, 0x49, 0x64, 0x12, 0x1b, 0x0a, 0x09, 0x66, 0x69, 0x6c, 0x65, 0x5f, 0x6e, 0x61, 0x6d,
+	0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x66, 0x69, 0x6c, 0x65, 0x4e, 0x61, 0x6d,
+	0x65, 0x12, 0x14, 0x0a, 0x05, 0x62, 0x75, 0x73, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05,
+	0x52, 0x05, 0x62, 0x75, 0x73, 0x69, 0x64, 0x12, 0x1b, 0x0a, 0x09, 0x66, 0x69, 0x6c, 0x65, 0x5f,
+	0x73, 0x69, 0x7a, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x66, 0x69, 0x6c, 0x65,
+	0x53, 0x69, 0x7a, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x75, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x5f, 0x74,
+	0x69, 0x6d, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x75, 0x70, 0x6c, 0x6f, 0x61,
+	0x64, 0x54, 0x69, 0x6d, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x64, 0x65, 0x61, 0x64, 0x5f, 0x74, 0x69,
+	0x6d, 0x65, 0x18, 0x07, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x64, 0x65, 0x61, 0x64, 0x54, 0x69,
+	0x6d, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x6d, 0x6f, 0x64, 0x69, 0x66, 0x79, 0x5f, 0x74, 0x69, 0x6d,
+	0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x6d, 0x6f, 0x64, 0x69, 0x66, 0x79, 0x54,
+	0x69, 0x6d, 0x65, 0x12, 0x25, 0x0a, 0x0e, 0x64, 0x6f, 0x77, 0x6e, 0x6c, 0x6f, 0x61, 0x64, 0x5f,
+	0x74, 0x69, 0x6d, 0x65, 0x73, 0x18, 0x09, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0d, 0x64, 0x6f, 0x77,
+	0x6e, 0x6c, 0x6f, 0x61, 0x64, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x12, 0x1a, 0x0a, 0x08, 0x75, 0x70,
+	0x6c, 0x6f, 0x61, 0x64, 0x65, 0x72, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x75, 0x70,
+	0x6c, 0x6f, 0x61, 0x64, 0x65, 0x72, 0x12, 0x23, 0x0a, 0x0d, 0x75, 0x70, 0x6c, 0x6f, 0x61, 0x64,
+	0x65, 0x72, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x75,
+	0x70, 0x6c, 0x6f, 0x61, 0x64, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0xed, 0x01, 0x0a, 0x0a,
+	0x46, 0x6f, 0x6c, 0x64, 0x65, 0x72, 0x47, 0x52, 0x50, 0x43, 0x12, 0x19, 0x0a, 0x08, 0x67, 0x72,
+	0x6f, 0x75, 0x70, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x07, 0x67, 0x72,
+	0x6f, 0x75, 0x70, 0x49, 0x64, 0x12, 0x1b, 0x0a, 0x09, 0x66, 0x6f, 0x6c, 0x64, 0x65, 0x72, 0x5f,
+	0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x66, 0x6f, 0x6c, 0x64, 0x65, 0x72,
+	0x49, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x66, 0x6f, 0x6c, 0x64, 0x65, 0x72, 0x5f, 0x6e, 0x61, 0x6d,
+	0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x66, 0x6f, 0x6c, 0x64, 0x65, 0x72, 0x4e,
+	0x61, 0x6d, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x5f, 0x74, 0x69,
+	0x6d, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x54, 0x69, 0x6d, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x18,
+	0x05, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x21,
+	0x0a, 0x0c, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x06,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x4e, 0x61, 0x6d,
+	0x65, 0x12, 0x28, 0x0a, 0x10, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x5f, 0x66, 0x69, 0x6c, 0x65, 0x5f,
+	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0e, 0x74, 0x6f, 0x74,
+	0x61, 0x6c, 0x46, 0x69, 0x6c, 0x65, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0x64, 0x0a, 0x0e, 0x47,
+	0x72, 0x6f, 0x75, 0x70, 0x46, 0x69, 0x6c, 0x65, 0x73, 0x47, 0x52, 0x50, 0x43, 0x12, 0x25, 0x0a,
+	0x05, 0x66, 0x69, 0x6c, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x6d,
+	0x6f, 0x64, 0x65, 0x6c, 0x2e, 0x46, 0x69, 0x6c, 0x65, 0x47, 0x52, 0x50, 0x43, 0x52, 0x05, 0x66,
+	0x69, 0x6c, 0x65, 0x73, 0x12, 0x2b, 0x0a, 0x07, 0x66, 0x6f, 0x6c, 0x64, 0x65, 0x72, 0x73, 0x18,
+	0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x2e, 0x46, 0x6f,
+	0x6c, 0x64, 0x65, 0x72, 0x47, 0x52, 0x50, 0x43, 0x52, 0x07, 0x66, 0x6f, 0x6c, 0x64, 0x65, 0x72,
+	0x73, 0x22, 0x9f, 0x01, 0x0a, 0x14, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x46, 0x69, 0x6c, 0x65, 0x73,
+	0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x47, 0x52, 0x50, 0x43, 0x12, 0x29, 0x0a, 0x04, 0x64, 0x61,
+	0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x15, 0x2e, 0x6d, 0x6f, 0x64, 0x65, 0x6c,
+	0x2e, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x46, 0x69, 0x6c, 0x65, 0x73, 0x47, 0x52, 0x50, 0x43, 0x52,
+	0x04, 0x64, 0x61, 0x74, 0x61, 0x12, 0x18, 0x0a, 0x07, 0x72, 0x65, 0x74, 0x63, 0x6f, 0x64, 0x65,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x72, 0x65, 0x74, 0x63, 0x6f, 0x64, 0x65, 0x12,
+	0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67, 0x18, 0x04,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x12, 0x18, 0x0a, 0x07, 0x77, 0x6f, 0x72,
+	0x64, 0x69, 0x6e, 0x67, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x77, 0x6f, 0x72, 0x64,
+	0x69, 0x6e, 0x67, 0x22, 0x1f, 0x0a, 0x0b, 0x46, 0x69, 0x6c, 0x65, 0x55, 0x72, 0x6c, 0x47, 0x52,
+	0x50, 0x43, 0x12, 0x10, 0x0a, 0x03, 0x75, 0x72, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x03, 0x75, 0x72, 0x6c, 0x22, 0x99, 0x01, 0x0a, 0x11, 0x46, 0x69, 0x6c, 0x65, 0x55, 0x72, 0x6c,
+	0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x47, 0x52, 0x50, 0x43, 0x12, 0x26, 0x0a, 0x04, 0x64, 0x61,
+	0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x6d, 0x6f, 0x64, 0x65, 0x6c,
+	0x2e, 0x46, 0x69, 0x6c, 0x65, 0x55, 0x72, 0x6c, 0x47, 0x52, 0x50, 0x43, 0x52, 0x04, 0x64, 0x61,
+	0x74, 0x61, 0x12, 0x18, 0x0a, 0x07, 0x72, 0x65, 0x74, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x03, 0x52, 0x07, 0x72, 0x65, 0x74, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x16, 0x0a, 0x06,
+	0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74,
+	0x61, 0x74, 0x75, 0x73, 0x12, 0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67, 0x18, 0x04, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x12, 0x18, 0x0a, 0x07, 0x77, 0x6f, 0x72, 0x64, 0x69, 0x6e,
+	0x67, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x77, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x67,
+	0x42, 0x31, 0x5a, 0x2f, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x64,
+	0x65, 0x7a, 0x68, 0x69, 0x73, 0x68, 0x65, 0x6e, 0x2f, 0x6f, 0x6e, 0x65, 0x62, 0x6f, 0x74, 0x2d,
+	0x73, 0x64, 0x6b, 0x2f, 0x70, 0x6b, 0x67, 0x2f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x3b, 0x6d, 0x6f,
+	0x64, 0x65, 0x6c, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -211,18 +809,28 @@ func file_file_proto_rawDescGZIP() []byte {
 	return file_file_proto_rawDescData
 }
 
-var file_file_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_file_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_file_proto_goTypes = []interface{}{
 	(*GroupFileSystemInfoGRPC)(nil),       // 0: model.GroupFileSystemInfoGRPC
 	(*GroupFileSystemInfoResultGRPC)(nil), // 1: model.GroupFileSystemInfoResultGRPC
+	(*FileGRPC)(nil),                      // 2: model.FileGRPC
+	(*FolderGRPC)(nil),                    // 3: model.FolderGRPC
+	(*GroupFilesGRPC)(nil),                // 4: model.GroupFilesGRPC
+	(*GroupFilesResultGRPC)(nil),          // 5: model.GroupFilesResultGRPC
+	(*FileUrlGRPC)(nil),                   // 6: model.FileUrlGRPC
+	(*FileUrlResultGRPC)(nil),             // 7: model.FileUrlResultGRPC
 }
 var file_file_proto_depIdxs = []int32{
 	0, // 0: model.GroupFileSystemInfoResultGRPC.data:type_name -> model.GroupFileSystemInfoGRPC
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	2, // 1: model.GroupFilesGRPC.files:type_name -> model.FileGRPC
+	3, // 2: model.GroupFilesGRPC.folders:type_name -> model.FolderGRPC
+	4, // 3: model.GroupFilesResultGRPC.data:type_name -> model.GroupFilesGRPC
+	6, // 4: model.FileUrlResultGRPC.data:type_name -> model.FileUrlGRPC
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_file_proto_init() }
@@ -255,6 +863,78 @@ func file_file_proto_init() {
 				return nil
 			}
 		}
+		file_file_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*FileGRPC); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_file_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*FolderGRPC); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_file_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GroupFilesGRPC); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_file_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GroupFilesResultGRPC); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_file_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*FileUrlGRPC); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_file_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*FileUrlResultGRPC); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -262,7 +942,7 @@ func file_file_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_file_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

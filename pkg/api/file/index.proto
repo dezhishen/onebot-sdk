@@ -1,0 +1,112 @@
+syntax = "proto3";
+package file;
+import "file.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+option go_package="github.com/dezhishen/onebot-sdk/pkg/api/file;file";
+
+message UploadGroupFileRequest {
+    int64 group_id = 1;
+    string file = 2;
+    string name = 3;
+    string folder = 4;
+}
+
+message DeleteGroupFileRequest {
+    int64 group_id = 1;
+    string file_id = 2;
+    int32 busid = 3;
+}
+
+message CreateGroupFileFolderRequest {
+    int64 group_id = 1;
+    string name = 2;
+    string parent_id = 3;
+}
+
+message DeleteGroupFolderRequest {
+    int64 group_id = 1;
+    string folder_id = 2;
+}
+
+message GroupFilesByFolderRequest {
+    int64 group_id = 1;
+    string folder_id = 2;
+}
+
+message GetGroupFileUrlRequest {
+    int64 group_id = 1;
+    string file_id = 2;
+    int32 busid = 3;
+}
+
+message UploadPrivateFileRequest {
+    int64 user_id = 1;
+    string file = 2;
+    string name = 3;
+}
+
+
+service OnebotApiFileGRPCService {
+    // 上传群文件
+	// upload_group_file
+	// groupId 群号
+	// file 文件路径
+	// name 文件名
+	// folder 群文件目录ID
+    rpc UploadGroupFile (UploadGroupFileRequest) returns (google.protobuf.Empty) {}
+
+	// 删除群文件
+	// delete_group_file
+	// groupId 群号
+	// file_id 文件ID 参考 File 对象
+	// busid 文件类型 参考 File 对象
+	// DeleteGroupFile(groupId int64, fileId string, busid int32) error
+    rpc DeleteGroupFile (DeleteGroupFileRequest) returns (google.protobuf.Empty) {}
+	// 创建群文件目录
+	// create_group_file_folder
+	// groupId 群号
+	// name 目录名
+	// parentId 父目录ID
+	// CreateGroupFileFolder(groupId int64, name string, parentId string) error
+    rpc CreateGroupFileFolder (CreateGroupFileFolderRequest) returns (google.protobuf.Empty) {}
+
+	// 删除群文件目录
+	// delete_group_folder
+	// groupId 群号
+	// folder_id 文件夹ID 参考 Folder 对象
+	// DeleteGroupFolder(groupId int64, folderId string) error
+    rpc DeleteGroupFolder (DeleteGroupFolderRequest) returns (google.protobuf.Empty) {}
+
+	// 获取群文件系统信息
+	// get_group_file_system_info
+	// groupId 群号
+	// GetGroupFileSystemInfo(groupId int64) (*model.GroupFileSystemInfoResult, error)
+    rpc GetGroupFileSystemInfo (google.protobuf.Int64Value) returns (model.GroupFileSystemInfoResultGRPC) {}
+
+	// 获取群根目录文件列表
+	// get_group_root_files
+	// groupId 群号
+	// GetGroupRootFiles(groupId int64) (*model.GroupFilesResult, error)
+    rpc GetGroupRootFiles (google.protobuf.Int64Value) returns (model.GroupFilesResultGRPC) {}
+	// get_group_files_by_folder
+	// 获取群文件列表
+	// groupId 群号
+	// folder_id 文件夹ID
+	// GetGroupFilesByFolder(groupId int64, folderId string) (*model.GroupFilesResult, error)
+    rpc GetGroupFilesByFolder (GroupFilesByFolderRequest) returns (model.GroupFilesResultGRPC) {}
+	// 获取群文件资源链接
+	// get_group_file_url
+	// groupId 群号
+	// file_id 文件ID 参考 File 对象
+	// busid 文件类型 参考 File 对象
+	// GetGroupFileUrl(groupId int64, fileId string, busid int32) (*model.FileUrlResult, error)
+    rpc GetGroupFileUrl (GetGroupFileUrlRequest) returns (model.FileUrlResultGRPC) {}
+	// 上传好友文件
+	// upload_private_file
+	// userId 用户ID
+	// file 文件路径
+	// name 文件名
+	// UploadPrivateFile(userId int64, file string, name string) error
+    rpc UploadPrivateFile (UploadPrivateFileRequest) returns (google.protobuf.Empty) {}
+}

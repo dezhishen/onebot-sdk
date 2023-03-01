@@ -1,0 +1,181 @@
+syntax = "proto3";
+package groupopt;
+import "base.proto";
+import "group.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/Empty.proto";
+option go_package="github.com/dezhishen/onebot-sdk/pkg/api/groupopt;groupopt";
+
+message SetGroupNameRequest {
+	int64 group_id = 1;
+	string group_name = 2;
+}
+
+message SetGroupPortraitRequest {
+	int64 group_id = 1;
+	string file = 2;
+	int32 cache = 3;
+}
+
+message SetGroupAdminRequest {
+	int64 group_id = 1;
+	int64 user_id = 2;
+	bool enable = 3;
+}
+
+message SetGroupCardRequest {
+	int64 group_id = 1;
+	int64 user_id = 2;
+	string card = 3;
+}
+
+message SetGroupSpecialTitleRequest {
+	int64 group_id = 1;
+	int64 user_id = 2;
+	string special_title = 3;
+	int32 duration = 4;
+}
+
+message SetGroupBanRequest {
+	int64 group_id = 1;
+	int64 user_id = 2;
+	int32 duration = 3;
+}
+
+message SetGroupWholeBanequest {
+	int64 group_id = 1;
+	bool enable = 2;
+}
+
+message SetGroupAnonymousBanRequest {
+	int64 group_id = 1;
+	model.AnonymousGRPC anonymous = 2;
+	string anonymous_flag = 3;
+	int32 duration = 4;
+}
+
+message SetGroupAnonymousRequest{
+	int64 group_id = 1;
+	bool enable = 2;
+}
+
+message SendGroupNoticeRequest {
+	int64 group_id = 1;
+	string content = 2;
+	string image = 3;
+}
+
+message SetGroupKickRequest {
+	int64 group_id = 1;
+	int64 user_id = 2;
+	bool reject_add_request = 3;
+}
+
+message SetGroupLeaveRequest {
+	int64 group_id = 1;
+	bool is_dismiss = 2;
+}
+
+service OnebotApiGroupOptGRPCService {
+	// 设置群名
+	// set_group_name
+	// groupId 群号
+	rpc SetGroupName(SetGroupNameRequest) returns (google.protobuf.Empty) {}
+	
+	// 设置群头像
+	// set_group_portrait
+	// groupId 群号
+	// file 图片文件路径
+	// cache 缓存时间
+	rpc SetGroupPortrait(SetGroupPortraitRequest) returns (google.protobuf.Empty) {}
+	
+	// set_group_admin
+	// 设置群管理员
+	// groupId 群号
+	// userId QQ 号
+	// enable true 为设置，false 为取消
+	rpc SetGroupAdmin(SetGroupAdminRequest) returns (google.protobuf.Empty) {}
+	
+	// 设置群名片
+	// set_group_card
+	// groupId 群号
+	// userId QQ 号
+	// card 群名片内容，不填或空字符串表示删除群名片
+	rpc SetGroupCard(SetGroupCardRequest) returns (google.protobuf.Empty) {}
+
+	// 设置群头衔
+	// set_group_special_title
+	// groupId 群号
+	// userId QQ 号
+	// specialTitle 头衔，不填或空字符串表示删除群头衔
+	// duration 专属头衔有效期, 单位秒, -1 表示永久, 不过此项似乎没有效果, 可能是只有某些特殊的时间长度有效, 有待测试
+	rpc SetGroupSpecialTitle(SetGroupSpecialTitleRequest) returns (google.protobuf.Empty) {}
+
+	// 禁言群成员
+	// set_group_ban
+	// groupId 群号
+	// userId QQ 号
+	// duration 禁言时长，单位秒，0 表示取消禁言
+	rpc SetGroupBan(SetGroupBanRequest) returns (google.protobuf.Empty) {}
+
+	// 设置全群禁言
+	// set_group_whole_ban
+	// groupId 群号
+	// enable 是否禁言
+	rpc SetGroupWholeBan(SetGroupWholeBanequest) returns (google.protobuf.Empty) {}
+
+	// 禁言群匿名成员
+	// set_group_anonymous_ban
+	// groupId 群号
+	// anonymous 可选, 要禁言的匿名用户对象（群消息上报的 anonymous 字段）
+	// anonymousFlag 可选, 要禁言的匿名用户的 flag（需从群消息上报的数据中获得）
+	// 上面的 anonymous 和 anonymous_flag 两者任选其一传入即可, 若都传入, 则使用 anonymous。
+	// duration 禁言时长，单位秒，不能超过 30 天
+	rpc SetGroupAnonymousBan(SetGroupAnonymousBanRequest) returns (google.protobuf.Empty) {}
+
+	// 设置精华消息
+	// set_essence_msg
+	// message_id 消息 ID
+	rpc SetEssenceMsg(google.protobuf.Int64Value) returns (google.protobuf.Empty) {}
+
+	// 删除精华消息
+	// delete_essence_msg
+	// message_id 消息 ID
+	rpc DeleteEssenceMsg(google.protobuf.Int64Value) returns (google.protobuf.Empty) {}
+
+	// 发送群签到
+	// send_group_sign
+	// groupId 群号
+	rpc SendGroupSign(google.protobuf.Int64Value) returns (google.protobuf.Empty) {}
+
+	// 设置群匿名
+	// set_group_anonymous
+	// groupId 群号
+	// enable 是否允许匿名聊天
+	rpc SetGroupAnonymous(SetGroupAnonymousRequest) returns (google.protobuf.Empty) {}
+
+	// 发送群公告
+	// _send_group_notice
+	// groupId 群号
+	// content 公告内容
+	// image 图片文件路径（可选）
+	rpc SendGroupNotice(SendGroupNoticeRequest) returns (google.protobuf.Empty) {}
+
+	// 获取群公告
+	// _get_group_notice
+	// groupId 群号
+	rpc GetGroupNotice(google.protobuf.Int64Value) returns (model.GroupNoticeResultGRPC) {}
+
+	// 群组踢人
+	// set_group_kick
+	// groupId 群号
+	// userId QQ 号
+	// rejectAddRequest 是否拒绝此人的加群请求
+	rpc SetGroupKick(SetGroupKickRequest) returns (google.protobuf.Empty) {}
+
+	// 退出群组
+	// set_group_leave
+	// groupId 群号
+	// isDismiss 是否解散，如果登录号是群主，则仅在此项为 true 时能够解散
+	rpc SetGroupLeave(SetGroupLeaveRequest) returns (google.protobuf.Empty) {}
+}

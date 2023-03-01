@@ -1,0 +1,64 @@
+syntax = "proto3";
+package cqhttp;
+import "cqhttp.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+option go_package="github.com/dezhishen/onebot-sdk/pkg/api/cqhttp;cqhttp";
+message DownloadFileRequestGRPC {
+    string url = 1;
+    int32 thread_count = 2;
+    repeated string headers = 3;
+}
+
+message HiddenHandleQuickOperationRequestGRPC {
+    string context = 1;
+    string operation = 2;
+}
+
+service OnebotApiCqhttpGRPCService {
+    // 获取 Cookies
+	// get_cookies
+	// domain 指定域名
+    rpc GetCookies (google.protobuf.StringValue) returns (model.CookiesResultGRPC) {}
+	// get_csrf_token
+	rpc GetCsrfToken(google.protobuf.Empty) returns (model.CsrfTokenResultGRPC){}
+	// 获取 QQ 相关接口凭证
+	// get_credentials
+    rpc GetCredentials(google.protobuf.Empty) returns (model.CredentialsResultGRPC){}
+	// 获取版本信息
+	// get_version_info
+    rpc GetVersionInfo(google.protobuf.Empty) returns (model.VersionInfoResultGRPC){}
+	// 获取状态
+	// get_status
+    rpc GetStatus(google.protobuf.Empty) returns (model.StatusResultGRPC){}
+	// 重启 Go-CqHttp
+	// set_restart
+	// delay 要延迟的毫秒数, 如果默认情况下无法重启, 可以尝试设置延迟为 2000 左右
+    rpc SetRestart(google.protobuf.Int32Value) returns (google.protobuf.Empty){}
+	// 清理缓存
+	// clean_cache
+    rpc CleanCache(google.protobuf.Empty) returns (google.protobuf.Empty){}
+	// 重载事件过滤器
+	// reload_event_filter
+	// file 事件过滤器文件路径
+    rpc ReloadEventFilter(google.protobuf.StringValue) returns (google.protobuf.Empty){}
+	// 下载文件到缓存目录
+	// download_file
+	// url 文件链接
+	// thread_count 线程数
+	// headers 请求头
+    rpc DownloadFile(DownloadFileRequestGRPC) returns (model.DownloadFileResultGRPC){}
+	// 检查链接安全性
+	// check_url_safely
+	// url 链接
+    rpc CheckUrlSafely(google.protobuf.StringValue) returns (model.CheckUrlSafelyResultGRPC){}
+	// 获取中文分词 ( 隐藏 API )
+	// .get_word_slices
+	// content 内容
+    rpc HiddenGetWordSlices(google.protobuf.StringValue) returns (model.WordSlicesResultGRPC){}
+	// 对事件执行快速操作 ( 隐藏 API )
+	// .handle_quick_operation
+	// context 事件上下文
+	// operation 操作
+    rpc HiddenHandleQuickOperation(HiddenHandleQuickOperationRequestGRPC) returns (google.protobuf.Empty){}
+}

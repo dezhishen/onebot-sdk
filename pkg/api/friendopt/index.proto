@@ -1,0 +1,16 @@
+syntax = "proto3";
+package friendopt;
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/Empty.proto";
+option go_package="github.com/dezhishen/onebot-sdk/pkg/api/friendopt;friendopt";
+
+service OnebotApiFriendOptGRPCService {
+	// 删除好友
+	// delete_friend
+	// user_id: int64 对方 QQ 号
+	rpc DeleteFriend(google.protobuf.Int64Value) returns (google.protobuf.Empty) {}
+	// 删除单向好友
+	// delete_unidirectional_friend
+	// user_id: int64 对方 QQ 号
+    rpc DeleteUnidirectionalFriend(google.protobuf.Int64Value) returns (google.protobuf.Empty) {}
+}

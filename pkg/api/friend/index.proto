@@ -1,0 +1,24 @@
+syntax = "proto3";
+package friend;
+import "friend.proto";
+import "google/protobuf/empty.proto";
+option go_package="github.com/dezhishen/onebot-sdk/pkg/api/friend;friend";
+message GetStrangerInfoRequest {
+    int64 user_id = 1;
+    bool no_cache = 2;
+}
+
+// FriendService 机器人好友管理
+service OnebotApiFriendGRPCService {
+    // 获取陌生人信息
+    // get_stranger_info
+    // user_id: 对方 QQ 号
+    // no_cache: 是否不使用缓存（使用缓存可能更新不及时，但响应更快）
+    rpc GetStrangerInfo (GetStrangerInfoRequest) returns (model.StrangerInfoResultGRPC) {}
+    // 获取好友列表
+    // get_friend_list
+    rpc GetFriendList (google.protobuf.Empty) returns (model.FriendListResultGRPC) {}
+    // 获取单向好友列表
+    // get_unidirectional_friend_list
+    rpc GetUnidirectionalFriendList (google.protobuf.Empty) returns (model.FriendListResultGRPC) {}
+}

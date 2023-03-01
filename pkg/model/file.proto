@@ -1,6 +1,6 @@
 syntax = "proto3";
 package model;
-option go_package = "../model";
+option go_package="github.com/dezhishen/onebot-sdk/pkg/model;model";
 
 message GroupFileSystemInfoGRPC {
     int32 file_count = 1;
@@ -11,6 +11,123 @@ message GroupFileSystemInfoGRPC {
 
 message GroupFileSystemInfoResultGRPC {
     GroupFileSystemInfoGRPC data = 1;
+    int64 retcode = 2;
+    string status = 3;
+    string msg = 4;
+    string wording = 5;
+}
+
+message FileGRPC {
+    // // group_id	int32	群号
+	// GroupId int32 `json:"group_id"`
+    int32 group_id = 1;
+    // // file_id	string	文件ID
+	// FileId string `json:"file_id"`
+    string file_id = 2;
+	// // file_name	string	文件名
+	// FileName string `json:"file_name"`
+    string file_name = 3;
+	// // busid	int32	文件类型
+	// Busid int32 `json:"busid"`
+    int32 busid = 4;
+	// // file_size	int64	文件大小
+	// FileSize int64 `json:"file_size"`
+    int64 file_size = 5;
+	// // upload_time	int64	上传时间
+	// UploadTime int64 `json:"upload_time"`
+    int64 upload_time = 6;
+	// // dead_time	int64	过期时间,永久文件恒为0
+	// DeadTime int64 `json:"dead_time"`
+    int64 dead_time = 7;
+	// // modify_time	int64	最后修改时间
+	// ModifyTime int64 `json:"modify_time"`
+    int64 modify_time = 8;
+	// // download_times	int32	下载次数
+	// DownloadTimes int32 `json:"download_times"`
+    int32 download_times = 9;
+	// // uploader	int64	上传者ID
+	// Uploader int64 `json:"uploader"`
+    int64 uploader = 10;
+	// // uploader_name	string	上传者名字
+	// UploaderName string `json:"uploader_name"`
+    string uploader_name = 11;
+}
+
+message FolderGRPC {
+    // // group_id	int32	群号
+	// GroupId int32 `json:"group_id"`
+    int32 group_id = 1;
+	// // folder_id	string	文件夹ID
+	// FolderId string `json:"folder_id"`
+    string folder_id = 2;
+	// // folder_name	string	文件名
+	// FolderName string `json:"folder_name"`
+    string folder_name = 3;
+	// // create_time	int64	创建时间
+	// CreateTime int64 `json:"create_time"`
+    int64 create_time = 4;
+	// // creator	int64	创建者
+	// Creator int64 `json:"creator"`
+    int64 creator = 5;
+	// // creator_name	string	创建者名字
+	// CreatorName string `json:"creator_name"`
+    string creator_name = 6;
+	// // total_file_count	int32	子文件数量
+	// TotalFileCount int32 `json:"total_file_count"`
+    int32 total_file_count = 7;
+}
+
+message GroupFilesGRPC {
+    // Files   []*File   `json:"files"`
+    repeated FileGRPC files = 1;
+	// Folders []*Folder `json:"folders"`
+    repeated FolderGRPC folders = 2;
+}
+
+
+// type GroupFilesResult struct {
+// 	Data *GroupFiles `json:"data"`
+// 	// retcode	int64	返回码
+// 	Retcode int64 `json:"retcode"`
+// 	// status	string	状态
+// 	Status string `json:"status"`
+// 	// msg	string	错误信息
+// 	Msg string `json:"msg"`
+// 	// wording	string	错误信息
+// 	Wording string `json:"wording"`
+// }
+message GroupFilesResultGRPC {
+    GroupFilesGRPC data = 1;
+    int64 retcode = 2;
+    string status = 3;
+    string msg = 4;
+    string wording = 5;
+}
+
+
+// type FileUrl struct {
+// 	// url	string	文件下载链接
+// 	Url string `json:"url"`
+// }
+
+message FileUrlGRPC {
+    string url = 1;
+}
+
+// type FileUrlResult struct {
+// 	Data *FileUrl `json:"data"`
+// 	// retcode	int64	返回码
+// 	Retcode int64 `json:"retcode"`
+// 	// status	string	状态
+// 	Status string `json:"status"`
+// 	// msg	string	错误信息
+// 	Msg string `json:"msg"`
+// 	// wording	string	错误信息
+// 	Wording string `json:"wording"`
+// }
+
+message FileUrlResultGRPC {
+    FileUrlGRPC data = 1;
     int64 retcode = 2;
     string status = 3;
     string msg = 4;

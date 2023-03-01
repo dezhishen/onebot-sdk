@@ -1,0 +1,22 @@
+syntax = "proto3";
+package record;
+import "base.proto";
+import "record.proto";
+import "google/protobuf/Empty.proto";
+option go_package="github.com/dezhishen/onebot-sdk/pkg/api/record;record";
+
+message GetRecordRequest {
+	string file = 1;
+	string out_format = 2;
+}
+
+service OnebotApiRecordGRPCService {
+	// 获取语音
+	// get_record
+	rpc GetRecord(GetRecordRequest) returns (model.RecordResultGRPC) {}
+
+	// 检查是否可以发送语音
+	// can_send_record
+	rpc CanSendRecord(google.protobuf.Empty) returns (model.BoolYesOfResultGRPC) {}
+
+}

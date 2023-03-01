@@ -48,6 +48,10 @@ onebot-sdk
 	- [ ] CQ码支持
 - [ ] secret支持
 - [ ] 支持[onebot-v12](https://12.onebot.dev/)
+- [ ] protobuf
+	- [x] model
+	- [x] api
+	- [ ] event
 # 快速开始
 ## 引用
 ```

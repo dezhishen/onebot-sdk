@@ -4,7 +4,7 @@ import "sender.proto";
 import "base.proto";
 import "message_element.proto";
 package model;
-option go_package="../model";
+option go_package="github.com/dezhishen/onebot-sdk/pkg/model;model";
 
 message EventMeesageBaseGRPC  {
 	EventBaseGRPC eventBase = 1;

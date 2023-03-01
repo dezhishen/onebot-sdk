@@ -1,0 +1,33 @@
+syntax = "proto3";
+package request;
+import "google/protobuf/Empty.proto";
+option go_package="github.com/dezhishen/onebot-sdk/pkg/api/request;request";
+
+message SetFriendAddRequestRequest {
+	string flag = 1;
+	bool approve = 2;
+	string remark = 3;
+}
+message SetGroupAddRequestRequest {
+	string flag = 1;
+	string subType = 2;
+	bool approve = 3;
+	string reason = 4;
+}
+
+service OnebotApiRequestGRPCService {
+	// 处理加好友请求
+	// set_friend_add_request
+	// flag: 加好友请求的 flag（需从上报的数据中获得）
+	// approve: 是否同意请求
+	// remark: 添加后的好友备注（仅在同意时有效）
+	rpc SetFriendAddRequest(SetFriendAddRequestRequest) returns (google.protobuf.Empty) {}
+
+	// 处理加群请求／邀请
+	// set_group_add_request
+	// flag: 加群请求的 flag（需从上报的数据中获得）
+	// sub_type: add 或 invite，请求类型（需要和上报消息中的 sub_type 字段相符）
+	// approve: 是否同意请求／邀请
+	// reason: 拒绝理由（仅在拒绝时有效）
+	rpc SetGroupAddRequest(SetGroupAddRequestRequest) returns (google.protobuf.Empty) {}
+}

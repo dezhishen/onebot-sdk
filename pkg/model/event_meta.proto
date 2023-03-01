@@ -1,7 +1,7 @@
 syntax = "proto3";
 import "event.proto";
 package model;
-option go_package="../model";
+option go_package="github.com/dezhishen/onebot-sdk/pkg/model;model";
 
 message EventMetaBaseGRPC  {
 	EventBaseGRPC eventBase = 1;

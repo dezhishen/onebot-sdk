@@ -1,6 +1,6 @@
 syntax = "proto3";
 package model;
-option go_package="../model";
+option go_package="github.com/dezhishen/onebot-sdk/pkg/model;model";
 import "message_element_at.proto";
 import "message_element_contact.proto";
 import "message_element_dice.proto";
@@ -10,7 +10,6 @@ import "message_element_image.proto";
 import "message_element_json.proto";
 import "message_element_location.proto";
 import "message_element_music.proto";
-// import "message_element_node.proto";
 import "message_element_poke.proto";
 import "message_element_record.proto";
 import "message_element_reply.proto";

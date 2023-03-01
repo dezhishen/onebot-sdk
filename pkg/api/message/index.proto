@@ -1,0 +1,68 @@
+syntax = "proto3";
+package message;
+import "message.proto";
+import "message_element.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/Empty.proto";
+option go_package="github.com/dezhishen/onebot-sdk/pkg/api/message;message";
+
+
+message SendGroupForwardMsgRequest {
+	int64 groupId = 1;
+	repeated model.MessageSegmentGRPC messages = 2;
+}
+
+message SendPrivateForwardMsgGRPC {
+	int64 userId = 1;
+	repeated model.MessageSegmentGRPC messages = 2;
+}
+
+message GetGroupMsgHistoryRequest {
+	int64 groupId = 1;
+	int64 message_seq = 2;
+}
+
+service OnebotApiMessageGRPCService {
+	// 发送私信
+	// send_private_msg
+	// msg 消息
+	rpc SendPrivateMsg (model.PrivateMsgGRPC) returns (model.SendMessageResultGRPC) {}
+
+	// 发送群消息
+	// send_group_msg
+	// msg 消息
+	rpc SendGroupMsg (model.GroupMsgGRPC) returns (model.SendMessageResultGRPC) {}
+
+	// 发送消息
+	rpc SendMsg (model.MsgForSendGRPC) returns (model.SendMessageResultGRPC) {}
+
+	// 获取消息
+	// get_msg
+	rpc GetMsg (google.protobuf.Int64Value) returns (model.MessageDataResultGRPC) {}
+
+	// 撤回消息
+	// delete_msg
+	rpc DeleteMsg (google.protobuf.Int64Value) returns (google.protobuf.Empty) {}
+
+	// 标记消息已读
+	// mark_msg_as_read
+	rpc MarkMsgAsRead (google.protobuf.Int64Value) returns (google.protobuf.Empty) {}
+	
+	// 获取合并转发消息
+	// get_forward_msg
+	rpc GetForwardMsg (google.protobuf.Int64Value) returns (model.ForwardMessageDataResultGRPC) {}
+	
+	// 发送合并转发 ( 群聊 )
+	// send_group_forward_msg
+	rpc SendGroupForwardMsg (SendGroupForwardMsgRequest) returns (model.SendForwardMessageDataResultGRPC) {}
+
+	// 发送合并转发 ( 好友 )
+	// send_private_forward_msg
+	rpc SendPrivateForwardMsg (SendPrivateForwardMsgGRPC) returns (model.SendForwardMessageDataResultGRPC) {}
+
+	// 获取群消息历史记录
+	// get_group_msg_history
+	rpc GetGroupMsgHistory (GetGroupMsgHistoryRequest) returns (model.MessagesResultGRPC) {}
+
+
+}

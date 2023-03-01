@@ -92,6 +92,39 @@ type File struct {
 	UploaderName string `json:"uploader_name"`
 }
 
+func (f *File) ToGRPC() *FileGRPC {
+	return &FileGRPC{
+		GroupId:       f.GroupId,
+		FileId:        f.FileId,
+		FileName:      f.FileName,
+		Busid:         f.Busid,
+		FileSize:      f.FileSize,
+		UploadTime:    f.UploadTime,
+		DeadTime:      f.DeadTime,
+		ModifyTime:    f.ModifyTime,
+		DownloadTimes: f.DownloadTimes,
+		Uploader:      f.Uploader,
+		UploaderName:  f.UploaderName,
+	}
+}
+
+// ToStruct
+func (f *FileGRPC) ToStruct() *File {
+	return &File{
+		GroupId:       f.GroupId,
+		FileId:        f.FileId,
+		FileName:      f.FileName,
+		Busid:         f.Busid,
+		FileSize:      f.FileSize,
+		UploadTime:    f.UploadTime,
+		DeadTime:      f.DeadTime,
+		ModifyTime:    f.ModifyTime,
+		DownloadTimes: f.DownloadTimes,
+		Uploader:      f.Uploader,
+		UploaderName:  f.UploaderName,
+	}
+}
+
 type Folder struct {
 	// group_id	int32	群号
 	GroupId int32 `json:"group_id"`
@@ -109,9 +142,57 @@ type Folder struct {
 	TotalFileCount int32 `json:"total_file_count"`
 }
 
+func (f *Folder) ToGRPC() *FolderGRPC {
+	return &FolderGRPC{
+		GroupId:        f.GroupId,
+		FolderId:       f.FolderId,
+		FolderName:     f.FolderName,
+		CreateTime:     f.CreateTime,
+		Creator:        f.Creator,
+		CreatorName:    f.CreatorName,
+		TotalFileCount: f.TotalFileCount,
+	}
+}
+
+// ToStruct
+func (f *FolderGRPC) ToStruct() *Folder {
+	return &Folder{
+		GroupId:        f.GroupId,
+		FolderId:       f.FolderId,
+		FolderName:     f.FolderName,
+		CreateTime:     f.CreateTime,
+		Creator:        f.Creator,
+		CreatorName:    f.CreatorName,
+		TotalFileCount: f.TotalFileCount,
+	}
+}
+
 type GroupFiles struct {
 	Files   []*File   `json:"files"`
 	Folders []*Folder `json:"folders"`
+}
+
+func (g *GroupFiles) ToGRPC() *GroupFilesGRPC {
+	result := &GroupFilesGRPC{}
+	for _, v := range g.Files {
+		result.Files = append(result.Files, v.ToGRPC())
+	}
+	for _, v := range g.Folders {
+		result.Folders = append(result.Folders, v.ToGRPC())
+	}
+	return result
+}
+
+// ToStruct
+func (g *GroupFilesGRPC) ToStruct() *GroupFiles {
+	result := &GroupFiles{}
+	for _, v := range g.Files {
+		result.Files = append(result.Files, v.ToStruct())
+	}
+	for _, v := range g.Folders {
+		result.Folders = append(result.Folders, v.ToStruct())
+	}
+	return result
 }
 
 type GroupFilesResult struct {
@@ -126,9 +207,47 @@ type GroupFilesResult struct {
 	Wording string `json:"wording"`
 }
 
+func (g *GroupFilesResult) ToGRPC() *GroupFilesResultGRPC {
+	result := &GroupFilesResultGRPC{
+		Retcode: g.Retcode,
+		Status:  g.Status,
+		Msg:     g.Msg,
+		Wording: g.Wording,
+	}
+	if g.Data != nil {
+		result.Data = g.Data.ToGRPC()
+	}
+	return result
+}
+
+func (g *GroupFilesResultGRPC) ToStruct() *GroupFilesResult {
+	result := &GroupFilesResult{
+		Retcode: g.Retcode,
+		Status:  g.Status,
+		Msg:     g.Msg,
+		Wording: g.Wording,
+	}
+	if g.Data != nil {
+		result.Data = g.Data.ToStruct()
+	}
+	return result
+}
+
 type FileUrl struct {
 	// url	string	文件下载链接
 	Url string `json:"url"`
+}
+
+func (f *FileUrl) ToGRPC() *FileUrlGRPC {
+	return &FileUrlGRPC{
+		Url: f.Url,
+	}
+}
+
+func (f *FileUrlGRPC) ToStruct() *FileUrl {
+	return &FileUrl{
+		Url: f.Url,
+	}
 }
 
 type FileUrlResult struct {
@@ -141,4 +260,30 @@ type FileUrlResult struct {
 	Msg string `json:"msg"`
 	// wording	string	错误信息
 	Wording string `json:"wording"`
+}
+
+func (f *FileUrlResult) ToGRPC() *FileUrlResultGRPC {
+	result := &FileUrlResultGRPC{
+		Retcode: f.Retcode,
+		Status:  f.Status,
+		Msg:     f.Msg,
+		Wording: f.Wording,
+	}
+	if f.Data != nil {
+		result.Data = f.Data.ToGRPC()
+	}
+	return result
+}
+
+func (f *FileUrlResultGRPC) ToStruct() *FileUrlResult {
+	result := &FileUrlResult{
+		Retcode: f.Retcode,
+		Status:  f.Status,
+		Msg:     f.Msg,
+		Wording: f.Wording,
+	}
+	if f.Data != nil {
+		result.Data = f.Data.ToStruct()
+	}
+	return result
 }

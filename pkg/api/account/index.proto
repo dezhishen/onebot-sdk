@@ -1,13 +1,12 @@
 syntax = "proto3";
-package api;
-import "github.com/dezhishen/onebot-sdk/proto/account.proto";
-import "google/protobuf/wrappers.proto";
+package account;
+import "account.proto";
 import "google/protobuf/empty.proto";
-option go_package="./";
-service AccountGRPCService {
-    rpc GetLoginInfo (google.protobuf.Empty) returns (proto.AccountResultGRPC) {}
-    rpc SetQQProfile (proto.QQProfileGRPC) returns (google.protobuf.Empty) {}
-    rpc GetModelShow (google.protobuf.Empty) returns (proto.ModelShowResultGRPC) {}
-    rpc SetModelShow (proto.ModelShowGRPC) returns (google.protobuf.Empty) {}
-    rpc GetOnlineClients (google.protobuf.Empty) returns (proto.OnlineClientsResultGRPC) {}
+option go_package="github.com/dezhishen/onebot-sdk/pkg/api/account;account";
+service OnebotApiAccountGRPCService {
+    rpc GetLoginInfo (google.protobuf.Empty) returns (model.AccountResultGRPC) {}
+    rpc SetQQProfile (model.QQProfileGRPC) returns (google.protobuf.Empty) {}
+    rpc GetModelShow (google.protobuf.Empty) returns (model.ModelShowResultGRPC) {}
+    rpc SetModelShow (model.ModelShowGRPC) returns (google.protobuf.Empty) {}
+    rpc GetOnlineClients (google.protobuf.Empty) returns (model.OnlineClientsResultGRPC) {}
 }
