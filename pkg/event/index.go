@@ -17,7 +17,14 @@ import (
 	"github.com/dezhishen/onebot-sdk/pkg/model"
 )
 
-type OnebotEventcli struct {
+type OnebotEventClientInterface interface {
+	message.OnebotMessageEventCli // 消息事件
+	notice.OnebotNoticeEventCli   // 通知事件
+	request.OnebotRequestEventCli // 请求事件
+	meta.OnebotMetaEventCli       // 元事件
+}
+
+type OnebotEventClient struct {
 	message.OnebotMessageEventCli                      // 消息事件
 	notice.OnebotNoticeEventCli                        // 通知事件
 	request.OnebotRequestEventCli                      // 请求事件
@@ -27,7 +34,7 @@ type OnebotEventcli struct {
 	// StartWsWithContext(ctx context.Context) error
 }
 
-func NewOnebotEventCli(conf *config.OnebotEventConfig) (*OnebotEventcli, error) {
+func NewOnebotEventCli(conf *config.OnebotEventConfig) (*OnebotEventClient, error) {
 	if conf == nil {
 		return nil, fmt.Errorf("config is nil")
 	}
@@ -35,7 +42,7 @@ func NewOnebotEventCli(conf *config.OnebotEventConfig) (*OnebotEventcli, error) 
 	if err != nil {
 		return nil, err
 	}
-	var result = &OnebotEventcli{
+	var result = &OnebotEventClient{
 		_channel:   _channel,
 		allHandler: make(map[base.OnebotEventType]base.OnebotBaseEventCli),
 	}
@@ -70,7 +77,7 @@ func NewOnebotEventCli(conf *config.OnebotEventConfig) (*OnebotEventcli, error) 
 	return result, nil
 }
 
-func (cli *OnebotEventcli) listen(ctx context.Context) error {
+func (cli *OnebotEventClient) listen(ctx context.Context) error {
 	err := cli._channel.StartListen(ctx, func(message []byte) error {
 		var eventBaseInfo model.EventBase
 		err := json.Unmarshal(message, &eventBaseInfo)
@@ -94,7 +101,7 @@ func (cli *OnebotEventcli) listen(ctx context.Context) error {
 	return err
 }
 
-func (cli *OnebotEventcli) StartListenWithCtx(ctx context.Context) error {
+func (cli *OnebotEventClient) StartListenWithCtx(ctx context.Context) error {
 	return cli.listen(ctx)
 }
 
