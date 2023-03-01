@@ -3,7 +3,9 @@ package model;
 option go_package="github.com/dezhishen/onebot-sdk/pkg/model;model";
 
 message EventBaseGRPC {
-	int64  time = 1;
-	int64  self_id = 2;
-	string post_type = 3;
+	// 用于传递api实例，当grpc使用时，api实例会被传递到grpc服务端，用于调用api
+	uint32 api_cli = 1;
+	int64  time = 2;
+	int64  self_id = 3;
+	string post_type = 4;
 }

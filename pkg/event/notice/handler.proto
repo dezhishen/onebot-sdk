@@ -1,0 +1,30 @@
+syntax = "proto3";
+package notice;
+import "event_notice.proto";
+import "google/protobuf/Empty.proto";
+option go_package="github.com/dezhishen/onebot-sdk/pkg/event/notice;notice";
+
+service OnebotEventNoticeGRPCService {
+    // ListenNoticeGroupUpload(handler func(data model.EventNoticeGroupUpload) error)
+    rpc HandleNoticeGroupUpload (model.EventNoticeGroupUploadGRPC) returns (google.protobuf.Empty) {}
+	// ListenNoticeGroupAdmin(handler func(data model.EventNoticeGroupAdmin) error)
+    rpc HandleNoticeGroupAdmin (model.EventNoticeGroupAdminGRPC) returns (google.protobuf.Empty) {}
+	// ListenNoticeGroupDecrease(handler func(data model.EventNoticeGroupDecrease) error)
+    rpc HandleNoticeGroupDecrease (model.EventNoticeGroupDecreaseGRPC) returns (google.protobuf.Empty) {}
+	// ListenNoticeGroupIncrease(handler func(data model.EventNoticeGroupIncrease) error)
+    rpc HandleNoticeGroupIncrease (model.EventNoticeGroupIncreaseGRPC) returns (google.protobuf.Empty) {}
+	// ListenNoticeGroupBan(handler func(data model.EventNoticeGroupBan) error)
+    rpc HandleNoticeGroupBan (model.EventNoticeGroupBanGRPC) returns (google.protobuf.Empty) {}
+	// ListenNoticeFriendAdd(handler func(data model.EventNoticeFriendAdd) error)
+    rpc HandleNoticeFriendAdd (model.EventNoticeFriendAddGRPC) returns (google.protobuf.Empty) {}
+	// ListenNoticeGroupRecall(handler func(data model.EventNoticeGroupRecall) error)
+    rpc HandleNoticeGroupRecall (model.EventNoticeGroupRecallGRPC) returns (google.protobuf.Empty) {}
+	// ListenNoticeFriendRecall(handler func(data model.EventNoticeFriendRecall) error)
+    rpc HandleNoticeFriendRecall (model.EventNoticeFriendRecallGRPC) returns (google.protobuf.Empty) {}
+	// ListenNoticeGroupNotifyPoke(handler func(data model.EventNoticeGroupNotifyPoke) error)
+    rpc HandleNoticeGroupNotifyPoke (model.EventNoticeGroupNotifyPokeGRPC) returns (google.protobuf.Empty) {}
+	// ListenNoticeGroupNotifyHonor(handler func(data model.EventNoticeGroupNotifyHonor) error)
+    rpc HandleNoticeGroupNotifyHonor (model.EventNoticeGroupNotifyHonorGRPC) returns (google.protobuf.Empty) {}
+	// ListenNoticeGroupNotifyLuckyKing(handler func(data model.EventNoticeGroupNotifyLuckyKing) error)
+    rpc HandleNoticeGroupNotifyLuckyKing (model.EventNoticeGroupNotifyLuckyKingGRPC) returns (google.protobuf.Empty) {}
+}

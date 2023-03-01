@@ -1,0 +1,12 @@
+syntax = "proto3";
+package meta;
+import "event_meta.proto";
+import "google/protobuf/Empty.proto";
+option go_package="github.com/dezhishen/onebot-sdk/pkg/event/meta;meta";
+
+service OnebotEventMetaGRPCService {
+    // ListenMetaLifecycle(handler func(data model.EventMetaLifecycle) error)
+    rpc HandlerLifecycle (model.EventMetaLifecycleGRPC) returns (google.protobuf.Empty) {}
+	// ListenMetaHeartBeat(handler func(data model.EventMetaHeartbeat) error)
+    rpc HandlerHeartBeat (model.EventMetaHeartbeatGRPC) returns (google.protobuf.Empty) {}
+}

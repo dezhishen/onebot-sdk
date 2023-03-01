@@ -1,0 +1,12 @@
+syntax = "proto3";
+package message;
+import "event_message.proto";
+import "google/protobuf/Empty.proto";
+option go_package="github.com/dezhishen/onebot-sdk/pkg/event/message;message";
+
+service OnebotEventMessageGRPCService {
+    // ListenMessagePrivate(handler func(data model.EventMessagePrivate) error)
+    rpc HandlerPrivateMessage (model.EventMessagePrivateGRPC) returns (google.protobuf.Empty) {}
+	// ListenMessageGroup(handler func(data model.EventMessageGroup) error)
+    rpc HandlerGroupMessage (model.EventMessageGroupGRPC) returns (google.protobuf.Empty) {}
+}
