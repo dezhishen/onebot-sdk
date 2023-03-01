@@ -58,6 +58,6 @@ WebSocket事件分为注册和启用两步
 - EVENT回调: 详情查看 [examples/event/main.go](./examples/event/main.go)
 # 功能点清单
 ## API
-- [go-cqhttp#api](https://docs.go-cqhttp.org/api/)
+- <a href="https://docs.go-cqhttp.org/api/" target="_blank">go-cqhttp#api</a>
 ## EVENT
-- [go-cqhttp#event](https://docs.go-cqhttp.org/event)
+- <a href="https://docs.go-cqhttp.org/event/" target="_blank">go-cqhttp#event</a>
