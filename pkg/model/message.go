@@ -333,3 +333,29 @@ type MessagesResult struct {
 	Msg     string    `json:"msg"`
 	Wording string    `json:"wording"`
 }
+
+func (a *MessagesResult) ToGRPC() *MessagesResultGRPC {
+	result := &MessagesResultGRPC{
+		Retcode: a.Retcode,
+		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
+	}
+	if a.Data != nil {
+		result.Data = a.Data.ToGRPC()
+	}
+	return result
+}
+
+func (a *MessagesResultGRPC) ToStruct() *MessagesResult {
+	result := &MessagesResult{
+		Retcode: a.Retcode,
+		Status:  a.Status,
+		Msg:     a.Msg,
+		Wording: a.Wording,
+	}
+	if a.Data != nil {
+		result.Data = a.Data.ToStruct()
+	}
+	return result
+}
