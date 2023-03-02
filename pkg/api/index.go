@@ -10,6 +10,7 @@ import (
 	"github.com/dezhishen/onebot-sdk/pkg/api/friendopt"
 	"github.com/dezhishen/onebot-sdk/pkg/api/group"
 	"github.com/dezhishen/onebot-sdk/pkg/api/groupopt"
+	"github.com/dezhishen/onebot-sdk/pkg/api/image"
 	"github.com/dezhishen/onebot-sdk/pkg/api/message"
 	"github.com/dezhishen/onebot-sdk/pkg/api/record"
 	"github.com/dezhishen/onebot-sdk/pkg/api/request"
@@ -25,6 +26,7 @@ type OnebotAPiClientInterface interface {
 	friendopt.OnebotApiFriendOptClient
 	group.OnebotApiGroupClient
 	groupopt.OnebotApiGroupOptClient
+	image.OnebotApiImageClient
 	message.OnebotApiMessageClient
 	record.OnebotApiRecordClient
 	request.OnebotApiRequestClient
@@ -38,6 +40,7 @@ type OnebotApiClient struct {
 	friendopt.OnebotApiFriendOptClient
 	group.OnebotApiGroupClient
 	groupopt.OnebotApiGroupOptClient
+	image.OnebotApiImageClient
 	message.OnebotApiMessageClient
 	record.OnebotApiRecordClient
 	request.OnebotApiRequestClient
@@ -91,6 +94,10 @@ func NewOnebotApiClient(config *config.OnebotApiConfig) (*OnebotApiClient, error
 	if err != nil {
 		return nil, err
 	}
+	imageCli, err := image.NewChannelApiImageClient(_channel)
+	if err != nil {
+		return nil, err
+	}
 	return &OnebotApiClient{
 		accountCli,
 		cqhttpCli,
@@ -99,6 +106,7 @@ func NewOnebotApiClient(config *config.OnebotApiConfig) (*OnebotApiClient, error
 		friendoptCli,
 		groupCli,
 		groupoptCli,
+		imageCli,
 		messageCli,
 		recordCli,
 		requestCli,
