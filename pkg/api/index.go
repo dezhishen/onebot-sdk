@@ -18,7 +18,7 @@ import (
 	"github.com/dezhishen/onebot-sdk/pkg/config"
 )
 
-type OnebotAPiClientInterface interface {
+type OnebotApiClientInterface interface {
 	account.OnebotApiAccountClient
 	cqhttp.OnebotApiCqhttpClient
 	file.OnebotApiFileClient
