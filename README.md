@@ -52,7 +52,6 @@ onebot-sdk
 	- [x] model
 	- [x] api
 	- [x] event
-		- [x] 在eventBase中添加`uint32 api_cli = 1;`字段，用于传递api实例
 # 快速开始
 ## 引用
 ```
