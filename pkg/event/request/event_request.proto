@@ -1,6 +1,6 @@
 syntax = "proto3";
 package request;
-import "event_request.proto";
+import "model_event_request.proto";
 import "google/protobuf/Empty.proto";
 option go_package="github.com/dezhishen/onebot-sdk/pkg/event/request;request";
 

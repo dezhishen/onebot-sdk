@@ -1,6 +1,6 @@
 syntax = "proto3";
 package message;
-import "event_message.proto";
+import "model_event_message.proto";
 import "google/protobuf/Empty.proto";
 option go_package="github.com/dezhishen/onebot-sdk/pkg/event/message;message";
 

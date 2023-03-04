@@ -1,6 +1,6 @@
 syntax = "proto3";
 package meta;
-import "event_meta.proto";
+import "model_event_meta.proto";
 import "google/protobuf/Empty.proto";
 option go_package="github.com/dezhishen/onebot-sdk/pkg/event/meta;meta";
 
