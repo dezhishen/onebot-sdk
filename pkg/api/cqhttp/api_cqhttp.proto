@@ -3,6 +3,7 @@ package cqhttp;
 import "cqhttp.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/any.proto";
 option go_package="github.com/dezhishen/onebot-sdk/pkg/api/cqhttp;cqhttp";
 message DownloadFileRequestGRPC {
     string url = 1;
@@ -11,8 +12,8 @@ message DownloadFileRequestGRPC {
 }
 
 message HiddenHandleQuickOperationRequestGRPC {
-    string context = 1;
-    string operation = 2;
+    google.protobuf.Any  context = 1;
+    google.protobuf.Any  operation = 2;
 }
 
 service OnebotApiCqhttpGRPCService {
