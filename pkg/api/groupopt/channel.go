@@ -110,7 +110,7 @@ func (cli *ChannelApiGroupOptClient) SetGroupWholeBan(groupId int64, enable bool
 // anonymousFlag 可选, 要禁言的匿名用户的 flag（需从群消息上报的数据中获得）
 // 上面的 anonymous 和 anonymous_flag 两者任选其一传入即可, 若都传入, 则使用 anonymous。
 // duration 禁言时长，单位秒，不能超过 30 天
-func (cli *ChannelApiGroupOptClient) SetGroupAnonymousBan(groupId int64, anonymous interface{}, anonymousFlag string, duration uint32) error {
+func (cli *ChannelApiGroupOptClient) SetGroupAnonymousBan(groupId int64, anonymous *model.Anonymous, anonymousFlag string, duration uint32) error {
 	return cli.PostByRequest(API_SET_GROUP_ANONYMOUS_BAN, map[string]interface{}{
 		"group_id":       groupId,
 		"anonymous":      anonymous,
