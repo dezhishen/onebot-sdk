@@ -1,11 +1,32 @@
 package model
 
 import (
+	"encoding/json"
 	"fmt"
+	"strings"
 
 	log "github.com/sirupsen/logrus"
 	"github.com/tidwall/gjson"
 )
+
+type Message []*MessageSegment
+
+func (m *Message) UnmarshalJSON(data []byte) error {
+	if data[0] == '"' && data[len(data)-1] == '"' {
+		code, err := ParseStringMessage(strings.Trim(string(data), "\""))
+		if err != nil {
+			return err
+		}
+		*m = code
+	} else {
+		var msgSeg []*MessageSegment
+		err := json.Unmarshal(data, &msgSeg)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
 
 type MessageSegment struct {
 	Type string         `json:"type"`

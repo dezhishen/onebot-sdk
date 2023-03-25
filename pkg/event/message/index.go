@@ -2,7 +2,6 @@ package message
 
 import (
 	"encoding/json"
-
 	"github.com/dezhishen/onebot-sdk/pkg/event/base"
 	"github.com/dezhishen/onebot-sdk/pkg/model"
 )

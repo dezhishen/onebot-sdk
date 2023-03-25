@@ -114,6 +114,6 @@ func runHandler(handler base.OnebotBaseEventCli, message []byte) {
 	}()
 	err := handler.Handler(message)
 	if err != nil {
-		log.Errorf("handle listen decoder err :%v,raw:%v", err, message)
+		log.Errorf("handle listen decoder err: %v, raw: %v", err, string(message))
 	}
 }

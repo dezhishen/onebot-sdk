@@ -2,14 +2,14 @@ package model
 
 type EventMeesageBase struct {
 	EventBase
-	MessageType string            `json:"message_type"`
-	SubType     string            `json:"sub_type"`
-	MessageId   int32             `json:"message_id"`
-	UserId      int64             `json:"user_id"`
-	Message     []*MessageSegment `json:"message"`
-	RawMessage  string            `json:"raw_message"`
-	Font        int32             `json:"font"`
-	Sender      *Sender           `json:"sender"`
+	MessageType string  `json:"message_type"`
+	SubType     string  `json:"sub_type"`
+	MessageId   int32   `json:"message_id"`
+	UserId      int64   `json:"user_id"`
+	Message     Message `json:"message"`
+	RawMessage  string  `json:"raw_message"`
+	Font        int32   `json:"font"`
+	Sender      *Sender `json:"sender"`
 }
 
 func (a *EventMeesageBase) ToGRPC() *EventMeesageBaseGRPC {
