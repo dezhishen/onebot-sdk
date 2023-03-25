@@ -92,7 +92,7 @@ func ParseCQCode(cqCode string) (*MessageSegment, error) {
 	}
 	cqData := map[string]string{}
 	for _, s := range split[1:] {
-		kv := strings.Split(s, CQKVSplit)
+		kv := strings.SplitN(s, CQKVSplit, 2)
 		if len(kv) != 2 {
 			return nil, fmt.Errorf("error kv in CQCode: %s", cqCode)
 		}
