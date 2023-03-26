@@ -106,7 +106,7 @@ func ParseCQCode(cqCode string) (*MessageSegment, error) {
 	res := &MessageSegment{
 		Type: split[0],
 	}
-	messageElement := getMessageElement(res.Type)
+	messageElement := getMessageElementFromType(res.Type)
 	if messageElement != nil {
 		if err = json.Unmarshal(cqDataStr, messageElement); err != nil {
 			return nil, err
@@ -120,7 +120,7 @@ func ParseCQCode(cqCode string) (*MessageSegment, error) {
 	return res, nil
 }
 
-func getMessageElement(cqType string) MessageElement {
+func getMessageElementFromType(cqType string) MessageElement {
 	switch cqType {
 	case CQTypeText:
 		return &MessageElementText{}
