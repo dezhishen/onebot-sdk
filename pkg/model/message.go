@@ -1,10 +1,10 @@
 package model
 
 type PrivateMsg struct {
-	UserId     int64             `json:"user_id"`
-	GroupId    int64             `json:"group_id"`
-	Message    []*MessageSegment `json:"message"`
-	AutoEscape bool              `json:"auto_escape"`
+	UserId     int64           `json:"user_id"`
+	GroupId    int64           `json:"group_id"`
+	Message    MessageSegments `json:"message"`
+	AutoEscape bool            `json:"auto_escape"`
 }
 
 func (msg *PrivateMsgGRPC) ToStruct() *PrivateMsg {
@@ -26,9 +26,9 @@ func (msg *PrivateMsg) ToGRPC() *PrivateMsgGRPC {
 }
 
 type GroupMsg struct {
-	GroupId    int64             `json:"group_id"`
-	Message    []*MessageSegment `json:"message"`
-	AutoEscape bool              `json:"auto_escape"`
+	GroupId    int64           `json:"group_id"`
+	Message    MessageSegments `json:"message"`
+	AutoEscape bool            `json:"auto_escape"`
 }
 
 func (msg *GroupMsgGRPC) ToStruct() *GroupMsg {
@@ -55,11 +55,11 @@ const (
 )
 
 type MsgForSend struct {
-	UserId      int64             `json:"user_id"`
-	GroupId     int64             `json:"group_id"`
-	Message     []*MessageSegment `json:"message"`
-	AutoEscape  bool              `json:"auto_escape"`
-	MessageType MessageType       `json:"message_type"`
+	UserId      int64           `json:"user_id"`
+	GroupId     int64           `json:"group_id"`
+	Message     MessageSegments `json:"message"`
+	AutoEscape  bool            `json:"auto_escape"`
+	MessageType MessageType     `json:"message_type"`
 }
 
 func (msg *MsgForSendGRPC) ToStruct() *MsgForSend {
@@ -142,7 +142,7 @@ type MessageData struct {
 	//发送人信息，同 消息事件
 	Sender *Sender `json:"sender"`
 	//消息内容
-	Message []*MessageSegment `json:"message"`
+	Message MessageSegments `json:"message"`
 }
 
 func (a *MessageData) ToGRPC() *MessageDataGRPC {
@@ -208,7 +208,7 @@ func (a *MessageDataResultGRPC) ToStruct() *MessageDataResult {
 }
 
 type ForwardMessageData struct {
-	Message []*MessageSegment `json:"message"`
+	Message MessageSegments `json:"message"`
 }
 
 func (a *ForwardMessageData) ToGRPC() *ForwardMessageDataGRPC {
@@ -311,7 +311,7 @@ func (a *SendForwardMessageDataResultGRPC) ToStruct() *SendForwardMessageDataRes
 }
 
 type Messages struct {
-	Messages []*MessageSegment `json:"messages"`
+	Messages MessageSegments `json:"messages"`
 }
 
 func (a *Messages) ToGRPC() *MessagesGRPC {
