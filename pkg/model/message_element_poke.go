@@ -1,6 +1,9 @@
 package model
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 type MessageElementPoke struct {
 	//qq	int64	需要戳的成员
@@ -13,6 +16,10 @@ func (msg *MessageElementPoke) Type() string {
 
 func (msg *MessageElementPoke) Enabled() bool {
 	return true
+}
+
+func (msg *MessageElementPoke) ToCQCode() string {
+	return CQPrefix + msg.Type() + CQEleSplit + "qq=" + fmt.Sprintf("%d", msg.Qq) + CQSuffix
 }
 
 // ProcessGRPC

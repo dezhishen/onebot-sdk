@@ -15,6 +15,12 @@ func (msg *MessageElementRedbag) Enabled() bool {
 	return true
 }
 
+func (msg *MessageElementRedbag) ToCQCode() string {
+	return CQPrefix + msg.Type() +
+		CQEleSplit + "title=" + msg.Title +
+		CQSuffix
+}
+
 // ProcessGRPC
 func (msg *MessageElementRedbag) ProcessGRPC(segment *MessageSegmentGRPC) {
 	segment.Data = &MessageSegmentGRPC_MessageElementRedbag{

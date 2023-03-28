@@ -1,6 +1,9 @@
 package model
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 type MessageElementNode struct {
 	// id	int32	转发消息id	直接引用他人的消息合并转发, 实际查看顺序为原消息发送顺序 与下面的自定义消息二选一
@@ -21,6 +24,16 @@ func (msg *MessageElementNode) Type() string {
 
 func (msg *MessageElementNode) Enabled() bool {
 	return true
+}
+
+func (msg *MessageElementNode) ToCQCode() string {
+	return CQPrefix + msg.Type() +
+		CQEleSplit + "id=" + msg.Id +
+		CQEleSplit + "name=" + msg.Name +
+		CQEleSplit + "uin=" + fmt.Sprintf("%d", msg.Uin) +
+		CQEleSplit + "content=" + msg.Content.ToCQCode() +
+		CQEleSplit + "seq=" + msg.Seq.ToCQCode() +
+		CQSuffix
 }
 
 // ProcessGRPC

@@ -13,6 +13,10 @@ func (msg *MessageElementRps) Enabled() bool {
 	return false
 }
 
+func (msg *MessageElementRps) ToCQCode() string {
+	return CQPrefix + msg.Type() + CQSuffix
+}
+
 // ProcessGRPC
 func (msg *MessageElementRps) ProcessGRPC(segment *MessageSegmentGRPC) {
 	segment.Data = &MessageSegmentGRPC_MessageElementRps{

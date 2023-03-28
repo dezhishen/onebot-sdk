@@ -1,6 +1,9 @@
 package model
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 type MessageElementVideo struct {
 	// file	string	-	视频地址, 支持http和file发送
@@ -17,6 +20,14 @@ func (msg *MessageElementVideo) Type() string {
 
 func (msg *MessageElementVideo) Enabled() bool {
 	return true
+}
+
+func (msg *MessageElementVideo) ToCQCode() string {
+	return CQPrefix + msg.Type() +
+		CQEleSplit + "file=" + msg.File +
+		CQEleSplit + "cover=" + msg.Cover +
+		CQEleSplit + "c=" + fmt.Sprintf("%d", msg.C) +
+		CQSuffix
 }
 
 // ProcessGRPC

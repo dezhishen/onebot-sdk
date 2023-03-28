@@ -14,6 +14,10 @@ func (msg *MessageElementText) Enabled() bool {
 	return true
 }
 
+func (msg *MessageElementText) ToCQCode() string {
+	return msg.Text
+}
+
 // ProcessGRPC
 func (msg *MessageElementText) ProcessGRPC(segment *MessageSegmentGRPC) {
 	segment.Data = &MessageSegmentGRPC_MessageElementText{

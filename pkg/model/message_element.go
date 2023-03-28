@@ -35,6 +35,13 @@ type MessageSegment struct {
 	Data MessageElement `json:"data"`
 }
 
+func (msg *MessageSegment) ToCQCode() string {
+	if msg.Data == nil {
+		return ""
+	}
+	return msg.Data.ToCQCode()
+}
+
 func (msg *MessageSegment) ToGRPC() *MessageSegmentGRPC {
 	if msg == nil {
 		return nil
@@ -116,4 +123,5 @@ type MessageElement interface {
 	Type() string
 	Enabled() bool
 	ProcessGRPC(msg *MessageSegmentGRPC)
+	ToCQCode() string
 }

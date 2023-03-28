@@ -1,6 +1,9 @@
 package model
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 type MessageElementJson struct {
 	// data	string	json内容, json的所有字符串记得实体化处理(转义)
@@ -15,6 +18,12 @@ func (msg *MessageElementJson) Type() string {
 
 func (msg *MessageElementJson) Enabled() bool {
 	return true
+}
+
+func (msg *MessageElementJson) ToCQCode() string {
+	return CQPrefix + msg.Type() + CQEleSplit + "data=" + msg.Data +
+		CQEleSplit + "resid=" + fmt.Sprintf("%d", msg.Resid) +
+		CQSuffix
 }
 
 // ProcessGRPC

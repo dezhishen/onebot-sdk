@@ -1,6 +1,9 @@
 package model
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 type MessageElementGift struct {
 	// qq	int64	接收礼物的成员
@@ -29,6 +32,13 @@ func (msg *MessageElementGift) Type() string {
 
 func (msg *MessageElementGift) Enabled() bool {
 	return true
+}
+
+func (msg *MessageElementGift) ToCQCode() string {
+	return CQPrefix + msg.Type() +
+		CQEleSplit + "qq=" + fmt.Sprintf("%d", msg.Qq) +
+		CQEleSplit + "id=" + fmt.Sprintf("%d", msg.Id) +
+		CQSuffix
 }
 
 // ProcessGRPC

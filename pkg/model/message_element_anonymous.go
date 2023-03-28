@@ -1,6 +1,8 @@
 package model
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 type MessageElementAnonymous struct {
 	// ignore		✓	0 1	可选, 表示无法匿名时是否继续发送
@@ -13,6 +15,10 @@ func (msg *MessageElementAnonymous) Type() string {
 
 func (msg *MessageElementAnonymous) Enabled() bool {
 	return false
+}
+
+func (msg *MessageElementAnonymous) ToCQCode() string {
+	return CQPrefix + msg.Type() + CQSuffix
 }
 
 func (msg *MessageElementAnonymous) ProcessGRPC(segment *MessageSegmentGRPC) {

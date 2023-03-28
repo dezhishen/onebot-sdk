@@ -17,6 +17,15 @@ func (msg *MessageElementLocation) Enabled() bool {
 	return false
 }
 
+func (msg *MessageElementLocation) ToCQCode() string {
+	return CQPrefix + msg.Type() +
+		CQEleSplit + "lat=" + msg.Lat +
+		CQEleSplit + "lon=" + msg.Lon +
+		CQEleSplit + "title=" + msg.Title +
+		CQEleSplit + "content=" + msg.Content +
+		CQSuffix
+}
+
 // ProcessGRPC
 func (msg *MessageElementLocation) ProcessGRPC(segment *MessageSegmentGRPC) {
 	segment.Data = &MessageSegmentGRPC_MessageElementLocation{

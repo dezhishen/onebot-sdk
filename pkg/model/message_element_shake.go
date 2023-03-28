@@ -13,6 +13,10 @@ func (msg *MessageElementShake) Enabled() bool {
 	return false
 }
 
+func (msg *MessageElementShake) ToCQCode() string {
+	return CQPrefix + msg.Type() + CQSuffix
+}
+
 // ProcessGRPC
 func (msg *MessageElementShake) ProcessGRPC(segment *MessageSegmentGRPC) {
 	segment.Data = &MessageSegmentGRPC_MessageElementShake{

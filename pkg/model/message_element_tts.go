@@ -15,6 +15,10 @@ func (msg *MessageElementTts) Enabled() bool {
 	return true
 }
 
+func (msg *MessageElementTts) ToCQCode() string {
+	return CQPrefix + msg.Type() + CQEleSplit + msg.Text + CQSuffix
+}
+
 // ProcessGRPC
 func (msg *MessageElementTts) ProcessGRPC(segment *MessageSegmentGRPC) {
 	segment.Data = &MessageSegmentGRPC_MessageElementTts{

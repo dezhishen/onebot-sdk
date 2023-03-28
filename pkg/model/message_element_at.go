@@ -1,6 +1,8 @@
 package model
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 type MessageElementAt struct {
 	Qq   string `json:"qq"`
@@ -13,6 +15,15 @@ func (msg *MessageElementAt) Type() string {
 
 func (msg *MessageElementAt) Enabled() bool {
 	return true
+}
+
+// ToCQCode
+func (msg *MessageElementAt) ToCQCode() string {
+	cqCode := CQPrefix + msg.Type() + CQEleSplit + "qq=" + msg.Qq
+	if msg.Name != "" {
+		cqCode += (CQEleSplit + "name=" + msg.Name)
+	}
+	return cqCode + CQSuffix
 }
 
 // ProcessGRPC

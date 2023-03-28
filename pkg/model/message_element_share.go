@@ -17,6 +17,15 @@ func (msg *MessageElementShare) Enabled() bool {
 	return true
 }
 
+func (msg *MessageElementShare) ToCQCode() string {
+	return CQPrefix + msg.Type() +
+		CQEleSplit + "url=" + msg.Url +
+		CQEleSplit + "title=" + msg.Title +
+		CQEleSplit + "content=" + msg.Content +
+		CQEleSplit + "image=" + msg.Image +
+		CQSuffix
+}
+
 // ProcessGRPC
 func (msg *MessageElementShare) ProcessGRPC(segment *MessageSegmentGRPC) {
 	segment.Data = &MessageSegmentGRPC_MessageElementShare{

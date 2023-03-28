@@ -15,6 +15,10 @@ func (msg *MessageElementForward) Enabled() bool {
 	return true
 }
 
+func (msg *MessageElementForward) ToCQCode() string {
+	return CQPrefix + msg.Type() + CQEleSplit + "id=" + msg.Id + CQSuffix
+}
+
 // ProcessGRPC
 func (msg *MessageElementForward) ProcessGRPC(segment *MessageSegmentGRPC) {
 	segment.Data = &MessageSegmentGRPC_MessageElementForward{

@@ -25,6 +25,17 @@ func (msg *MessageElementRecord) Enabled() bool {
 	return true
 }
 
+func (msg *MessageElementRecord) ToCQCode() string {
+	return CQPrefix + msg.Type() +
+		CQEleSplit + "file=" + msg.File +
+		CQEleSplit + "magic=" + msg.Magic +
+		CQEleSplit + "url=" + msg.Url +
+		CQEleSplit + "cache=" + msg.Cache +
+		CQEleSplit + "proxy=" + msg.Proxy +
+		CQEleSplit + "timeout=" + msg.Timeout +
+		CQSuffix
+}
+
 // ProcessGRPC
 func (msg *MessageElementRecord) ProcessGRPC(segment *MessageSegmentGRPC) {
 	segment.Data = &MessageSegmentGRPC_MessageElementRecord{

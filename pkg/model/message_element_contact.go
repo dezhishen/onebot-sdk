@@ -15,6 +15,10 @@ func (msg *MessageElementContact) Enabled() bool {
 	return false
 }
 
+func (msg *MessageElementContact) ToCQCode() string {
+	return CQPrefix + msg.Type() + CQEleSplit + "type=" + msg.Type() + CQEleSplit + "id=" + msg.Id
+}
+
 // ProcessGRPC
 func (msg *MessageElementContact) ProcessGRPC(segment *MessageSegmentGRPC) {
 	segment.Data = &MessageSegmentGRPC_MessageElementContact{

@@ -14,6 +14,9 @@ func (msg *MessageElementDice) Type() string {
 func (msg *MessageElementDice) Enabled() bool {
 	return false
 }
+func (msg *MessageElementDice) ToCQCode() string {
+	return CQPrefix + msg.Type() + CQSuffix
+}
 
 // ProcessGRPC
 func (msg *MessageElementDice) ProcessGRPC(segment *MessageSegmentGRPC) {

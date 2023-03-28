@@ -14,6 +14,10 @@ func (msg *MessageElementFace) Enabled() bool {
 	return true
 }
 
+func (msg *MessageElementFace) ToCQCode() string {
+	return CQPrefix + msg.Type() + CQEleSplit + "id=" + msg.Id + CQSuffix
+}
+
 // ProcessGRPC
 func (msg *MessageElementFace) ProcessGRPC(segment *MessageSegmentGRPC) {
 	segment.Data = &MessageSegmentGRPC_MessageElementFace{

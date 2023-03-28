@@ -1,6 +1,9 @@
 package model
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 type MessageElementReply struct {
 	// id	int	回复时所引用的消息id, 必须为本群消息.
@@ -21,6 +24,16 @@ func (msg *MessageElementReply) Enabled() bool {
 
 func (msg *MessageElementReply) Type() string {
 	return "reply"
+}
+
+func (msg *MessageElementReply) ToCQCode() string {
+	return CQPrefix + msg.Type() +
+		CQEleSplit + "id=" + fmt.Sprintf("%d", msg.Id) +
+		CQEleSplit + "text=" + msg.Text +
+		CQEleSplit + "qq=" + fmt.Sprintf("%d", msg.QQ) +
+		CQEleSplit + "time=" + fmt.Sprintf("%d", msg.Time) +
+		CQEleSplit + "seq=" + fmt.Sprintf("%d", msg.Seq) +
+		CQSuffix
 }
 
 // ProcessGRPC

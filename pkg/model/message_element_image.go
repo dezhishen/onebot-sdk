@@ -42,6 +42,18 @@ func (msg *MessageElementImage) Enabled() bool {
 	return true
 }
 
+func (msg *MessageElementImage) ToCQCode() string {
+	return CQPrefix + msg.Type() +
+		CQEleSplit + "file=" + msg.File +
+		CQEleSplit + "type=" + msg.ImageType +
+		CQEleSplit + "sub_type=" + msg.SubType +
+		CQEleSplit + "url=" + msg.Url +
+		CQEleSplit + "cache=" + msg.Cache +
+		CQEleSplit + "id=" + msg.Id +
+		CQEleSplit + "c=" + msg.C +
+		CQSuffix
+}
+
 // ProcessGRPC
 func (msg *MessageElementImage) ProcessGRPC(segment *MessageSegmentGRPC) {
 	segment.Data = &MessageSegmentGRPC_MessageElementImage{

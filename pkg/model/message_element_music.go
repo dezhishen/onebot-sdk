@@ -32,6 +32,18 @@ func (msg *MessageElementMusic) Enabled() bool {
 	return true
 }
 
+func (msg *MessageElementMusic) ToCQCode() string {
+	return CQPrefix + msg.Type() +
+		CQEleSplit + "type=" + msg.MusicType +
+		CQEleSplit + "id=" + msg.Id +
+		CQEleSplit + "url=" + msg.Url +
+		CQEleSplit + "audio=" + msg.Audio +
+		CQEleSplit + "title=" + msg.Title +
+		CQEleSplit + "content=" + msg.Content +
+		CQEleSplit + "image=" + msg.Image +
+		CQSuffix
+}
+
 // ProcessGRPC
 func (msg *MessageElementMusic) ProcessGRPC(segment *MessageSegmentGRPC) {
 	segment.Data = &MessageSegmentGRPC_MessageElementMusic{

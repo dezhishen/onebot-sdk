@@ -1,6 +1,9 @@
 package model
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 type MessageElementCardimage struct {
 	// file	string	和image的file字段对齐, 支持也是一样的
@@ -25,6 +28,25 @@ func (msg *MessageElementCardimage) Type() string {
 
 func (msg *MessageElementCardimage) Enabled() bool {
 	return true
+}
+
+// ToCQCode
+
+func (msg *MessageElementCardimage) ToCQCode() string {
+	cqCode := CQPrefix + CQEleSplit + "file=" + msg.File
+	if msg.Minwidth != 0 {
+		cqCode += (CQEleSplit + fmt.Sprintf("minwidth=%d", msg.Minwidth))
+	}
+	if msg.Minheight != 0 {
+		cqCode += (CQEleSplit + fmt.Sprintf("minheight=%d", msg.Minheight))
+	}
+	if msg.Icon != "" {
+		cqCode += (CQEleSplit + "icon=" + msg.Icon)
+	}
+	if msg.Source != "" {
+		cqCode += (CQEleSplit + "source=" + msg.Source)
+	}
+	return cqCode + CQSuffix
 }
 
 // ProcessGRPC
