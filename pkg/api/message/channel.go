@@ -4,16 +4,19 @@ import (
 	"fmt"
 
 	"github.com/dezhishen/onebot-sdk/pkg/channel"
+	"github.com/dezhishen/onebot-sdk/pkg/config"
 	"github.com/dezhishen/onebot-sdk/pkg/model"
 )
 
 type ChannelApiMessageClient struct {
 	channel.ApiChannel
+	conf *config.OnebotApiConfig
 }
 
-func NewChannelApiMessageClient(channel channel.ApiChannel) (OnebotApiMessageClient, error) {
+func NewChannelApiMessageClient(channel channel.ApiChannel, conf *config.OnebotApiConfig) (OnebotApiMessageClient, error) {
 	return &ChannelApiMessageClient{
-		channel,
+		ApiChannel: channel,
+		conf:       conf,
 	}, nil
 }
 

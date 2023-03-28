@@ -5,7 +5,8 @@ type OnebotApiConfig struct {
 	Endpoint    string `json:"endpoint" yaml:"endpoint"` // http://
 	Secret      string `json:"secret" yaml:"secret"`
 	AccessToken string `json:"access_token" yaml:"access-token"`
-	Timeout     int64  `json:"timeout" yaml:"timeout"` // ms
+	Timeout     int64  `json:"timeout" yaml:"timeout"`         // ms
+	PostFormat  string `json:"post_format" yaml:"post-format"` // string array
 }
 
 type OnebotEventConfig struct {
@@ -13,6 +14,7 @@ type OnebotEventConfig struct {
 	Addr        string `json:"addr" yaml:"addr"` // http://\
 	Secret      string `json:"secret" yaml:"secret"`
 	AccessToken string `json:"access_token" yaml:"access-token"`
+	PostFormat  string `json:"post_format" yaml:"post-format"` // string array
 }
 
 type OnebotConfig struct {

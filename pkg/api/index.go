@@ -82,7 +82,7 @@ func NewOnebotApiClient(config *config.OnebotApiConfig) (*OnebotApiClient, error
 	if err != nil {
 		return nil, err
 	}
-	messageCli, err := message.NewChannelApiMessageClient(_channel)
+	messageCli, err := message.NewChannelApiMessageClient(_channel, config)
 	if err != nil {
 		return nil, err
 	}
