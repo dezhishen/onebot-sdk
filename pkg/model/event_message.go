@@ -1,18 +1,18 @@
 package model
 
-type EventMeesageBase struct {
+type EventMessageBase struct {
 	EventBase
-	MessageType string            `json:"message_type"`
-	SubType     string            `json:"sub_type"`
-	MessageId   int32             `json:"message_id"`
-	UserId      int64             `json:"user_id"`
-	Message     []*MessageSegment `json:"message"`
-	RawMessage  string            `json:"raw_message"`
-	Font        int32             `json:"font"`
-	Sender      *Sender           `json:"sender"`
+	MessageType string          `json:"message_type"`
+	SubType     string          `json:"sub_type"`
+	MessageId   int32           `json:"message_id"`
+	UserId      int64           `json:"user_id"`
+	Message     MessageSegments `json:"message"`
+	RawMessage  string          `json:"raw_message"`
+	Font        int32           `json:"font"`
+	Sender      *Sender         `json:"sender"`
 }
 
-func (a *EventMeesageBase) ToGRPC() *EventMeesageBaseGRPC {
+func (a *EventMessageBase) ToGRPC() *EventMeesageBaseGRPC {
 	result := &EventMeesageBaseGRPC{
 		EventBase:   a.EventBase.ToGRPC(),
 		MessageType: a.MessageType,
@@ -28,8 +28,8 @@ func (a *EventMeesageBase) ToGRPC() *EventMeesageBaseGRPC {
 	return result
 }
 
-func (a *EventMeesageBaseGRPC) ToStruct() *EventMeesageBase {
-	result := &EventMeesageBase{
+func (a *EventMeesageBaseGRPC) ToStruct() *EventMessageBase {
+	result := &EventMessageBase{
 		EventBase:   *a.EventBase.ToStruct(),
 		MessageType: a.MessageType,
 		SubType:     a.SubType,
@@ -45,30 +45,30 @@ func (a *EventMeesageBaseGRPC) ToStruct() *EventMeesageBase {
 }
 
 type EventMessagePrivate struct {
-	EventMeesageBase
+	EventMessageBase
 }
 
 func (a *EventMessagePrivate) ToGRPC() *EventMessagePrivateGRPC {
 	return &EventMessagePrivateGRPC{
-		EventMeesageBase: a.EventMeesageBase.ToGRPC(),
+		EventMeesageBase: a.EventMessageBase.ToGRPC(),
 	}
 }
 
 func (a *EventMessagePrivateGRPC) ToStruct() *EventMessagePrivate {
 	return &EventMessagePrivate{
-		EventMeesageBase: *a.EventMeesageBase.ToStruct(),
+		EventMessageBase: *a.EventMeesageBase.ToStruct(),
 	}
 }
 
 type EventMessageGroup struct {
-	EventMeesageBase
+	EventMessageBase
 	GroupId   int64      `json:"group_id"`
 	Anonymous *Anonymous `json:"anonymous"`
 }
 
 func (a *EventMessageGroup) ToGRPC() *EventMessageGroupGRPC {
 	res := &EventMessageGroupGRPC{
-		EventMeesageBase: a.EventMeesageBase.ToGRPC(),
+		EventMeesageBase: a.EventMessageBase.ToGRPC(),
 		GroupId:          a.GroupId,
 	}
 	if a.Anonymous != nil {
@@ -79,7 +79,7 @@ func (a *EventMessageGroup) ToGRPC() *EventMessageGroupGRPC {
 
 func (a *EventMessageGroupGRPC) ToStruct() *EventMessageGroup {
 	res := &EventMessageGroup{
-		EventMeesageBase: *a.EventMeesageBase.ToStruct(),
+		EventMessageBase: *a.EventMeesageBase.ToStruct(),
 		GroupId:          a.GroupId,
 	}
 	if a.Anonymous != nil {

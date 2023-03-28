@@ -2,7 +2,6 @@ package message
 
 import (
 	"encoding/json"
-
 	"github.com/dezhishen/onebot-sdk/pkg/event/base"
 	"github.com/dezhishen/onebot-sdk/pkg/model"
 )
@@ -27,7 +26,7 @@ func (c *websocketOnebotMessageEventCli) EventType() base.OnebotEventType {
 }
 
 func (c *websocketOnebotMessageEventCli) Handler(data []byte) error {
-	var message model.EventMeesageBase
+	var message model.EventMessageBase
 	err := json.Unmarshal(data, &message)
 	if err != nil {
 		return err
